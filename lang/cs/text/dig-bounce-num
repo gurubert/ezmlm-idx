@@ -1,21 +1,21 @@
 # Revision: 1
 
-Uschoval jsem èísla digestù z listu <#L#>-digest, které se vrátily
-z va¹í adresy. Pro ka¾dı takovı digest jsem si zapamatoval èíslo
-první zprávy v digestu. Nearchivuji si digesty samotné, ale
-mù¾ete si vy¾ádat jednotlivé zprávy z archívu hlavního listu.
+Uschoval jsem ÄÃ­sla digestÅ¯ z listu <#L#>-digest, kterÃ© se vrÃ¡tily
+z vaÅ¡Ã­ adresy. Pro kaÅ¾dÃ½ takovÃ½ digest jsem si zapamatoval ÄÃ­slo
+prvnÃ­ zprÃ¡vy v digestu. Nearchivuji si digesty samotnÃ©, ale
+mÅ¯Å¾ete si vyÅ¾Ã¡dat jednotlivÃ© zprÃ¡vy z archÃ­vu hlavnÃ­ho listu.
 
 <=a=>
-Pro získání zprávy 12345 z archívu, po¹lete prázdnı mail na adresu
+Pro zÃ­skÃ¡nÃ­ zprÃ¡vy 12345 z archÃ­vu, poÅ¡lete prÃ¡zdnÃ½ mail na adresu
    <<#L#>-get.12345@<#h#>>
 
-Zprávy èíslo 123 a¾ 145 získáte z archívu (maximálnì 100 zpráv na jeden mail)
-získáte zasláním zprávy na následující adresu:
+ZprÃ¡vy ÄÃ­slo 123 aÅ¾ 145 zÃ­skÃ¡te z archÃ­vu (maximÃ¡lnÄ› 100 zprÃ¡v na jeden mail)
+zÃ­skÃ¡te zaslÃ¡nÃ­m zprÃ¡vy na nÃ¡sledujÃ­cÃ­ adresu:
    <<#L#>-get.123_145@<#h#>>
 
-Seznam zpráv se subjectem a autorem zpráv 123-456 - e-mail:
+Seznam zprÃ¡v se subjectem a autorem zprÃ¡v 123-456 - e-mail:
    <<#L#>-index@<#h#>>
 
 <==>
-Následují èísla prvních zpráv v digestech:
+NÃ¡sledujÃ­ ÄÃ­sla prvnÃ­ch zprÃ¡v v digestech:
 

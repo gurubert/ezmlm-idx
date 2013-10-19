@@ -1,51 +1,51 @@
 # Revision: 1
-mailing list <#L#> $B$K(B
-$B0J2<$KE:IU$5$l$?(B message $B$,(B post $B$5$l$^$7$?!#(B
-post $B$rG'$a$k>l9g$O!"0J2<$N(B address
+mailing list <#L#> に
+以下に添付された message が post されました。
+post を認める場合は、以下の address
 
 <#A#>
 
-$B$X(B reply $B$7$F2<$5$$!#(B
+へ reply して下さい。
 
-$BDL>o$O(B Mail User Agent (MUA) $B$N(B reply $B$N5!G=$@$1$G==J,$JH&$G$9!#(B
+通常は Mail User Agent (MUA) の reply の機能だけで十分な筈です。
 
-$B$&$^$/$$$+$J$$>l9g$O!"<jF0$G(B
+うまくいかない場合は、手動で
 
         To: <#A#>
 
-$B$rIU$1$F(B reply message $B$r:n@.$7$F2<$5$$!#(B
+を付けて reply message を作成して下さい。
 
 
-MUA $B$K$h$C$F$O(B
+MUA によっては
 
         mailto:<#A#>
 
-$B$r(B click $B$9$k$@$1$G=`Hw$,=PMh$k>l9g$b$"$k$G$7$g$&!#(B
+を click するだけで準備が出来る場合もあるでしょう。
 
-post $B$rG'$a$J$$>l9g$O!"0J2<$N(B address
+post を認めない場合は、以下の address
 
 <#R#>
 
-$B08$K(B message $B$rAw$C$F2<$5$$!#(B
+宛に message を送って下さい。
 
-MUA $B$K(B "reply-to-all" $B$N5!G=$,$"$k$N$J$i(B <#L#>-reject $B0J30$G(B
-$B;O$^$kB>$N(B address $B$r:o=|$9$k$N$,4JC1$G$7$g$&!#(B
+MUA に "reply-to-all" の機能があるのなら <#L#>-reject 以外で
+始まる他の address を削除するのが簡単でしょう。
 
-MUA $B$K$h$C$F$O(B
+MUA によっては
 
         mailto:<#R#>
 
-$B$r(B click $B$9$k$@$1$G=`Hw$,=PMh$k>l9g$b$"$k$G$7$g$&!#(B
+を click するだけで準備が出来る場合もあるでしょう。
 
-*** post $B$5$l$?(B message $BK\BN$O(B copy $B$9$kI,MW$O$"$j$^$;$s(B ***
+*** post された message 本体は copy する必要はありません ***
 
-post $B$rG'$a$J$$>l9g$K!"2?$+(B comment $B$rIU$1$?$$$N$G$"$l$P(B
-$B0J2<$NMM$J(B marker line
+post を認めない場合に、何か comment を付けたいのであれば
+以下の様な marker line
 
 %%% Start comment
 %%% End comment
 
-$B$N4V$K(B comment $B$r=q$$$F2<$5$$!#(B
+の間に comment を書いて下さい。
 
---- $B0J2<$KAw$i$F$-$?(B message $B$rE:IU$7$F$*$-$^$9(B
+--- 以下に送らてきた message を添付しておきます
 

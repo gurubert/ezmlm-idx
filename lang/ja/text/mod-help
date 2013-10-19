@@ -1,67 +1,67 @@
 # Revision: 1
---- $B4IM}<T$N3'MM$X(B ---
+--- 管理者の皆様へ ---
 
-mailing list <#L#>@<#h#> $B$N4IM}$K(B
-$B6(NO$7$F$$$?$@$-46<U$7$^$9!#(B
+mailing list <#L#>@<#h#> の管理に
+協力していただき感謝します。
 
-ezmlm $B$N(B command $B$O!"B>$N(B mailing list program $B$H$O<c430[$J$C$F(B
-$B8+$($k$+$b$7$l$^$s$,!"(Bcommand $B$,D>46E*$G$"$j!";HMQ$,4JC1$@$H(B
-$B;W$($k$G$7$g$&!#(B
+ezmlm の command は、他の mailing list program とは若干異なって
+見えるかもしれまんが、command が直感的であり、使用が簡単だと
+思えるでしょう。
 
-$B0J2<$O(B mailing list $B$N4IM}<T$H$7$F$N:n6H$N$?$a$N<j0z$-$G$9!#(B
+以下は mailing list の管理者としての作業のための手引きです。
 
 Remote subscription
 -------------------
-$B4IM}<T$OG$0U$N(B address $B$r9XFI<T$K2C$($?$j30$7$?$j$9$k;v$,=PMh$^$9!#(B
-$BNc$($P(B "john@example.com" $B$r9XFI<T$K2C$($k>l9g$O!"(B
+管理者は任意の address を購読者に加えたり外したりする事が出来ます。
+例えば "john@example.com" を購読者に加える場合は、
 
                 john@example.com
-                        $B"-(B
+                        ↓
                 john=example.com
-                        $B"-(B
+                        ↓
         <<#L#>-subscribe-john=example.com@<#h#>>
 
-$B$NMM$K$7$F(B command address $B$r@8@.$7!"$=$N(B address $B$X(B
-$B6u$N(B message $B$rAw$C$F2<$5$$!#(B
+の様にして command address を生成し、その address へ
+空の message を送って下さい。
 
-$B$^$?!"(Bjohn@example.com $B$r9XFI<T$+$i30$9>l9g$O(B
+また、john@example.com を購読者から外す場合は
 
         <<#L#>-unsubscribe-john=example.com@<#h#>>
 
-$B$X6u$N(B message $B$rAw$C$F2<$5$$!#(B
+へ空の message を送って下さい。
 
 <=d=>
-digest list $B$K2C$($?$j!&30$7$?$j$9$k>l9g$bF1MM$K$7$F(B
+digest list に加えたり・外したりする場合も同様にして
 
         <<#L#>-digest-subscribe-john=example.com@<#h#>>
         <<#L#>-digest-unsubscribe-john=example.com@<#h#>>
 
-$B$NMM$K$J$j$^$9!#(B
+の様になります。
 
 <==>
-message $B$NCf?H$OI,MW$"$j$^$;$s!#(Baddress $B$@$1$,=EMW$G$9!#(B
+message の中身は必要ありません。address だけが重要です。
 
 <=r=>
-ezmlm $B$O5.J}$K3NG'$N(B message $B$rAw$j$^$9!#$3$l$O(B request $B$,(B
-$BK\Ev$K5.J}$+$i$N$b$N$+$r3NG'$9$k$?$a$G$9!#Aw$i$l$?(B message $B$K(B
-reply $B$9$k;v$G<jB3$-$O40N;$7$^$9!#(B
+ezmlm は貴方に確認の message を送ります。これは request が
+本当に貴方からのものかを確認するためです。送られた message に
+reply する事で手続きは完了します。
 
 <=R=>
-ezmlm $B$O(B user $B$KBP$7$F3NG'$N(B message $B$rAw$j$^$9!#(B
-$B>e5-$N>l9g$O(B <john@example.com> $B08$K3NG'$N(B message $B$,Aw$i$l$k(B
-$B$3$H$K$J$j$^$9!#3NG'$N(B message $B$r<u$1<h$C$?(B user $B$O(B reply $B$r(B
-$B$9$k$3$H$G3NG'$,=*N;$7$^$9!#(B
+ezmlm は user に対して確認の message を送ります。
+上記の場合は <john@example.com> 宛に確認の message が送られる
+ことになります。確認の message を受け取った user は reply を
+することで確認が終了します。
 <==>
 
-$B$3$N3NG'$K$h$C$F!"Bh;0<T$K$h$k967b$r:$Fq$J$b$N$K$7$F$$$^$9!#(B
+この確認によって、第三者による攻撃を困難なものにしています。
 
-$B$^$?!"(Bezmlm $B$O9XFI$N>uBV$,JQ2=$7$?$3$H$r(B user $B$KDLCN$7$^$9!#(B
+また、ezmlm は購読の状態が変化したことを user に通知します。
 
 
 Subscription
 ------------
-$B4IM}<T$K8B$i$:!"C/$G$b0J2<$N(B address $B08$K6u$N(B message $B$r(B
-$BAw$k;v$G9XFI$r3+;O$7$?$j!&=*N;$5$;$?$j=PMh$^$9!#(B
+管理者に限らず、誰でも以下の address 宛に空の message を
+送る事で購読を開始したり・終了させたり出来ます。
 
         <<#L#>-subscribe@<#h#>>
 	(Start subscription)
@@ -70,7 +70,7 @@ Subscription
 	(Stop subscription)
 
 <=d=>
-digest list $B$N9XFI3+;O!&=*N;$O0J2<$N(B command address $B$G$9!#(B
+digest list の購読開始・終了は以下の command address です。
 
         <<#L#>-digest-subscribe@<#h#>>
 	(Start digest subscription)
@@ -79,23 +79,23 @@ digest list $B$N9XFI3+;O!&=*N;$O0J2<$N(B command address $B$G$9!#(B
 	(Stop digest subscription)
 
 <==>
-$BH/?.<T$K$O3NG'$N(B message $B$,(B ezmlm $B$+$iAw$i$l$^$9!#(B
+発信者には確認の message が ezmlm から送られます。
 
 <=s=>
-$B$3$N(B mailing list $B$N9XFI3+;O!&C&B`$O4IM}<T$N4FFD2<$G9T$o$l$kMM(B
-$B@_Dj$5$l$F$$$^$9!#4IM}<T08$K3NG'$r=P$9A0$K(B ezmlm $B$O(B request $B$r(B
-$B=P$7$?H/?.<T$X3NG'$N(B message $B$rAw$j!"(Brequest $B$,K\J*$+H]$+$r3NG'(B
-$B$7$F$$$k$N$G!"$=$N(B request $B$,K\J*$G$"$k$H9M$($F$bBg>fIW$G$9!#(B
+この mailing list の購読開始・脱退は管理者の監督下で行われる様
+設定されています。管理者宛に確認を出す前に ezmlm は request を
+出した発信者へ確認の message を送り、request が本物か否かを確認
+しているので、その request が本物であると考えても大丈夫です。
 
-request $B$,@5Ev$J$b$N$H;W$&$N$G$"$l$P!"(Bezmlm $B$+$iFO$$$?3NG'$N(B
-message $B$KBP$7$F(B reply $B$7$F2<$5$$!#@5Ev$G$J$$$H;W$&$N$G$"$l$P(B
-ezmlm $B$+$i$N(B message $B$rC1=c$KL5;k$7$F2<$5$$!#$=$7$F!"I,MW$J$i(B
-request $B$NH/?.<T$KO"Mm$7$F$_$F2<$5$$!#(B
+request が正当なものと思うのであれば、ezmlm から届いた確認の
+message に対して reply して下さい。正当でないと思うのであれば
+ezmlm からの message を単純に無視して下さい。そして、必要なら
+request の発信者に連絡してみて下さい。
 <=S=>
-$B9XFI3+;O!&C&B`$O<+F0$G=hM}$5$l$^$9!#(B
+購読開始・脱退は自動で処理されます。
 <==>
 
-$B$^$?!"(B
+また、
 
         <<#L#>-subscribe-mary=example.com@<#h#>>
 	(Start subscription as mary@example.com)
@@ -103,100 +103,100 @@ request $B$NH/?.<T$KO"Mm$7$F$_$F2<$5$$!#(B
 	<<#L#>-unsubscribe-mary=example.com@<#h#>>
 	(Stop subscription as mary@example.com)
 
-$B$NMM$K$9$k;v$G!"H/?.85$H$O0[$J$k(B address$B!J$3$N>l9g$O(B mary@example.com$B!K(B
-$B$G(B mailing list $B$+$i$N(B message $B$r<u$1<h$kMM$K$9$k;v$b=PMh$^$9!#(B
-$B3NG'$O(B mary@example.com $B08$KH/9T$5$l!"$=$N(B message $B$KBP$7$F(B
-$B@5$7$$(B reply $B$,5"$C$F$-$?>l9g$N$_9XFI!&C&B`$OM-8z$K$J$j$^$9!#(B
+の様にする事で、発信元とは異なる address（この場合は mary@example.com）
+で mailing list からの message を受け取る様にする事も出来ます。
+確認は mary@example.com 宛に発行され、その message に対して
+正しい reply が帰ってきた場合のみ購読・脱退は有効になります。
 
-$B4IM}<T$N(B address $B$=$NB>$N>pJs$O9XFI<T$K$O0l@ZO"Mm$5$l$^$;$s!#(B
-$B!JL^O@!"5.J}$,D>@\(B mail $B$rAw$C$?>l9g$OJL$G$9!K(B
+管理者の address その他の情報は購読者には一切連絡されません。
+（勿論、貴方が直接 mail を送った場合は別です）
 
 <=rl=>
-mailing list <#L#>@<#h#> $B$N9VFI<T0lMw$O(B
-$B0J2<$N(B address $B$+$iF@$i$l$^$9!#(B
+mailing list <#L#>@<#h#> の講読者一覧は
+以下の address から得られます。
         <<#L#>-list@<#h#>>
-ezmlm $B$N(B log $B$O0J2<$N(B address $B$+$iF@$i$l$^$9!#(B
+ezmlm の log は以下の address から得られます。
         <<#L#>-log@<#h#>>
 
 <=rld=>
-mailing list <#L#>@<#h#> $B$N(B digest $BHG$N9VFI<T0lMw$O(B
-$B0J2<$N(B address $B$+$iF@$i$l$^$9!#(B
+mailing list <#L#>@<#h#> の digest 版の講読者一覧は
+以下の address から得られます。
         <<#L#>-digest-list@<#h#>>
-digest $BHG$K4X$9$k(B log $B$O0J2<$N(B address $B$G$9!#(B
+digest 版に関する log は以下の address です。
         <<#L#>-digest-log@<#h#>>
 
 <=rn=>
-ezmlm $B$,Aw$j=P$9(B message text $B$rJT=8$9$k$K$O!"0J2<$N(B command address:
+ezmlm が送り出す message text を編集するには、以下の command address:
 
         <<#L#>-edit@<#h#>>
 
-$B08$K6u$N(B e-mail $B$rAw$C$F2<$5$$!#(B
-$B!JJT=82DG=$J(B message $B0lMw5Z$S!"JT=8J}K!$OJV?.$K4^$^$l$F$$$^$9!K(B
+宛に空の e-mail を送って下さい。
+（編集可能な message 一覧及び、編集方法は返信に含まれています）
 
 <=m=>
 Moderated posts
 ---------------
-message $B$r?3::$9$kMM$K@_Dj$5$l$F$$$k>l9g$O!"(Bezmlm $B$O(B post $B$5$l$?(B
-message $B$r0lC6J]B8$7!"?3::<jB3$-$N@bL@$rIU$1$?$b$N$r4IM}<T08$K(B
-$BAw$j$^$9!#$=$N(B message $B$O(B "Subject: MODERATE for ..." $B$H$J$C$F(B
-$B$$$^$9!#(B
+message を審査する様に設定されている場合は、ezmlm は post された
+message を一旦保存し、審査手続きの説明を付けたものを管理者宛に
+送ります。その message は "Subject: MODERATE for ..." となって
+います。
 
-post $B$rG'$a$k>l9g$O!"(Bezmlm $B$,(B "Reply-To:" $B$K@_Dj$7$?(B address
-$B08$K(B reply $B$r$7$F2<$5$$!#K\J8$N(B copy $B$OI,MW$"$j$^$;$s!#(B
-$B!J(Bezmlm $B$O(B reply $B$NCf?H$O0l@Z8+$F$$$^$;$s!K(B
+post を認める場合は、ezmlm が "Reply-To:" に設定した address
+宛に reply をして下さい。本文の copy は必要ありません。
+（ezmlm は reply の中身は一切見ていません）
 
-post $B$r5qH]$9$k>l9g$O!"(Bezmlm $B$,(B "From:" $B$K@_Dj$7$?(B address $B08$K(B
-reply $B$r$7$F2<$5$$!#DL>o(B Mail User Agent (MUA) $B$N(B 'reply-to-all'
-$B$N5!G=$r;H$C$F(B message $B$N=`Hw$r$7$?8e$K!"ITMW$J(B address $B$r:o$k(B
-$B$@$1$@$H;W$$$^$9!#5qH]$9$kM}M3Ey$r#38D$N(B'%'$B$G;O$^$k9T$N8e$KIU$1(B
-$B#38D$N(B'%' $B$GJD$8$k$3$H$GF1:-$9$k;v$,=PMh$^$9!#(B
+post を拒否する場合は、ezmlm が "From:" に設定した address 宛に
+reply をして下さい。通常 Mail User Agent (MUA) の 'reply-to-all'
+の機能を使って message の準備をした後に、不要な address を削る
+だけだと思います。拒否する理由等を３個の'%'で始まる行の後に付け
+３個の'%' で閉じることで同梱する事が出来ます。
 
-$B7+$jJV$7$^$9$,!"4IM}<T$N(B address $B$=$NB>$N>pJs$O(B ezmlm $B7PM3$G$O(B
-$BL@$i$+$K$5$l$^$;$s!#(B
+繰り返しますが、管理者の address その他の情報は ezmlm 経由では
+明らかにされません。
 
-$BJ#?t$N4IM}<T$,$$$k>l9g!"(Bezmlm $B$O:G=i$K4IM}<T$+$iFO$$$?(B message
-$B$N$_$KH?1~$7$^$9!#5.J}$,(B post $B$rG'$a$k(B reply $B$r$7$?;~$K!"4{$K(B
-$BB>$N4IM}<T$,5qH]$r$7$F$$$?>l9g!"5Z$S$=$N5U$N>l9g$O(B ezmlm $B$O(B
-$B5.J}08$K(B message $B$rAw$j$^$9!#(B
+複数の管理者がいる場合、ezmlm は最初に管理者から届いた message
+のみに反応します。貴方が post を認める reply をした時に、既に
+他の管理者が拒否をしていた場合、及びその逆の場合は ezmlm は
+貴方宛に message を送ります。
 
-ezmlm $B$ODj$a$i$l$?4|8B!JDL>o$O(B 5$BF|!K0JFb$K?3::$N7k2L$r<u$1(B
-$B<h$l$J$$>l9g$K$O!"H/?.<T08$KM}M3$rF1:-$7$F(B message $B$rJVAw$7$^$9!#(B
-$B!JI,MW$H$"$l$P!"4|8B@Z$l$N(B message $B$rC1=c$K:o=|$9$kMM$K$b(B
-  $B@_Dj=PMh$^$9!K(B
+ezmlm は定められた期限（通常は 5日）以内に審査の結果を受け
+取れない場合には、発信者宛に理由を同梱して message を返送します。
+（必要とあれば、期限切れの message を単純に削除する様にも
+  設定出来ます）
 <==>
 
 Vacations
 ---------
-$B0l;~E*$K0[$J$k(B address $B$G4IM}$N:n6H$r$7$?$$>l9g$O!"(B
-"Mailing-List: contact <#L#>-help@<#h#>; run by ezmlm" $B$d(B
-"Subject: MODERATE for <#L#>@<#h#>" $B$d(B
-"Subject: CONFIRM subscribe to <#L#>@<#h#>" $BEy$N(B
-$B4IM}$N0Y$N(B message $B$,K>$s$@(B address $B08$KFO$/MM$K@_Dj$9$l$P(B
-$B2DG=$G$9!#(B
+一時的に異なる address で管理の作業をしたい場合は、
+"Mailing-List: contact <#L#>-help@<#h#>; run by ezmlm" や
+"Subject: MODERATE for <#L#>@<#h#>" や
+"Subject: CONFIRM subscribe to <#L#>@<#h#>" 等の
+管理の為の message が望んだ address 宛に届く様に設定すれば
+可能です。
 
-$B$^$?$OCN?M08$KAw$jD>$9MM$K$9$k$H$$$&<j$b$"$j$^$9!#(B
-$B!J$3$N>l9g$O;vA0$K<g:K<T$K3NG'$r$H$C$F2<$5$$!K(B
+または知人宛に送り直す様にするという手もあります。
+（この場合は事前に主宰者に確認をとって下さい）
 
-$B5.J}$,4IM}$N:n6H$r<B9T=PMh$J$$4V$O!"<+F0$G>5G'$r9T$&$H$$$&$N$G(B
-$B$"$l$P!">e5-$N4IM}MQ(B message $B$KBP$7$FE,@Z$J1~Ez$r<+F0@8@.$9$k(B
-$BMM$K@_Dj$7$F2<$5$$!#(B
+貴方が管理の作業を実行出来ない間は、自動で承認を行うというので
+あれば、上記の管理用 message に対して適切な応答を自動生成する
+様に設定して下さい。
 
 <=r=>
-$B9XFI3+;O!&=*N;$N:n6H$r4IM}<T$G$"$k5.J}$N$b$N$G$J$$(B address $B$+$i(B
-$B9T$C$?>l9g!"9XFI3+;O!&=*N;$NBP>]$K$J$C$?(B address $B08$K3NG'$N(B message
-$B$,FO$-$^$9!#$=$N8e$KA44IM}<T08$K3NG'$N(B message $B$,FO$-$^$9!#$3$l$O(B
-request $B$rH/9T$7$?$N$,5.J}<+?H$+H]$+$r(B ezmlm $B$,H=CG$9$k<jCJ$r;}$C$F(B
-$B$$$J$$0Y$G$9!#(B
+購読開始・終了の作業を管理者である貴方のものでない address から
+行った場合、購読開始・終了の対象になった address 宛に確認の message
+が届きます。その後に全管理者宛に確認の message が届きます。これは
+request を発行したのが貴方自身か否かを ezmlm が判断する手段を持って
+いない為です。
 
-$B$3$N>l9g$O!"5.J}$NAw?.$7$?(B message $B$d(B address $B$,BP>]$H$J$C$?(B user
-$B08$KAw$i$l$k;v$r3P$($F$*$$$F2<$5$$!#(B
+この場合は、貴方の送信した message や address が対象となった user
+宛に送られる事を覚えておいて下さい。
 
 <==>
-$B$*<j?t$r$*$+$1$7$^$9!#(B
+お手数をおかけします。
 
-PS: $B2?$+ITL@$JE@Ey$,$"$j$^$7$?$i!"<g:K<T$N(B
+PS: 何か不明な点等がありましたら、主宰者の
 
         <#L#>-owner@<#h#>
 
-    $B$KO"Mm$7$F2<$5$$!#(B
+    に連絡して下さい。
 

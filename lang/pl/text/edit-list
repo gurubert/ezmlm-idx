@@ -1,40 +1,40 @@
 # Revision: 1
 <=n=>
-Pliki <#L#>-edit.nazwa_pliku mog± byæ stosowane przez zdalnego
-administratora do edycji tekstów zarz±dczych listy dyskusyjnej.
+Pliki <#L#>-edit.nazwa_pliku mogÄ… byÄ‡ stosowane przez zdalnego
+administratora do edycji tekstÃ³w zarzÄ…dczych listy dyskusyjnej.
 
-Tabela pod spodem jest list± plików wraz z krótkim opisem
-ich dzia³ania. Aby zamieniæ okre¶lony plik, po prostu wy¶lij
+Tabela pod spodem jest listÄ… plikÃ³w wraz z krÃ³tkim opisem
+ich dziaÅ‚ania. Aby zamieniÄ‡ okreÅ›lony plik, po prostu wyÅ›lij
 pusty list na adres <#L#>-edit.nazwa_pliku@<#h#> ,
-zamieniaj±c wyra¿enie 'nazwa_pliku' nazw± zamienianego pliku.
+zamieniajÄ…c wyraÅ¼enie 'nazwa_pliku' nazwÄ… zamienianego pliku.
 Instrukcja sposobu zamiany pliku zostanie dostarczona wraz ze
-starym plikiem poczt± zwrotn±.
+starym plikiem pocztÄ… zwrotnÄ….
 
 File                Use
 
-bottom              spód ka¿dej odpowiedzi administracyjnej. G³ówne komendy.
-digest              administracyjna czê¶æ przegl±du listy.
-faq                 najczê¶ciej zadawane pytania na naszej li¶cie.
+bottom              spÃ³d kaÅ¼dej odpowiedzi administracyjnej. GÅ‚Ã³wne komendy.
+digest              administracyjna czÄ™Å›Ä‡ przeglÄ…du listy.
+faq                 najczÄ™Å›ciej zadawane pytania na naszej liÅ›cie.
 get_bad             tekst w miejsce listu nie znalezionego w archiwum.
-help                g³ówna tre¶æ pomocy.
-info                informacje o naszej li¶cie.
-mod_help            pomoc dla moderatorów list.
-mod_reject          list przesy³any nadawcy przesy³ki nie zaakceptowanej.
-mod_request         tekst przesy³any razem z pro¶b± moderowania.
-mod_sub             tekst przesy³any prenumeratorowi po zaakceptowaniu.
-mod_sub_confirm     tekst do moderatora z pro¶b± o wpisanie na listê.
+help                gÅ‚Ã³wna treÅ›Ä‡ pomocy.
+info                informacje o naszej liÅ›cie.
+mod_help            pomoc dla moderatorÃ³w list.
+mod_reject          list przesyÅ‚any nadawcy przesyÅ‚ki nie zaakceptowanej.
+mod_request         tekst przesyÅ‚any razem z proÅ›bÄ… moderowania.
+mod_sub             tekst przesyÅ‚any prenumeratorowi po zaakceptowaniu.
+mod_sub_confirm     tekst do moderatora z proÅ›bÄ… o wpisanie na listÄ™.
 mod_timeout         do nadawcy przterminowanego listu.
-mod_unsub_confirm   do zdalnego opiekuna z pro¶b± o potwierdzenie wypisu.
-sub_bad             do prenumaratora, je¿eli potwierdzenie by³o z³e.
-sub_confirm         do prenumeratora z pro¶b± dokonania potwierdzenia.
-sub_nop             tre¶æ listu powitalnego dla ponownie subskrybuj±cego.
-sub_ok              tre¶æ listu powitalnego dla nowozapisanego.
-top                 pocz±tek ka¿dego listu, ostro¿nie!
+mod_unsub_confirm   do zdalnego opiekuna z proÅ›bÄ… o potwierdzenie wypisu.
+sub_bad             do prenumaratora, jeÅ¼eli potwierdzenie byÅ‚o zÅ‚e.
+sub_confirm         do prenumeratora z proÅ›bÄ… dokonania potwierdzenia.
+sub_nop             treÅ›Ä‡ listu powitalnego dla ponownie subskrybujÄ…cego.
+sub_ok              treÅ›Ä‡ listu powitalnego dla nowozapisanego.
+top                 poczÄ…tek kaÅ¼dego listu, ostroÅ¼nie!
 <=tn=>
-trailer             tekst dodawany do ka¿dego listu, ostro¿nie!
+trailer             tekst dodawany do kaÅ¼dego listu, ostroÅ¼nie!
 <=n=>
-unsub_bad           do prenumeratora, je¶li jego potwierdzenie jest z³e.
-unsub_confirm       tre¶æ potwierdzenia po ¿yczeniu wypisania siê z listy.
-unsub_nop           do osoby nie bêd±cej prenumeratorem, wypisuj±cej siê.
-unsub_ok            list po¿egnalny do rezygnuj±cego z prenumeraty.
+unsub_bad           do prenumeratora, jeÅ›li jego potwierdzenie jest zÅ‚e.
+unsub_confirm       treÅ›Ä‡ potwierdzenia po Å¼yczeniu wypisania siÄ™ z listy.
+unsub_nop           do osoby nie bÄ™dÄ…cej prenumeratorem, wypisujÄ…cej siÄ™.
+unsub_ok            list poÅ¼egnalny do rezygnujÄ…cego z prenumeraty.
 

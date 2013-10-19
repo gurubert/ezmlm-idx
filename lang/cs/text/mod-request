@@ -1,36 +1,36 @@
 # Revision: 1
-Ní¾e citovaná zpráva byla zaslána na adresu listu <#L#>@<#h#>.
-Pokud souhlasíte s distribucí této zprávy v¹em pøihlá¹enım, po¹lete
+NÃ­Å¾e citovanÃ¡ zprÃ¡va byla zaslÃ¡na na adresu listu <#L#>@<#h#>.
+Pokud souhlasÃ­te s distribucÃ­ tÃ©to zprÃ¡vy vÅ¡em pÅ™ihlÃ¡Å¡enÃ½m, poÅ¡lete
 mail na adresu
 
 <#A#>
 
-Toho obvykle dosáhnete pomocí tlaèítka "Odpovìï/Reply". Mù¾ete zkontrolovat
-adresu, zaèíná-li øetìzcem "<#L#>-accept". Pokud toto nefunguje, staèí
-zkopírovat adresu a ulo¾it ji do políèka "To:" nové zprávy.
+Toho obvykle dosÃ¡hnete pomocÃ­ tlaÄÃ­tka "OdpovÄ›Ä/Reply". MÅ¯Å¾ete zkontrolovat
+adresu, zaÄÃ­nÃ¡-li Å™etÄ›zcem "<#L#>-accept". Pokud toto nefunguje, staÄÃ­
+zkopÃ­rovat adresu a uloÅ¾it ji do polÃ­Äka "To:" novÃ© zprÃ¡vy.
 
-Mù¾ete také zkusit kliknout zde:
+MÅ¯Å¾ete takÃ© zkusit kliknout zde:
 	mailto:<#A#>
 
-Chcete-li zprávu odmítnout a zpùsobit její vrácení odesílateli,
-po¹lete zprávu na adresu
+Chcete-li zprÃ¡vu odmÃ­tnout a zpÅ¯sobit jejÃ­ vrÃ¡cenÃ­ odesÃ­lateli,
+poÅ¡lete zprÃ¡vu na adresu
 
 <#R#>
 
-Toto se bvykle nejsnáze udìlá pomocí tlaèítka "Odpovìz v¹em/Reply to all"
-a následného vymazání v¹ech adres kromì té, která zaèíná "<#L#>-reject".
+Toto se bvykle nejsnÃ¡ze udÄ›lÃ¡ pomocÃ­ tlaÄÃ­tka "OdpovÄ›z vÅ¡em/Reply to all"
+a nÃ¡slednÃ©ho vymazÃ¡nÃ­ vÅ¡ech adres kromÄ› tÃ©, kterÃ¡ zaÄÃ­nÃ¡ "<#L#>-reject".
 
-Mù¾ete také zkusit kliknout zde:
+MÅ¯Å¾ete takÃ© zkusit kliknout zde:
 	mailto:<#R#>
 
-Není tøeba kopírovat zprávu ve svém potvrzení nebo odmítnutí této zprávy.
-Chcete-li poslat komentáø odesílateli odmítnuté zprávy, doplòte jej
-mezi následující øádky zaèínající tøemi znaky "%":
+NenÃ­ tÅ™eba kopÃ­rovat zprÃ¡vu ve svÃ©m potvrzenÃ­ nebo odmÃ­tnutÃ­ tÃ©to zprÃ¡vy.
+Chcete-li poslat komentÃ¡Å™ odesÃ­lateli odmÃ­tnutÃ© zprÃ¡vy, doplÅˆte jej
+mezi nÃ¡sledujÃ­cÃ­ Å™Ã¡dky zaÄÃ­najÃ­cÃ­ tÅ™emi znaky "%":
 
-%%% Zaèátek komentáøe
-%%% Konec komentáøe
+%%% ZaÄÃ¡tek komentÃ¡Å™e
+%%% Konec komentÃ¡Å™e
 
-Dìkuji za spolupráci.
+DÄ›kuji za spoluprÃ¡ci.
 
---- Dále uvádím zaslanou zprávu.
+--- DÃ¡le uvÃ¡dÃ­m zaslanou zprÃ¡vu.
 

@@ -1,19 +1,19 @@
 # Revision: 1
 
-Jag har skapat en lista på de meddelanden från <#L#> listan som
-har "studsat" på väg till dig.
+Jag har skapat en lista pÃ¥ de meddelanden frÃ¥n <#L#> listan som
+har "studsat" pÃ¥ vÃ¤g till dig.
 
 <=a=>
 Kopior av dessa meddelanden kan du finna i arkivet.
 
-För att hämta meddelande 123-145 (max 100 per förfrågan), skicka
+FÃ¶r att hÃ¤mta meddelande 123-145 (max 100 per fÃ¶rfrÃ¥gan), skicka
 ett brev till:
    <<#L#>-get.123_145@<#h#>>
 
-För att få en lista på titlar och författare för de senaste 100
+FÃ¶r att fÃ¥ en lista pÃ¥ titlar och fÃ¶rfattare fÃ¶r de senaste 100
 meddelandena, skicka ett brev till:
    <<#L#>-index@<#h#>>
 
 <==>
-Detta är meddelande nummren:
+Detta Ã¤r meddelande nummren:
 

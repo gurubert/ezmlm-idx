@@ -1,17 +1,17 @@
 # Revision: 1
 <=n=>
-Przerób, proszê, za³±czony tekst i wy¶lij go na adres:
+PrzerÃ³b, proszÄ™, zaÅ‚Ä…czony tekst i wyÅ›lij go na adres:
 
 <#R#>
 
-Twój program powienien uczyniæ to automatycznie, je¿eli u¿yjesz
+TwÃ³j program powienien uczyniÄ‡ to automatycznie, jeÅ¼eli uÅ¼yjesz
 funkcji "reply/odpowiedz".
 
-Mogê bez k³opotu usun±æ dodatki jakie mo¿e dodawaæ do tekstów
-Twój program pocztowy, je¿eli zachowasz linie znaczników.
+MogÄ™ bez kÅ‚opotu usunÄ…Ä‡ dodatki jakie moÅ¼e dodawaÄ‡ do tekstÃ³w
+TwÃ³j program pocztowy, jeÅ¼eli zachowasz linie znacznikÃ³w.
 
-Linie znaczników s± to linie rozpoczynaj±ce siê "%%%".
-Nie mog± one byæ zmienione, dodatkowe znaki dodane przez program
-pocztowy na pocz±tku linii s± dozwolone.
+Linie znacznikÃ³w sÄ… to linie rozpoczynajÄ…ce siÄ™ "%%%".
+Nie mogÄ… one byÄ‡ zmienione, dodatkowe znaki dodane przez program
+pocztowy na poczÄ…tku linii sÄ… dozwolone.
 
 

@@ -1,39 +1,39 @@
 # Revision: 1
 <=n=>
-Pøíkaz <#L#>-edit.soubor mù¾e bıt pou¾it vzdálenım správcem k editaci
-textovıch souborù, ze kterıch se skládají odpovìdi pro list <#L#>@<#h#>.
+PÅ™Ã­kaz <#L#>-edit.soubor mÅ¯Å¾e bÃ½t pouÅ¾it vzdÃ¡lenÃ½m sprÃ¡vcem k editaci
+textovÃ½ch souborÅ¯, ze kterÃ½ch se sklÃ¡dajÃ­ odpovÄ›di pro list <#L#>@<#h#>.
 
-Následuje seznam pøíslu¹nıch souborù a krátkı popis toho, kdy je
-jejich obsah vyu¾íván. Chcete-li editovat soubor, staèí poslat
-mail na adresu <#L#>-edit.soubor<#h#>, pøièem¾ je nutno "soubor"
-nahradit skuteènım jménem souboru. Obdr¾íte soubor spolu s instrukcemi,
+NÃ¡sleduje seznam pÅ™Ã­sluÅ¡nÃ½ch souborÅ¯ a krÃ¡tkÃ½ popis toho, kdy je
+jejich obsah vyuÅ¾Ã­vÃ¡n. Chcete-li editovat soubor, staÄÃ­ poslat
+mail na adresu <#L#>-edit.soubor<#h#>, pÅ™iÄemÅ¾ je nutno "soubor"
+nahradit skuteÄnÃ½m jmÃ©nem souboru. ObdrÅ¾Ã­te soubor spolu s instrukcemi,
 jak tento soubor editovat.
 
-Soubor              Pou¾ití
+Soubor              PouÅ¾itÃ­
 
-bottom              pøidává se za ka¾dou odpovìï. V¹eobecné informace.
-digest              "administrativní" èást digestù.
-faq                 èasto kladené dotazy, specifické pro tento list.
-get_bad             neni-li zpráva nalezena v archívu.
-help                v¹eobecná nápovìda (mezi "top" a "bottom").
-info                informace o listu. První øádek by mìl dávat smysl sám o sobì.
-mod_help            nápovìda pro moderátory.
-mod_reject          odesílateli odmítnuté zprávy.
-mod_request         moderátorovi spolu s pøíspìvkem.
-mod_sub             pøihla¹ovanému, jakmile jeho pøihlá¹ení potvrdí moderátor.
-mod_sub_confirm     moderátorovi s ¾ádostí o potvrzení pøihlá¹ení.
-mod_timeout         odesílateli, nestihne-li moderátor potvrdit zprávu.
-mod_unsub_confirm   administrátorovi s ¾ádostí o potvrzení odhlá¹ení.
-sub_bad             odesílateli, bylo-li pøihlá¹ení neplatné.
-sub_confirm         odesílateli - ¾ádost potvrzení pøihlá¹ení.
-sub_nop             odesílateli - pøi pokusu o opìtovné pøihlá¹ení
-sub_ok              odesílateli - oznamuje pøihlá¹ení.
-top                 zaèátek v¹ech odpovìdí.
+bottom              pÅ™idÃ¡vÃ¡ se za kaÅ¾dou odpovÄ›Ä. VÅ¡eobecnÃ© informace.
+digest              "administrativnÃ­" ÄÃ¡st digestÅ¯.
+faq                 Äasto kladenÃ© dotazy, specifickÃ© pro tento list.
+get_bad             neni-li zprÃ¡va nalezena v archÃ­vu.
+help                vÅ¡eobecnÃ¡ nÃ¡povÄ›da (mezi "top" a "bottom").
+info                informace o listu. PrvnÃ­ Å™Ã¡dek by mÄ›l dÃ¡vat smysl sÃ¡m o sobÄ›.
+mod_help            nÃ¡povÄ›da pro moderÃ¡tory.
+mod_reject          odesÃ­lateli odmÃ­tnutÃ© zprÃ¡vy.
+mod_request         moderÃ¡torovi spolu s pÅ™Ã­spÄ›vkem.
+mod_sub             pÅ™ihlaÅ¡ovanÃ©mu, jakmile jeho pÅ™ihlÃ¡Å¡enÃ­ potvrdÃ­ moderÃ¡tor.
+mod_sub_confirm     moderÃ¡torovi s Å¾Ã¡dostÃ­ o potvrzenÃ­ pÅ™ihlÃ¡Å¡enÃ­.
+mod_timeout         odesÃ­lateli, nestihne-li moderÃ¡tor potvrdit zprÃ¡vu.
+mod_unsub_confirm   administrÃ¡torovi s Å¾Ã¡dostÃ­ o potvrzenÃ­ odhlÃ¡Å¡enÃ­.
+sub_bad             odesÃ­lateli, bylo-li pÅ™ihlÃ¡Å¡enÃ­ neplatnÃ©.
+sub_confirm         odesÃ­lateli - Å¾Ã¡dost potvrzenÃ­ pÅ™ihlÃ¡Å¡enÃ­.
+sub_nop             odesÃ­lateli - pÅ™i pokusu o opÄ›tovnÃ© pÅ™ihlÃ¡Å¡enÃ­
+sub_ok              odesÃ­lateli - oznamuje pÅ™ihlÃ¡Å¡enÃ­.
+top                 zaÄÃ¡tek vÅ¡ech odpovÄ›dÃ­.
 <=tn=>
-trailer             pøidá se za ka¾dı pøíspìvek do listu.
+trailer             pÅ™idÃ¡ se za kaÅ¾dÃ½ pÅ™Ã­spÄ›vek do listu.
 <=n=>
-unsub_bad           odesílateli, byla li ¾ádost o odhlá¹ení neplatná.
-unsub_confirm       odesílateli - ¾ádost o potvrzení odhlá¹ení.
-unsub_nop           odesílateli - nebyl-li pøihlá¹en a sna¾il-li se odhlásit.
-unsub_ok            odesílateli po úspì¹ném odhlá¹ení.
+unsub_bad           odesÃ­lateli, byla li Å¾Ã¡dost o odhlÃ¡Å¡enÃ­ neplatnÃ¡.
+unsub_confirm       odesÃ­lateli - Å¾Ã¡dost o potvrzenÃ­ odhlÃ¡Å¡enÃ­.
+unsub_nop           odesÃ­lateli - nebyl-li pÅ™ihlÃ¡Å¡en a snaÅ¾il-li se odhlÃ¡sit.
+unsub_ok            odesÃ­lateli po ÃºspÄ›Å¡nÃ©m odhlÃ¡Å¡enÃ­.
 

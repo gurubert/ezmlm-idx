@@ -1,22 +1,22 @@
 # Revision: 2
 
-Eu, O sistema, mantenho um controle das mensagens da lista <#L> que não
-foram entregues para o seu endereço.
+Eu, O sistema, mantenho um controle das mensagens da lista <#L> que nÃ£o
+foram entregues para o seu endereÃ§o.
 
 <=a=>
-Cópias destas mensagens podem estar no arquivo.
+CÃ³pias destas mensagens podem estar no arquivo.
 
 Para pegar a mensagem 12345 do arquivo, envie uma mensagem vazia para
   <<#L#>-get.12345@<#h#>>
 
-Para recuperar uma lista de assuntos e autores das últimas 100
+Para recuperar uma lista de assuntos e autores das Ãºltimas 100
 mensagens, envie uma mensagem vazia para:
    <<#L#>-index@<#h#>>
 
-Para recuperar as mensagens 123 a 145 (no máximo 100 por comando),
+Para recuperar as mensagens 123 a 145 (no mÃ¡ximo 100 por comando),
 envie uma mensagem vazia para:
    <<#L#>-get.123_145@<#h#>>
 
 <==>
-Aqui estão os números das mensagens:
+Aqui estÃ£o os nÃºmeros das mensagens:
 

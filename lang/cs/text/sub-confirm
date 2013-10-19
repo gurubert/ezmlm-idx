@@ -1,31 +1,31 @@
 # Revision: 1
-Chcete-li opravdu pøidat adresu
+Chcete-li opravdu pÅ™idat adresu
 
 <#A#>
 
-do listu <#l#>, po¹lete prázdnou zprávu na adresu
+do listu <#l#>, poÅ¡lete prÃ¡zdnou zprÃ¡vu na adresu
 
 <#R#>
 
-Toho obvykle dosáhnete pomocí tlaèítka "Odpovìï/Reply". Mù¾ete zkontrolovat
-adresu, zaèíná-li øetìzcem "<#L#>-sc". Pokud toto nefunguje, staèí
-zkopírovat adresu a ulo¾it ji do políèka "To:" nové zprávy.
+Toho obvykle dosÃ¡hnete pomocÃ­ tlaÄÃ­tka "OdpovÄ›Ä/Reply". MÅ¯Å¾ete zkontrolovat
+adresu, zaÄÃ­nÃ¡-li Å™etÄ›zcem "<#L#>-sc". Pokud toto nefunguje, staÄÃ­
+zkopÃ­rovat adresu a uloÅ¾it ji do polÃ­Äka "To:" novÃ© zprÃ¡vy.
 
-Mù¾ete také zkusit kliknout zde:
+MÅ¯Å¾ete takÃ© zkusit kliknout zde:
 	mailto:<#R#>
 
-Vy¾adování tohoto potvrzení má dva dùvody. Za prvé ovìuje, ¾e jsem
-schopen zasílat mail na va¹i adresu. A za druhé, chrání vás v pøípadì,
-¾e nìkdo zfal¹uje ¾ádost o pøihlá¹ení s va¹ím jménem.
+VyÅ¾adovÃ¡nÃ­ tohoto potvrzenÃ­ mÃ¡ dva dÅ¯vody. Za prvÃ© ovÄ›uje, Å¾e jsem
+schopen zasÃ­lat mail na vaÅ¡i adresu. A za druhÃ©, chrÃ¡nÃ­ vÃ¡s v pÅ™Ã­padÄ›,
+Å¾e nÄ›kdo zfalÅ¡uje Å¾Ã¡dost o pÅ™ihlÃ¡Å¡enÃ­ s vaÅ¡Ã­m jmÃ©nem.
 
 <=q=>
-Nìkteré po¹tovní programy jsou chybné a nemohou zpracovávat dlouhé
-adresy. Pokud nemù¾ete odpovìdìt na tuto adresu, po¹lete
-zprávu na adresu <<#L#>-request@<#h#>>
-a vlo¾te celou vı¹e uvedenou adresu do subjectu.
+NÄ›kterÃ© poÅ¡tovnÃ­ programy jsou chybnÃ© a nemohou zpracovÃ¡vat dlouhÃ©
+adresy. Pokud nemÅ¯Å¾ete odpovÄ›dÄ›t na tuto adresu, poÅ¡lete
+zprÃ¡vu na adresu <<#L#>-request@<#h#>>
+a vloÅ¾te celou vÃ½Å¡e uvedenou adresu do subjectu.
 
 <=s=>
-Tento list je moderovanı. Jakmile po¹lete potvrzení, po¾adavek
-bude poslán moderátorovi tohoto listu. Uvìdomím vás, jakmile
-bude pøihlá¹ení hotovo.
+Tento list je moderovanÃ½. Jakmile poÅ¡lete potvrzenÃ­, poÅ¾adavek
+bude poslÃ¡n moderÃ¡torovi tohoto listu. UvÄ›domÃ­m vÃ¡s, jakmile
+bude pÅ™ihlÃ¡Å¡enÃ­ hotovo.
 

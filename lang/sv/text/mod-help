@@ -1,173 +1,173 @@
 # Revision: 1
-Tack för att du vill moderera <#L#>@<#h#> listan.
+Tack fÃ¶r att du vill moderera <#L#>@<#h#> listan.
 
-Kommandona är lite anorlunda mot andra listor,
-men de är lätta att lära och använda.
+Kommandona Ã¤r lite anorlunda mot andra listor,
+men de Ã¤r lÃ¤tta att lÃ¤ra och anvÃ¤nda.
 
-Här är lite instruktioner angående de saker du kan behöva
-göra som listägare/moderator.
+HÃ¤r Ã¤r lite instruktioner angÃ¥ende de saker du kan behÃ¶va
+gÃ¶ra som listÃ¤gare/moderator.
 
-Allmäna kommandon följer efter detta meddelande.
+AllmÃ¤na kommandon fÃ¶ljer efter detta meddelande.
 
-Fjärr prenumeration.
+FjÃ¤rr prenumeration.
 --------------------
 Som moderator kan du prenumerera och avprenumerera vilken adress
-som helst på listan. För att prenumerera "john@example.com",
-skriv bara ett bindesträck efter "kommando ordet", därefter
-adressen med ett '=' tecken istället för '@'. I detta fallet skulle
+som helst pÃ¥ listan. FÃ¶r att prenumerera "john@example.com",
+skriv bara ett bindestrÃ¤ck efter "kommando ordet", dÃ¤refter
+adressen med ett '=' tecken istÃ¤llet fÃ¶r '@'. I detta fallet skulle
 du skickat ett brev till:
    <<#L#>-subscribe-john=example.com@<#h#>>
 
-Du kan på samma sätt ta bort en adress med ett meddelande till:
+Du kan pÃ¥ samma sÃ¤tt ta bort en adress med ett meddelande till:
    <<#L#>-unsubscribe-john=example.com@<#h#>>
 
 <=d=>
-För "digest" versionen av listan:
+FÃ¶r "digest" versionen av listan:
    <<#L#>-digest-subscribe-john=example.com@<#h#>>
    <<#L#>-digest-unsubscribe-john=example.com@<#h#>>
 
 <==>
-Det är allt. Titel och innehåll spelar ingen roll!
+Det Ã¤r allt. Titel och innehÃ¥ll spelar ingen roll!
 
 <=r=>
-Ett bekräftelse brev kommer skickas för att vara säker
-på att det verkligen var du som skickade brevet.
-Svara bara på det brevet och det hela är klart.
+Ett bekrÃ¤ftelse brev kommer skickas fÃ¶r att vara sÃ¤ker
+pÃ¥ att det verkligen var du som skickade brevet.
+Svara bara pÃ¥ det brevet och det hela Ã¤r klart.
 <=R=>
-Jag kommer skicka ett bekräftelsebrev till prenumerantens adress,
-i detta fallet <john@example.com>. Allt prenumeranten behöver
-göra är att svara på brevet.
+Jag kommer skicka ett bekrÃ¤ftelsebrev till prenumerantens adress,
+i detta fallet <john@example.com>. Allt prenumeranten behÃ¶ver
+gÃ¶ra Ã¤r att svara pÃ¥ brevet.
 <==>
 
-Bekräftelserna är nödvändiga för att göra det svårt för
-en tredje part till att lägga till/ta bort adresser till
+BekrÃ¤ftelserna Ã¤r nÃ¶dvÃ¤ndiga fÃ¶r att gÃ¶ra det svÃ¥rt fÃ¶r
+en tredje part till att lÃ¤gga till/ta bort adresser till
 listan.
 
-Jag kommer underrätta prenumeranten när dennes status
-har ändrats.
+Jag kommer underrÃ¤tta prenumeranten nÃ¤r dennes status
+har Ã¤ndrats.
 
 Prenumeration
 --------------
 
-Alla kan prenumerera/sluta prenumerera på listan genom
+Alla kan prenumerera/sluta prenumerera pÃ¥ listan genom
 att skicka ett brev till:
 
 <#L#>-subscribe@<#h#>
 <#L#>-unsubscribe@<#h#>
 
 <=d=>
-För "digest" versionen av listan:
+FÃ¶r "digest" versionen av listan:
 
 <#L#>-digest-subscribe@<#h#>
 <#L#>-digest-unsubscribe@<#h#>
 
 <==>
-Prenumeranten kommer få ett bekräftelse brev för
-att vara säker på att personen har den adressen.
-När det är klart blir personen borttagen ur listan.
+Prenumeranten kommer fÃ¥ ett bekrÃ¤ftelse brev fÃ¶r
+att vara sÃ¤ker pÃ¥ att personen har den adressen.
+NÃ¤r det Ã¤r klart blir personen borttagen ur listan.
 
 <=s=>
-Eftersom denna listan är sluten, kommer jag skicka en andra
-förfrågan till moderatorerna. Eftersom prenumeranten redan har
-bekräftat att den vill vara med på listan, kan du som
-moderator vara säker på att det är rätt adress. Ifall du vill
-ha med personen på listan, svara på bekräftelse (CONFIRM)
+Eftersom denna listan Ã¤r sluten, kommer jag skicka en andra
+fÃ¶rfrÃ¥gan till moderatorerna. Eftersom prenumeranten redan har
+bekrÃ¤ftat att den vill vara med pÃ¥ listan, kan du som
+moderator vara sÃ¤ker pÃ¥ att det Ã¤r rÃ¤tt adress. Ifall du vill
+ha med personen pÃ¥ listan, svara pÃ¥ bekrÃ¤ftelse (CONFIRM)
 meddelandet. Ifall du inte vill ha med personen, radera bara
-meddelandet istället (eller kontakta personen för ytterligare
+meddelandet istÃ¤llet (eller kontakta personen fÃ¶r ytterligare
 information).
 <=S=>
-Prenumeration fungerar på samma sätt.
+Prenumeration fungerar pÃ¥ samma sÃ¤tt.
 <==>
 
-Användaren kan också:
+AnvÃ¤ndaren kan ocksÃ¥:
 
    <<#L#>-subscribe-mary=example.com@<#h#>>
    <<#L#>-unsubscribe-mary=example.com@<#h#>>
 
-för att få brev skickad till "mary@example.com". Bara om hon kan
-ta emot brev på den adressen, får hon bekräftelse meddelandet
-och kan svara på det.
+fÃ¶r att fÃ¥ brev skickad till "mary@example.com". Bara om hon kan
+ta emot brev pÃ¥ den adressen, fÃ¥r hon bekrÃ¤ftelse meddelandet
+och kan svara pÃ¥ det.
 
-Din adress och identitet kommer att vara hemlig för prenumeranten
+Din adress och identitet kommer att vara hemlig fÃ¶r prenumeranten
 om du inte skickar brev direkt till denne.
 
 <=rl=>
-För att få en lista på prenumeranter på <#L#>@<#h#>,
+FÃ¶r att fÃ¥ en lista pÃ¥ prenumeranter pÃ¥ <#L#>@<#h#>,
 skicka ett brev till:
    <<#L#>-list@<#h#>>
 
-För att få en "transaktionslog" för <#L#>@<#h#>,
+FÃ¶r att fÃ¥ en "transaktionslog" fÃ¶r <#L#>@<#h#>,
 skicka ett brev till:
    <<#L#>-log@<#h#>>
 
 <=rld=>
-För "digest" prenumeranter:
+FÃ¶r "digest" prenumeranter:
    <<#L#>-digest-list@<#h#>>
 och:
    <<#L#>-digest-log@<#h#>>
 
 <=rn=>
-Du kan ändra textfilerna, som listan använder, på distans. För att
-få en lista på filerna och instruktioner om hur du ändrar dem,
+Du kan Ã¤ndra textfilerna, som listan anvÃ¤nder, pÃ¥ distans. FÃ¶r att
+fÃ¥ en lista pÃ¥ filerna och instruktioner om hur du Ã¤ndrar dem,
 skicka ett e-mail till:
    <<#L#>-edit@<#h#>>
 
 <=m=>
 Modererade utskick
 ------------------
-När utskick är modererade, kommer ett brev att skickas till dig
-med en kopia på utskick och instruktioner som berättar hur
-utskicket skall godkännas för att komma med på listan. Det
+NÃ¤r utskick Ã¤r modererade, kommer ett brev att skickas till dig
+med en kopia pÃ¥ utskick och instruktioner som berÃ¤ttar hur
+utskicket skall godkÃ¤nnas fÃ¶r att komma med pÃ¥ listan. Det
 brevet kommer att ha "MODERATE for ..." som titel.
 
-För att acceptera ett utskick, skicka bara ett svar till 'Reply-To:'
-adressen (sker vanligtvis med "svara" knappen). Du behöver inte
-skicka med brevet du fick skickat till dig, det är bara adressen
-som är viktig.
+FÃ¶r att acceptera ett utskick, skicka bara ett svar till 'Reply-To:'
+adressen (sker vanligtvis med "svara" knappen). Du behÃ¶ver inte
+skicka med brevet du fick skickat till dig, det Ã¤r bara adressen
+som Ã¤r viktig.
 
-Ifall du vill avvisa utskicket, skicka ett brev till avsändar-
-adressen ("From:" fältet), där rätt avvisningsadress är inskrivning.
-"Svara alla" brukar använda den adressen. Om du vill skriva ett
-meddelande till författaren, skriv den mellan två rader som börjar
+Ifall du vill avvisa utskicket, skicka ett brev till avsÃ¤ndar-
+adressen ("From:" fÃ¤ltet), dÃ¤r rÃ¤tt avvisningsadress Ã¤r inskrivning.
+"Svara alla" brukar anvÃ¤nda den adressen. Om du vill skriva ett
+meddelande till fÃ¶rfattaren, skriv den mellan tvÃ¥ rader som bÃ¶rjar
 med tre '%' tecken. Detta kommer att ske anonymt och bara skickas
-till författaren.
+till fÃ¶rfattaren.
 
-Utskicket kommer att behandlas beroende på vilket svar som kommer
-in först. Om en moderator redan har avvisat ett brev som du godkänner
-så kommer brevet ändå att vara avvisat och vice versa.
+Utskicket kommer att behandlas beroende pÃ¥ vilket svar som kommer
+in fÃ¶rst. Om en moderator redan har avvisat ett brev som du godkÃ¤nner
+sÃ¥ kommer brevet Ã¤ndÃ¥ att vara avvisat och vice versa.
 
 Ifall ingen moderator svarar inom en viss tid (vanligtvis 5 dagar),
-kommer brevet att returneras till författaren med en förklaring
-om vad som hände.
+kommer brevet att returneras till fÃ¶rfattaren med en fÃ¶rklaring
+om vad som hÃ¤nde.
 <==>
 
 Semestrar
 ---------
-Ifall du temporärt har en annan adress, vidareskicka alla brev som
-har korrekt "Mailing-List:" fält i brevhuvudet (eller alla brev som
+Ifall du temporÃ¤rt har en annan adress, vidareskicka alla brev som
+har korrekt "Mailing-List:" fÃ¤lt i brevhuvudet (eller alla brev som
 har titeln "MODERATE for <#L#>@<#h#>"
 eller "CONFIRM subscribe to <#L#>@<#h#>")
-till den nya adressen. Du kan därefter moderera listan från den
-adressen. Alternativt kan du vidareskicka brevet till någon annan
-som modererar listan åt dig. Fråga listägaren först om det är OK.
+till den nya adressen. Du kan dÃ¤refter moderera listan frÃ¥n den
+adressen. Alternativt kan du vidareskicka brevet till nÃ¥gon annan
+som modererar listan Ã¥t dig. FrÃ¥ga listÃ¤garen fÃ¶rst om det Ã¤r OK.
 
-Ifall du vill att allt skall godkännas automatiskt medan du är
-borta, ställ iordning ditt e-mail system så den gör ett autosvar
-på brev med ovan nämnda titlar.
+Ifall du vill att allt skall godkÃ¤nnas automatiskt medan du Ã¤r
+borta, stÃ¤ll iordning ditt e-mail system sÃ¥ den gÃ¶r ett autosvar
+pÃ¥ brev med ovan nÃ¤mnda titlar.
 
 <=r=>
-Ifall du försöker administrera listan från en adress som inte är din
-egen, prenumeranten, inte du, kommer frågas efter en bekräftelse.
-Därefter kommer en bekräftelseförfrågan skickas till moderatorerna.
-Detta görs eftersom det är omöjligt att veta ifall det var du som
-skickade originalfrågan.
+Ifall du fÃ¶rsÃ¶ker administrera listan frÃ¥n en adress som inte Ã¤r din
+egen, prenumeranten, inte du, kommer frÃ¥gas efter en bekrÃ¤ftelse.
+DÃ¤refter kommer en bekrÃ¤ftelsefÃ¶rfrÃ¥gan skickas till moderatorerna.
+Detta gÃ¶rs eftersom det Ã¤r omÃ¶jligt att veta ifall det var du som
+skickade originalfrÃ¥gan.
 
-Observera att originalförfrågan, inklusive din adress, skickas till
+Observera att originalfÃ¶rfrÃ¥gan, inklusive din adress, skickas till
 prenumeranten i detta fallet.
 <==>
 
 Lycka till!
 
-PS. Kontakta listägaren (<#L#>-owner@<#h#>) ifall du
-har några frågor eller stöter på några problem.
+PS. Kontakta listÃ¤garen (<#L#>-owner@<#h#>) ifall du
+har nÃ¥gra frÃ¥gor eller stÃ¶ter pÃ¥ nÃ¥gra problem.
 

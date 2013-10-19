@@ -1,30 +1,30 @@
 # Revision: 1
-¡Vaya!, parece que ese número de confirmación es inválido.
+Â¡Vaya!, parece que ese nÃºmero de confirmaciÃ³n es invÃ¡lido.
 
-La principal razón por la que los números de confirmación se
-invalidan es la expiración. Debo recibir confirmación de cada
-petición en un plazo de diez días. Además, asegúrese que el
-número completo de confirmación estaba incluido en la respuesta
-que me mandó. Tenga en cuenta que algunos programas de correo
-tienen la (mala) costumbre de cortar parte de la dirección de
+La principal razÃ³n por la que los nÃºmeros de confirmaciÃ³n se
+invalidan es la expiraciÃ³n. Debo recibir confirmaciÃ³n de cada
+peticiÃ³n en un plazo de diez dÃ­as. AdemÃ¡s, asegÃºrese que el
+nÃºmero completo de confirmaciÃ³n estaba incluido en la respuesta
+que me mandÃ³. Tenga en cuenta que algunos programas de correo
+tienen la (mala) costumbre de cortar parte de la direcciÃ³n de
 respuesta, que puede ser muy larga.
 
-He configurado un nuevo número de confirmación. Para confirmar
-que le gustaría que
+He configurado un nuevo nÃºmero de confirmaciÃ³n. Para confirmar
+que le gustarÃ­a que
 
 <#A#>
 
 fuese dado de baja en la lista de correo <#l#>, por favor, mande
-un mensaje en blanco a esta dirección:
+un mensaje en blanco a esta direcciÃ³n:
 
 <#R#>
 
-o haga clic aquí:
+o haga clic aquÃ­:
 
 	mailto:<#R#>
 
-De nuevo, compruebe la dirección de respuesta cuidadosamente para
-asegurarse que esté todo incluido antes de confirmar esta acción.
+De nuevo, compruebe la direcciÃ³n de respuesta cuidadosamente para
+asegurarse que estÃ© todo incluido antes de confirmar esta acciÃ³n.
 
 Perdone las molestias.
 

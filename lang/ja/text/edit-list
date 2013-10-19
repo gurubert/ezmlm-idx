@@ -1,42 +1,42 @@
 # Revision: 1
 <=n=>
-$B4IM}<T$O(B <#L#>-edit.FILE command $B$r;H$&$3$H$G(B ezmlm $B$,=PNO$9$k(B
-mailing list <#L#> $B$N0Y$N(B message text $B$rJT=8$9$k$3$H$,=PMh$^$9!#(B
+管理者は <#L#>-edit.FILE command を使うことで ezmlm が出力する
+mailing list <#L#> の為の message text を編集することが出来ます。
 
-$B0J2<$OJT=82DG=$J(B FILE $B$H!"$=$NL\E*$G$9!#(Bfile FOO $B$rJT=8$7$?$$(B
-$B>l9g$O(B <#L#>-edit.FOO@<#h#> $B08$K6u$N(B message $B$rAw$C$F2<$5$$!#(B
-$BJT=8$N;EJ}$OAw?.$5$l$k(B message $B$K4^$^$l$F$$$^$9!#(B
+以下は編集可能な FILE と、その目的です。file FOO を編集したい
+場合は <#L#>-edit.FOO@<#h#> 宛に空の message を送って下さい。
+編集の仕方は送信される message に含まれています。
 
 File                Use
 
-bottom              ezmlm $B$N(B command $B0lMw$G$9!#(B
-                    ezmlm $B$,JVAw$9$kA4$F$N(B message $B$KIU2C$5$l$^$9!#(B
-digest              digest $BHG$N0Y$N(B command $B$N@bL@$G$9!#(B
-faq                 mailing list <#L#> $B$G$N(B FAQ $B$G$9!#(B
-get_bad             archive $BCf$K;XDj$5$l$?(B message $B$r8+IU$1$i$l$J$+$C$?>l9g$K(B
-                    $BAw$i$l$^$9!#(B
-help                help message $B$G$9!J(B'top' $B$H(B 'bottom' $B$N4V$KF~$j$^$9!K(B
-info                mailing list <#L#> $B$N>pJs$G$9!#(B
-mod_help            $B4IM}<T8~$1$N(B help message $B$G$9!#(B
-mod_reject          $B4IM}<T$,<uM}$7$J$+$C$?(B post $B$NAw$j<g$KBP$7$FAw$i$l$^$9!#(B
-mod_request         moderated $B$J(B mailing list $B$KBP$7$F(B post $B$,$"$C$?>l9g(B
-                    $B4IM}<T$KAw$i$l$^$9!#(B
-mod_sub             $B9XFI4uK><T$KBP$7$F!"4IM}<T$,9XFI(B request $B$r<uM}$7$?;~$KAw$i$l$^$9!#(B
-mod_sub_confirm     $B4IM}<T$KBP$7$F9XFI(B request $B$N3NG'$N$?$aAw$i$l$^$9!#(B
-mod_timeout         $B4IM}<T$,<uM}$;$:;~4V@Z$l$K$J$C$?(B post $B$NAw?.<T$KAw$i$l$^$9!#(B
-mod_unsub_confirm   $B4IM}<T$KBP$7$F9XFICf;_$N3NG'$r<h$k>l9g$KAw$i$l$^$9!#(B
-sub_bad             $B9XFI4uK><T$+$i$N9XFI3NG'$N0Y$N1~Ez$,IT@5$J>l9g$KAw$i$l$^$9!#(B
-sub_confirm         $B9XFI4uK><T$KBP$7$F!"3NG'$N$?$a$KAw$i$l$^$9!#(B
-sub_nop             $B4{$K9XFI<T$K$J$C$F$$$k?M$,:F$S9XFI(B request $B$r=P$7$?>l9g$K(B
-                    $BAw$i$l$^$9!#(B
-sub_ok              $B9XFI$N<jB3$-$,=*N;$7$?8e$KAw$i$l$^$9!#(B
-top                 ezmlm $B$,Aw?.$9$kA4$F$N1~Ez$NF,$KIU$-$^$9!#(B
+bottom              ezmlm の command 一覧です。
+                    ezmlm が返送する全ての message に付加されます。
+digest              digest 版の為の command の説明です。
+faq                 mailing list <#L#> での FAQ です。
+get_bad             archive 中に指定された message を見付けられなかった場合に
+                    送られます。
+help                help message です（'top' と 'bottom' の間に入ります）
+info                mailing list <#L#> の情報です。
+mod_help            管理者向けの help message です。
+mod_reject          管理者が受理しなかった post の送り主に対して送られます。
+mod_request         moderated な mailing list に対して post があった場合
+                    管理者に送られます。
+mod_sub             購読希望者に対して、管理者が購読 request を受理した時に送られます。
+mod_sub_confirm     管理者に対して購読 request の確認のため送られます。
+mod_timeout         管理者が受理せず時間切れになった post の送信者に送られます。
+mod_unsub_confirm   管理者に対して購読中止の確認を取る場合に送られます。
+sub_bad             購読希望者からの購読確認の為の応答が不正な場合に送られます。
+sub_confirm         購読希望者に対して、確認のために送られます。
+sub_nop             既に購読者になっている人が再び購読 request を出した場合に
+                    送られます。
+sub_ok              購読の手続きが終了した後に送られます。
+top                 ezmlm が送信する全ての応答の頭に付きます。
 <=tn=>
-trailer             $B$3$N(B mailing list $B$KBP$9$kA4$F$N(B post $B$NKvHx$K(B
-                    $BIU$1B-$5$l$FAw$i$l$^$9!#(B
+trailer             この mailing list に対する全ての post の末尾に
+                    付け足されて送られます。
 <=n=>
-unsub_bad           $B9XFI<T$+$i$N9XFICf;_3NG'$,IT@5$J>l9g$KAw$i$l$^$9!#(B
-unsub_confirm       $B9XFI<T$+$i$N9XFICf;_$N(B request $B$N3NG'$N$?$a$KAw$i$l$^$9!#(B
-unsub_nop           $B9XFI<T0J30$,9XFI$rCf;_$7$h$&$H$7$?;~$KAw$i$l$^$9!#(B
-unsub_ok            $B9XFI<T$+$i$N9XFICf;_$N(B request $B$,<uM}$5$l$?;~$KAw$i$l$^$9!#(B
+unsub_bad           購読者からの購読中止確認が不正な場合に送られます。
+unsub_confirm       購読者からの購読中止の request の確認のために送られます。
+unsub_nop           購読者以外が購読を中止しようとした時に送られます。
+unsub_ok            購読者からの購読中止の request が受理された時に送られます。
 

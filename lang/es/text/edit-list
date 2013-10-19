@@ -3,56 +3,56 @@
 
 El comando <#L#>-edit.file puede ser utilizado por un
 administrador remoto para modificar los ficheros de texto que
-componen la mayoría de las respuestas de la lista de correo
+componen la mayorÃ­a de las respuestas de la lista de correo
 <#L#>@<#h#>.
 
 Lo que sigue es un listado de los ficheros de respuesta y una
-corta indicación de cuando se utilizan sus contenidos. Para
-modificar un fichero, simplemente envíe un correo a
+corta indicaciÃ³n de cuando se utilizan sus contenidos. Para
+modificar un fichero, simplemente envÃ­e un correo a
 <#L#>-edit.fichero@<#h#>, sustituyendo 'fichero' por el nombre
-del fichero. Las instrucciones para las modificaciones se envían
+del fichero. Las instrucciones para las modificaciones se envÃ­an
 con el fichero.
 
 File                    Use
 
-bottom                  final de todas las respuestas. Información general sobre comandos.
+bottom                  final de todas las respuestas. InformaciÃ³n general sobre comandos.
 bounce_bottom           final de las advertencias de mensajes devueltos
 bounce_num              prefijo a la lista del numero de mensajes devueltos
 bounce_probe            mensaje de prueba para comprobar que una direccion existe
 bounce_warn             mensaje de advertencia relativo a mensajes devueltos
 <=dn=>
-dig_bounce_num          prefijo a la lista del numero de resúmenes que han sido devueltos
-digest                  sección administrativa de resúmenes.
+dig_bounce_num          prefijo a la lista del numero de resÃºmenes que han sido devueltos
+digest                  secciÃ³n administrativa de resÃºmenes.
 <=n=>
-edit_do                 prefijo con instrucciones para la edición de texto
-edit_done               mensaje de edición de texto correcta
+edit_do                 prefijo con instrucciones para la ediciÃ³n de texto
+edit_done               mensaje de ediciÃ³n de texto correcta
 edit_list               esta lista
 faq                     preguntas frecuentes propias de esta lista.
 <=Bn=>
 get_bad                 en lugar de mensajes no encontrados en el archivo.
 <=n=>
 help                    ayuda general (entre 'top' y 'bottom').
-info                    información sobre la lista. La primera línea debe tener significado por sí misma.
+info                    informaciÃ³n sobre la lista. La primera lÃ­nea debe tener significado por sÃ­ misma.
 <=mn=>
-mod_help                ayuda específica para moderadores.
+mod_help                ayuda especÃ­fica para moderadores.
 mod_reject              al remitente del mensaje rechazado.
 mod_request             a los moderadores de mensajes junto a los mensajes.
-mod_sub                 al suscriptor después de que el moderador confirme la suscripción.
-mod_sub_confirm         al moderador para pedir confirmación de suscripción.
+mod_sub                 al suscriptor despuÃ©s de que el moderador confirme la suscripciÃ³n.
+mod_sub_confirm         al moderador para pedir confirmaciÃ³n de suscripciÃ³n.
 mod_timeout             al remitente de correo caducado.
-mod_unsub_confirm       al administrador remoto para pedir confirmación de baja.
+mod_unsub_confirm       al administrador remoto para pedir confirmaciÃ³n de baja.
 <=yn=>
-post-confirm            al remitente para confirmación del mensaje
+post-confirm            al remitente para confirmaciÃ³n del mensaje
 <=n=>
-sub_bad                 al suscriptor si la confirmación no fue correcta.
-sub_confirm             al suscriptor para pedir confirmación de suscripción.
-sub_nop                 al suscriptor después de re-suscribirse.
-sub_ok                  al suscriptor después de la suscripción.
+sub_bad                 al suscriptor si la confirmaciÃ³n no fue correcta.
+sub_confirm             al suscriptor para pedir confirmaciÃ³n de suscripciÃ³n.
+sub_nop                 al suscriptor despuÃ©s de re-suscribirse.
+sub_ok                  al suscriptor despuÃ©s de la suscripciÃ³n.
 top                     el principio de todas las respuestas.
 <=tn=>
-trailer                 añadido a todos los mensajes enviados de la lista.
+trailer                 aÃ±adido a todos los mensajes enviados de la lista.
 <=n=>
-unsub_bad               al suscriptor si la confirmación de baja fue incorrecta.
-unsub_confirm           al suscriptor para pedir confirmación de cancelación.
-unsub_nop               al no suscriptor después de darse de baja.
-unsub_ok                al ex suscriptor después de darse de baja.
+unsub_bad               al suscriptor si la confirmaciÃ³n de baja fue incorrecta.
+unsub_confirm           al suscriptor para pedir confirmaciÃ³n de cancelaciÃ³n.
+unsub_nop               al no suscriptor despuÃ©s de darse de baja.
+unsub_ok                al ex suscriptor despuÃ©s de darse de baja.

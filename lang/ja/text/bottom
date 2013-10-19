@@ -1,47 +1,47 @@
 # Revision: 1
 
---- mailing list <#l#> $B$GMxMQ2DG=$J(B command $B0lMw$G$9(B ---
+--- mailing list <#l#> で利用可能な command 一覧です ---
 
-ezmlm $B$O0J2<$N(B command $B$r<+F0$G<B9T$7$^$9!#(B
+ezmlm は以下の command を自動で実行します。
 
-[[[ $B@dBP$K(B mailing list $BK\BN$K(B command $B$rAw$i$J$$$G2<$5$$(B ]]]
+[[[ 絶対に mailing list 本体に command を送らないで下さい ]]]
 
-command $B$O0J2<$N(B address $B08$K6u$N(B message $B$rAw$k$3$H$G<B9T$5$l$^$9!#(B
+command は以下の address 宛に空の message を送ることで実行されます。
 
-   * $BMxMQ2DG=$J(B command $B0lMw$r<h$j=P$9(B
+   * 利用可能な command 一覧を取り出す
      <<#L#>-help@<#h#>>
      (Get help and commands)
 
-   * $B9XFI$r3+;O$9$k(B
+   * 購読を開始する
      <<#L#>-subscribe@<#h#>>
      (Start subscription)
 
-$B9XFI$rCf;_$9$k$K$O(B mailing list <#L#> $B$+$i$N(B message $B$N(B header $B$K(B
-$B4^$^$l$F$$$k(B ``List-Unsubscribe'' $B9T$,<($9(B address $B$K6u(B message
-$B$rAw$C$F$/$@$5$$!#$^$?$O0J2<$N(B address $B08$F$K6u(B message $B$rAw$C$F(B
-$B2<$5$$!#(B
+購読を中止するには mailing list <#L#> からの message の header に
+含まれている ``List-Unsubscribe'' 行が示す address に空 message
+を送ってください。または以下の address 宛てに空 message を送って
+下さい。
      <<#L#>-unsubscribe@<#h#>>
      (Stop subscription)
 
 <=d=>
-digest $B$N9XFI$rCf;_$9$k$K$O0J2<$N(B address $B08$F$K6u$N(B message $B$r(B
-$BAw$C$F2<$5$$!#(B
+digest の購読を中止するには以下の address 宛てに空の message を
+送って下さい。
      <<#L#>-digest-unsubscribe@<#h#>>
      (Stop digest subscription)
 
 <=HJ=>
-$B9XFI$N3+;O$*$h$SCf;_$N:]$K$O(B ezmlm $B$O3NG'$N0Y$N(B message $B$r(B
-$B;XDj$5$l$?(B address $B08$F$KAw?.$7$^$9!#$=$N3NG'$N0Y$N(B message
-$B$KBP$7$F!"(Breply $B$rJV$9$3$H$G3NG'$N<jB3$-$O=*N;$7$^$9!#(B
+購読の開始および中止の際には ezmlm は確認の為の message を
+指定された address 宛てに送信します。その確認の為の message
+に対して、reply を返すことで確認の手続きは終了します。
 
 <==>
-$B0J>e$N;X<($K=>$C$F$b!"K>$s$@7k2L$K$J$i$J$$>l9gEy$O!"(B
-mailing list <#L#> $B$N<g:K<T$N(B
-<#L#>-owner@<#h#> $BKxO"Mm$7$F2<$5$$!#(B
-$B!JJV;v$,CY$l$k$+$b$7$l$^$;$s!#$4N;>52<$5$$!K(B
+以上の指示に従っても、望んだ結果にならない場合等は、
+mailing list <#L#> の主宰者の
+<#L#>-owner@<#h#> 迄連絡して下さい。
+（返事が遅れるかもしれません。ご了承下さい）
 
-$BLdBj$N2r@O$r?J$a$d$9$/$9$k0Y$K(B ezmlm $B$+$iAw$i$l$F$-$?(B message $B$r(B
-$B!XA4$F$N(B header $B$r4^$a$F!YE:IU$7$F$/$@$5$$!#(B
+問題の解析を進めやすくする為に ezmlm から送られてきた message を
+『全ての header を含めて』添付してください。
 
---- $B0J2<$KAw$i$l$F$-$?(B message $B$rE:IU$7$F$*$-$^$9(B ---
+--- 以下に送られてきた message を添付しておきます ---
 

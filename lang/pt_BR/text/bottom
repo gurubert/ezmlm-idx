@@ -1,10 +1,10 @@
 # Revision: 0
 
---- Aqui estão os endereços de comando do ezmlm.
+--- Aqui estÃ£o os endereÃ§os de comando do ezmlm.
 
 Eu, O Sistema, posso cuidar automaticamente das tarefas administrativas.
-Favor não enviar mensagens administrativas à própria lista. Basta enviar
-uma mensagem vazia para qualquer destes endereços:
+Favor nÃ£o enviar mensagens administrativas Ã  prÃ³pria lista. Basta enviar
+uma mensagem vazia para qualquer destes endereÃ§os:
 
    Para assinar a lista <#L#> e receber as mensagens a ela enviadas,
    envie email para:
@@ -12,41 +12,41 @@ uma mensagem vazia para qualquer destes endereços:
 
    Para cancelar a assinatura, envie mensagem para:
    <<#L#>-unsubscribe@<#h#>>:
-   Caso tenha mudado de endereço de email depois de ter assinado, pode
-   ainda cancelar a assinatura pelo envio de uma mensagem ao endereço no
-   campo: "List-Unsubscribe" encontrado nos cabeçalhos de qualquer mensagem
-   que tenha sido enviada à lista.
+   Caso tenha mudado de endereÃ§o de email depois de ter assinado, pode
+   ainda cancelar a assinatura pelo envio de uma mensagem ao endereÃ§o no
+   campo: "List-Unsubscribe" encontrado nos cabeÃ§alhos de qualquer mensagem
+   que tenha sido enviada Ã  lista.
 
-   Para receber mais informações ou o FAQ desta lista,
-   se disponíveis, envie email para:
+   Para receber mais informaÃ§Ãµes ou o FAQ desta lista,
+   se disponÃ­veis, envie email para:
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
 
 <=d=>
-Existem também estes endereços similares para a lista "digest":
+Existem tambÃ©m estes endereÃ§os similares para a lista "digest":
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <==>
-Na verdade as mensagens não precisam ser vazias, mas eu irei
-ignorar o seu conteúdo. Somente o ENDEREÇO é importante.
+Na verdade as mensagens nÃ£o precisam ser vazias, mas eu irei
+ignorar o seu conteÃºdo. Somente o ENDEREÃ‡O Ã© importante.
 
-Você pode iniciar a assinatura para um endereço alternativo,
-por exemplo "john@host.domain", bastando adicionar um traço
-e o seu endereço (com '=' no lugar de '@'), ou seja:
+VocÃª pode iniciar a assinatura para um endereÃ§o alternativo,
+por exemplo "john@host.domain", bastando adicionar um traÃ§o
+e o seu endereÃ§o (com '=' no lugar de '@'), ou seja:
 <<#L#>-subscribe-john=host.domain@<#h#>>
 
-Para cancelar a assinatura desse endereço, envie mensagem
+Para cancelar a assinatura desse endereÃ§o, envie mensagem
 para: <<#L#>-unsubscribe-john=host.domain@<#h#>>
 
-Em ambos os casos, eu (O Sistema) enviarei uma mensagem de confirmação para
-esse endereço; quando você receber esta mensagem, simplesmente
+Em ambos os casos, eu (O Sistema) enviarei uma mensagem de confirmaÃ§Ã£o para
+esse endereÃ§o; quando vocÃª receber esta mensagem, simplesmente
 responda para completar sua assinatura (ou cancelamento).
 
-Se estas instruções são muito complicadas ou você não teve os
+Se estas instruÃ§Ãµes sÃ£o muito complicadas ou vocÃª nÃ£o teve os
 resultados que esperava, por favor escrever o meu dono em
-<#L#>-owner@<#h#>. Mas tenha paciência, o meu dono é
+<#L#>-owner@<#h#>. Mas tenha paciÃªncia, o meu dono Ã©
 muito mais devagar do que eu. ;-)
 
---- Abaixo está uma cópia da requisição que eu recebi.
+--- Abaixo estÃ¡ uma cÃ³pia da requisiÃ§Ã£o que eu recebi.
 

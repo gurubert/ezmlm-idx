@@ -1,58 +1,58 @@
 # Revision: 1
-$B$3$l$OHFMQ$N(B help message $B$G$9!#(B
-$B5.J}$N(B message $B$O(B ezmlm $B$N(B command $B$H$7$F$OG'<1$5$l$^$;$s$G$7$?!#(B
+これは汎用の help message です。
+貴方の message は ezmlm の command としては認識されませんでした。
 
-$B0J2<$KMxMQ2DG=$J(B command address $B0J2<$NDL$j$G$9!'(B
-$B!J6u(B message $B$r;XDj$5$l$?(B command address $B$KAw?.$9$k$3$H$G<B9T$5$l$^$9!K(B
+以下に利用可能な command address 以下の通りです：
+（空 message を指定された command address に送信することで実行されます）
 
-   * mailing list <#l#> $B$N@bL@$r<h$j=P$7$^$9!#(B
+   * mailing list <#l#> の説明を取り出します。
      <<#L#>-info@<#h#>>
      (Get information)
-   * mailing list <#l#> $B$N!X$h$/?R$M$i$l$k<ALd$H$=$NEz$(!Y$r<h$j=P$7$^$9!#(B
+   * mailing list <#l#> の『よく尋ねられる質問とその答え』を取り出します。
      <<#L#>-faq@<#h#>>
      (Get FAQ)
 
 <=d=>
-   * digest list <#L#>-digest $B$N9XFI$r3+;O$9$k(B
+   * digest list <#L#>-digest の購読を開始する
      <<#L#>-digest-subscribe@<#h#>>
      (Start digest subscription)
 
-   * digest list <#L#>-digest $B$N9XFI$rCf;_$9$k(B
+   * digest list <#L#>-digest の購読を中止する
      <<#L#>-digest-unsubscribe@<#h#>>
      (Stop digest subscription)
 
 <=a=>
-   * 123 $BHV$+$i(B 145 $BHVKx$N(B message $B$r<h$j=P$9(B
+   * 123 番から 145 番迄の message を取り出す
      <<#L#>-get.123_145@<#h#>>
-     $B!J0lEY$K<h$j=P$;$k$N$O:GBg$G(B 100$BDL$G$9!K(B
+     （一度に取り出せるのは最大で 100通です）
 
-   * 123 $BHV$+$i(B 145 $BHVKx$N(B message $B$NAw?.<T$H(B Subject: $B$r<h$j=P$9(B
+   * 123 番から 145 番迄の message の送信者と Subject: を取り出す
      <<#L#>-index.123_456@<#h#>>
 
-   * message 12345 $BHV$N(B Subject: $B$HF1$8(B Subject: $B$r;}$D(B message $B$r(B
-     $B<h$j=P$9(B
+   * message 12345 番の Subject: と同じ Subject: を持つ message を
+     取り出す
      <<#L#>-thread.12345@<#h#>>
 
 <==>
-command address $B08$F$N(B message $B$O(B address $B$N$_$,I,MW$G$9!#Cf?H$O(B
-$B2?$,$"$C$F$bL5;k$5$l$^$9!#(B
+command address 宛ての message は address のみが必要です。中身は
+何があっても無視されます。
 
-$BI,MW$G$"$l$PDL>o$H$O0[$J$k(B address $B$G(B mailing list <#L#> $B$+$i$N(B
-message $B$r<u$1<h$k$h$&$K=PMh$^$9!#(B
+必要であれば通常とは異なる address で mailing list <#L#> からの
+message を受け取るように出来ます。
 
-$BNc!K(Bjohn@example.com $B$G<u$1<h$kMM$K$9$k(B
+例）john@example.com で受け取る様にする
 
-    $B<u$1<h$j(B address $B$r0J2<$NMM$KJQ49$7$F(B
+    受け取り address を以下の様に変換して
 
         john@example.com
-                $B"-(B      $B!J(B'@' --> '='$B!K(B
+                ↓      （'@' --> '='）
         john=example.com
-                $B"-(B
+                ↓
         <<#L#>-subscribe-john=example.com@<#h#>>
 
-<#L#>-subscribe-john=example.com@<#h#> $B08$F$K6u(B message $B$rAw$k$3$H$G(B
-john@example.com $B$G$N9XFI$r3+;O$G$-$^$9!#(B
+<#L#>-subscribe-john=example.com@<#h#> 宛てに空 message を送ることで
+john@example.com での購読を開始できます。
 
-$B$3$N>l9g!"9XFI$rCf;_$9$k$K$O(B <#L#>-unsubscribe-john=example.com@<#h#>
-$B08$F$K6u(B message $B$rAw$C$F$/$@$5$$!#(B
+この場合、購読を中止するには <#L#>-unsubscribe-john=example.com@<#h#>
+宛てに空 message を送ってください。
 

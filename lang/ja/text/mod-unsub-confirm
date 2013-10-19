@@ -1,27 +1,27 @@
 # Revision: 1
-$B0J2<$N(B address
+以下の address
 
 <#A#>
 
-$B$r(B mailing list <#L#> $B$+$i(B
-$B30$9$N$G$"$l$P!"0J2<$N(B address
+を mailing list <#L#> から
+外すのであれば、以下の address
 
 <#R#>
 
-$B08$K(B reply $B$7$F2<$5$$!#(B
+宛に reply して下さい。
 
-$BDL>o$O(B Mail User Agent (MUA) $B$N(B reply $B$N5!G=$@$1$G==J,$JH&$G$9!#(B
-$B$=$l$,$&$^$/9T$+$J$$>l9g$O!"(B
+通常は Mail User Agent (MUA) の reply の機能だけで十分な筈です。
+それがうまく行かない場合は、
 
         To: <#R#>
 
-$B$r<jF0$G@_Dj$7$F(B message $B$rAw$C$F2<$5$$!#(B
+を手動で設定して message を送って下さい。
 
-MUA $B$K$h$C$F$O(B
+MUA によっては
 
         mailto:<#R#>
 
-$B$r(B click $B$9$k$@$1$G=`Hw$,=PMh$k$G$7$g$&!#(B
+を click するだけで準備が出来るでしょう。
 
-$BC&B`$rG'$a$J$$>l9g$O!"$3$N(B message $B$rL5;k$7$F2<$5$$!#(B
+脱退を認めない場合は、この message を無視して下さい。
 

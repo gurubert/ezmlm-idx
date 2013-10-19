@@ -1,45 +1,45 @@
 # Revision: 0
 
---- Poni¿ej znajduj± siê komendy menad¿era list dyskusyjnych "ezmlm".
+--- PoniÅ¼ej znajdujÄ… siÄ™ komendy menadÅ¼era list dyskusyjnych "ezmlm".
 
-Spe³niam komendy administracyjne automatycznie.
-Wy¶lij jedynie pusty list pod którykolwiek z tych adresów:
+SpeÅ‚niam komendy administracyjne automatycznie.
+WyÅ›lij jedynie pusty list pod ktÃ³rykolwiek z tych adresÃ³w:
 
    <<#L#>-subscribe@<#h#>>:
-   Zapisanie siê na listê o nazwie <#L#>.
+   Zapisanie siÄ™ na listÄ™ o nazwie <#L#>.
 
    <<#L#>-unsubscribe@<#h#>>:
-   Wypisanie siê z listy o nazwie <#L#>.
+   Wypisanie siÄ™ z listy o nazwie <#L#>.
 
-Wy¶lij list pod nastêpuj±ce adresy, je¶li chcesz uzykaæ krótk± notkê
-informacyjn± o li¶cie dyskusyjnej lub jej FAQ (czyli 'najczê¶ciej
+WyÅ›lij list pod nastÄ™pujÄ…ce adresy, jeÅ›li chcesz uzykaÄ‡ krÃ³tkÄ… notkÄ™
+informacyjnÄ… o liÅ›cie dyskusyjnej lub jej FAQ (czyli 'najczÄ™Å›ciej
 zadawana pytania na temat listy wraz z odpowiedziami'):
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
 
 <=d=>
-I odpowiadaj±ce powy¿szemu adresy, je¶li chodzi ci o przegl±d listy:
+I odpowiadajÄ…ce powyÅ¼szemu adresy, jeÅ›li chodzi ci o przeglÄ…d listy:
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <==>
-NIE WYSY£AJ POLECEÑ ADMINISTRACYJNYCH NA LISTÊ DYSKUSYJN¡!
+NIE WYSYÅAJ POLECEÅƒ ADMINISTRACYJNYCH NA LISTÄ˜ DYSKUSYJNÄ„!
 Jesli to zrobisz, administrator listy ich nie zobaczy, natomiast
-wszyscy prenumeratorzy nie¼le siê na Ciebie wkurz± i zostaniesz
-uznany(a) za internetowego ¿ó³todzioba, z którym nie warto gadaæ.
+wszyscy prenumeratorzy nieÅºle siÄ™ na Ciebie wkurzÄ… i zostaniesz
+uznany(a) za internetowego Å¼Ã³Å‚todzioba, z ktÃ³rym nie warto gadaÄ‡.
 
-Aby okresliæ adres Bóg@example.com jako swój adres subskrybcyjny,
-wy¶lij list na adres:
-<<#L#>-subscribe-Bóg=example.com@<#h#>>.
-Wy¶lê Ci wtedy potwierdzenie na ten w³asnie adres; kiedy je otrzymasz,
-po prostu odpowiedz na nie, aby staæ siê prenumeratorem.
+Aby okresliÄ‡ adres BÃ³g@example.com jako swÃ³j adres subskrybcyjny,
+wyÅ›lij list na adres:
+<<#L#>-subscribe-BÃ³g=example.com@<#h#>>.
+WyÅ›lÄ™ Ci wtedy potwierdzenie na ten wÅ‚asnie adres; kiedy je otrzymasz,
+po prostu odpowiedz na nie, aby staÄ‡ siÄ™ prenumeratorem.
 
 <=x=>
-Je¿eli instrukcje, których Ci udzieli³em, s± zbyt trudne, albo
-nie jeste¶ zadowolony z ich efektów, skontaktuj siê z opiekunem listy
+JeÅ¼eli instrukcje, ktÃ³rych Ci udzieliÅ‚em, sÄ… zbyt trudne, albo
+nie jesteÅ› zadowolony z ich efektÃ³w, skontaktuj siÄ™ z opiekunem listy
 pod adresem <#L#>-owner@<#h#>.
-Proszê byæ cierpliwym, opiekun listy jest o wiele wolniejszy
-od komputera, którym ja jestem ;-)
+ProszÄ™ byÄ‡ cierpliwym, opiekun listy jest o wiele wolniejszy
+od komputera, ktÃ³rym ja jestem ;-)
 
---- Za³±cznik jest kopi± polecenia, które otrzyma³em.
+--- ZaÅ‚Ä…cznik jest kopiÄ… polecenia, ktÃ³re otrzymaÅ‚em.
 

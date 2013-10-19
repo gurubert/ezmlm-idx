@@ -9,48 +9,48 @@ weiterzuleiten, senden Sie bitte eine Mail an:
 
 <#A#>
 
-Normalerweise sollte das über die "Beantworten"-Funktion Ihres
-Mailprogramms funktionieren. Bitte prüfen Sie aber noch einmal,
+Normalerweise sollte das Ã¼ber die "Beantworten"-Funktion Ihres
+Mailprogramms funktionieren. Bitte prÃ¼fen Sie aber noch einmal,
 ob die Adresse mit "<#L#>-accept" beginnt und am Ende nicht
 abgeschnitten ist. Manche Programme haben leider Probleme mit langen
 Adressen. Falls "Beantworten" nicht funktioniert, kopieren Sie
 die oben genannte Adresse einfach in die Zieladresse einer neuen
 Nachricht. Beachten Sie dabei aber einen eventuell von Ihrem
 Mailprogramm vorgenommenen Zeilenumbruch, falls die Adresse nicht
-in eine Zeile paßt.
+in eine Zeile paÃŸt.
 
-Falls Ihr Programm Hyperlinks unterstützt, klicken Sie hier:
+Falls Ihr Programm Hyperlinks unterstÃ¼tzt, klicken Sie hier:
    mailto:<#A#>
-Kontrollieren Sie aber bitte auch in diesem Fall, daß die Adresse
-nicht durch Zeilenumbruch verstümmelt wurde!
+Kontrollieren Sie aber bitte auch in diesem Fall, daÃŸ die Adresse
+nicht durch Zeilenumbruch verstÃ¼mmelt wurde!
 
 
-Um die Nachricht abzuweisen und an den Absender zurückzuschicken,
+Um die Nachricht abzuweisen und an den Absender zurÃ¼ckzuschicken,
 senden Sie bitte eine Mail an:
 
 <#R#>
 
-Falls Ihr Programm das unterstützt, können Sie auch an die im
+Falls Ihr Programm das unterstÃ¼tzt, kÃ¶nnen Sie auch an die im
 From: Header angegebene Adresse antworten (das sollte die oben
 angegebene sein).
 
-Wenn Ihr Programm Hyperlinks unterstützt, können Sie auch
+Wenn Ihr Programm Hyperlinks unterstÃ¼tzt, kÃ¶nnen Sie auch
 hier klicken:
    mailto:<#R#>
 
 
-Sie müssen keine Kopie der Originalnachricht mitschicken.
+Sie mÃ¼ssen keine Kopie der Originalnachricht mitschicken.
 Wenn Sie dem Absender bei einer Ablehnung einen Kommentar zukommen
-lassen wollen, schließen Sie diesen zwischen zwei Zeilen ein, die
+lassen wollen, schlieÃŸen Sie diesen zwischen zwei Zeilen ein, die
 jeweils mit drei Prozentzeichen beginnen.
 
 %%% Beginn Kommentar
 %%% Ende Kommentar
 
-Auch bei Ablehnung einer Nachricht kontrollieren Sie bitte, daß
-die Adresse nicht von Ihrem Mailprogramm verstümmelt wird.
+Auch bei Ablehnung einer Nachricht kontrollieren Sie bitte, daÃŸ
+die Adresse nicht von Ihrem Mailprogramm verstÃ¼mmelt wird.
 
-Vielen Dank für Ihre Mithilfe!
+Vielen Dank fÃ¼r Ihre Mithilfe!
 
 --- Anbei finden Sie die Nachricht, um die es geht.
 

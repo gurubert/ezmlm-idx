@@ -1,28 +1,28 @@
 # Revision: 1
-Potvrzujete-li, ¾e chcete adresu
+Potvrzujete-li, Å¾e chcete adresu
 
 <#A#>
 
-zru¹it z listu <#l#>, po¹lete prázdnou odpovìï na adresu
+zruÅ¡it z listu <#l#>, poÅ¡lete prÃ¡zdnou odpovÄ›Ä na adresu
 
 <#R#>
 
-Toho obvykle dosáhnete pomocí tlaèítka "Odpovìï/Reply". Mù¾ete zkontrolovat
-adresu, zaèíná-li øetìzcem "<#L#>-sc". Pokud toto nefunguje, staèí
-zkopírovat adresu a ulo¾it ji do políèka "To:" nové zprávy.
+Toho obvykle dosÃ¡hnete pomocÃ­ tlaÄÃ­tka "OdpovÄ›Ä/Reply". MÅ¯Å¾ete zkontrolovat
+adresu, zaÄÃ­nÃ¡-li Å™etÄ›zcem "<#L#>-sc". Pokud toto nefunguje, staÄÃ­
+zkopÃ­rovat adresu a uloÅ¾it ji do polÃ­Äka "To:" novÃ© zprÃ¡vy.
 
-Mù¾ete také zkusit kliknout zde:
+MÅ¯Å¾ete takÃ© zkusit kliknout zde:
 	mailto:<#R#>
 
-Nekontroloval jsem, je-li va¹e adresa v souèasné dobì na listu.
-Chcete-li zjistit, ze které adresy bylo provedeno pøihlá¹ení,
-podívejte se do zpráv, které dostáváte z listu. Ka¾dá zpráva
-má adresu v návratové cestì:
+Nekontroloval jsem, je-li vaÅ¡e adresa v souÄasnÃ© dobÄ› na listu.
+Chcete-li zjistit, ze kterÃ© adresy bylo provedeno pÅ™ihlÃ¡Å¡enÃ­,
+podÃ­vejte se do zprÃ¡v, kterÃ© dostÃ¡vÃ¡te z listu. KaÅ¾dÃ¡ zprÃ¡va
+mÃ¡ adresu v nÃ¡vratovÃ© cestÄ›:
 <<#l#>-return-<number>-jana=example.com@<#h#>.
 
 <=q=>
-Nìkteré po¹tovní programy jsou chybné a nemohou zpracovávat dlouhé
-adresy. Pokud nemù¾ete odpovìdìt na tuto adresu, po¹lete
-zprávu na adresu <<#L#>-request@<#h#>>
-a vlo¾te celou vı¹e uvedenou adresu do subjectu.
+NÄ›kterÃ© poÅ¡tovnÃ­ programy jsou chybnÃ© a nemohou zpracovÃ¡vat dlouhÃ©
+adresy. Pokud nemÅ¯Å¾ete odpovÄ›dÄ›t na tuto adresu, poÅ¡lete
+zprÃ¡vu na adresu <<#L#>-request@<#h#>>
+a vloÅ¾te celou vÃ½Å¡e uvedenou adresu do subjectu.
 

@@ -1,31 +1,31 @@
 # Revision: 1
-¡Vaya!, parece que el número de confirmación no es válido.
+Â¡Vaya!, parece que el nÃºmero de confirmaciÃ³n no es vÃ¡lido.
 
-La principal causa por la que los números se invalidan es su
-expiración. Yo tengo que recibir confirmación de cada petición en
-un plazo de diez días. Además, asegúrese de que el número de
-confirmación completo estaba incluido en la respuesta que me
-mandó. Algunos programas de correo tienen la (mala) costumbre de
-cortar parte de la dirección de respuesta, que puede ser muy
+La principal causa por la que los nÃºmeros se invalidan es su
+expiraciÃ³n. Yo tengo que recibir confirmaciÃ³n de cada peticiÃ³n en
+un plazo de diez dÃ­as. AdemÃ¡s, asegÃºrese de que el nÃºmero de
+confirmaciÃ³n completo estaba incluido en la respuesta que me
+mandÃ³. Algunos programas de correo tienen la (mala) costumbre de
+cortar parte de la direcciÃ³n de respuesta, que puede ser muy
 larga.
 
-He configurado un nuevo número de confirmación. Para confirmar
-que le gustaría que
+He configurado un nuevo nÃºmero de confirmaciÃ³n. Para confirmar
+que le gustarÃ­a que
 
 <#A#>
 
-fuese añadida a la lista de correo <#l#>, por favor, mande un
-mensaje en blanco a esta dirección:
+fuese aÃ±adida a la lista de correo <#l#>, por favor, mande un
+mensaje en blanco a esta direcciÃ³n:
 
 <#R#>
 
-o haga clic aquí:
+o haga clic aquÃ­:
 
 	mailto:<#R#>
 
-De nuevo, compruebe cuidadosamente la dirección de la respuesta
-para asegurarse que esté todo incluido antes de confirmar su
-suscripción.
+De nuevo, compruebe cuidadosamente la direcciÃ³n de la respuesta
+para asegurarse que estÃ© todo incluido antes de confirmar su
+suscripciÃ³n.
 
 Perdone las molestias.
 

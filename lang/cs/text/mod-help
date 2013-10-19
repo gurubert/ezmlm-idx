@@ -1,167 +1,167 @@
 # Revision: 1
-Dìkuji, ¾e jste se uvoli moderovat nebo spravovat list <#L#>@<#h#>.
+DÄ›kuji, Å¾e jste se uvoli moderovat nebo spravovat list <#L#>@<#h#>.
 
-Moje pøíkazy jsou ponìkud odli¹nìj¹í od jinıch listù, ale myslím,
-¾e je seznáte intuitivními a pøíjemnımi k pou¾ití.
+Moje pÅ™Ã­kazy jsou ponÄ›kud odliÅ¡nÄ›jÅ¡Ã­ od jinÃ½ch listÅ¯, ale myslÃ­m,
+Å¾e je seznÃ¡te intuitivnÃ­mi a pÅ™Ã­jemnÃ½mi k pouÅ¾itÃ­.
 
-Tady jsou instrukce pro èinnosti, které pøípadnì mù¾ete vykonávat
-jako správce listu nebo moderátor.
+Tady jsou instrukce pro Äinnosti, kterÃ© pÅ™Ã­padnÄ› mÅ¯Å¾ete vykonÃ¡vat
+jako sprÃ¡vce listu nebo moderÃ¡tor.
 
-Vzdálené pøihlá¹ení
+VzdÃ¡lenÃ© pÅ™ihlÃ¡Å¡enÃ­
 -------------------
 
-Jako moderátor mù¾ete pøihla¹ovat a odhla¹ovat libovolnou adresu
-do svého listu. Pro pøihlá¹ení u¾ivatele "pepa@example.com" jednodu¹e
-doplòte pomlèku za název pøíkazu a pak tuto adres s rovnítkem
-místo zavináèe. Napøíklad pro pøihlá¹ení vı¹e uvedené adresy
-po¹lete mail na adresu
+Jako moderÃ¡tor mÅ¯Å¾ete pÅ™ihlaÅ¡ovat a odhlaÅ¡ovat libovolnou adresu
+do svÃ©ho listu. Pro pÅ™ihlÃ¡Å¡enÃ­ uÅ¾ivatele "pepa@example.com" jednoduÅ¡e
+doplÅˆte pomlÄku za nÃ¡zev pÅ™Ã­kazu a pak tuto adres s rovnÃ­tkem
+mÃ­sto zavinÃ¡Äe. NapÅ™Ã­klad pro pÅ™ihlÃ¡Å¡enÃ­ vÃ½Å¡e uvedenÃ© adresy
+poÅ¡lete mail na adresu
    <<#L#>-subscribe-pepa=example.com@<#h#>>
 
-Podobnì mù¾ete odhla¹ovat u¾ivatele pomocí mailu na adresu
+PodobnÄ› mÅ¯Å¾ete odhlaÅ¡ovat uÅ¾ivatele pomocÃ­ mailu na adresu
    <<#L#>-unsubscribe-pepa=example.com@<#h#>>
 
 <=d=>
-Pro digestovı list:
+Pro digestovÃ½ list:
    <<#L#>-digest-subscribe-pepa=example.com@<#h#>>
    <<#L#>-digest-unsubscribe-pepa=example.com@<#h#>>
 
 <==>
-To je v¹echno. ®ádnı speciální subject ani obsah zprávy není potøeba!
+To je vÅ¡echno. Å½Ã¡dnÃ½ speciÃ¡lnÃ­ subject ani obsah zprÃ¡vy nenÃ­ potÅ™eba!
 
 <=r=>
-Po¹lu vám ¾ádost o potvrzení, abych se ujistil, ¾e po¾adavek
-opravdu pochází od vás. Jednodu¹e odpovìzte na mail,
-kterı obdr¾íte a vá¹ pøíkaz se vykoná.
+PoÅ¡lu vÃ¡m Å¾Ã¡dost o potvrzenÃ­, abych se ujistil, Å¾e poÅ¾adavek
+opravdu pochÃ¡zÃ­ od vÃ¡s. JednoduÅ¡e odpovÄ›zte na mail,
+kterÃ½ obdrÅ¾Ã­te a vÃ¡Å¡ pÅ™Ã­kaz se vykonÃ¡.
 <=R=>
-Po¹lu ¾ádost o potvrzení, v tomto pøípadì na adresu <pepa@example.com>.
-V¹echno co bude muset udìlat u¾ivatel je odpovìdìt na tuto
-¾ádost.
+PoÅ¡lu Å¾Ã¡dost o potvrzenÃ­, v tomto pÅ™Ã­padÄ› na adresu <pepa@example.com>.
+VÅ¡echno co bude muset udÄ›lat uÅ¾ivatel je odpovÄ›dÄ›t na tuto
+Å¾Ã¡dost.
 <==>
 
-Potvrzení jsou nezbytná, aby se tøetím stranám co nejvíce
-ztí¾ila mo¾nost pøidávat a ru¹it cizí adresu do/z listu.
+PotvrzenÃ­ jsou nezbytnÃ¡, aby se tÅ™etÃ­m stranÃ¡m co nejvÃ­ce
+ztÃ­Å¾ila moÅ¾nost pÅ™idÃ¡vat a ruÅ¡it cizÃ­ adresu do/z listu.
 
-Uvìdomuji u¾ivatele, kdy¾ se stav jeho pøihlá¹ení zmìní.
+UvÄ›domuji uÅ¾ivatele, kdyÅ¾ se stav jeho pÅ™ihlÃ¡Å¡enÃ­ zmÄ›nÃ­.
 
-Pøihlá¹ení
+PÅ™ihlÃ¡Å¡enÃ­
 ----------
 
-Libovolnı u¾ivatel se smí pøihla¹ovat a odhla¹ovat do/z listu
-zasláním zprávy na adresu
+LibovolnÃ½ uÅ¾ivatel se smÃ­ pÅ™ihlaÅ¡ovat a odhlaÅ¡ovat do/z listu
+zaslÃ¡nÃ­m zprÃ¡vy na adresu
 
 <#L#>-subscribe@<#h#>
 <#L#>-unsubscribe@<#h#>
 
 <=d=>
-Pro digestovı list:
+Pro digestovÃ½ list:
 
 <#L#>-digest-subscribe@<#h#>
 <#L#>-digest-unsubscribe@<#h#>
 
 <==>
-U¾ivatel obdr¾í ¾ádost o potvrzení, abych se ujistil,
-¾e mu skuteènì daná adresa patøí. Jakmile se toto ovìøí,
-u¾ivatel je odhlá¹en.
+UÅ¾ivatel obdrÅ¾Ã­ Å¾Ã¡dost o potvrzenÃ­, abych se ujistil,
+Å¾e mu skuteÄnÄ› danÃ¡ adresa patÅ™Ã­. Jakmile se toto ovÄ›Å™Ã­,
+uÅ¾ivatel je odhlÃ¡Å¡en.
 
 <=s=>
-Proto¾e toto je list s moderovanım pøihlá¹ením, po¹lu dal¹í
-¾ádost o potvrzení moderátorovi. Proto¾e u¾ivatel ji¾ potvrdil
-pøání bıt na listu, mù¾ete si jako moderátor bıt dostateènì jist,
-¾e adresa pøihla¹ovaného je skuteèná. Pokud chcete pøijmout
-u¾ivatelovu ¾ádost, jednodu¹e po¹lete odpovìï na tuto zprávu.
-Pokud ne, sma¾te tuto zprávu a pøípadnì kontaktujte u¾ivatele
-pro dal¹í informace.
+ProtoÅ¾e toto je list s moderovanÃ½m pÅ™ihlÃ¡Å¡enÃ­m, poÅ¡lu dalÅ¡Ã­
+Å¾Ã¡dost o potvrzenÃ­ moderÃ¡torovi. ProtoÅ¾e uÅ¾ivatel jiÅ¾ potvrdil
+pÅ™Ã¡nÃ­ bÃ½t na listu, mÅ¯Å¾ete si jako moderÃ¡tor bÃ½t dostateÄnÄ› jist,
+Å¾e adresa pÅ™ihlaÅ¡ovanÃ©ho je skuteÄnÃ¡. Pokud chcete pÅ™ijmout
+uÅ¾ivatelovu Å¾Ã¡dost, jednoduÅ¡e poÅ¡lete odpovÄ›Ä na tuto zprÃ¡vu.
+Pokud ne, smaÅ¾te tuto zprÃ¡vu a pÅ™Ã­padnÄ› kontaktujte uÅ¾ivatele
+pro dalÅ¡Ã­ informace.
 <=S=>
-Pøihlíá¹ení funguje stejnì.
+PÅ™ihlÃ­Ã¡Å¡enÃ­ funguje stejnÄ›.
 <==>
 
-U¾ivatel také mù¾e pou¾ít adresu
+UÅ¾ivatel takÃ© mÅ¯Å¾e pouÅ¾Ã­t adresu
 
    <<#L#>-subscribe-jana=example.com@<#h#>>
    <<#L#>-unsubscribe-jana=example.com@<#h#>>
 
-pro zaslání mailu pro "jana@example.com". Pokud tato skuteènì má
-vı¹e uvedenou adresu, obdr¾í ¾ádost o potvrzení a mù¾e ji
+pro zaslÃ¡nÃ­ mailu pro "jana@example.com". Pokud tato skuteÄnÄ› mÃ¡
+vÃ½Å¡e uvedenou adresu, obdrÅ¾Ã­ Å¾Ã¡dost o potvrzenÃ­ a mÅ¯Å¾e ji
 potvrdit.
 
-Va¹e adresa a identita není otevøena pøihlá¹enému, pokud mu sám
-nepo¹lete mail.
+VaÅ¡e adresa a identita nenÃ­ otevÅ™ena pÅ™ihlÃ¡Å¡enÃ©mu, pokud mu sÃ¡m
+nepoÅ¡lete mail.
 
 <=rl=>
-Pro získání seznamu pøihlá¹enıch pro list <#L#>@<#h#>, po¹lete
-zprávu na adresu
+Pro zÃ­skÃ¡nÃ­ seznamu pÅ™ihlÃ¡Å¡enÃ½ch pro list <#L#>@<#h#>, poÅ¡lete
+zprÃ¡vu na adresu
    <<#L#>-list@<#h#>>
 
-Seznam provedenıch transakcí listu <#L#>@<#h#> získáte z adresy
+Seznam provedenÃ½ch transakcÃ­ listu <#L#>@<#h#> zÃ­skÃ¡te z adresy
    <<#L#>-list@<#h#>>
 
 <=rld=>
-Pro pøihlá¹ené do digestu:
+Pro pÅ™ihlÃ¡Å¡enÃ© do digestu:
    <<#L#>-digest-list@<#h#>>
 a
    <<#L#>-digest-log@<#h#>>
 
 <=rn=>
-Mù¾ete vzdálenì editovat textové soubory, ze kterıch se sestavují
-odpovìdi, které posílám. Chcete-li získat seznam editovatelnıch souborù
-a pokyny pro editaci, napi¹te na adresu
+MÅ¯Å¾ete vzdÃ¡lenÄ› editovat textovÃ© soubory, ze kterÃ½ch se sestavujÃ­
+odpovÄ›di, kterÃ© posÃ­lÃ¡m. Chcete-li zÃ­skat seznam editovatelnÃ½ch souborÅ¯
+a pokyny pro editaci, napiÅ¡te na adresu
    <<#L#>-edit@<#h#>>
 
 <=m=>
-Moderované pøíspìvky
+ModerovanÃ© pÅ™Ã­spÄ›vky
 --------------------
 
-Pokud je list moderovanı, ulo¾ím si zprávy, které obdr¾ím a po¹lu vám
-kopii a instrukce. Zpráva pro vás bude mít subject "MODERATE for ...".
+Pokud je list moderovanÃ½, uloÅ¾Ã­m si zprÃ¡vy, kterÃ© obdrÅ¾Ã­m a poÅ¡lu vÃ¡m
+kopii a instrukce. ZprÃ¡va pro vÃ¡s bude mÃ­t subject "MODERATE for ...".
 
-Chcete-li zprávu pøijmout, staèí poslat odpovìï (na adresu v "Reply-To:"),
-kterou nastavím na pøíkaz pro pøijetí zprávy do listu. Nemusíte
-posílat obsah pùvodní zprávy. Ve skuteènosti ignoruji cokoli, co mi
-po¹lete, pokud bude adresa, na kterou to po¹lete, korektní.
+Chcete-li zprÃ¡vu pÅ™ijmout, staÄÃ­ poslat odpovÄ›Ä (na adresu v "Reply-To:"),
+kterou nastavÃ­m na pÅ™Ã­kaz pro pÅ™ijetÃ­ zprÃ¡vy do listu. NemusÃ­te
+posÃ­lat obsah pÅ¯vodnÃ­ zprÃ¡vy. Ve skuteÄnosti ignoruji cokoli, co mi
+poÅ¡lete, pokud bude adresa, na kterou to poÅ¡lete, korektnÃ­.
 
-Pokud chcete zprávu odmítnout, po¹lete odpovìï na adresu ve "From:",
-kterou nastavím na pøíkaz pro odmítnutí zprávy. Toto se obvykle udìlá
-pøíkazem "Odpovìz v¹em" ve va¹em po¹tovním klientovi, pøièem¾
-sma¾ete v¹echny ostatní adresy kromì adresy pro odmítnutí (reject).
-Mù¾ete pøidat komentáø odesílateli - napi¹te jej mezi dva øádky,
-zaèínající tøema znaky "%". Po¹lu autorovi pouze tento komentáø,
-co¾ neprozradí va¹i identitu.
+Pokud chcete zprÃ¡vu odmÃ­tnout, poÅ¡lete odpovÄ›Ä na adresu ve "From:",
+kterou nastavÃ­m na pÅ™Ã­kaz pro odmÃ­tnutÃ­ zprÃ¡vy. Toto se obvykle udÄ›lÃ¡
+pÅ™Ã­kazem "OdpovÄ›z vÅ¡em" ve vaÅ¡em poÅ¡tovnÃ­m klientovi, pÅ™iÄemÅ¾
+smaÅ¾ete vÅ¡echny ostatnÃ­ adresy kromÄ› adresy pro odmÃ­tnutÃ­ (reject).
+MÅ¯Å¾ete pÅ™idat komentÃ¡Å™ odesÃ­lateli - napiÅ¡te jej mezi dva Å™Ã¡dky,
+zaÄÃ­najÃ­cÃ­ tÅ™ema znaky "%". PoÅ¡lu autorovi pouze tento komentÃ¡Å™,
+coÅ¾ neprozradÃ­ vaÅ¡i identitu.
 
-Se zprávou nalo¾ím podle první odpovìdi, kterou dostanu.
-Uvìdomím vás, pokud mi po¹lete po¾adavek na potvrzení ji¾
-odmítnuté zprávy a naopak,
+Se zprÃ¡vou naloÅ¾Ã­m podle prvnÃ­ odpovÄ›di, kterou dostanu.
+UvÄ›domÃ­m vÃ¡s, pokud mi poÅ¡lete poÅ¾adavek na potvrzenÃ­ jiÅ¾
+odmÃ­tnutÃ© zprÃ¡vy a naopak,
 
-Pokud nedostanu odpovìï od moderátora do urèité doby (implicitnì 5 dní),
-vrátím zprávu odesílateli s vysvìtlením, ¾e byla odmítnuta.
-Jako administrátor mù¾ete také list nastavit tak, ¾e ignorované
-zprávy jsou jednodu¹e smazány bez upozornìní odesílateli.
+Pokud nedostanu odpovÄ›Ä od moderÃ¡tora do urÄitÃ© doby (implicitnÄ› 5 dnÃ­),
+vrÃ¡tÃ­m zprÃ¡vu odesÃ­lateli s vysvÄ›tlenÃ­m, Å¾e byla odmÃ­tnuta.
+Jako administrÃ¡tor mÅ¯Å¾ete takÃ© list nastavit tak, Å¾e ignorovanÃ©
+zprÃ¡vy jsou jednoduÅ¡e smazÃ¡ny bez upozornÄ›nÃ­ odesÃ­lateli.
 <==>
 
-Dovolená
+DovolenÃ¡
 --------
-Pokud jste doèasnì na jiné adrese, staèí si pøeposlat v¹echny zprávy,
-které mají správnou hlavièku "Mailing-List:" (nebo v¹echny se subjectem
+Pokud jste doÄasnÄ› na jinÃ© adrese, staÄÃ­ si pÅ™eposlat vÅ¡echny zprÃ¡vy,
+kterÃ© majÃ­ sprÃ¡vnou hlaviÄku "Mailing-List:" (nebo vÅ¡echny se subjectem
 "MODERATE for <#L#>@<#h#>" (nebo "CONFIRM subscribe to <#L#>@<#h#>")
-na novou adresu. Mù¾ete také pøeposílat tyto zprávy pøíteli, kterı
-bude moderovat za vás. Prosím uvìdomte o tomto také správce listserveru.
+na novou adresu. MÅ¯Å¾ete takÃ© pÅ™eposÃ­lat tyto zprÃ¡vy pÅ™Ã­teli, kterÃ½
+bude moderovat za vÃ¡s. ProsÃ­m uvÄ›domte o tomto takÃ© sprÃ¡vce listserveru.
 
-Pokud chcete automaticky potvrdit v¹echny po¾adavky bìhem své nepøítomnosti,
-nastavte si po¹tovního klienta na posílání automatickıch odpovìdí na zprávy,
-které splòují vı¹e uvedená kritéria.
+Pokud chcete automaticky potvrdit vÅ¡echny poÅ¾adavky bÄ›hem svÃ© nepÅ™Ã­tomnosti,
+nastavte si poÅ¡tovnÃ­ho klienta na posÃ­lÃ¡nÃ­ automatickÃ½ch odpovÄ›dÃ­ na zprÃ¡vy,
+kterÃ© splÅˆujÃ­ vÃ½Å¡e uvedenÃ¡ kritÃ©ria.
 
 <=r=>
-Pokud zkusíte dìlat vzdálenou administraci z adresy, která není
-va¹e vlastní, bude o potvrzení po¾ádán u¾ivatel, nikoli vy.
-Po schválení u¾ivatelem po¹lu ¾ádost o potvrzení v¹em moderátorùm.
-Toto dìlám proto, ¾e nemám zpùsob, jak zjistit, ¾e jste to skuteènì vy,
-kdo poslal pùvodní po¾adavek.
+Pokud zkusÃ­te dÄ›lat vzdÃ¡lenou administraci z adresy, kterÃ¡ nenÃ­
+vaÅ¡e vlastnÃ­, bude o potvrzenÃ­ poÅ¾Ã¡dÃ¡n uÅ¾ivatel, nikoli vy.
+Po schvÃ¡lenÃ­ uÅ¾ivatelem poÅ¡lu Å¾Ã¡dost o potvrzenÃ­ vÅ¡em moderÃ¡torÅ¯m.
+Toto dÄ›lÃ¡m proto, Å¾e nemÃ¡m zpÅ¯sob, jak zjistit, Å¾e jste to skuteÄnÄ› vy,
+kdo poslal pÅ¯vodnÃ­ poÅ¾adavek.
 
-Berte také na vìdomí, ¾e v tomto pøípadì je vá¹ pùvodní po¾adavek
-(vèetnì va¹í adresy!) zaslán u¾ivateli s ¾ádostí o potvrzení.
+Berte takÃ© na vÄ›domÃ­, Å¾e v tomto pÅ™Ã­padÄ› je vÃ¡Å¡ pÅ¯vodnÃ­ poÅ¾adavek
+(vÄetnÄ› vaÅ¡Ã­ adresy!) zaslÃ¡n uÅ¾ivateli s Å¾Ã¡dostÃ­ o potvrzenÃ­.
 <==>
 
-Mnoho ¹tìstí!
+Mnoho Å¡tÄ›stÃ­!
 
-PS: Prosím kontaktujte správce listu (<#L#>-owner@<#h#>),
-budete-li mít dotazy nebo problémy.
+PS: ProsÃ­m kontaktujte sprÃ¡vce listu (<#L#>-owner@<#h#>),
+budete-li mÃ­t dotazy nebo problÃ©my.
 

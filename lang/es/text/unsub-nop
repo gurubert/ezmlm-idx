@@ -1,40 +1,40 @@
 # Revision: 1
-Lo siento, no he podido cursar su peticiÛn porque la direcciÛn
+Lo siento, no he podido cursar su petici√≥n porque la direcci√≥n
 
 <#A#>
 
-no estaba en la lista de correo <#l#> cuando recibÌ su peticiÛn y
+no estaba en la lista de correo <#l#> cuando recib√≠ su petici√≥n y
 no es suscriptor de esta lista.
 
-Si se da de baja, pero sigue recibiendo correo, es que est·
-suscrito con una direcciÛn distinta a la que usa actualmente. Por
+Si se da de baja, pero sigue recibiendo correo, es que est√°
+suscrito con una direcci√≥n distinta a la que usa actualmente. Por
 favor, busque en las cabeceras el texto:
 
 'Return-Path: <<#l#>-return-1234-user=example.com@<#h#>>'
 
-La direcciÛn para dar de baja a este usuario serÌa:
+La direcci√≥n para dar de baja a este usuario ser√≠a:
 '<#l#>-unsubscribe-user=example.com@<#h#>'.
 
-Simplemente escriba a esa direcciÛn, tras modificarla con la
-verdadera direcciÛn de suscripciÛn.
+Simplemente escriba a esa direcci√≥n, tras modificarla con la
+verdadera direcci√≥n de suscripci√≥n.
 
 Si el mensaje tiene una cabecera ``List-Unsubscribe:'' puede
-usted mandar un mensaje a la direcciÛn de esa cabecera. La
-cabecera ya contiene la peticiÛn de suscripciÛn.
+usted mandar un mensaje a la direcci√≥n de esa cabecera. La
+cabecera ya contiene la petici√≥n de suscripci√≥n.
 
-En algunos programas de correo, necesitar· hacer visibles los
+En algunos programas de correo, necesitar√° hacer visibles los
 encabezamientos para ver el campo de retorno:
 
-Con Eudora 4.0, haga clic en el botÛn "Blah blah ...". Con
+Con Eudora 4.0, haga clic en el bot√≥n "Blah blah ...". Con
 PMMail, haga clic en "Window->Show entire message/header".
 
 Si esto tampoco da resultado, siento decirle que no le puedo
-ayudar. Por favor, reenvÌe el mensaje junto con una nota sobre lo
-que est· intentando hacer y una lista de direcciones bajo las
+ayudar. Por favor, reenv√≠e el mensaje junto con una nota sobre lo
+que est√° intentando hacer y una lista de direcciones bajo las
 cuales puede estar suscrito, a mi propietario:
 
     <#l#>-owner@<#h#>
 
-que se ocupar· de todo. Mi propietario es un poco m·s lento que
+que se ocupar√° de todo. Mi propietario es un poco m√°s lento que
 yo; por favor, tenga paciencia.
 

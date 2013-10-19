@@ -1,43 +1,43 @@
 # Revision: 1
-Detta är ett almänt hjälp meddelande. Brevet som kom var inte
-skickat till någon av kommando adresserna.
+Detta Ã¤r ett almÃ¤nt hjÃ¤lp meddelande. Brevet som kom var inte
+skickat till nÃ¥gon av kommando adresserna.
 
-Detta är en lista på de kommando adresser som stöds:
+Detta Ã¤r en lista pÃ¥ de kommando adresser som stÃ¶ds:
 
-Skicka brev till något av följande adresser för information
-och "FAQn" för listan:
+Skicka brev till nÃ¥got av fÃ¶ljande adresser fÃ¶r information
+och "FAQn" fÃ¶r listan:
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
 
 <=d=>
-Liknande adresser finns för "digest" versionen av listan:
+Liknande adresser finns fÃ¶r "digest" versionen av listan:
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <=a=>
-För att få meddelande 123 till 145 (max 100 per förfrågan),
+FÃ¶r att fÃ¥ meddelande 123 till 145 (max 100 per fÃ¶rfrÃ¥gan),
 skicka ett brev till:
    <<#L#>-get.123_145@<#h#>>
 
-För att få ett index med författare och titel för meddelande
+FÃ¶r att fÃ¥ ett index med fÃ¶rfattare och titel fÃ¶r meddelande
 123-456, skicka ett brev till:
    <<#L#>-index.123_456@<#h#>>
 
-För att få alla meddelanden med samma titel som meddelande 12345,
+FÃ¶r att fÃ¥ alla meddelanden med samma titel som meddelande 12345,
 skicka ett brev till:
    <<#L#>-thread.12345@<#h#>>
 
 <==>
-Meddelandena behöver inte innehålla något särskilt, det är
-bara adressen som är viktig.
+Meddelandena behÃ¶ver inte innehÃ¥lla nÃ¥got sÃ¤rskilt, det Ã¤r
+bara adressen som Ã¤r viktig.
 
 Du kan starta en prenumeration till en alternativ adress,
-t ex "john@example.com", addera bara ett bindesträck
-och din adress (med '=', istället för '@') efter kommando
+t ex "john@example.com", addera bara ett bindestrÃ¤ck
+och din adress (med '=', istÃ¤llet fÃ¶r '@') efter kommando
 ordet. Dvs:
 <<#L#>-subscribe-john=example.com@<#h#>>
 
-För att avsluta prenumerationen till denna adressen,
+FÃ¶r att avsluta prenumerationen till denna adressen,
 skicka ett brev till:
 <<#L#>-unsubscribe-john=example.com@<#h#>>
 

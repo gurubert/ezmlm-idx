@@ -1,6 +1,6 @@
 # Revision: 2
 
-Jeg har hold øje med hvilke breve fra <#L> listen der er
+Jeg har hold Ã¸je med hvilke breve fra <#L> listen der er
 kommet retur fordi de ikke kunne afleveres til dig.
 
 <=a=>
@@ -14,7 +14,7 @@ Du kan f.eks. hente brev 123-145 (max. 100 ad gangen), ved at
 sende et tomt brev til:
    <<#L#>-get.123_145@<#h#>>
 
-Du kan få en oversigt over emne og afsender for de sidste 100
+Du kan fÃ¥ en oversigt over emne og afsender for de sidste 100
 breve ved at sende et tomt brev til:
    <<#L#>-index@<#h#>>
 

@@ -1,19 +1,19 @@
 # Revision: 1
 
-$B5.J}08$K(B mailing list <#L#> $B$,Aw$C$?(B
-message $B$N4v$D$+$,G[Aw=PMh$:!"3NG'$N0Y$K(B ezmlm $B$,Aw?.$7$?(B
-message $B$bG[Aw$K<:GT$7$F$7$^$$$^$7$?!#(B
+貴方宛に mailing list <#L#> が送った
+message の幾つかが配送出来ず、確認の為に ezmlm が送信した
+message も配送に失敗してしまいました。
 
-$BG[Aw$K<:GT$7$FJVAw$5$l$F$-$?(B message $B$rE:IU$7$F$*$-$^$9!#(B
+配送に失敗して返送されてきた message を添付しておきます。
 
-$B$3$N(B message $B$O!"5.J}08$KG[Aw$,2DG=$+H]$+$rD4$Y$k$?$a$N$b$N$G$9!#(B
-$B$3$N(B message $B$bG[Aw$K<:GT$7$?>l9g$O!"(Bezmlm $B$O5.J}$N(B address $B$r(B
-mailing list <#L#>@<#h#> $B$+$i(B
-$B<+F0E*$K:o=|$7$^$9!#(B
+この message は、貴方宛に配送が可能か否かを調べるためのものです。
+この message も配送に失敗した場合は、ezmlm は貴方の address を
+mailing list <#L#>@<#h#> から
+自動的に削除します。
 
-$B$b$&0lEY9XFI$r$7$?$$>l9g$O!"0J2<$N(B address
+もう一度購読をしたい場合は、以下の address
 
         <<#L#>-subscribe@<#h#>>
 
-$B08$K6u$N(B message $B$rAw$C$F!"?75,$K9XFI$r$7$J$*$7$F2<$5$$!#(B
+宛に空の message を送って、新規に購読をしなおして下さい。
 

@@ -1,15 +1,15 @@
 # Revision: 1
 <=n=>
-$BE:IU$5$l$?(B message text $B$rJT=8$7$F!"0J2<$N(B address
+添付された message text を編集して、以下の address
 
 <#R#>
 
-$B08$KJVAw$7$F2<$5$$!#(B
+宛に返送して下さい。
 
-$B!X(B%%%$B!Y$G;O$^$k9T$,(B message text $B3+;O$N(B marker line $B$K(B
-$B$J$C$F$$$^$9!#(B
+『%%%』で始まる行が message text 開始の marker line に
+なっています。
 
-$B!J$3$N9T$K5.J}$N;H$C$F$$$k(B Mail User Agent (MUA) $B$G$N(B
-  $B0zMQ$N0u(B (ex. foo>%%%) $B$,IU2C$5$l$F$$$k>l9g$O!"(Bmessage text
-  $BK\BN$NItJ,$KIU$$$?0zMQ$N0u$O<+F0=|5n$5$l$^$9!K(B
+（この行に貴方の使っている Mail User Agent (MUA) での
+  引用の印 (ex. foo>%%%) が付加されている場合は、message text
+  本体の部分に付いた引用の印は自動除去されます）
 

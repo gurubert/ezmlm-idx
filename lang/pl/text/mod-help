@@ -1,175 +1,175 @@
 # Revision: 0
-Dziêkujê za zgodê na zostanie moderatorem listy o adresie:
+DziÄ™kujÄ™ za zgodÄ™ na zostanie moderatorem listy o adresie:
 <#L#>@<#h#>.
 
-Moje komendy s± nieco inne, ni¿ bywaj± w programach obs³uguj±cych
-pocztowe listy dyskusyjne. Mo¿esz nawet na pocz±tku stwierdziæ, ¿e s±
-niezwyk³e, ale jak tylko zaczniesz ich u¿ywaæ, docenisz prostotê systemu
-oraz szybko¶æ, z jak± obs³ugujê twoje ¿yczenia.
+Moje komendy sÄ… nieco inne, niÅ¼ bywajÄ… w programach obsÅ‚ugujÄ…cych
+pocztowe listy dyskusyjne. MoÅ¼esz nawet na poczÄ…tku stwierdziÄ‡, Å¼e sÄ…
+niezwykÅ‚e, ale jak tylko zaczniesz ich uÅ¼ywaÄ‡, docenisz prostotÄ™ systemu
+oraz szybkoÅ›Ä‡, z jakÄ… obsÅ‚ugujÄ™ twoje Å¼yczenia.
 
-Poni¿ej kilka s³ów o tym, jak dzia³a moderowanie:
+PoniÅ¼ej kilka sÅ‚Ã³w o tym, jak dziaÅ‚a moderowanie:
 
-Zdalne wpisanie na listê prenumeratorów
+Zdalne wpisanie na listÄ™ prenumeratorÃ³w
 ---------------------------------------
-Bêd±c moderatorem, mo¿esz zapisaæ lub wypisaæ internautê
-o adresie janek@example.com poprzez wys³anie listu na adres:
+BÄ™dÄ…c moderatorem, moÅ¼esz zapisaÄ‡ lub wypisaÄ‡ internautÄ™
+o adresie janek@example.com poprzez wysÅ‚anie listu na adres:
 
 <#L#>-subscribe-janek=example.com@<#h#>
 <#L#>-unsubscribe-janek=example.com@<#h#>
 
 <=g=>
-Odpowiednio dla przegl±du listy:
+Odpowiednio dla przeglÄ…du listy:
 
 <#L#>-digest-subscribe-janek=example.com@<#h#>
 <#L#>-digest-unsubscribe-janek=example.com@<#h#>
 
 <==>
-To wszystko. Nie musisz nadawaæ listowi tytu³u, nie musisz
-równie¿ pisaæ nic w jego tre¶ci!
+To wszystko. Nie musisz nadawaÄ‡ listowi tytuÅ‚u, nie musisz
+rÃ³wnieÅ¼ pisaÄ‡ nic w jego treÅ›ci!
 
 <=r=>
-Wy¶lê Ci pro¶bê o potwierdzenie
-Co zrobiæ z moim listem?
+WyÅ›lÄ™ Ci proÅ›bÄ™ o potwierdzenie
+Co zrobiÄ‡ z moim listem?
 Po prostu odpowiedz na niego i gotowe.
 <=R=>
-Wy¶lê pro¶bê o potwierdzenie chêci uczestnictwa na adres
+WyÅ›lÄ™ proÅ›bÄ™ o potwierdzenie chÄ™ci uczestnictwa na adres
 autora listu.
-Wystarczy, ze na te pro¶be odpowie, a bedzie zapisany.
+Wystarczy, ze na te proÅ›be odpowie, a bedzie zapisany.
 <==>
 
-Zawiadomiê subskrybenta, je¿eli jego/jej dane dotyczace
-jego subskrybcji zostan± zmienione.
+ZawiadomiÄ™ subskrybenta, jeÅ¼eli jego/jej dane dotyczace
+jego subskrybcji zostanÄ… zmienione.
 
 Prenumerata
 -----------
 
-Ka¿dy mo¿e zapisaæ siê na listê, albo z niej wypisaæ, poprzez
-wys³anie listu na adres:
+KaÅ¼dy moÅ¼e zapisaÄ‡ siÄ™ na listÄ™, albo z niej wypisaÄ‡, poprzez
+wysÅ‚anie listu na adres:
 
 <#L#>-subscribe@<#h#>
 <#L#>-unsubscribe@<#h#>
 
 <=g=>
-Obs³uga przegl±du listy:
+ObsÅ‚uga przeglÄ…du listy:
 
 <#L#>-digest-subscribe@<#h#>
 <#L#>-digest-unsubscribe@<#h#>
 
-Chêtny otrzyma pro¶be o potwierdzenie ¿yczenia wypisania siê z listy,
-aby siê upewniæ czy ¿yczenie to zosta³o rzeczywiscie przez niego
-wys³ane. Je¿eli zostanie to potwierdzone, zostanie usuniêty
-z listy prenumeratorów.
-Podobna procedura obowi±zuje podczas zapisywania siê na listê.
+ChÄ™tny otrzyma proÅ›be o potwierdzenie Å¼yczenia wypisania siÄ™ z listy,
+aby siÄ™ upewniÄ‡ czy Å¼yczenie to zostaÅ‚o rzeczywiscie przez niego
+wysÅ‚ane. JeÅ¼eli zostanie to potwierdzone, zostanie usuniÄ™ty
+z listy prenumeratorÃ³w.
+Podobna procedura obowiÄ…zuje podczas zapisywania siÄ™ na listÄ™.
 
 <=s=>
-Podczas procedury zapisywania siê na listê, pro¶ba
-o potwierdzenie zapisu jest wysy³ana równie¿ do moderatora listy.
-Pozytywna odpowied¼ moderatora dope³ni zapisu na listê.
+Podczas procedury zapisywania siÄ™ na listÄ™, proÅ›ba
+o potwierdzenie zapisu jest wysyÅ‚ana rÃ³wnieÅ¼ do moderatora listy.
+Pozytywna odpowiedÅº moderatora dopeÅ‚ni zapisu na listÄ™.
 <=S=>
-Zapisy funkcjonuj± w ten sam sposób.
+Zapisy funkcjonujÄ… w ten sam sposÃ³b.
 <==>
 
-U¿ytkownik mo¿e równie¿ u¿ywaæ adresów:
+UÅ¼ytkownik moÅ¼e rÃ³wnieÅ¼ uÅ¼ywaÄ‡ adresÃ³w:
 
 <#L#>-subscribe-janek=example.com@<#h#>
 <#L#>-unsubscribe-janek=example.com@<#h#>
 
-aby poczta z listy wêdrowa³a na inny adres bed±cy jego w³asno¶ci±.
-Tylko wówczas, kiedy u¿ytkownik dostaje listy na adres
-janek@example.com, bêdzie w stanie odpowiedzieæ
-na ¿yczenie potwierdzenia skierowanego od menad¿era listy.
+aby poczta z listy wÄ™drowaÅ‚a na inny adres bedÄ…cy jego wÅ‚asnoÅ›ciÄ….
+Tylko wÃ³wczas, kiedy uÅ¼ytkownik dostaje listy na adres
+janek@example.com, bÄ™dzie w stanie odpowiedzieÄ‡
+na Å¼yczenie potwierdzenia skierowanego od menadÅ¼era listy.
 
-Wszystkie powy¿sze kroki s± przedsiêbrane po to, by unikaæ
-z³o¶liwo¶ci typu zapisanie kogo¶ wbrew jego woli na listê
-oraz aby moderator móg³ byæ pewnym, ¿e adres prenumeratora
-rzeczywi¶cie istnieje.
+Wszystkie powyÅ¼sze kroki sÄ… przedsiÄ™brane po to, by unikaÄ‡
+zÅ‚oÅ›liwoÅ›ci typu zapisanie kogoÅ› wbrew jego woli na listÄ™
+oraz aby moderator mÃ³gÅ‚ byÄ‡ pewnym, Å¼e adres prenumeratora
+rzeczywiÅ›cie istnieje.
 
-Twój rzeczywisty adres pocztowy nie bêdzie ujawniony prenumaratorowi.
-Pozwoli to zachowaæ Ci anonimowo¶æ.
+TwÃ³j rzeczywisty adres pocztowy nie bÄ™dzie ujawniony prenumaratorowi.
+Pozwoli to zachowaÄ‡ Ci anonimowoÅ›Ä‡.
 
 <=rl=>
-Aby uzyskaæ listê prenumeratorów <#L#>@<#h#>,
-wy¶lij list na adres:
+Aby uzyskaÄ‡ listÄ™ prenumeratorÃ³w <#L#>@<#h#>,
+wyÅ›lij list na adres:
    <<#L#>-list@<#h#>>
 
-Chc±c uzyskaæ dziennik pok³adowy listy <#L#>@<#h#>,
-wy¶lij list na adres:
+ChcÄ…c uzyskaÄ‡ dziennik pokÅ‚adowy listy <#L#>@<#h#>,
+wyÅ›lij list na adres:
    <<#L#>-list@<#h#>>
 
 <=rld=>
-Adresy w³a¶ciwe dla przegl±du listy:
+Adresy wÅ‚aÅ›ciwe dla przeglÄ…du listy:
    <<#L#>-digest-list@<#h#>>
 i:
    <<#L#>-digest-log@<#h#>>
 
 <=rn=>
-Mo¿esz zdalnie zmieniaæ pliki tekstowe, którymi pos³uguje siê automat
-podczas obs³ugi listy dyskusyjnej. Aby uzyskaæ zbiór plików oraz
-instrukcje, jak je zmieniaæ, napisz pod adres:
+MoÅ¼esz zdalnie zmieniaÄ‡ pliki tekstowe, ktÃ³rymi posÅ‚uguje siÄ™ automat
+podczas obsÅ‚ugi listy dyskusyjnej. Aby uzyskaÄ‡ zbiÃ³r plikÃ³w oraz
+instrukcje, jak je zmieniaÄ‡, napisz pod adres:
    <<#L#>-edit@<#h#>>
 
 <=m=>
-Przesy³ki moderowane
+PrzesyÅ‚ki moderowane
 --------------------
-Je¿eli przesy³ki podlegaj± moderowaniu, umieszczam wys³ane listy
-w kolejce pocztowej i wysy³am ¿yczenie przyjrzenia sie listowi do
+JeÅ¼eli przesyÅ‚ki podlegajÄ… moderowaniu, umieszczam wysÅ‚ane listy
+w kolejce pocztowej i wysyÅ‚am Å¼yczenie przyjrzenia sie listowi do
 moderatora.
 
-Wystarczy, aby¶ odpowiedzia³ na adres zwrotny tego listu, u¿ywaj±c
-funkcji "odpowiedz (reply)", aby zaakceptowaæ tre¶æ listu.
+Wystarczy, abyÅ› odpowiedziaÅ‚ na adres zwrotny tego listu, uÅ¼ywajÄ…c
+funkcji "odpowiedz (reply)", aby zaakceptowaÄ‡ treÅ›Ä‡ listu.
 
-Je¿eli natomiast chcesz odmówiæ zgody na wys³anie listu, wy¶lij
-pocztê na adres wziêty z nag³ówka "From:" (mo¿na zwykle tego
-dokonaæ poprzez u¿ycie opcji "reply-to-all/odpowiedz-na-wszystkie-
--adresy" i skasowanie z tej listy w³asnego adresu oraz adresu
-akceptuj±cego). Mo¿esz równie¿ dodaæ jak±¶ notkê do wysy³aj±cego
-odrzucony przez Ciebie list, aby wyt³umaczyæ mu, dlaczego to
-uczyni³e¶. Notkê dodajesz umieszczaj±c j± w tre¶ci powy¿szego listu
-odrzucaj±cego, wstawiaj±c j± pomiêdzy dwie linie, zawieraj±ce
+JeÅ¼eli natomiast chcesz odmÃ³wiÄ‡ zgody na wysÅ‚anie listu, wyÅ›lij
+pocztÄ™ na adres wziÄ™ty z nagÅ‚Ã³wka "From:" (moÅ¼na zwykle tego
+dokonaÄ‡ poprzez uÅ¼ycie opcji "reply-to-all/odpowiedz-na-wszystkie-
+-adresy" i skasowanie z tej listy wÅ‚asnego adresu oraz adresu
+akceptujÄ…cego). MoÅ¼esz rÃ³wnieÅ¼ dodaÄ‡ jakÄ…Å› notkÄ™ do wysyÅ‚ajÄ…cego
+odrzucony przez Ciebie list, aby wytÅ‚umaczyÄ‡ mu, dlaczego to
+uczyniÅ‚eÅ›. NotkÄ™ dodajesz umieszczajÄ…c jÄ… w treÅ›ci powyÅ¼szego listu
+odrzucajÄ…cego, wstawiajÄ…c jÄ… pomiÄ™dzy dwie linie, zawierajÄ…ce
 trzy znaki '%'.
 
-Wezmê pod uwagê pierwszy list, który od Ciebie dostanê.
-Je¿eli wy¶lesz najpierw potwierdzenie akceptacji listu, który
-wcze¶niej odrzuci³e¶, lub odwrotnie, oczywi¶cie Ci o tym powiem.
+WezmÄ™ pod uwagÄ™ pierwszy list, ktÃ³ry od Ciebie dostanÄ™.
+JeÅ¼eli wyÅ›lesz najpierw potwierdzenie akceptacji listu, ktÃ³ry
+wczeÅ›niej odrzuciÅ‚eÅ›, lub odwrotnie, oczywiÅ›cie Ci o tym powiem.
 
-Je¿eli nie dostanê odpowiedzi od moderatora przez okre¶lony czas,
-zwykle jest to piêæ dni, zwrócê list nadawcy z opisem zaistnia³ej
+JeÅ¼eli nie dostanÄ™ odpowiedzi od moderatora przez okreÅ›lony czas,
+zwykle jest to piÄ™Ä‡ dni, zwrÃ³cÄ™ list nadawcy z opisem zaistniaÅ‚ej
 sytuacji.
 <==>
 
 Wakacje
 -------
-Je¿eli korzystasz tymczasowo z innego adresu, po prostu przekieruj
-wszystkie listy z nag³ówkiem 'Mailing-List:',
-albo te, których tematy zaczynaj± siê s³owami
+JeÅ¼eli korzystasz tymczasowo z innego adresu, po prostu przekieruj
+wszystkie listy z nagÅ‚Ã³wkiem 'Mailing-List:',
+albo te, ktÃ³rych tematy zaczynajÄ… siÄ™ sÅ‚owami
 "MODERATE for <#L#>@<#h#>",
 lub
 "CONFIRM subscribe to <#L#>@<#h#>",
 na nowy adres.
-Mo¿esz wtedy moderowaæ z nowego adresu. Innym sposobem jest
-przekierowanie tych listów do przyjaciela, który mo¿e Ciê zast±piæ.
-Musisz oczywi¶cie uzgodniæ przedtem wszystko z opiekunem listy.
+MoÅ¼esz wtedy moderowaÄ‡ z nowego adresu. Innym sposobem jest
+przekierowanie tych listÃ³w do przyjaciela, ktÃ³ry moÅ¼e CiÄ™ zastÄ…piÄ‡.
+Musisz oczywiÅ›cie uzgodniÄ‡ przedtem wszystko z opiekunem listy.
 
-Je¿eli chcesz automatycznie aprobowaæ wszelkie przesy³ki kierowane
-na listê, skonfiguruj swój program pocztowy tak, aby automatycznie
-odpowiada³ na listy maj±ce tematy zgodne z powy¿szymi kryteriami.
+JeÅ¼eli chcesz automatycznie aprobowaÄ‡ wszelkie przesyÅ‚ki kierowane
+na listÄ™, skonfiguruj swÃ³j program pocztowy tak, aby automatycznie
+odpowiadaÅ‚ na listy majÄ…ce tematy zgodne z powyÅ¼szymi kryteriami.
 
 <=r=>
-Uwa¿aj, je¿eli bêdziesz próbowa³ zdalnie zarz±dzaæ list± z adresu,
-który nie jest wpisany jako adres administratora, prenumerator,
-a nie Ty, zostanie poproszony o potwierdzenie, które zostanie
-potem przekazane do moderatorów.
-Robiê tak, gdy¿ nie ma sposobu upewniæ siê czy to rzeczywi¶cie Ty
-kryjesz siê za poczt± przychodz±c± z nieznanego adresu.
+UwaÅ¼aj, jeÅ¼eli bÄ™dziesz prÃ³bowaÅ‚ zdalnie zarzÄ…dzaÄ‡ listÄ… z adresu,
+ktÃ³ry nie jest wpisany jako adres administratora, prenumerator,
+a nie Ty, zostanie poproszony o potwierdzenie, ktÃ³re zostanie
+potem przekazane do moderatorÃ³w.
+RobiÄ™ tak, gdyÅ¼ nie ma sposobu upewniÄ‡ siÄ™ czy to rzeczywiÅ›cie Ty
+kryjesz siÄ™ za pocztÄ… przychodzÄ…cÄ… z nieznanego adresu.
 
-Pamiêtaj, ¿e w powy¿szym wypadku Twoje ¿ycznie skierowane do serwera
-i równie¿ Twój adres s± przesy³ane do prenumeratora! Przestajesz byæ
-wówczas anonimowy.
+PamiÄ™taj, Å¼e w powyÅ¼szym wypadku Twoje Å¼ycznie skierowane do serwera
+i rÃ³wnieÅ¼ TwÃ³j adres sÄ… przesyÅ‚ane do prenumeratora! Przestajesz byÄ‡
+wÃ³wczas anonimowy.
 <==>
 
 Powodzenia!
 
-PS: Skontaktuj siê, proszê, z opiekunem listy pod adresem
+PS: Skontaktuj siÄ™, proszÄ™, z opiekunem listy pod adresem
 <#L#>-owner@<#h#>
-je¿eli masz jakie¶ pytania, lub napotkasz na problemy.
+jeÅ¼eli masz jakieÅ› pytania, lub napotkasz na problemy.
 

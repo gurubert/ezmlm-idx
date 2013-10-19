@@ -1,28 +1,28 @@
 # Revision: 1
-För att bekräfta att du vill ta bort
+FÃ¶r att bekrÃ¤fta att du vill ta bort
 
 <#A#>
 
-från <#l#> listan, skicka ett brev till denna adress:
+frÃ¥n <#l#> listan, skicka ett brev till denna adress:
 
 <#R#>
 
-Vanligtvis gör man det med "Svara" ("Reply") knappen.
+Vanligtvis gÃ¶r man det med "Svara" ("Reply") knappen.
 Ifall det inte fungerar, kopiera adressen nedan och klistra
-in den i "Till" ("To:") fältet i ett nytt brev.
+in den i "Till" ("To:") fÃ¤ltet i ett nytt brev.
 
-eller tryck här:
+eller tryck hÃ¤r:
 	<mailto:<#R#>>
 
-För att se vilken adress din prenumeration går till, undersök ett
-meddelande från listan. Varje meddelande har din adress dold i
-dess "return path", t ex mary@example.com har får meddelanden
+FÃ¶r att se vilken adress din prenumeration gÃ¥r till, undersÃ¶k ett
+meddelande frÃ¥n listan. Varje meddelande har din adress dold i
+dess "return path", t ex mary@example.com har fÃ¥r meddelanden
 med "return-path" satt till:
 <<#l#>-return-<nummer>-mary=example.com@<#h#>>.
 
 <=q=>
-Vissa email program är felaktiga och kan inte hantera långa adresser.
-Ifall du inte kan svara på detta meddelande, skicka istället ett
-meddelande till <<#L#>-request@<#h#>> och skriv hela ovan nämnda
+Vissa email program Ã¤r felaktiga och kan inte hantera lÃ¥nga adresser.
+Ifall du inte kan svara pÃ¥ detta meddelande, skicka istÃ¤llet ett
+meddelande till <<#L#>-request@<#h#>> och skriv hela ovan nÃ¤mnda
 adress i titel ("Subject:") raden.
 

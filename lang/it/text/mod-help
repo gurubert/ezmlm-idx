@@ -27,16 +27,16 @@ Per agire sulla lista delle raccolte, scrivi invece a:
    <<#L#>-digest-unsubscribe-john=example.com@<#h#>>
 
 <==>
-Questo Ë tutto. Non c'Ë bisogno di mettere i comandi nell'oggetto o nel
+Questo √® tutto. Non c'√® bisogno di mettere i comandi nell'oggetto o nel
 corpo del messaggio!
 
 <=r=>
 Per essere sicuro che sia stato davvero tu a spedire la richiesta, ti
-spedirÚ una richiesta di conferma. Ti sar‡ sufficiente rispondere al
-messaggio che ricevi perchË i tuoi ordini siano eseguiti.
+spedir√≤ una richiesta di conferma. Ti sar√† sufficiente rispondere al
+messaggio che ricevi perch√® i tuoi ordini siano eseguiti.
 <=R=>
-SpedirÚ una richiesta di conferma all'indirizzo dell'utente, nel caso
-in esempio a <john@example.com>. Tutto ciÚ che l'utente dovr‡ fare sar‡
+Spedir√≤ una richiesta di conferma all'indirizzo dell'utente, nel caso
+in esempio a <john@example.com>. Tutto ci√≤ che l'utente dovr√† fare sar√†
 rispondere a quella richiesta di conferma.
 <==>
 
@@ -44,11 +44,11 @@ I messaggi di conferma sono necessari per rendere estremamente difficile
 ad un terzo non autorizzato l'aggiunta o la cancellazione di un indirizzo
 dalla mailing list.
 
-AvvertirÚ sempre l'utente quando cambia lo stato della sua iscrizione.
+Avvertir√≤ sempre l'utente quando cambia lo stato della sua iscrizione.
 
 Iscrizione
 ----------
-Qualsiasi utente puÚ iscriversi o cancellarsi dalla lista, scrivendo a:
+Qualsiasi utente pu√≤ iscriversi o cancellarsi dalla lista, scrivendo a:
 
     <<#L#>-subscribe@<#h#>>
     <<#L#>-unsubscribe@<#h#>>
@@ -60,13 +60,13 @@ o, per la lista delle raccolte, a:
     <<#L#>-digest-unsubscribe@<#h#>>
 
 <==>
-L'utente ricever‡ una richiesta di conferma, perchË sia sicuro che abbia
+L'utente ricever√† una richiesta di conferma, perch√® sia sicuro che abbia
 davvero il controllo sull'indirizzo di iscrizione. Una volta effettuata
-la verifica, il comando verr‡ eseguito.
+la verifica, il comando verr√† eseguito.
 
 <=s=>
-Visto che questa lista Ë moderata per le iscrizioni, spedirÚ una seconda
-richiesta di conferma al moderatore. Dato che l'utente ha gi‡ confermato
+Visto che questa lista √® moderata per le iscrizioni, spedir√≤ una seconda
+richiesta di conferma al moderatore. Dato che l'utente ha gi√† confermato
 il desiderio di essere nella lista, come moderatore potrai essere sicuro
 che l'indirizzo esiste. Se vuoi approvare la richiesta dell'utente, devi
 semplicemente rispondere al mio messaggio di conferma.
@@ -76,16 +76,16 @@ potenziale nuovo iscritto per maggiori informazioni.
 Iscrizioni e cancellazioni funzionano allo stesso modo.
 <==>
 
-L'utente puÚ anche utilizzare:
+L'utente pu√≤ anche utilizzare:
 
    <<#L#>-subscribe-mary=example.com@<#h#>>
    <<#L#>-unsubscribe-mary=example.com@<#h#>>
 
-per far arrivare le e-mail a: "mary@example.com". Ovviamente, solo se Ë
-davvero in grado di leggere le e-mail di quell'indirizzo potr‡ ricevere
+per far arrivare le e-mail a: "mary@example.com". Ovviamente, solo se √®
+davvero in grado di leggere le e-mail di quell'indirizzo potr√† ricevere
 il messaggio con la richiesta di conferma e rispondere.
 
-Il tuo indirizzo e la tua identit‡ non saranno resi noti agli iscritti,
+Il tuo indirizzo e la tua identit√† non saranno resi noti agli iscritti,
 a meno che tu non decida di scrivere loro direttamente.
 
 <=rl=>
@@ -112,33 +112,33 @@ le istruzioni per modificarli, scrivi a:
 <=m=>
 Moderazione dei messaggi
 ------------------------
-Quando la pubblicazione dei messaggi Ë moderata, il messaggio spedito
-verr‡ parcheggiato temporaneamente e te ne ne verr‡ inviata una copia,
+Quando la pubblicazione dei messaggi √® moderata, il messaggio spedito
+verr√† parcheggiato temporaneamente e te ne ne verr√† inviata una copia,
 insieme alle istruzioni di moderazione. L'oggetto del messaggio che
-riceverai inizier‡ con "MODERATE for".
+riceverai inizier√† con "MODERATE for".
 
 Per accettare il messaggio, basta rispondere all'indirizzo contenuto in
-'Rispondi a:', che Ë gi‡ configurato con l'appropriato indirizzo di
-accettazione. Non Ë necessario allegare il messaggio: in effetti, se
-l'indirizzo al quale scrivi Ë corretto, il contenuto del messaggio
-sar‡ ignorato.
+'Rispondi a:', che √® gi√† configurato con l'appropriato indirizzo di
+accettazione. Non √® necessario allegare il messaggio: in effetti, se
+l'indirizzo al quale scrivi √® corretto, il contenuto del messaggio
+sar√† ignorato.
 
 Se invece vuoi rifutare il messaggio, scrivi una e-mail all'indirizzo
-'Da:', che avrÚ gi‡ configurato con il corretto indirizzo di rifuto. Di
-solito, ciÚ puÚ essere fatto con il pulsante 'Rispondi a tutti' e poi
+'Da:', che avr√≤ gi√† configurato con il corretto indirizzo di rifuto. Di
+solito, ci√≤ pu√≤ essere fatto con il pulsante 'Rispondi a tutti' e poi
 cancellare tutti i destinatari ad esclusione del comando di rifiuto.
 Se vuoi spedire al mittente un commento per spiegare il motivo del
-rifiuro, mettilo tra le due linee che iniziano con tre '%': penserÚ io
+rifiuro, mettilo tra le due linee che iniziano con tre '%': penser√≤ io
 a spedire al mittente il commento, insieme al messaggio rifiutato.
-In ogno caso, la tua identit‡ non sar‡ rivelata.
+In ogno caso, la tua identit√† non sar√† rivelata.
 
-ProcesserÚ il messaggio secondo la prima risposta che mi arriver‡. Se mi
+Processer√≤ il messaggio secondo la prima risposta che mi arriver√†. Se mi
 spedisci una richiesta di accettare un messaggio che un altro moderatore
-ha gi‡ rifiutato o accettato, te lo farÚ sapere.
+ha gi√† rifiutato o accettato, te lo far√≤ sapere.
 
 Se non ricevo risposte da un moderatore entro un certo numero di giorni
 (di solito 5), di solito spedisco un messaggio al mittente spiegadogli
-quello che Ë successo. L'amministratore puÚ anche configurare la lista
+quello che √® successo. L'amministratore pu√≤ anche configurare la lista
 in modo che questi messaggi ignorati vengano cancellati senza avvisare,
 invece che rispediti al mittente.
 <==>
@@ -150,9 +150,9 @@ nuovo indirizzo di tutti i messaggi che hanno l'intestazione della
 lista 'Mailing-List: <#L#>@<#h#>'
 (oppure dei messaggi con oggetto 'MODERATE for <#L#>@<#h#>'
 o 'CONFIRM subscribe to <#L#>@<#h#>').
-Dopo di ciÚ, puoi moderare la mailing-list dal nuovo indirizzo.
+Dopo di ci√≤, puoi moderare la mailing-list dal nuovo indirizzo.
 In alternativa, puoi fare il forward dei messaggi a un amico, in modo
-che li possa moderare lui per te. In questo caso, perÚ, assicurati che
+che li possa moderare lui per te. In questo caso, per√≤, assicurati che
 il proprietario della mailing list non abbia nulla in contrario.
 
 Se vuoi approvare in automatico tutte le richieste mentre non ci sei,
@@ -160,9 +160,9 @@ puoi configurare il tuo programma di posta in che risponda in automatico
 ai messaggi che hanno gli oggetti conformi ai criteri sopracitati.
 
 <=r=>
-Se vuoi amministrare la lista da un indirizzo che non Ë il tuo, ti verr‡
-chiesta una conferma. Fatto ciÚ, verr‡ inviata una richiesta di conferma
-a tutti i moderatori. Lo faccio perchË non c'Ë altro modo di sapere con
+Se vuoi amministrare la lista da un indirizzo che non √® il tuo, ti verr√†
+chiesta una conferma. Fatto ci√≤, verr√† inviata una richiesta di conferma
+a tutti i moderatori. Lo faccio perch√® non c'√® altro modo di sapere con
 certezza chi sia stato a mandarmi la richiesta originale.
 
 Ricorda che in questo caso la tua richiesta originale (e quindi il tuo

@@ -2,24 +2,24 @@
 Obrigado por concordar em moderar a lista
 <#L#>@<#h#>.
 
-Meus comandos são um pouco diferentes de outros gerenciadores de
-listas. À primeira vista eles parecem não usuais, mas à medida que
-você os for usando, vai apreciar a simplicidade do sistema e
-a rapidez com que eu trato suas requisições.
+Meus comandos sÃ£o um pouco diferentes de outros gerenciadores de
+listas. Ã€ primeira vista eles parecem nÃ£o usuais, mas Ã  medida que
+vocÃª os for usando, vai apreciar a simplicidade do sistema e
+a rapidez com que eu trato suas requisiÃ§Ãµes.
 
-Aqui estão algumas observações sobre como atuar como dono da
+Aqui estÃ£o algumas observaÃ§Ãµes sobre como atuar como dono da
 lista e/ou moderador:
 
-Subscrição Remota
+SubscriÃ§Ã£o Remota
 -----------------
-Como um moderador, você pode subscrever e cancelar a subscrição
-de qualquer endereço da lista. Para cadastrar john@johnhost.johndomain,
-simplesmente coloque um traço depois do comando, e depois o endereço
-com '=' no lugar de '@'. Por exemplo, para cadastrar este endereço,
+Como um moderador, vocÃª pode subscrever e cancelar a subscriÃ§Ã£o
+de qualquer endereÃ§o da lista. Para cadastrar john@johnhost.johndomain,
+simplesmente coloque um traÃ§o depois do comando, e depois o endereÃ§o
+com '=' no lugar de '@'. Por exemplo, para cadastrar este endereÃ§o,
 envie uma mensagem para:
    <<#L#>-subscribe-john=example.com@<#h#>>
 
-Você pode analogamente remover esse endereço, enviando mensagem para:
+VocÃª pode analogamente remover esse endereÃ§o, enviando mensagem para:
    <<#L#>-unsubscribe-john=example.com@<#h#>>
 
 <=d=>
@@ -28,29 +28,29 @@ Para a lista "digest":
    <<#L#>-digest-unsubscribe-john=example.com@<#h#>>
 
 <==>
-Isto é tudo. Nem assunto nem corpo de mensagem são necessários!
+Isto Ã© tudo. Nem assunto nem corpo de mensagem sÃ£o necessÃ¡rios!
 
 <=r=>
-Eu enviarei para você um pedido de confirmação, para ter certeza
-que é realmente você quem enviou a requisição. Simplesmente
-retorne a mensagem, e a requisição será completada.
+Eu enviarei para vocÃª um pedido de confirmaÃ§Ã£o, para ter certeza
+que Ã© realmente vocÃª quem enviou a requisiÃ§Ã£o. Simplesmente
+retorne a mensagem, e a requisiÃ§Ã£o serÃ¡ completada.
 <=R=>
-Eu enviarei um pedido de confirmação para o endereço do usuário,
-neste caso <john@example.com>. Tudo que o usuário tem que fazer é
-retornar este pedido de confirmação.
+Eu enviarei um pedido de confirmaÃ§Ã£o para o endereÃ§o do usuÃ¡rio,
+neste caso <john@example.com>. Tudo que o usuÃ¡rio tem que fazer Ã©
+retornar este pedido de confirmaÃ§Ã£o.
 <==>
 
-As confirmações são necessárias para evitar que pessoas
-não autorizadas possam cadastrar ou remover endereços
+As confirmaÃ§Ãµes sÃ£o necessÃ¡rias para evitar que pessoas
+nÃ£o autorizadas possam cadastrar ou remover endereÃ§os
 da lista.
 
-Eu notificarei o usuário quando a situação de sua subscrição
+Eu notificarei o usuÃ¡rio quando a situaÃ§Ã£o de sua subscriÃ§Ã£o
 for alterada.
 
-Subscrição
+SubscriÃ§Ã£o
 ----------
 
-Qualquer usuário pode subscrever-se ou cancelar a subscrição
+Qualquer usuÃ¡rio pode subscrever-se ou cancelar a subscriÃ§Ã£o
 enviando mensagem para:
 
 <#L#>-subscribe@<#h#>
@@ -63,41 +63,41 @@ Para a lista "digest":
 <#L#>-digest-unsubscribe@<#h#>
 
 <==>
-O usuário receberá um pedido de confirmação para eu ter
-certeza que ele controla o endereço de subscrição. Quando este
-endereço for verificado, ele será descadastrado.
+O usuÃ¡rio receberÃ¡ um pedido de confirmaÃ§Ã£o para eu ter
+certeza que ele controla o endereÃ§o de subscriÃ§Ã£o. Quando este
+endereÃ§o for verificado, ele serÃ¡ descadastrado.
 
 <=s=>
-Sendo esta lista moderada para subscrição, eu enviarei um segundo
-pedido de confirmação para o(s) moderador(es). Se o usuário
-já tiver confirmado o desejo de ficar na lista, você como
-moderador pode confiar que o endereço do assinante é verdadeiro.
-Se você deseja aprovar os pedidos do usuário, simplesmente
-retorne a mensagem de CONFIRMAÇÃO. Caso contrário, simplesmente
+Sendo esta lista moderada para subscriÃ§Ã£o, eu enviarei um segundo
+pedido de confirmaÃ§Ã£o para o(s) moderador(es). Se o usuÃ¡rio
+jÃ¡ tiver confirmado o desejo de ficar na lista, vocÃª como
+moderador pode confiar que o endereÃ§o do assinante Ã© verdadeiro.
+Se vocÃª deseja aprovar os pedidos do usuÃ¡rio, simplesmente
+retorne a mensagem de CONFIRMAÃ‡ÃƒO. Caso contrÃ¡rio, simplesmente
 ignore a minha mensagem ou possivelmente contacte o potencial
-assinante para obter mais informações.
+assinante para obter mais informaÃ§Ãµes.
 <=S=>
-Subscrições funcionam da mesma forma.
+SubscriÃ§Ãµes funcionam da mesma forma.
 <==>
 
-O usuário também pode usar estas formas:
+O usuÃ¡rio tambÃ©m pode usar estas formas:
 
    <<#L#>-subscribe-mary=example.com@<#h#>>
    <<#L#>-unsubscribe-mary=example.com@<#h#>>
 
 para que as mensagens sejam enviadas para "mary@example.com".
-Somente se ela receber mensagens neste endereço, ela será
-capaz de responder a confirmação.
+Somente se ela receber mensagens neste endereÃ§o, ela serÃ¡
+capaz de responder a confirmaÃ§Ã£o.
 
-Seu endereço e identidade não serão revelados para o assinante,
-a não ser que você envie mensagens diretamente para o usuário.
+Seu endereÃ§o e identidade nÃ£o serÃ£o revelados para o assinante,
+a nÃ£o ser que vocÃª envie mensagens diretamente para o usuÃ¡rio.
 
 <=rl=>
 Para obter o cadastro de assinantes da lista <#L#>@<#h#>,
 envie uma mensagem para:
    <<#L#>-list@<#h#>>
 
-Para um registro de transações da lista,
+Para um registro de transaÃ§Ãµes da lista,
 envie uma mensagem para:
    <<#L#>-log@<#h#>>
 
@@ -108,70 +108,70 @@ e:
    <<#L#>-digest-log@<#h#>>
 
 <=rn=>
-Você pode editar remotamente os arquivos-texto de resposta que a lista
-envia. Para obter uma lista dos arquivos e instruções de edição, envie
+VocÃª pode editar remotamente os arquivos-texto de resposta que a lista
+envia. Para obter uma lista dos arquivos e instruÃ§Ãµes de ediÃ§Ã£o, envie
 mensagem para:
    <<#L#>-edit@<#h#>>
 
 <=m=>
 Postagens Moderadas
 -------------------
-Quando as postagens são moderadas, eu colocarei as mensagens em
-uma fila, e enviarei a você uma cópia junto com instruções. A
-mensagem terá "MODERATE for ..." como assunto.
+Quando as postagens sÃ£o moderadas, eu colocarei as mensagens em
+uma fila, e enviarei a vocÃª uma cÃ³pia junto com instruÃ§Ãµes. A
+mensagem terÃ¡ "MODERATE for ..." como assunto.
 
-Se você aceita a mensagem, basta responder para o endereço 'Reply-To:',
-o qual já deixei configurado como o endereço de "aceitação".
-Não é necessário incluir a mensagem; na verdade, eu ignorarei qualquer
-coisa que você envie, desde que o endereço para o qual você enviou
+Se vocÃª aceita a mensagem, basta responder para o endereÃ§o 'Reply-To:',
+o qual jÃ¡ deixei configurado como o endereÃ§o de "aceitaÃ§Ã£o".
+NÃ£o Ã© necessÃ¡rio incluir a mensagem; na verdade, eu ignorarei qualquer
+coisa que vocÃª envie, desde que o endereÃ§o para o qual vocÃª enviou
 esteja correto.
 
-Se você quiser rejeitá-la, envie a mensagem para o endereço 'From:',
-que por sua vez, está configurado com o endereço de "rejeição".
-Você pode usualmente fazer um 'reply-to-all' - resposta para todos,
-e então remover o seu endereço e o endereço de "aceitação").
-Você pode adicionar um comentário opcional para o remetente entre
-duas linhas começando com três '%'. Eu enviarei este comentário somente
+Se vocÃª quiser rejeitÃ¡-la, envie a mensagem para o endereÃ§o 'From:',
+que por sua vez, estÃ¡ configurado com o endereÃ§o de "rejeiÃ§Ã£o".
+VocÃª pode usualmente fazer um 'reply-to-all' - resposta para todos,
+e entÃ£o remover o seu endereÃ§o e o endereÃ§o de "aceitaÃ§Ã£o").
+VocÃª pode adicionar um comentÃ¡rio opcional para o remetente entre
+duas linhas comeÃ§ando com trÃªs '%'. Eu enviarei este comentÃ¡rio somente
 para o remetente, sem revelar sua identidade.
 
 Eu irei processar a mensagem de acordo com o primeiro retorno que eu
-receber. Se você me enviar uma requisição para aceitar uma mensagem
-que já foi rejeitada ou vice-versa, eu o avisarei.
+receber. Se vocÃª me enviar uma requisiÃ§Ã£o para aceitar uma mensagem
+que jÃ¡ foi rejeitada ou vice-versa, eu o avisarei.
 
-Se eu não receber nenhuma resposta do moderador dentro de um certo
-período de tempo (normalmente 5 dias), eu retornarei uma mensagem
-para o remetente com uma explicação do ocorrido. O administrador
-também pode configurar a lista para que as mensagens "ignoradas"
-sejam simplesmente removidas, ao invés de retornar para o remetente.
+Se eu nÃ£o receber nenhuma resposta do moderador dentro de um certo
+perÃ­odo de tempo (normalmente 5 dias), eu retornarei uma mensagem
+para o remetente com uma explicaÃ§Ã£o do ocorrido. O administrador
+tambÃ©m pode configurar a lista para que as mensagens "ignoradas"
+sejam simplesmente removidas, ao invÃ©s de retornar para o remetente.
 <==>
 
-Férias
+FÃ©rias
 ------
-Se você está temporariamente em um endereço diferente, basta repassar
-todas as mensagens que têm o cabeçalho correto 'Mailing-List:' (ou todas
-as mensagens que têm assuntos começando com 'MODERATE for <#L#>@<#h#>'
-ou 'CONFIRM subscribe to <#L#>@<#h#>') para o novo endereço.
-Você pode então moderar a partir do novo endereço. Alternativamente,
-você pode repassar as mensagens para um amigo, assim ele pode moderar
-para você. Por favor, avise e confirme este procedimento com o dono da lista.
+Se vocÃª estÃ¡ temporariamente em um endereÃ§o diferente, basta repassar
+todas as mensagens que tÃªm o cabeÃ§alho correto 'Mailing-List:' (ou todas
+as mensagens que tÃªm assuntos comeÃ§ando com 'MODERATE for <#L#>@<#h#>'
+ou 'CONFIRM subscribe to <#L#>@<#h#>') para o novo endereÃ§o.
+VocÃª pode entÃ£o moderar a partir do novo endereÃ§o. Alternativamente,
+vocÃª pode repassar as mensagens para um amigo, assim ele pode moderar
+para vocÃª. Por favor, avise e confirme este procedimento com o dono da lista.
 
-Se você quiser aprovar automaticamente todas as mensagens enquanto
-está fora, configure o seu programa de correio eletrônico para responder
-automaticamente as mensagens que têm os assuntos com os critérios acima.
+Se vocÃª quiser aprovar automaticamente todas as mensagens enquanto
+estÃ¡ fora, configure o seu programa de correio eletrÃ´nico para responder
+automaticamente as mensagens que tÃªm os assuntos com os critÃ©rios acima.
 
 <=r=>
-Se você tentar administrar remotamente a partir de um endereço que
-não é seu, o assinante, não você, será questionado para confirmar.
-Depois disto, um pedido de confirmação é enviado para todos os
-moderadores. Estou fazendo isto, porque eu não tenho como saber que
-foi você quem enviou o pedido original.
+Se vocÃª tentar administrar remotamente a partir de um endereÃ§o que
+nÃ£o Ã© seu, o assinante, nÃ£o vocÃª, serÃ¡ questionado para confirmar.
+Depois disto, um pedido de confirmaÃ§Ã£o Ã© enviado para todos os
+moderadores. Estou fazendo isto, porque eu nÃ£o tenho como saber que
+foi vocÃª quem enviou o pedido original.
 
-Por favor note que o seu pedido original (e seu endereço) é enviado
+Por favor note que o seu pedido original (e seu endereÃ§o) Ã© enviado
 para o assinante neste caso!
 <==>
 
 Boa sorte!
 
-PS: Por favor, contacte o dono da lista (<#L#>-owner@<#h#>) se você
-tiver qualquer dúvida ou problema.
+PS: Por favor, contacte o dono da lista (<#L#>-owner@<#h#>) se vocÃª
+tiver qualquer dÃºvida ou problema.
 

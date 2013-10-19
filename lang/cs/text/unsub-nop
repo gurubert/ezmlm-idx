@@ -1,33 +1,33 @@
 # Revision: 1
-Potvrzení: Adresa
+PotvrzenÃ­: Adresa
 
 <#A#>
 
-nebyla na listu <#l#> v dobì, kdy jsem obdr¾el
-vá¹ po¾adavek a není na nìm ani teï.
+nebyla na listu <#l#> v dobÄ›, kdy jsem obdrÅ¾el
+vÃ¡Å¡ poÅ¾adavek a nenÃ­ na nÄ›m ani teÄ.
 
-Pokud se odhlásíte, ale stále vám budou chodit dopisy, je pøihlá¹ení
-provedeno pod jinou adresou, ne¾ kterou v souèasné dobì pou¾íváte.
-Podívejte se prosím do hlavièek zpráv na text
+Pokud se odhlÃ¡sÃ­te, ale stÃ¡le vÃ¡m budou chodit dopisy, je pÅ™ihlÃ¡Å¡enÃ­
+provedeno pod jinou adresou, neÅ¾ kterou v souÄasnÃ© dobÄ› pouÅ¾Ã­vÃ¡te.
+PodÃ­vejte se prosÃ­m do hlaviÄek zprÃ¡v na text
 
 "Return-Path: <<#l#>-return-1234-pepa=example.com@<#h#>>'
 
-Odhla¹ovací adresa pro tohoto u¾ivatele pak bude
+OdhlaÅ¡ovacÃ­ adresa pro tohoto uÅ¾ivatele pak bude
 "<#l#>-unsubscribe-pepa=example.com@<#h#>".
-Staèí poslat mail na tuto adresu s tím, ¾e pepa=example.com nahradíte
-skuteènımi hodnotami. Pak odpovíte na ¾ádost o potvrzení a mìla
-by vám dojít zpráva o odhlá¹ení z listu.
+StaÄÃ­ poslat mail na tuto adresu s tÃ­m, Å¾e pepa=example.com nahradÃ­te
+skuteÄnÃ½mi hodnotami. Pak odpovÃ­te na Å¾Ã¡dost o potvrzenÃ­ a mÄ›la
+by vÃ¡m dojÃ­t zprÃ¡va o odhlÃ¡Å¡enÃ­ z listu.
 
-V nìkterıch po¹tovních programech si musíte zprávu zobrazit vèetnì
-hlavièek, jinak není hlavièka "Return-Path" viditelná.
+V nÄ›kterÃ½ch poÅ¡tovnÃ­ch programech si musÃ­te zprÃ¡vu zobrazit vÄetnÄ›
+hlaviÄek, jinak nenÃ­ hlaviÄka "Return-Path" viditelnÃ¡.
 
-Pokud toto stále nefunguje, pak je mi líto, ale nemohu vám pomoci.
-Prosím PREPO©LETE (forward) zprávu z listu spolu s poznámkou o tom,
-èeho se sna¾íte dosáhnout a seznamem adres, ze kterıch potenciálnì
-mù¾ete bıt pøihlá¹en[a] mému správci:
+Pokud toto stÃ¡le nefunguje, pak je mi lÃ­to, ale nemohu vÃ¡m pomoci.
+ProsÃ­m PREPOÅ LETE (forward) zprÃ¡vu z listu spolu s poznÃ¡mkou o tom,
+Äeho se snaÅ¾Ã­te dosÃ¡hnout a seznamem adres, ze kterÃ½ch potenciÃ¡lnÄ›
+mÅ¯Å¾ete bÃ½t pÅ™ihlÃ¡Å¡en[a] mÃ©mu sprÃ¡vci:
 
     <#l#>-owner@<#h#>
 
-Tento se bude sna¾it vá¹ problém øe¹it. Mùj správce je tro¹ku pomalej¹í
-ne¾ já, tak¾e prosím o trochu trpìlivosti.
+Tento se bude snaÅ¾it vÃ¡Å¡ problÃ©m Å™eÅ¡it. MÅ¯j sprÃ¡vce je troÅ¡ku pomalejÅ¡Ã­
+neÅ¾ jÃ¡, takÅ¾e prosÃ­m o trochu trpÄ›livosti.
 

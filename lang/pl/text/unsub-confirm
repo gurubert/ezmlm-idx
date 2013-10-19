@@ -1,22 +1,22 @@
 # Revision: 0
-Aby potwierdziæ, ¿e chcesz usunac adres
+Aby potwierdziÄ‡, Å¼e chcesz usunac adres
 
 <#A#>
 
-z listy prenumaratorów <#L#>, prze¶lij, proszê, pust±
-odpowied¼ na ten list pod adres:
+z listy prenumaratorÃ³w <#L#>, przeÅ›lij, proszÄ™, pustÄ…
+odpowiedÅº na ten list pod adres:
 
 <#R#>
 
 mailto:<#R#>
 
-Twój program pocztowy powienien automatycznie zaadresowaæ przesy³kê,
-je¿eli u¿yjesz opcji "odpowiedz/reply".
+TwÃ³j program pocztowy powienien automatycznie zaadresowaÄ‡ przesyÅ‚kÄ™,
+jeÅ¼eli uÅ¼yjesz opcji "odpowiedz/reply".
 
-Nie sprawdzi³em jednak czy twój adres znajduje siê na li¶cie
-prenumeratorów. Aby sprawdziæ, którego adresu u¿ywasz jako koresponde-
-cyjnego, spojrzyj na jak±kolwiek wiadomosæ z listy dyskusyjnej.
-Ka¿dy list ma schowany Twój adres w scie¿ce zwrotnej; np.
-Bóg@example.com dostaje listy ze scie¿k± zwrotn±:
-<<#l#>-return-<number>-Bóg=example.com@<#h#>.
+Nie sprawdziÅ‚em jednak czy twÃ³j adres znajduje siÄ™ na liÅ›cie
+prenumeratorÃ³w. Aby sprawdziÄ‡, ktÃ³rego adresu uÅ¼ywasz jako koresponde-
+cyjnego, spojrzyj na jakÄ…kolwiek wiadomosÄ‡ z listy dyskusyjnej.
+KaÅ¼dy list ma schowany TwÃ³j adres w scieÅ¼ce zwrotnej; np.
+BÃ³g@example.com dostaje listy ze scieÅ¼kÄ… zwrotnÄ…:
+<<#l#>-return-<number>-BÃ³g=example.com@<#h#>.
 

@@ -1,12 +1,12 @@
 # Revision: 2
 Mi dispiace, il codice di conferma che ho ricevuto non risulta valido.
 
-La ragione più comune per i codici di conferma non validi è che si
+La ragione piÃ¹ comune per i codici di conferma non validi Ã¨ che si
 riferiscono ad una richiesta scaduta: la conferma di una richiesta deve
 essere ricevuta entro 10 giorni.
-Un altra ragione può dipendere al tuo programma di posta elettronica:
+Un altra ragione puÃ² dipendere al tuo programma di posta elettronica:
 alcuni programmi, infatti, hanno l'abitudine di troncare gli indirizzi
-di risposta, se non sono in grado di gestire un indirizzo così lungo.
+di risposta, se non sono in grado di gestire un indirizzo cosÃ¬ lungo.
 
 Ti ho predisposto un altro numero di conferma. Per confermare che
 
@@ -22,7 +22,7 @@ oppure clicca qui:
 
 <=q=>
 
-Alcuni programmi di posta non sono in grado di gestire indirizzi così
+Alcuni programmi di posta non sono in grado di gestire indirizzi cosÃ¬
 lunghi. Se il tuo programma non riesce a gestire questo indirizzo,
 invia un messaggio a:
 

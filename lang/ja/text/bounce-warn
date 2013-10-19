@@ -1,12 +1,12 @@
 # Revision: 1
 
-$B5.J}08$K(B mailing list <#L#> $B$,Aw$C$?(B message $B$N4v$D$+$G(B
-$BG[Aw$K<:GT$7$^$7$?!#(B
+貴方宛に mailing list <#L#> が送った message の幾つかで
+配送に失敗しました。
 
-$BG[Aw$K<:GT$7$?(B message $B$N:G=i$N0lDL$rE:IU$7$F$*$-$^$9!#(B
+配送に失敗した message の最初の一通を添付しておきます。
 
-$B$b$7$b$3$N(B message $B<+BN$bG[Aw$K<:GT$7$?>l9g$K$O(B
-ezmlm $B$O3NG'$N(B message $B$rAw$j$^$9!#$=$N(B message $B$bG[Aw$K<:GT$7$?>l9g(B
-$B5.J}$N(B address $B$O(B mailing list <#L#> $B$+$i(B
-$BL5>r7o$K:o=|$5$l$^$9!#(B
+もしもこの message 自体も配送に失敗した場合には
+ezmlm は確認の message を送ります。その message も配送に失敗した場合
+貴方の address は mailing list <#L#> から
+無条件に削除されます。
 

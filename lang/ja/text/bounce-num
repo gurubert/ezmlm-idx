@@ -1,22 +1,22 @@
 # Revision: 1
 
-mailing list <#L#> $B$,5.J}08$KAw$C$?(B message $B$NFb(B
-$BG[Aw$K<:GT$7$?$b$N$NHV9f$rE:IU$7$F$*$-$^$9!#(B
+mailing list <#L#> が貴方宛に送った message の内
+配送に失敗したものの番号を添付しておきます。
 
 <=a=>
-message $B$O(B archive $BCf$KJ]B8$5$l$F$$$^$9!#(B
+message は archive 中に保存されています。
 
-$B6u$N(B message $B$r0J2<$N(B command address $B$KAw$k$3$H$G!"5.J}$,<u$1<h$l(B
-$B$J$+$C$?(B message $B$r(B archive $BFb$+$i<h$j=P$9$3$H$,=PMh$^$9!#(B
+空の message を以下の command address に送ることで、貴方が受け取れ
+なかった message を archive 内から取り出すことが出来ます。
 
-$BNc!K(B
-   * 123 $BHV$+$i(B 145 $BHVKx$N(B message $B$r<h$j=P$9(B
+例）
+   * 123 番から 145 番迄の message を取り出す
      <<#L#>-get.123_145@<#h#>>
-     $B!J0lEY$K<h$j=P$;$k$N$O:GBg$G(B 100$BDL$G$9!K(B
+     （一度に取り出せるのは最大で 100通です）
 
-   * $B:G?7(B 100$BDL$NEj9F<T$H(B Subject: $B9T$r<h$j=P$9(B
+   * 最新 100通の投稿者と Subject: 行を取り出す
      <<#L#>-index@<#h#>>
 
 <==>
-$BG[Aw$K<:GT$7$?(B message $B$NHV9f$O0J2<$NDL$j$G$9(B:
+配送に失敗した message の番号は以下の通りです:
 

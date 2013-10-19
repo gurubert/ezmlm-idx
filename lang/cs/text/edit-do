@@ -1,16 +1,16 @@
 # Revision: 1
 <=n=>
-Prosím editujte následující soubor a po¹lete jej na adresu
+ProsÃ­m editujte nÃ¡sledujÃ­cÃ­ soubor a poÅ¡lete jej na adresu
 
 <#R#>
 
-Vá¹ po¹tovní program by mìl mít tlaèítko "Odpovìï/Reply",
-kterı tuto adresu pou¾ije automaticky.
+VÃ¡Å¡ poÅ¡tovnÃ­ program by mÄ›l mÃ­t tlaÄÃ­tko "OdpovÄ›Ä/Reply",
+kterÃ½ tuto adresu pouÅ¾ije automaticky.
 
-Umím dokonce sám smazat citovací znaèky, které vá¹ po¹tovní program
-pøidá pøed text, pokud ov¹em ponecháte znaèkovací øádky samotné.
+UmÃ­m dokonce sÃ¡m smazat citovacÃ­ znaÄky, kterÃ© vÃ¡Å¡ poÅ¡tovnÃ­ program
+pÅ™idÃ¡ pÅ™ed text, pokud ovÅ¡em ponechÃ¡te znaÄkovacÃ­ Å™Ã¡dky samotnÃ©.
 
-Tyto øádky zaèínají tøemi znaky procento. Nesmí bıt modifikovány
-(s vıjimkou pøípadnıch znakù pøed nimi, pøidanıch pøipadnì va¹ím
-po¹tovním klientem).
+Tyto Å™Ã¡dky zaÄÃ­najÃ­ tÅ™emi znaky procento. NesmÃ­ bÃ½t modifikovÃ¡ny
+(s vÃ½jimkou pÅ™Ã­padnÃ½ch znakÅ¯ pÅ™ed nimi, pÅ™idanÃ½ch pÅ™ipadnÄ› vaÅ¡Ã­m
+poÅ¡tovnÃ­m klientem).
 

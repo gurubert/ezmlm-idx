@@ -1,35 +1,35 @@
 # Revision: 1
-Confirmação: o endereço
+ConfirmaÃ§Ã£o: o endereÃ§o
 
 <#A#>
 
-não está na lista <#l#>. Ele não foi encontrado quando
+nÃ£o estÃ¡ na lista <#l#>. Ele nÃ£o foi encontrado quando
 o seu pedido foi recebido.
 
-Se você cancelou a assinatura, mas continua recebendo mensagens,
-você está assinado com um endereço diferente do que está usando
-agora. Por favor, olhe o cabeçalho da mensagem, procurando por:
+Se vocÃª cancelou a assinatura, mas continua recebendo mensagens,
+vocÃª estÃ¡ assinado com um endereÃ§o diferente do que estÃ¡ usando
+agora. Por favor, olhe o cabeÃ§alho da mensagem, procurando por:
 
 'Return-Path: <<#l#>-return-1234-user=host.dom@<#h#>>'
 
-O endereço de cancelamento para este endereço deve ser:
+O endereÃ§o de cancelamento para este endereÃ§o deve ser:
 '<#l#>-unsubscribe-user=host.dom@<#h#>'.
-Basta enviar uma mensagem para este endereço, substituindo
+Basta enviar uma mensagem para este endereÃ§o, substituindo
 user=host.dom pelos valores corretos; depois, responda ao pedido de
-confirmação e você deverá receber um aviso que está fora da lista.
+confirmaÃ§Ã£o e vocÃª deverÃ¡ receber um aviso que estÃ¡ fora da lista.
 
-Para alguns programas de correio, você precisará tornar os cabeçalhos
-visíveis para ver o caminho de retorno (return-path):
+Para alguns programas de correio, vocÃª precisarÃ¡ tornar os cabeÃ§alhos
+visÃ­veis para ver o caminho de retorno (return-path):
 
-Para o Eudora 4.0, clique no botão "Blah blah ...".
+Para o Eudora 4.0, clique no botÃ£o "Blah blah ...".
 Para o PMMail, clique em "Window->Show entire message/header".
 
-Se isto ainda não funcionar, eu sinto muito em dizer que não posso
-ajudá-lo. Por favor, REPASSE uma mensagem da lista junto com uma
-observação sobre o que você está tentando fazer para o meu dono:
+Se isto ainda nÃ£o funcionar, eu sinto muito em dizer que nÃ£o posso
+ajudÃ¡-lo. Por favor, REPASSE uma mensagem da lista junto com uma
+observaÃ§Ã£o sobre o que vocÃª estÃ¡ tentando fazer para o meu dono:
 
     <#l#>-owner@<#h#>
 
-que cuidará disto. Meu dono é um pouco mais lento do que eu,
-por favor tenha paciência.
+que cuidarÃ¡ disto. Meu dono Ã© um pouco mais lento do que eu,
+por favor tenha paciÃªncia.
 

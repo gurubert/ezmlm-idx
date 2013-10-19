@@ -1,23 +1,23 @@
 # Revision: 1
 <=d=>
-digest $B$N9XFI$r4uK>$9$k>l9g$O!"6u$N(B message $B$r(B
+digest の購読を希望する場合は、空の message を
 
         <<#L#>-digest-subscribe@<#h#>>
         (To subscribe to the digest)
 
-$B08$KAw$C$F2<$5$$!#(B
+宛に送って下さい。
 
-digest $B$N9XFI$r$d$a$k>l9g$O!"6u$N(B message $B$r(B
+digest の購読をやめる場合は、空の message を
 
         <<#L#>-digest-unsubscribe@<#h#>>
         (To unsubscribe from the digest)
 
-$B08$KAw$C$F2<$5$$!#(B
+宛に送って下さい。
 
-mailing list <#L#> $B$X$N(B post $B$O(B
+mailing list <#L#> への post は
 
         <<#L#>@<#h#>>
         (To post to the list)
 
-$B08$K$*4j$$$7$^$9!#(B
+宛にお願いします。
 

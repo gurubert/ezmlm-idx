@@ -1,30 +1,30 @@
 # Revision: 1
 
-Este es un mensaje genérico de ayuda. El mensaje que recibí no
+Este es un mensaje genÃ©rico de ayuda. El mensaje que recibÃ­ no
 fue mandado a ninguna de mis direcciones-comando.
 
-Aquí hay una lista de las direcciones comando disponibles:
+AquÃ­ hay una lista de las direcciones comando disponibles:
 
 Mande un correo a las siguientes direcciones-comando para obtener
-información y FAQ de esta lista:
+informaciÃ³n y FAQ de esta lista:
 
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
 
 <=d=>
-Para la lista de resúmenes existen direcciones-comando análogas:
+Para la lista de resÃºmenes existen direcciones-comando anÃ¡logas:
 
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <=a=>
 
-Para recibir los mensajes desde el número 123 al 145 (con un
-máximo de 100 por petición), escriba a:
+Para recibir los mensajes desde el nÃºmero 123 al 145 (con un
+mÃ¡ximo de 100 por peticiÃ³n), escriba a:
 
    <<#L#>-get.123_145@<#h#>>
 
-Para obtener un índice con los campos "Asunto" y "Autor" para los
+Para obtener un Ã­ndice con los campos "Asunto" y "Autor" para los
 mensajes del 123 al 456, debe escribir a:
 
    <<#L#>-index.123_456@<#h#>>
@@ -36,17 +36,17 @@ mensaje 12345, mande un mensaje en blanco a:
 
 <==>
 
-En realidad no es necesario que los mensajes estén en blanco,
-pero si no lo están ignoraré su contenido. Sólo es importante la
-DIRECCIÓN a la que se envía.
+En realidad no es necesario que los mensajes estÃ©n en blanco,
+pero si no lo estÃ¡n ignorarÃ© su contenido. SÃ³lo es importante la
+DIRECCIÃ“N a la que se envÃ­a.
 
-Usted puede suscribir una dirección alternativa, por ejemplo,
-para "david@example.com", simplemente añada un guión y su
-dirección (con '=' en lugar de '@') después del comando:
+Usted puede suscribir una direcciÃ³n alternativa, por ejemplo,
+para "david@example.com", simplemente aÃ±ada un guiÃ³n y su
+direcciÃ³n (con '=' en lugar de '@') despuÃ©s del comando:
 
    <<#L#>-subscribe-david=example.com@<#h#>>
 
-Para cancelar la suscripción de esta dirección, escriba a:
+Para cancelar la suscripciÃ³n de esta direcciÃ³n, escriba a:
 
 <<#L#>-unsubscribe-david=example.com@<#h#>>
 

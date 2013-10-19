@@ -1,28 +1,28 @@
 # Revision: 1
-Oops, det bekräftelsenummret verkar vara felaktigt.
+Oops, det bekrÃ¤ftelsenummret verkar vara felaktigt.
 
-Den vanligaste orsaken till felaktiga bekräftelsenummer är
-att de blivit för gamla. De gäller i max 10 dagar. Var också
-säker på att du använde hela bekräftelsenummret i ditt svar,
-vissa program kan i vissa fel ta bort slutet på adresser när
-de är långa.
+Den vanligaste orsaken till felaktiga bekrÃ¤ftelsenummer Ã¤r
+att de blivit fÃ¶r gamla. De gÃ¤ller i max 10 dagar. Var ocksÃ¥
+sÃ¤ker pÃ¥ att du anvÃ¤nde hela bekrÃ¤ftelsenummret i ditt svar,
+vissa program kan i vissa fel ta bort slutet pÃ¥ adresser nÃ¤r
+de Ã¤r lÃ¥nga.
 
-Ett nytt bekräftelsenummer har skapats, för att bekräfta att
+Ett nytt bekrÃ¤ftelsenummer har skapats, fÃ¶r att bekrÃ¤fta att
 du vill ha med
 
 <#A#>
 
-på <#l#> listan, skicka ett brev till denna adress:
+pÃ¥ <#l#> listan, skicka ett brev till denna adress:
 
 <#R#>
 
-eller tryck här:
+eller tryck hÃ¤r:
 	<mailto:<#R#>>
 
-Var noga med att svarsadresser är riktig när du bekräftar
+Var noga med att svarsadresser Ã¤r riktig nÃ¤r du bekrÃ¤ftar
 prenumerationen.
 
-Ursäkta detta extra besvär.
+UrsÃ¤kta detta extra besvÃ¤r.
 
 	<#L#>-Owner <<#l#>-owner@<#h#>>
 

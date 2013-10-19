@@ -3,26 +3,26 @@ Powiadomienie: Adresu pocztowego
 
 <#A#>
 
-nie ma na li¶cie prenumeratorów <#l#>. Nie by³o go równie¿
-przed dosteniem Twojego ¿yczenia wykre¶lenia z listy..
+nie ma na liÅ›cie prenumeratorÃ³w <#l#>. Nie byÅ‚o go rÃ³wnieÅ¼
+przed dosteniem Twojego Å¼yczenia wykreÅ›lenia z listy..
 
-Je¿eli wypisa³e¶(a¶) siê, lecz nadal dostajesz listy, jeste¶ po prostu
-zapisany(a) z innego adresu, ni¿ ten, którego w³a¶nie u¿ywasz.
-Spojrzyj, proszê, ma nag³ówki któregokolwiek listu z prenumeraty,
-znajdziesz tam frazê:
+JeÅ¼eli wypisaÅ‚eÅ›(aÅ›) siÄ™, lecz nadal dostajesz listy, jesteÅ› po prostu
+zapisany(a) z innego adresu, niÅ¼ ten, ktÃ³rego wÅ‚aÅ›nie uÅ¼ywasz.
+Spojrzyj, proszÄ™, ma nagÅ‚Ã³wki ktÃ³regokolwiek listu z prenumeraty,
+znajdziesz tam frazÄ™:
 
 'Return-Path: <<#l#>-return-1234-user=example.com@<#h#>>'
 
-W³a¶ciwy adres, na który powinno wiêc trafiæ twoje ¿yczenie wypisania to:
+WÅ‚aÅ›ciwy adres, na ktÃ³ry powinno wiÄ™c trafiÄ‡ twoje Å¼yczenie wypisania to:
 '<#l#>-unsubscribe-user=example.com@<#h#>'.
-Po prostu napisz na powy¿szy adres, zamieniaj±c user=example.com na twoje
-prawdziwe dane, odpowiedz po¼niej na pro¶bê potwierdzenia,
-powieniene¶(a¶) wówczas dostaæ list, ¿e jeste¶ wykre¶lony(a)
-z listy prenumeratorów.
+Po prostu napisz na powyÅ¼szy adres, zamieniajÄ…c user=example.com na twoje
+prawdziwe dane, odpowiedz poÅºniej na proÅ›bÄ™ potwierdzenia,
+powienieneÅ›(aÅ›) wÃ³wczas dostaÄ‡ list, Å¼e jesteÅ› wykreÅ›lony(a)
+z listy prenumeratorÃ³w.
 
-Je¿eli moje rady nie skutkuj±, niestety nie mogê Ci ju¿ wiêcej pomóc.
-Prze¶lij, proszê, jak±kolwiek przesy³kê z listy wraz z krótk± informacj±,
-co chcesz osi±gn±æ, do opiekuna listy, pod adres:
+JeÅ¼eli moje rady nie skutkujÄ…, niestety nie mogÄ™ Ci juÅ¼ wiÄ™cej pomÃ³c.
+PrzeÅ›lij, proszÄ™, jakÄ…kolwiek przesyÅ‚kÄ™ z listy wraz z krÃ³tkÄ… informacjÄ…,
+co chcesz osiÄ…gnÄ…Ä‡, do opiekuna listy, pod adres:
 
 <=x=>
 mailto:<#L#>-owner@<#h#>
@@ -30,6 +30,6 @@ mailto:<#L#>-owner@<#h#>
     <#l#>-owner@<#h#>
 <==>
 
-który to opiekun siê tym zajmie. We¼ pod uwagê, ¿e cz³owiek jest nieco
-wolniejszy od komputera :-), wiêc b±d¼ cierpliwy(a).
+ktÃ³ry to opiekun siÄ™ tym zajmie. WeÅº pod uwagÄ™, Å¼e czÅ‚owiek jest nieco
+wolniejszy od komputera :-), wiÄ™c bÄ…dÅº cierpliwy(a).
 

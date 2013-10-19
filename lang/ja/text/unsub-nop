@@ -1,50 +1,50 @@
 # Revision: 1
-$B0J2<$N(B address
+以下の address
 
 <#A#>
 
-$B$O(B mailing list <#L#> $B$N(B
-$B9XFI<T$G$O$"$j$^$;$s!#(B
+は mailing list <#L#> の
+購読者ではありません。
 
         -       -       -       -       -       -       -       -
 
-$B9XFI$r;_$a$?$K$b4X$o$i$:!"(Bmailing list <#L#>
-$B$+$i$N(B mail $B$,FO$/>l9g$O!"5.J}$,8=:_;H$C$F$$$k(B e-mail address $B$H$O(B
-$B0c$&(B address $B$G(B mailing list <#L#> $B$r(B
-$B9XFI$7$F$$$k$N$+$b$7$l$^$;$s!#(B
+購読を止めたにも関わらず、mailing list <#L#>
+からの mail が届く場合は、貴方が現在使っている e-mail address とは
+違う address で mailing list <#L#> を
+購読しているのかもしれません。
 
-hearder $B$N0J2<$NItJ,$K(B
+hearder の以下の部分に
 
 'Return-Path: <<#L#>-return-1234-user=example.com@<#h#>>'
 
-$B5.J}$,$I$N(B address $B$G9XFI$r$7$F$$$k$N$+$,8=$l$F$$$^$9!#(B
-$B!J$3$N>l9g!"(Buser@example.com $B$G9XFI$r$7$F$$$k$3$H$K$J$j$^$9!K(B
+貴方がどの address で購読をしているのかが現れています。
+（この場合、user@example.com で購読をしていることになります）
 
-address $B$rL@<($7$F9XFICf;_$N(B request $B$r=P$9>l9g$O!"0J2<$NMM$K(B
+address を明示して購読中止の request を出す場合は、以下の様に
 
         <<#L#>-unsubscribe-user=example.com@<#h#>>
 
-'<#L#>-unsubscribe-' $B$N8e$m$K!"(Buser@example.com $B$r(B user=example.com $B$K(B
-$B=q$-49$($?J*$r7R$$$G2<$5$$!#(B
+'<#L#>-unsubscribe-' の後ろに、user@example.com を user=example.com に
+書き換えた物を繋いで下さい。
 
-$B4v$D$+$N(B Mail User Agent (MUA) $B$O!"(BReturn-Path $B$r8+$k$?$a$K$O(B
-$BFCJL$JA`:n$rI,MW$K$J$j$^$9!#(B
+幾つかの Mail User Agent (MUA) は、Return-Path を見るためには
+特別な操作を必要になります。
 
-        * Eudora 4.0 $B$@$H!X(BBlah blah ...$B!Y%\%?%s$r(B click $B$9$k(B
-        * PMMail $B$@$H(B Window menu $B$N!X(BShow entire message/header$B!Y(B
-          $B%\%?%s$r(B click $B$9$k(B
+        * Eudora 4.0 だと『Blah blah ...』ボタンを click する
+        * PMMail だと Window menu の『Show entire message/header』
+          ボタンを click する
 
         -       -       -       -       -       -       -       -
 
-address $B$rL@<($7$?9XFICf;_$b$&$^$/$$$+$J$$>l9g$O!"?=$7Lu$"$j$^$;$s$,(B
+address を明示した購読中止もうまくいかない場合は、申し訳ありませんが
 
-        * $B5.J}$,2?$r$7$h$&$H$7$F<:GT$7$?$N$+(B
-        * ezmlm $B$+$i$N(B message
-        * $B9XFICf;_$r4uK>$9$k(B address
+        * 貴方が何をしようとして失敗したのか
+        * ezmlm からの message
+        * 購読中止を希望する address
 
-$B$rE:IU$7$F!"(Bmailing list <#L#> $B$N(B owner $B$N(B
+を添付して、mailing list <#L#> の owner の
 
     <#L#>-owner@<#h#>
 
-$BKxAw$C$F2<$5$$!#!JJV;v$K;~4V$,$+$+$k$+$b$7$l$^$;$s$,$4N;>52<$5$$!K(B
+迄送って下さい。（返事に時間がかかるかもしれませんがご了承下さい）
 

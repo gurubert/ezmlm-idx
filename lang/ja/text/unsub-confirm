@@ -1,43 +1,43 @@
 # Revision: 1
-$B0J2<$N(B address
+以下の address
 
 <#A#>
 
-$B$r(B mailing list <#L#> $B$N(B
-$B9XFI<T$+$i30$7$?$$>l9g$O!"6u$N(B message $B$r0J2<$N(B address
+を mailing list <#L#> の
+購読者から外したい場合は、空の message を以下の address
 
 <#R#>
 
-$BKxAw$C$F2<$5$$!#(B
+迄送って下さい。
 
-$BDL>o$O(B Mail User Agent (MUA) $B$N(B reply $B$N5!G=$r;H$($PBg>fIW$G$9!#(B
+通常は Mail User Agent (MUA) の reply の機能を使えば大丈夫です。
 
-$B$b$7!"$=$l$G$&$^$/9T$+$J$$>l9g$O!"(B
+もし、それでうまく行かない場合は、
 
         To: <#R#>
 
-$B$H$7$F(B message $B$r:n@.$7$F2<$5$$!#(B
+として message を作成して下さい。
 
-$B$^$?!"(BMail User Agent (MUA) $B$K$h$C$F$O(B
+また、Mail User Agent (MUA) によっては
 
         mailto:<#R#>
 
-$B$r(B click $B$7$F(B message $B$r:n@.$9$k;v$b=PMh$k$G$7$g$&!#(B
+を click して message を作成する事も出来るでしょう。
 
-$B5.J}$N(B address $B$,9XFI<T$+H]$+$O(B check $B$7$F$$$^$;$s!#(B
-$B$I$N(B address $B$G9XFI$r$7$F$$$k$N$+$O!"(Bmailing list $B$+$i(B
-$BAw$i$l$F$/$k(B message $B$N(B "Return-Path:" $B$N=j$KKd$a9~$^$l$F(B
-$B$$$^$9!#Nc$($P!"(Bmary@example.com $B$,9XFI$N(B address $B$J$i(B
+貴方の address が購読者か否かは check していません。
+どの address で購読をしているのかは、mailing list から
+送られてくる message の "Return-Path:" の所に埋め込まれて
+います。例えば、mary@example.com が購読の address なら
 
         Return-Path: <<#L#>-return-<number>-mary=example.com@<#h#>>
 
-$B$H$$$&6q9g$$$G$9!#(B
+という具合いです。
 
 <=q=>
-$B4D6-$K$h$C$F$O!"D9$$(B address $B$r$&$^$/07$($J$$>l9g$,M-$j$^$9!#(B
-$B$3$N(B message $B$K(B reply $B$r$&$^$/JV$;$J$$MM$J$i!"0J2<$N(B address
+環境によっては、長い address をうまく扱えない場合が有ります。
+この message に reply をうまく返せない様なら、以下の address
 
         <<#L#>-request@<#h#>>
 
-$B$K(B "Subject: <#R#>" $B$rIU$1$FAw$C$F2<$5$$!#(B
+に "Subject: <#R#>" を付けて送って下さい。
 

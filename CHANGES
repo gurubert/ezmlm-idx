@@ -32,6 +32,8 @@ release.
   and enhanced it to allow reading the mbox from stdin.
   Thanks to Tullio Andreatta.
 
+- Changed to UTF-8
+
 ezmlm-idx-7.1.1, 2010-11-18
 ===========================
 

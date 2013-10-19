@@ -1,10 +1,10 @@
 # Revision: 3
 <=n=>
-Un amministratore remoto puÚ usare il comando <#L#>-edit.file
+Un amministratore remoto pu√≤ usare il comando <#L#>-edit.file
 per modificare i file di testo utilizzati per comporre il corpo delle
 risposte dalla mailing list <#L#>@<#h#> .
 
-Quella che segue Ë una lista dei file delle risposte corredate da una
+Quella che segue √® una lista dei file delle risposte corredate da una
 breve descrizione di come viene utilizzato il loro contenuto. Se vuoi
 modificare un file, spedisci semplicemente una e-mail all'indirizzo
   <#L#>-edit.file@<#h#>
@@ -17,7 +17,7 @@ bottom          informazioni generali sui comandi, in fondo a tutte le
                 risposte
 bounce_bottom   messo in fondo a tutti i messaggi di avvertimento
 bounce_num      introduce l'elenco dei messaggi ritornati indietro
-bounce_probe    messaggio di verifica di raggiungibilit‡ di un indirizzo
+bounce_probe    messaggio di verifica di raggiungibilit√† di un indirizzo
 bounce_warn     messaggio che avvisa che i messaggi tornano indietro
 <=dn=>
 dig_bounce_num  introduziona alla lista dei messaggi delle raccolte
@@ -27,7 +27,7 @@ digest          informazioni di amministrazione per le raccolte
 edit_do         prefisso con le istruzioni per modificare il testo
 edit_done       messaggio di conferma dell'avvenuta modifica di un testo
 edit_list       questo documento
-faq             domande pi˘ frequenti relative alla lista
+faq             domande pi√π frequenti relative alla lista
 <=Bn=>
 get_bad         inviato se i messaggi richiesti non sono nell'archivio
 <=n=>
@@ -54,7 +54,7 @@ sub_bad         spedito all'utente se la risposta ad un messaggio di
 sub_confirm     spedito all'iscritto per chiedere conferma della
                 richiesta di iscrizione alla mailing list
 sub_nop         spedito all'utente che chiede di iscrivere un
-                indirizzo gi‡ iscritto alla mailing list
+                indirizzo gi√† iscritto alla mailing list
 sub_ok          spedito all'iscritto una volta accettata l'iscrizione
 top             testo introduttivo all'inizio di tutte le risposte
 <=tn=>

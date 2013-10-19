@@ -1,21 +1,21 @@
 # Revision: 2
 
-Uschoval jsem si seznam zpráv z listu <#L#>, které se z va¹í adresy
-vrátily.
+Uschoval jsem si seznam zprÃ¡v z listu <#L#>, kterÃ© se z vaÅ¡Ã­ adresy
+vrÃ¡tily.
 
 <=a=>
-Kopie tìchto zpráv mù¾ete získat v archívu.
+Kopie tÄ›chto zprÃ¡v mÅ¯Å¾ete zÃ­skat v archÃ­vu.
 
-Pro získání zprávy 12345 z archívu, po¹lete prázdnı mail na adresu
+Pro zÃ­skÃ¡nÃ­ zprÃ¡vy 12345 z archÃ­vu, poÅ¡lete prÃ¡zdnÃ½ mail na adresu
    <<#L#>-get.12345@<#h#>>
 
-Zprávy èíslo 123 a¾ 145 získáte z archívu (maximálnì 100 zpráv na jeden mail)
-získáte zasláním zprávy na následující adresu:
+ZprÃ¡vy ÄÃ­slo 123 aÅ¾ 145 zÃ­skÃ¡te z archÃ­vu (maximÃ¡lnÄ› 100 zprÃ¡v na jeden mail)
+zÃ­skÃ¡te zaslÃ¡nÃ­m zprÃ¡vy na nÃ¡sledujÃ­cÃ­ adresu:
    <<#L#>-get.123_145@<#h#>>
 
-Seznam zpráv se subjectem a autorem zpráv 123-456 - e-mail:
+Seznam zprÃ¡v se subjectem a autorem zprÃ¡v 123-456 - e-mail:
    <<#L#>-index@<#h#>>
 
 <==>
-Následují èísla zpráv:
+NÃ¡sledujÃ­ ÄÃ­sla zprÃ¡v:
 

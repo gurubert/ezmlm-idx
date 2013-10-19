@@ -1,9 +1,9 @@
 # Revision: 0
 
---- Aqui estão os endereços de comando do ezmlm.
+--- Aqui estÃ£o os endereÃ§os de comando do ezmlm.
 
-Eu posso tratar as requisições administrativas automaticamente.
-Basta enviar uma mensagem vazia para qualquer destes endereços:
+Eu posso tratar as requisiÃ§Ãµes administrativas automaticamente.
+Basta enviar uma mensagem vazia para qualquer destes endereÃ§os:
 
    <<#L#>-subscribe@<#h#>>:
    Receber as futuras mensagens enviadas para a lista <#L#>.
@@ -13,34 +13,34 @@ Basta enviar uma mensagem vazia para qualquer destes endereços:
 
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
-   Para receber mais informações ou o FAQ desta lista,
-   se disponíveis.
+   Para receber mais informaÃ§Ãµes ou o FAQ desta lista,
+   se disponÃ­veis.
 
 <=d=>
-Existem também estes endereços similares para a lista "digest":
+Existem tambÃ©m estes endereÃ§os similares para a lista "digest":
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <==>
-Na verdade as mensagens não precisam ser vazias, mas eu irei
-ignorar o seu conteúdo. Somente o ENDEREÇO é importante.
+Na verdade as mensagens nÃ£o precisam ser vazias, mas eu irei
+ignorar o seu conteÃºdo. Somente o ENDEREÃ‡O Ã© importante.
 
-Você pode iniciar a assinatura para um endereço alternativo,
-por exemplo "john@example.com", bastando adicionar um traço
-e o seu endereço (com '=' no lugar de '@'), ou seja:
+VocÃª pode iniciar a assinatura para um endereÃ§o alternativo,
+por exemplo "john@example.com", bastando adicionar um traÃ§o
+e o seu endereÃ§o (com '=' no lugar de '@'), ou seja:
 <<#L#>-subscribe-john=example.com@<#h#>>
 
-Para cancelar a subscrição para este endereço, envie mensagem
+Para cancelar a subscriÃ§Ã£o para este endereÃ§o, envie mensagem
 para: <<#L#>-unsubscribe-john=example.com@<#h#>>
 
-Em ambos os casos, eu enviarei uma mensagem de confirmação para
-esse endereço; quando você receber esta mensagem, simplesmente
-responda para completar sua subscrição (ou cancelamento).
+Em ambos os casos, eu enviarei uma mensagem de confirmaÃ§Ã£o para
+esse endereÃ§o; quando vocÃª receber esta mensagem, simplesmente
+responda para completar sua subscriÃ§Ã£o (ou cancelamento).
 
-Se estas instruções são muito complicadas ou você não teve os
+Se estas instruÃ§Ãµes sÃ£o muito complicadas ou vocÃª nÃ£o teve os
 resultados que esperava, por favor contacte o meu dono em
-<#L#>-owner@<#h#>. Mas tenha paciência, o meu dono é
+<#L#>-owner@<#h#>. Mas tenha paciÃªncia, o meu dono Ã©
 muito mais lento do que eu ;-)
 
---- Abaixo está uma cópia da requisição que eu recebi.
+--- Abaixo estÃ¡ uma cÃ³pia da requisiÃ§Ã£o que eu recebi.
 

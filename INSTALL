@@ -200,7 +200,7 @@ HOW TO BUILD, TEST, AND INSTALL:
 
     Note there are no entries for 'charset', 'style' and 'bannerprog' Where
     no entries are made, the default variables are assumed. The above
-    configuration assumes that the character set 'iso-8859-1' and that no
+    configuration assumes that the character set 'utf-8' and that no
     style sheet is used. Since formatting is largely controlled by the
     style sheet, the output doesn't look exciting on a GUI browser. Start with
     ezcgi.css in the distribution, and modify to taste. See www.ezmlm.org

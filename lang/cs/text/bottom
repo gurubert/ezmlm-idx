@@ -1,44 +1,44 @@
 # Revision: 0
 
---- Administrativní pøíkazy pro list <#l#> ---
+--- AdministrativnÃ­ pÅ™Ã­kazy pro list <#l#> ---
 
-Umím automaticky obsluhovat administrativní pøíkazy. Neposílejte
-je prosím do listu! Po¹lete zprávu na adresu pøíslu¹ného pøíkazu:
+UmÃ­m automaticky obsluhovat administrativnÃ­ pÅ™Ã­kazy. NeposÃ­lejte
+je prosÃ­m do listu! PoÅ¡lete zprÃ¡vu na adresu pÅ™Ã­sluÅ¡nÃ©ho pÅ™Ã­kazu:
 
-Pro pøihlá¹ení do listu, po¹lete e-mail na adresu:
+Pro pÅ™ihlÃ¡Å¡enÃ­ do listu, poÅ¡lete e-mail na adresu:
    <<#L#>-subscribe@<#h#>>
 
-Pro odhlá¹ení se z listu pou¾ijte adresu
+Pro odhlÃ¡Å¡enÃ­ se z listu pouÅ¾ijte adresu
    <<#L#>-unsubscribe@<#h#>>
 
-Informace o listu a FAQ (èasto kladené dotazy) získáte zasláním dopisu
-na následující adresy:
+Informace o listu a FAQ (Äasto kladenÃ© dotazy) zÃ­skÃ¡te zaslÃ¡nÃ­m dopisu
+na nÃ¡sledujÃ­cÃ­ adresy:
    <<#L#>-info@<#h#>>
    <<#L#>-faq@<#h#>>
 
 <=d=>
-Podobné adresy existují i pro list digestù:
+PodobnÃ© adresy existujÃ­ i pro list digestÅ¯:
    <<#L#>-digest-subscribe@<#h#>>
    <<#L#>-digest-unsubscribe@<#h#>>
 
 <==>
-Zprávy ve skuteènosti nemusí bıt prázdné - budu jejich obsah ignorovat.
-Jediná dùle¾itá vìc je ADRESA na kterou mail posíláte.
+ZprÃ¡vy ve skuteÄnosti nemusÃ­ bÃ½t prÃ¡zdnÃ© - budu jejich obsah ignorovat.
+JedinÃ¡ dÅ¯leÅ¾itÃ¡ vÄ›c je ADRESA na kterou mail posÃ­lÃ¡te.
 
-Mù¾ete se také do listu pøihlásit pod jinou adresou - napøíklad
-"pepa@example.com". Staèí pøidat pomlèku a novou adresu s rovnítkem (=)
-namísto zavináèe:
+MÅ¯Å¾ete se takÃ© do listu pÅ™ihlÃ¡sit pod jinou adresou - napÅ™Ã­klad
+"pepa@example.com". StaÄÃ­ pÅ™idat pomlÄku a novou adresu s rovnÃ­tkem (=)
+namÃ­sto zavinÃ¡Äe:
 <<#L#>-subscribe-pepa=example.com@<#h#>>
 
-Odhlásit tuto adresu lze pomocí mailu na adresu
+OdhlÃ¡sit tuto adresu lze pomocÃ­ mailu na adresu
 <<#L#>-unsubscribe-pepa=example.com@<#h#>>
 
-V obou pøípadech po¹lu ¾ádost o souhlas na tuto adresu. Kdy¾ ji dostanete,
-jednodu¹e na ni odpovìzte a va¹e pøihlá¹ení/odhlá¹ení se dokonèí.
+V obou pÅ™Ã­padech poÅ¡lu Å¾Ã¡dost o souhlas na tuto adresu. KdyÅ¾ ji dostanete,
+jednoduÅ¡e na ni odpovÄ›zte a vaÅ¡e pÅ™ihlÃ¡Å¡enÃ­/odhlÃ¡Å¡enÃ­ se dokonÄÃ­.
 
-Pokud nedosáhnete po¾adovanıch vısledkù, kontaktujte mého správce
-na adrese <#L#>-owner@<#h#>. Prosím o trpìlivost, mùj správce je
-podstatnì pomalej¹í ne¾ já ;-)
+Pokud nedosÃ¡hnete poÅ¾adovanÃ½ch vÃ½sledkÅ¯, kontaktujte mÃ©ho sprÃ¡vce
+na adrese <#L#>-owner@<#h#>. ProsÃ­m o trpÄ›livost, mÅ¯j sprÃ¡vce je
+podstatnÄ› pomalejÅ¡Ã­ neÅ¾ jÃ¡ ;-)
 
---- Pøipojuji kopii po¾adavku, kterı jsem dostal.
+--- PÅ™ipojuji kopii poÅ¾adavku, kterÃ½ jsem dostal.
 

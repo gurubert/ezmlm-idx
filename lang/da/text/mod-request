@@ -5,13 +5,13 @@ skriver du til:
 
 <#A#>
 
-Bekræftelse sker normalt blot ved at svare på dette brev. Svar adressen
-skulle gerne starte med "<#L#>-accept". Hvis det ikke er tilfældet, må
-den korrekte svar adresse overføres manuelt til modtagerfeltet, evt.
+BekrÃ¦ftelse sker normalt blot ved at svare pÃ¥ dette brev. Svar adressen
+skulle gerne starte med "<#L#>-accept". Hvis det ikke er tilfÃ¦ldet, mÃ¥
+den korrekte svar adresse overfÃ¸res manuelt til modtagerfeltet, evt.
 med klippe/klistre.
-Mulighederne afhænger af at du har et fornuftigt postprogram.
+Mulighederne afhÃ¦nger af at du har et fornuftigt postprogram.
 
-Måske virker det at klikke med musen på næste linje:
+MÃ¥ske virker det at klikke med musen pÃ¥ nÃ¦ste linje:
         mailto:<#A#>
 
 Hvis du istedet vil afvise at brevet postes til listen, svar til:
@@ -22,10 +22,10 @@ Normalt er det nemmest at lave et "svar-til-alle", og fjerne alle
 adresserne undtagen den der starter med
 "<#L#>-reject".
 
-Måske virker det at klikke med musen på næste linje:
+MÃ¥ske virker det at klikke med musen pÃ¥ nÃ¦ste linje:
         mailto:<#R#>
 
-Du behøver ikke inkludere brevet i dit svar for at acceptere eller
+Du behÃ¸ver ikke inkludere brevet i dit svar for at acceptere eller
 afvise det. Hvis du vil sende en besked til afsenderen af et
 afvist brev, kan du skrive beskeden mellem de to linjer der
 begynder med %%%.
@@ -33,7 +33,7 @@ begynder med %%%.
 %%% Kommentar start
 %%% Kommentar slut
 
-Tak for hjælpen!
+Tak for hjÃ¦lpen!
 
 --- Her er det indsendte brev.
 

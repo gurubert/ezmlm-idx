@@ -1,46 +1,46 @@
 # Revision: 1
-$B0J2<$N(B address
+以下の address
 
 <#A#>
 
-$B$r(B mailing list <#L#>
-$B$K2C$($k;v$rG'$a$k>l9g$O!"6u$N(B message $B$r(B
+を mailing list <#L#>
+に加える事を認める場合は、空の message を
 
 <#R#>
 
-$B$KJV?.$7$F2<$5$$!#(B
+に返信して下さい。
 
-$BDL>o$O(B Mail User Agent (MUA) $B$N(B reply $B$N5!G=$r;H$&$@$1$G$7$g$&!#(B
+通常は Mail User Agent (MUA) の reply の機能を使うだけでしょう。
 
-$B$=$l$G$&$^$/9T$+$J$$>l9g$O(B
+それでうまく行かない場合は
 
         To:<#R#>
 
-$B$H$7$F(B message $B$r:n@.$7$F2<$5$$!#(B
+として message を作成して下さい。
 
-MUA $B$K$h$C$F$O(B
+MUA によっては
 
         mailto:<#R#>
 
-$B$r(B click $B$9$k$@$1=`Hw$,=PMh$k$b$N$b$"$k$G$7$g$&!#(B
+を click するだけ準備が出来るものもあるでしょう。
 
-$B$3$N3NG'$K$O0J2<$NFs$D$N0UL#$,$"$j$^$9!#(B
+この確認には以下の二つの意味があります。
 
-        * $B;XDj$5$l$?(B address $B$G(B message $B$,Aw?.=PMh$k$+H]$+(B
-        * $B5.J}$N(B address $B$r56$C$?(B request $B$rGS=|$9$k(B
+        * 指定された address で message が送信出来るか否か
+        * 貴方の address を偽った request を排除する
 
 <=q=>
-e-mail $B$r07$&4D6-$K$h$C$F$O!"(Bezmlm $B$,;H$&D9$$(B address $B$r(B
-$B$&$^$/07$($J$$;v$,$"$j$^$9!#$=$NMM$J>l9g$O0J2<$N(B address
+e-mail を扱う環境によっては、ezmlm が使う長い address を
+うまく扱えない事があります。その様な場合は以下の address
 
         <<#L#>-request@<#h#>>
 
-$B$K(B "Subject: <#R#>" $B$H$7$F(B
-message $B$rAw$C$F2<$5$$!#(B
+に "Subject: <#R#>" として
+message を送って下さい。
 
 <=s=>
-mailing list <#L#> $B$O(B moderated $B$J(B mailing list $B$G$9!#(B
-$B5.J}$,$3$N3NG'$rAw?.$9$k$H!"A4$F$N4IM}<T08$F$K5.J}$N9XFI$rG'$a$k$+H]$+(B
-$B$N3NG'$,FO$-$^$9!#4IM}<T$,9XFI$r>5G'$7$?8e!"5.J}08$F$K$=$N;]$NDLCN$,(B
-$BFO$/$O$:$G$9!#(B
+mailing list <#L#> は moderated な mailing list です。
+貴方がこの確認を送信すると、全ての管理者宛てに貴方の購読を認めるか否か
+の確認が届きます。管理者が購読を承認した後、貴方宛てにその旨の通知が
+届くはずです。
 

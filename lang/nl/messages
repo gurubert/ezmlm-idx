@@ -75,7 +75,7 @@ ERR_NOT_ALLOWED|Command allowed only to moderators (#5.7.1)|Commando alleen toeg
 ERR_NOT_ARCHIVED|Sorry, this list is not archived (#5.1.1)|Sorry, deze lijst wordt niet gearchiveerd (#5.1.1)
 ERR_NOT_AVAILABLE|Command not available (#5.1.1)|Commando niet beschikbaar (#5.1.1)
 ERR_NOT_CLEAN|Bad character in address components|Ongeldig teken in adresdeel
-ERR_NOT_INDEXED|Sorry, this list is not indexed (#5.1.1)|Sorry, deze lijst is niet geïndexeerd (#5.1.1)
+ERR_NOT_INDEXED|Sorry, this list is not indexed (#5.1.1)|Sorry, deze lijst is niet geÃ¯ndexeerd (#5.1.1)
 ERR_NOT_PARENT|this message is not from my parent list (#5.7.2)|dit bericht is niet afkomstig van mijn bovenliggende list ($5.7.2)
 ERR_NOT_PUBLIC|Sorry, I've been told to reject all requests (#5.7.2)|Sorry, ik heb opdracht alle verzoeken af te wijzen (#5.7.2)
 ERR_NO_ABSOLUTE|absolute directory names outside of the list directory are no longer supported|absolutie directorynamen buiten de list directory worden niet langer ondersteund

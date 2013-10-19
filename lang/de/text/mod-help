@@ -1,12 +1,12 @@
 # Revision: 1
-Vielen Dank, daß Sie bereit sind, die Moderation der Liste
+Vielen Dank, daÃŸ Sie bereit sind, die Moderation der Liste
    <#L#>@<#h#>
-zu übernehmen.
+zu Ã¼bernehmen.
 
 Die Kommandos, die ich benutze, sind leicht verschieden von denen
 anderer Mailinglistenmanager. Sie werden Ihnen anfangs sehr
-ungewohnt vorkommen, wenn Sie sich aber erst einmal daran gewöhnt
-haben, werden Sie hoffentlich ihre Einfachheit schätzen lernen.
+ungewohnt vorkommen, wenn Sie sich aber erst einmal daran gewÃ¶hnt
+haben, werden Sie hoffentlich ihre Einfachheit schÃ¤tzen lernen.
 
 Hier einige Hinweise, wie die Moderation funktioniert.
 Generelle Hinweise zur Listenbedienung folgen am Ende dieser
@@ -19,16 +19,16 @@ in die Liste aufzunehmen oder sie daraus zu streichen. Sie
 bauen einfach die Adresse, um die es geht, in meine Kommando-Adresse
 ein und ersetzen dabei das at-Zeichen (@) durch ein
 Gleichheitszeichen (=).
-Für die Adresse ich@example.com geht das zum Beispiel
-über die folgenden Steueradressen:
+FÃ¼r die Adresse ich@example.com geht das zum Beispiel
+Ã¼ber die folgenden Steueradressen:
 
 Eintragen:
    <#L#>-subscribe-ich=example.com@<#h#>
-Löschen:
+LÃ¶schen:
    <#L#>-unsubscribe-ich=example.com@<#h#>
 
 <=d=>
-Entsprechend für die Digest-Liste:
+Entsprechend fÃ¼r die Digest-Liste:
    <#L#>-digest-subscribe-ich=example.com@<#h#>
    <#L#>-digest-unsubscribe-ich=example.com@<#h#>
 
@@ -37,22 +37,22 @@ So einfach ist das :) Sie brauchen nicht einmal einen
 Betreff oder irgendeinen Nachrichtentext schreiben.
 
 <=r=>
-Ich werde Ihnen eine Rückfrage schicken, um sicherzugehen dass
+Ich werde Ihnen eine RÃ¼ckfrage schicken, um sicherzugehen dass
 wirklich Sie das Kommando geschickt haben.
 Sie brauchen dann einfach nur noch antworten und der Vorgang
 ist damit abgeschlossen.
 <=R=>
 Ich werde zur Sicherheit an die angegebene Adresse (in diesem
-Fall ich@example.com) eine Rückfrage schicken.
+Fall ich@example.com) eine RÃ¼ckfrage schicken.
 Alles was der Nutzer tun muss, ist auf diese Anfrage zu antworten.
 <==>
 
-Die Bestätigungsnachrichten sind erforderlich um es Dritten
+Die BestÃ¤tigungsnachrichten sind erforderlich um es Dritten
 schwerer zu machen, beliebige Mailadressen in die Liste
 aufzunehmen oder aus ihr zu entfernen.
 
-Der Nutzer wird darüber informiert, wenn er in die Liste
-aufgenommen oder aus ihr gelöscht wird.
+Der Nutzer wird darÃ¼ber informiert, wenn er in die Liste
+aufgenommen oder aus ihr gelÃ¶scht wird.
 
 
 Abonnement durch die Nutzer
@@ -68,58 +68,58 @@ Abbestellen der Liste:
    <#L#>-unsubscribe@<#h#>
 
 <=d=>
-Entsprechend für die Digest-Liste:
+Entsprechend fÃ¼r die Digest-Liste:
 
    <#L#>-digest-subscribe@<#h#>
    <#L#>-digest-unsubscribe@<#h#>
 
 <==>
-In beiden Fällen bekommt der Nutzer eine Rückfrage, um
-Fälschungen vorzubeugen. Nach Bestätigung wird der Nutzer
-Abonnent der Liste oder aus ihr gelöscht.
+In beiden FÃ¤llen bekommt der Nutzer eine RÃ¼ckfrage, um
+FÃ¤lschungen vorzubeugen. Nach BestÃ¤tigung wird der Nutzer
+Abonnent der Liste oder aus ihr gelÃ¶scht.
 
 <=s=>
 Da diese Liste mit moderierten Abonnements arbeitet, wird
-bei einem Abonnement eine zweite Rückfrage an den oder die
+bei einem Abonnement eine zweite RÃ¼ckfrage an den oder die
 Moderatoren geschickt.
-Da die Bestätigung durch den Nutzer schon erfolgte, können Sie
-relativ sicher sein, daß die angegebene Adresse nicht gefälscht
+Da die BestÃ¤tigung durch den Nutzer schon erfolgte, kÃ¶nnen Sie
+relativ sicher sein, daÃŸ die angegebene Adresse nicht gefÃ¤lscht
 ist. Wenn Sie dem Abonnement durch den Nutzer zustimmen,
-beantworten Sie die Bestätigungsanforderung einfach.
-Falls nicht, können Sie die Anforderung einfach löschen.
-Eventuell können Sie auch mehr Informationen vom Nutzer einholen
-oder ihm Ihre Gründe für die Nicht-Bestätigung mitteilen.
-Beachten Sie, daß dadurch Ihre Email-Adresse bekannt wird.
+beantworten Sie die BestÃ¤tigungsanforderung einfach.
+Falls nicht, kÃ¶nnen Sie die Anforderung einfach lÃ¶schen.
+Eventuell kÃ¶nnen Sie auch mehr Informationen vom Nutzer einholen
+oder ihm Ihre GrÃ¼nde fÃ¼r die Nicht-BestÃ¤tigung mitteilen.
+Beachten Sie, daÃŸ dadurch Ihre Email-Adresse bekannt wird.
 <=S=>
 Einschreibungen laufen in derselben Art und Weise ab.
 <==>
-Die Nutzer können auch die folgende Adressen benutzen:
+Die Nutzer kÃ¶nnen auch die folgende Adressen benutzen:
 
    <#L#>-subscribe-ich=example.com@<#h#>
    <#L#>-unsubscribe-ich=example.com@<#h#>
 
 <=d=>
-Für Digests:
+FÃ¼r Digests:
    <#L#>-digest-subscribe-ich=example.com@<#h#>
    <#L#>-digest-unsubscribe-ich=example.com@<#h#>
 
 <==>
-Damit können sie eine andere als die aktuell benutzte
+Damit kÃ¶nnen sie eine andere als die aktuell benutzte
 Email-Adresse in die Mailingliste einzutragen bzw. sie daraus
-löschen (in diesem Beispiel die Adresse ich@example.com).
-Nur wenn die Rückfrage an diese Adresse dann auch beantwortet
-wird, kann die Aktion ausgeführt werden.
+lÃ¶schen (in diesem Beispiel die Adresse ich@example.com).
+Nur wenn die RÃ¼ckfrage an diese Adresse dann auch beantwortet
+wird, kann die Aktion ausgefÃ¼hrt werden.
 
-All diese Rückfragen werden durchgeführt, um sicherzustellen
-dass keine gefälschten Kommandos vorliegen und dass es sich
-wirklich um den Wunsch der Person handelt, die Mails über
-diese Adresse empfängt.
+All diese RÃ¼ckfragen werden durchgefÃ¼hrt, um sicherzustellen
+dass keine gefÃ¤lschten Kommandos vorliegen und dass es sich
+wirklich um den Wunsch der Person handelt, die Mails Ã¼ber
+diese Adresse empfÃ¤ngt.
 
-Ihre Adresse und Identität wird keiner weiteren Person
+Ihre Adresse und IdentitÃ¤t wird keiner weiteren Person
 offengelegt, es sei denn, Sie nehmen direkt Kontakt auf.
 
 <=rl=>
-Information über den Listenzustand
+Information Ã¼ber den Listenzustand
 ----------------------------------
 
 Um eine Liste der Abonnenten von <#L#>@<#h#>
@@ -127,24 +127,24 @@ zu bekommen, senden Sie eine Mail an:
    <<#L#>-list@<#h#>>
 
 Um ein Transaktionslog (Liste der Abonnenten-Zu- und
-Abgaenge) für <#L#>@<#h#>
+Abgaenge) fÃ¼r <#L#>@<#h#>
 zu bekommen, senden Sie eine Mail an:
    <<#L#>-log@<#h#>>
 
 <=rld=>
-Die Liste der Digest-Abonnenten erhalten Sie über:
+Die Liste der Digest-Abonnenten erhalten Sie Ã¼ber:
    <<#L#>-digest-list@<#h#>>
 
-Das Logfile für die <#L#>-digest@<#h#> Liste über:
+Das Logfile fÃ¼r die <#L#>-digest@<#h#> Liste Ã¼ber:
    <<#L#>-digest-log@<#h#>>
 
 <=rn=>
 
-Textänderungen
+TextÃ¤nderungen
 ----------------
 
-Sie können die erläuternden Texte, die ich verschicke, auch per Mail
-verändern. Um eine Datei- und Kommandoliste dafür zu erhalten schreiben
+Sie kÃ¶nnen die erlÃ¤uternden Texte, die ich verschicke, auch per Mail
+verÃ¤ndern. Um eine Datei- und Kommandoliste dafÃ¼r zu erhalten schreiben
 Sie an:
    <<#L#>-edit@<#h#>>
 
@@ -153,77 +153,77 @@ Sie an:
 Moderierte Nachrichten
 ----------------------
 
-Moderierte Nachrichten werden von mir zunächst in eine
-Warteschlange eingereiht, daraufhin wird eine Bestätigungs-
+Moderierte Nachrichten werden von mir zunÃ¤chst in eine
+Warteschlange eingereiht, daraufhin wird eine BestÃ¤tigungs-
 anforderung an Sie geschickt. In der Betreffzeile steht
 in diesem Fall "MODERATE for ...".
 
-Falls Sie die Nachricht genehmigen wollen, müssen Sie einfach nur
+Falls Sie die Nachricht genehmigen wollen, mÃ¼ssen Sie einfach nur
 auf diese Anforderung antworten. Dazu benutzen Sie bitte
 die Adresse im Reply-To:-Header (sollte automatisch von
 Ihrem Mailprogramm angeboten werden).
 In einigen Programmen
 wird die Adresse auch als Hyperlink im Mailtext angezeigt, den
-Sie dann nur noch per Mausklick öffnen müssen.
-Die Nachricht des Nutzers müssen Sie nicht mitschicken, da ich
+Sie dann nur noch per Mausklick Ã¶ffnen mÃ¼ssen.
+Die Nachricht des Nutzers mÃ¼ssen Sie nicht mitschicken, da ich
 noch eine Kopie davon besitze und diese verwende.
 
-Wenn Sie die Nachricht ablehnen möchten, senden Sie an die
-Adresse, die im From:-Header angegeben ist. Auch hier können
-Sie die Möglichkeit des Hyperlinks verwenden, wenn Ihr Mailprogramm
-dies unterstützt.
-Sie können eine Begründung oder einen Kommentar beifügen,
-indem Sie Ihren Text zwischen zwei Zeilen einschließen, die jeweils
-mit drei Prozentzeichen beginnen. Der Nutzer erhält nur diesen
-Kommentar, ohne daß Ihre Identität dabei preisgegeben wird.
+Wenn Sie die Nachricht ablehnen mÃ¶chten, senden Sie an die
+Adresse, die im From:-Header angegeben ist. Auch hier kÃ¶nnen
+Sie die MÃ¶glichkeit des Hyperlinks verwenden, wenn Ihr Mailprogramm
+dies unterstÃ¼tzt.
+Sie kÃ¶nnen eine BegrÃ¼ndung oder einen Kommentar beifÃ¼gen,
+indem Sie Ihren Text zwischen zwei Zeilen einschlieÃŸen, die jeweils
+mit drei Prozentzeichen beginnen. Der Nutzer erhÃ¤lt nur diesen
+Kommentar, ohne daÃŸ Ihre IdentitÃ¤t dabei preisgegeben wird.
 
 Ich werde die Nachricht anhand der ersten Moderatoren-Antwort
-behandeln. Sollten Sie eine Bestätigung oder Ablehnung schicken
+behandeln. Sollten Sie eine BestÃ¤tigung oder Ablehnung schicken
 und die Nachricht wurde aufgrund der Entscheidung eines
 weiteren Moderators schon anderweitig verarbeitet, werde
-ich Sie darüber informieren.
+ich Sie darÃ¼ber informieren.
 
 Sollte kein Moderator innerhalb einer festgelegten Zeit
 (normalerweise 5 Tage) reagieren, schicke ich die Nachricht
-zusammen mit einer Erklärung an den Absender zurück.
-Die Liste kann auch so konfiguriert werden, daß solche
-Nachrichten nicht an den Nutzer zurückgeschickt, sondern
-kommentarlos gelöscht werden.
+zusammen mit einer ErklÃ¤rung an den Absender zurÃ¼ck.
+Die Liste kann auch so konfiguriert werden, daÃŸ solche
+Nachrichten nicht an den Nutzer zurÃ¼ckgeschickt, sondern
+kommentarlos gelÃ¶scht werden.
 
 <==>
 
 Urlaub und andere Abwesenheit
 ------------------------------
 
-Wenn Sie zeitweilig über eine andere Adresse erreichbar sind, schicken
+Wenn Sie zeitweilig Ã¼ber eine andere Adresse erreichbar sind, schicken
 Sie alle Mails, die den richtigen 'Mailing-List:' Header haben an diese
 Adresse weiter. Behandeln Sie alle Mails, die einen Betreff der Form:
 'MODERATE for <#L#>@<#h#>' oder
 'CONFIRM subscribe to <#L#>@<#h#>'
 haben auf die gleiche Weise.
-Ihre Moderationstätigkeit können Sie dann auch von der neuen Adresse
+Ihre ModerationstÃ¤tigkeit kÃ¶nnen Sie dann auch von der neuen Adresse
 aus fortsetzen.
-Es ist ebenfalls möglich, einen Vertreter damit zu beauftragen. Bitte
-klären Sie aber Vertretungen vorher mit dem Listeneigentümer ab.
+Es ist ebenfalls mÃ¶glich, einen Vertreter damit zu beauftragen. Bitte
+klÃ¤ren Sie aber Vertretungen vorher mit dem ListeneigentÃ¼mer ab.
 
-Wenn Sie für eine Weile alle Anforderungsmails automatisch
-bestätigen wollen, lassen Sie einfach Ihr Mailsystem die Nachrichten
-automatisch beantworten, die die oben genannten Bedingungen erfüllen.
+Wenn Sie fÃ¼r eine Weile alle Anforderungsmails automatisch
+bestÃ¤tigen wollen, lassen Sie einfach Ihr Mailsystem die Nachrichten
+automatisch beantworten, die die oben genannten Bedingungen erfÃ¼llen.
 
 <=r=>
 Wenn Sie die Liste von einer Fremdadresse aus administrieren wollen,
-werden nicht Sie, sondern der Nutzer nach einer Bestätigung gefragt.
-Danach wird die Bestätigungsanforderung an alle Moderatoren verschickt.
+werden nicht Sie, sondern der Nutzer nach einer BestÃ¤tigung gefragt.
+Danach wird die BestÃ¤tigungsanforderung an alle Moderatoren verschickt.
 Diese Verfahrensweise ist notwendig, da ich in diesem Fall nicht wissen kann,
 ob Sie zur Administration berechtigt sind.
 
 Bitte beachten Sie, dass in diesem Fall auch Ihre Administrationsmail
-(und Ihre Mailadresse) an den Nutzer übermittelt werden.
+(und Ihre Mailadresse) an den Nutzer Ã¼bermittelt werden.
 
 <==>
 Viel Erfolg!
 
-PS: Bitte wenden Sie sich an den Listeneigentümer
+PS: Bitte wenden Sie sich an den ListeneigentÃ¼mer
    <#L#>-owner@<#h#>
 falls Sie Probleme irgendwelcher Art mit der Listenadministration
 haben sollten.

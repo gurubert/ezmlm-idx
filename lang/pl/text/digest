@@ -1,12 +1,12 @@
 # Revision: 0
 <=d=>
-Aby zaprenumerowaæ przegl±d listy, napisz pod adres:
+Aby zaprenumerowaÄ‡ przeglÄ…d listy, napisz pod adres:
 	<#L#>-digest-subscribe@<#h#>
 
-Aby wykre¶liæ swoój adres pocztowy z listy subskrybentów, napisz pod adres:
+Aby wykreÅ›liÄ‡ swoÃ³j adres pocztowy z listy subskrybentÃ³w, napisz pod adres:
 	<#L#>-digest-unsubscribe@<#h#>
 
-Aby wys³aæ cokolwiek na listê, pisz pod adres:
+Aby wysÅ‚aÄ‡ cokolwiek na listÄ™, pisz pod adres:
 	<#L#>@<#h#>
 
 <=iax=>
