@@ -22,7 +22,7 @@
 
 const char FATAL[] = "ezmlm-import: fatal: ";
 const char USAGE[] =
-"ezmlm-import: usage: ezmlm-import dir [/path/to/mbox]";
+"ezmlm-import: usage: ezmlm-import dir mbox";
 
 static struct option options[] = {
   OPT_END
@@ -39,7 +39,7 @@ unsigned long msgnum;
 unsigned long cumsize;
 char strnum[FMT_ULONG*2];
 
-static int openone(unsigned long outnum)
+int openone(unsigned long outnum)
 {
   int fd;
   if (!stralloc_copys(&fnadir,"archive/")) die_nomem();
@@ -63,7 +63,7 @@ static int openone(unsigned long outnum)
   return fd;
 }
 
-static void numwrite(void)
+void numwrite(void)
 {
   int fd;
   int i;
@@ -81,15 +81,6 @@ static void numwrite(void)
   wrap_rename("numnew","num");
 }
 
-static void flushit(int fd)
-{
-  if (fd > 0)
-    if (substdio_flush(&ssarchive) == -1
-	|| fchmod(fd,MODE_ARCHIVE|0700) == -1
-	|| close(fd) == -1)
-      strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fnaf.s));
-}
-
 int main(int argc,char *argv[])
 {
   int fd;
@@ -98,18 +89,12 @@ int main(int argc,char *argv[])
   int opt;
 
   opt = getconfopt(argc,argv,options,1,0);
-  switch (argc - opt) {
-    case 0:
-      substdio_fdbuf(&ssin,read,0,inputbuf,sizeof inputbuf);
-      break;
-    case 1:
-      if ((fd = open_read(argv[opt])) == -1)
-        strerr_die2sys(111,FATAL,MSG1(ERR_OPEN,argv[opt]));
-      substdio_fdbuf(&ssin,read,fd,inputbuf,sizeof inputbuf);
-      break;
-    default:
-      die_usage();
-  }
+  if (argc - opt != 1)
+    die_usage();
+
+  if ((fd = open_read(argv[opt])) == -1)
+    strerr_die2sys(111,FATAL,MSG1(ERR_OPEN,argv[opt]));
+  substdio_fdbuf(&ssin,read,fd,inputbuf,sizeof inputbuf);
 
   lockfile("lock");
 
@@ -119,7 +104,13 @@ int main(int argc,char *argv[])
   while (getln(&ssin,&line,&match,'\n') == 0 && match) {
     if (line.len > 5
 	&& byte_diff(line.s,5,"From ") == 0) {
-      flushit(fd);
+      if (fd > 0) {
+	if (substdio_flush(&ssarchive) == -1
+	    || fchmod(fd,MODE_ARCHIVE|0700) == -1
+	    || close(fd) == -1)
+	  strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fnaf.s));
+	fd = 0;
+      }
       ++msgnum;
       cumsize += (msgsize + 128L) >> 8;
       msgsize = 0L;
@@ -131,8 +122,6 @@ int main(int argc,char *argv[])
     }
   }
   cumsize += (msgsize + 128L) >> 8;
-
-  flushit(fd);
 
   numwrite();
   

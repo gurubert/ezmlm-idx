@@ -1,1 +1,0 @@
-dependon sub-mysql.so

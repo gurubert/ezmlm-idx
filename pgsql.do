@@ -1,1 +1,0 @@
-dependon sub-pgsql.so

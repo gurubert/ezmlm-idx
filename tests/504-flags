@@ -1,6 +1,7 @@
 prompt "flags:                "
 
 DEFAULT="digest-subscribe"
+LOCAL="${LOC}-${DEFAULT}"
 
 # Check loading flags from "flags"
 
@@ -10,15 +11,13 @@ ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
 fatal "failed to produce subscribe probe"
 grepbodynot Flag: t
 
-rm "$DIR"/addtrailer
+${RM} "$DIR"/addtrailer
 echo aBcdefGHIJkLmNOpqRStuvWxYz > "$DIR"/flags
 ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
 fatal "failed to produce subscribe probe"
 grepbody Flag: t
 
-rm "$DIR"/flags
-
-# Check loading flags from "config"
+${RM} "$DIR"/flags
 
 touch "$DIR"/addtrailer
 echo F:aBcdefGHIJkLmNOpqRSTuvWxYz > "$DIR"/config
@@ -26,7 +25,7 @@ ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
 fatal "failed to produce subscribe probe"
 grepbodynot Flag: t
 
-rm "$DIR"/addtrailer
+${RM} "$DIR"/addtrailer
 echo F:aBcdefGHIJkLmNOpqRStuvWxYz > "$DIR"/config
 ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
 fatal "failed to produce subscribe probe"
@@ -39,18 +38,6 @@ ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
 fatal "failed to produce subscribe probe"
 grepbody Flag: t
 
-rm "$DIR"/config
+${RM} "$DIR"/config
 
-# Check handling of number flags
-
-touch "$DIR"/remote
-${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
-fatal "failed to produce subscribe probe"
-grepbody Flag: 9
-
-rm -f "$DIR"/remote
-${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
-fatal "failed to produce subscribe probe"
-grepbodynot Flag: 9
-
-echo OK
+${ECHO} OK

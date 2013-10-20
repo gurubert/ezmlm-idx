@@ -2,143 +2,145 @@
 SHELL=/bin/sh
 default: it
 
+all: \
+it installer mysql pgsql sqlite3 man
+
 alloc.0: \
 alloc.3
 	nroff -man alloc.3 > alloc.0
 
 alloc.a: \
-makelib alloc.o alloc_re.o
-	./makelib alloc.a alloc.o alloc_re.o
+makelib alloc.lo alloc_re.lo
+	./makelib alloc.a alloc.lo alloc_re.lo
 
-alloc.o: \
-compile alloc.c alloc.h error.h
-	./compile alloc.c
+alloc.lo: \
+libcompile alloc.c alloc.h error.h
+	./libcompile alloc.c
 
-alloc_re.o: \
-compile alloc_re.c alloc.h byte.h
-	./compile alloc_re.c
+alloc_re.lo: \
+libcompile alloc_re.c alloc.h byte.h
+	./libcompile alloc_re.c
 
-altpath.o: \
-compile altpath.c stralloc.h gen_alloc.h config.h die.h hasattribute.h error.h open.h slurp.h altpath.h idx.h auto_etc.h
-	./compile altpath.c
+altpath.lo: \
+libcompile altpath.c stralloc.h gen_alloc.h config.h stralloc.h gen_alloc.h die.h hasattribute.h env.h error.h open.h slurp.h altpath.h idx.h auto_etc.h
+	./libcompile altpath.c
 
-author.o: \
-compile author.c
-	./compile author.c
+author.lo: \
+libcompile author.c
+	./libcompile author.c
+
+auto_bin.c: \
+auto-str conf-bin
+	./auto-str auto_bin EZMLM_BIN <conf-bin >auto_bin.c
+
+auto_bin.lo: \
+libcompile auto_bin.c
+	./libcompile auto_bin.c
 
 auto-ccld.sh: \
-conf-cc conf-ld conf-sub warn-auto.sh
+conf-cc conf-cclo conf-ld conf-ldso warn-auto.sh
 	( cat warn-auto.sh; \
-	sub=`head -n 1 conf-sub` ; \
-	echo CC=\'`head -n 1 conf-cc` `head -n 1 sub_$$sub/conf-sqlcc`\'; \
-	echo LD=\'`head -n 1 conf-ld`\' \
+	echo CC=\'`head -n 1 conf-cc`\'; \
+	echo CCLO=\'`head -n 1 conf-cclo`\'; \
+	echo LD=\'`head -n 1 conf-ld`\'; \
+	echo LDSO=\'`head -n 1 conf-ldso`\'; \
 	) > auto-ccld.sh
+
+auto_cron.c: \
+auto-str conf-cron
+	./auto-str auto_cron <conf-cron >auto_cron.c
+
+auto_cron.lo: \
+libcompile auto_cron.c
+	./libcompile auto_cron.c
+
+auto_etc.c: \
+auto-str conf-etc
+	./auto-str auto_etc EZMLM_ETC <conf-etc >auto_etc.c
+
+auto_etc.lo: \
+libcompile auto_etc.c
+	./libcompile auto_etc.c
+
+auto_lib.c: \
+auto-str conf-lib
+	./auto-str auto_lib EZMLM_LIB <conf-lib >auto_lib.c
+
+auto_lib.lo: \
+libcompile auto_lib.c
+	./libcompile auto_lib.c
+
+auto_qmail.c: \
+auto-str conf-qmail
+	./auto-str auto_qmail <conf-qmail >auto_qmail.c
+
+auto_qmail.lo: \
+libcompile auto_qmail.c
+	./libcompile auto_qmail.c
 
 auto-str: \
 load auto-str.o substdio.a error.a str.a
 	./load auto-str substdio.a error.a str.a 
 
 auto-str.o: \
-compile auto-str.c subfd.h substdio.h readwrite.h exit.h
+compile auto-str.c str.h subfd.h substdio.h readwrite.h exit.h
 	./compile auto-str.c
-
-auto_bin.c: \
-auto-str conf-bin
-	./auto-str auto_bin `head -n 1 conf-bin` > auto_bin.c
-
-auto_bin.o: \
-compile auto_bin.c
-	./compile auto_bin.c
-
-auto_cron.c: \
-auto-str conf-cron
-	./auto-str auto_cron `head -n 1 conf-cron` > auto_cron.c
-
-auto_cron.o: \
-compile auto_cron.c
-	./compile auto_cron.c
-
-auto_etc.c: \
-auto-str conf-etc
-	./auto-str auto_etc `head -n 1 conf-etc` > auto_etc.c
-
-auto_etc.o: \
-compile auto_etc.c
-	./compile auto_etc.c
-
-auto_qmail.c: \
-auto-str conf-qmail
-	./auto-str auto_qmail `head -n 1 conf-qmail` > auto_qmail.c
-
-auto_qmail.o: \
-compile auto_qmail.c
-	./compile auto_qmail.c
 
 auto_version.c: \
 auto-str VERSION
-	./auto-str auto_version `head -n 1 VERSION` > auto_version.c
+	./auto-str auto_version < VERSION > auto_version.c
 
-auto_version.o: \
-compile auto_version.c
-	./compile auto_version.c
+auto_version.lo: \
+libcompile auto_version.c
+	./libcompile auto_version.c
 
-byte_chr.o: \
-compile byte_chr.c byte.h
-	./compile byte_chr.c
+byte_chr.lo: \
+libcompile byte_chr.c byte.h
+	./libcompile byte_chr.c
 
-byte_copy.o: \
-compile byte_copy.c byte.h
-	./compile byte_copy.c
+byte_copy.lo: \
+libcompile byte_copy.c byte.h
+	./libcompile byte_copy.c
 
-byte_cr.o: \
-compile byte_cr.c byte.h
-	./compile byte_cr.c
+byte_cr.lo: \
+libcompile byte_cr.c byte.h
+	./libcompile byte_cr.c
 
-byte_diff.o: \
-compile byte_diff.c byte.h
-	./compile byte_diff.c
+byte_diff.lo: \
+libcompile byte_diff.c byte.h
+	./libcompile byte_diff.c
 
-byte_rchr.o: \
-compile byte_rchr.c byte.h
-	./compile byte_rchr.c
+byte_rchr.lo: \
+libcompile byte_rchr.c byte.h
+	./libcompile byte_rchr.c
 
-byte_zero.o: \
-compile byte_zero.c byte.h
-	./compile byte_zero.c
+byte_zero.lo: \
+libcompile byte_zero.c byte.h
+	./libcompile byte_zero.c
 
 case.0: \
 case.3
 	nroff -man case.3 > case.0
 
-case_diffb.o: \
-compile case_diffb.c case.h
-	./compile case_diffb.c
+case_diffb.lo: \
+libcompile case_diffb.c case.h
+	./libcompile case_diffb.c
 
-case_diffs.o: \
-compile case_diffs.c case.h
-	./compile case_diffs.c
+case_diffs.lo: \
+libcompile case_diffs.c case.h
+	./libcompile case_diffs.c
 
-case_lowerb.o: \
-compile case_lowerb.c case.h
-	./compile case_lowerb.c
+case_lowerb.lo: \
+libcompile case_lowerb.c case.h
+	./libcompile case_lowerb.c
 
-case_startb.o: \
-compile case_startb.c case.h
-	./compile case_startb.c
+case_startb.lo: \
+libcompile case_startb.c case.h
+	./libcompile case_startb.c
 
-case_starts.o: \
-compile case_starts.c case.h
-	./compile case_starts.c
-
-checktag.c: \
-conf-sub
-	rm -f checktag.c checktag.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/checktag.c checktag.c
-	touch checktag.c
-
-checktag.o: \
-compile checktag.c subscribe.h stralloc.h gen_alloc.h
-	./compile checktag.c
+case_starts.lo: \
+libcompile case_starts.c case.h
+	./libcompile case_starts.c
 
 choose: \
 warn-auto.sh choose.sh
@@ -154,81 +156,86 @@ make-compile warn-auto.sh systype
 	( cat warn-auto.sh; ./make-compile "`cat systype`" ) > compile
 	chmod 755 compile
 
-concatHDR.o: \
-compile concatHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h case.h byte.h mime.h errtxt.h die.h idx.h
-	./compile concatHDR.c
+concatHDR.lo: \
+libcompile concatHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h case.h byte.h mime.h stralloc.h gen_alloc.h messages.h die.h hasattribute.h idx.h
+	./libcompile concatHDR.c
 
-config.o: \
-compile config.c byte.h config.h stralloc.h gen_alloc.h die.h hasattribute.h errtxt.h getconf.h idx.h slurp.h strerr.h
-	./compile config.c
+config.lo: \
+libcompile config.c byte.h config.h stralloc.h gen_alloc.h die.h hasattribute.h messages.h getconf.h idx.h slurp.h str.h strerr.h hasattribute.h wrap.h
+	./libcompile config.c
 
-constmap.o: \
-compile constmap.c constmap.h alloc.h case.h
-	./compile constmap.c
+constmap.lo: \
+libcompile constmap.c constmap.h alloc.h case.h
+	./libcompile constmap.c
 
-cookie.o: \
-compile cookie.c cookie.h str.h uint32.h surfpcs.h
-	./compile cookie.c
+cookie.lo: \
+libcompile cookie.c cookie.h str.h uint32.h surfpcs.h uint32.h
+	./libcompile cookie.c
 
-copy.o: \
-compile copy.c stralloc.h gen_alloc.h substdio.h strerr.h hasattribute.h str.h getln.h case.h readwrite.h qmail.h errtxt.h error.h quote.h copy.h mime.h altpath.h byte.h die.h idx.h config.h
-	./compile copy.c
+copy.lo: \
+libcompile copy.c stralloc.h gen_alloc.h substdio.h strerr.h hasattribute.h str.h getln.h case.h readwrite.h qmail.h substdio.h stralloc.h gen_alloc.h messages.h error.h quote.h copy.h mime.h stralloc.h gen_alloc.h altpath.h byte.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h
+	./libcompile copy.c
 
-date2yyyymm.o: \
-compile date2yyyymm.c yyyymm.h stralloc.h gen_alloc.h
-	./compile date2yyyymm.c
+crypt.lib: \
+compile load trylib.c
+	( ( ./compile trylib.c && ./load trylib -lcrypt ) >/dev/null 2>&1 && echo -lcrypt || exit 0 ) >crypt.lib
+	rm -f trylib.o trylib
 
-date822fmt.o: \
-compile date822fmt.c datetime.h fmt.h date822fmt.h
-	./compile date822fmt.c
+date2yyyymm.lo: \
+libcompile date2yyyymm.c yyyymm.h stralloc.h gen_alloc.h
+	./libcompile date2yyyymm.c
 
-dateline.o: \
-compile dateline.c fmt.h yyyymm.h stralloc.h gen_alloc.h cgi.h hasattribute.h
-	./compile dateline.c
+date822fmt.lo: \
+libcompile date822fmt.c datetime.h fmt.h date822fmt.h
+	./libcompile date822fmt.c
+
+dateline.lo: \
+libcompile dateline.c fmt.h yyyymm.h stralloc.h gen_alloc.h stralloc.h gen_alloc.h cgi.h hasattribute.h
+	./libcompile dateline.c
 
 datetime.0: \
 datetime.3
 	nroff -man datetime.3 > datetime.0
 
-datetime.o: \
-compile datetime.c datetime.h
-	./compile datetime.c
+datetime.lo: \
+libcompile datetime.c datetime.h
+	./libcompile datetime.c
 
-decodeB.o: \
-compile decodeB.c stralloc.h gen_alloc.h strerr.h hasattribute.h uint32.h errtxt.h die.h idx.h
-	./compile decodeB.c
+decodeB.lo: \
+libcompile decodeB.c stralloc.h gen_alloc.h strerr.h hasattribute.h uint32.h messages.h die.h hasattribute.h idx.h
+	./libcompile decodeB.c
 
-decodeHDR.o: \
-compile decodeHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h error.h case.h byte.h uint32.h mime.h errtxt.h die.h idx.h
-	./compile decodeHDR.c
+decodeHDR.lo: \
+libcompile decodeHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h error.h case.h byte.h uint32.h mime.h stralloc.h gen_alloc.h messages.h die.h hasattribute.h idx.h
+	./libcompile decodeHDR.c
 
-decodeQ.o: \
-compile decodeQ.c stralloc.h gen_alloc.h strerr.h hasattribute.h errtxt.h mime.h die.h idx.h
-	./compile decodeQ.c
+decodeQ.lo: \
+libcompile decodeQ.c stralloc.h gen_alloc.h strerr.h hasattribute.h messages.h mime.h stralloc.h gen_alloc.h die.h hasattribute.h idx.h
+	./libcompile decodeQ.c
 
-die_badaddr.o: \
-compile die_badaddr.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_badaddr.c
+die_badaddr.lo: \
+libcompile die_badaddr.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_badaddr.c
 
-die_badformat.o: \
-compile die_badformat.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_badformat.c
+die_badformat.lo: \
+libcompile die_badformat.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_badformat.c
 
-die_dow.o: \
-compile die_dow.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_dow.c
+die_dow.lo: \
+libcompile die_dow.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_dow.c
 
-die_nomem.o: \
-compile die_nomem.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_nomem.c
+die_nomem.lo: \
+libcompile die_nomem.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_nomem.c
 
-die_sender.o: \
-compile die_sender.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_sender.c
+die_sender.lo: \
+libcompile die_sender.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_sender.c
 
-die_usage.o: \
-compile die_usage.c strerr.h hasattribute.h errtxt.h die.h
-	./compile die_usage.c
+die_usage.lo: \
+libcompile die_usage.c strerr.h hasattribute.h messages.h die.h hasattribute.h
+	./libcompile die_usage.c
 
 direntry.0: \
 direntry.3
@@ -240,49 +247,58 @@ compile trydrent.c direntry.h1 direntry.h2
 	&& cat direntry.h2 || cat direntry.h1 ) > direntry.h
 	rm -f trydrent.o
 
-encodeB.o: \
-compile encodeB.c stralloc.h gen_alloc.h uint32.h mime.h strerr.h hasattribute.h errtxt.h die.h idx.h
-	./compile encodeB.c
+dl.lib: \
+compile load trylib.c
+	( ( ./compile trylib.c && ./load trylib -ldl ) >/dev/null 2>&1 && echo -ldl || exit 0 ) >dl.lib
+	rm -f trylib.o trylib
 
-encodeQ.o: \
-compile encodeQ.c errtxt.h mime.h stralloc.h gen_alloc.h strerr.h hasattribute.h die.h idx.h
-	./compile encodeQ.c
+encodeB.lo: \
+libcompile encodeB.c stralloc.h gen_alloc.h uint32.h mime.h stralloc.h gen_alloc.h strerr.h hasattribute.h messages.h die.h hasattribute.h idx.h
+	./libcompile encodeB.c
+
+encodeQ.lo: \
+libcompile encodeQ.c messages.h mime.h stralloc.h gen_alloc.h stralloc.h gen_alloc.h strerr.h hasattribute.h die.h hasattribute.h idx.h
+	./libcompile encodeQ.c
 
 env.0: \
 env.3
 	nroff -man env.3 > env.0
 
-env.o: \
-compile env.c str.h alloc.h env.h
-	./compile env.c
+env.lo: \
+libcompile env.c str.h alloc.h env.h
+	./libcompile env.c
 
-envread.o: \
-compile envread.c env.h str.h
-	./compile envread.c
+envread.lo: \
+libcompile envread.c env.h str.h
+	./libcompile envread.c
 
 error.0: \
 error.3
 	nroff -man error.3 > error.0
 
 error.a: \
-makelib error.o error_str.o
-	./makelib error.a error.o error_str.o
+makelib error.lo error_str.lo
+	./makelib error.a error.lo error_str.lo
 
-error.o: \
-compile error.c error.h
-	./compile error.c
+error.lo: \
+libcompile error.c error.h
+	./libcompile error.c
 
 error_str.0: \
 error_str.3
 	nroff -man error_str.3 > error_str.0
 
-error_str.o: \
-compile error_str.c error.h
-	./compile error_str.c
+error_str.lo: \
+libcompile error_str.c error.h
+	./libcompile error_str.c
 
 error_temp.0: \
 error_temp.3
 	nroff -man error_temp.3 > error_temp.0
+
+ezmlm.0: \
+ezmlm.5
+	nroff -man ezmlm.5 > ezmlm.0
 
 ezmlm-accept.0: \
 ezmlm-accept.1
@@ -302,7 +318,7 @@ load ezmlm-archive.o libezmlm.a
 	./load ezmlm-archive -lezmlm 
 
 ezmlm-archive.o: \
-compile ezmlm-archive.c alloc.h error.h stralloc.h gen_alloc.h str.h sig.h getconf.h strerr.h hasattribute.h getln.h substdio.h readwrite.h fmt.h sgetopt.h subgetopt.h idxthread.h idx.h makehash.h lock.h open.h scan.h die.h errtxt.h config.h auto_version.h
+compile ezmlm-archive.c alloc.h error.h stralloc.h gen_alloc.h str.h sig.h getconf.h strerr.h hasattribute.h getln.h substdio.h readwrite.h fmt.h getconfopt.h idxthread.h idx.h makehash.h lock.h open.h scan.h die.h hasattribute.h wrap.h idx.h messages.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-archive.c
 
 ezmlm-cgi.0: \
@@ -314,7 +330,7 @@ load ezmlm-cgi.o libezmlm.a
 	./load ezmlm-cgi -lezmlm 
 
 ezmlm-cgi.o: \
-compile ezmlm-cgi.c alloc.h direntry.h datetime.h now.h stralloc.h gen_alloc.h strerr.h hasattribute.h error.h env.h sig.h open.h getln.h case.h scan.h str.h fmt.h readwrite.h fork.h wait.h exit.h substdio.h getconf.h gen_allocdefs.h constmap.h byte.h subscribe.h errtxt.h makehash.h mime.h die.h idx.h yyyymm.h cgi.h auto_etc.h
+compile ezmlm-cgi.c alloc.h direntry.h datetime.h now.h datetime.h stralloc.h gen_alloc.h strerr.h hasattribute.h error.h env.h sig.h open.h getln.h case.h scan.h str.h fmt.h readwrite.h fork.h wait.h exit.h substdio.h getconf.h gen_alloc.h gen_allocdefs.h constmap.h byte.h subdb.h stralloc.h gen_alloc.h messages.h makehash.h mime.h stralloc.h gen_alloc.h wrap.h die.h hasattribute.h idx.h yyyymm.h stralloc.h gen_alloc.h cgi.h hasattribute.h auto_etc.h
 	./compile ezmlm-cgi.c
 
 ezmlm-check.0: \
@@ -326,6 +342,18 @@ warn-auto.sh ezmlm-check.sh
 	cat warn-auto.sh ezmlm-check.sh > ezmlm-check
 	chmod 755 ezmlm-check
 
+ezmlm-checksub.0: \
+ezmlm-checksub.1
+	nroff -man ezmlm-checksub.1 > ezmlm-checksub.0
+
+ezmlm-checksub: \
+load ezmlm-checksub.o libezmlm.a dl.lib
+	./load ezmlm-checksub -lezmlm  `cat dl.lib`
+
+ezmlm-checksub.o: \
+compile ezmlm-checksub.c strerr.h hasattribute.h env.h sender.h str.h subdb.h stralloc.h gen_alloc.h subfd.h substdio.h getconfopt.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
+	./compile ezmlm-checksub.c
+
 ezmlm-clean.0: \
 ezmlm-clean.1
 	nroff -man ezmlm-clean.1 > ezmlm-clean.0
@@ -335,7 +363,7 @@ load ezmlm-clean.o libezmlm.a
 	./load ezmlm-clean -lezmlm 
 
 ezmlm-clean.o: \
-compile ezmlm-clean.c error.h stralloc.h gen_alloc.h str.h env.h sig.h getconf.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h readwrite.h seek.h quote.h datetime.h now.h direntry.h cookie.h sgetopt.h subgetopt.h fmt.h errtxt.h copy.h open.h scan.h lock.h hdr.h die.h idx.h mime.h config.h auto_version.h
+compile ezmlm-clean.c error.h stralloc.h gen_alloc.h str.h env.h sig.h getconf.h getconfopt.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h stralloc.h gen_alloc.h substdio.h readwrite.h seek.h quote.h datetime.h now.h datetime.h direntry.h cookie.h fmt.h messages.h copy.h open.h scan.h lock.h hdr.h die.h hasattribute.h idx.h mime.h stralloc.h gen_alloc.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-clean.c
 
 ezmlm-confirm.0: \
@@ -347,7 +375,7 @@ load ezmlm-confirm.o libezmlm.a
 	./load ezmlm-confirm -lezmlm 
 
 ezmlm-confirm.o: \
-compile ezmlm-confirm.c error.h case.h stralloc.h gen_alloc.h str.h env.h sig.h fork.h wait.h getconf.h strerr.h hasattribute.h byte.h getln.h qmail.h substdio.h readwrite.h seek.h quote.h datetime.h now.h fmt.h sgetopt.h subgetopt.h auto_bin.h cookie.h errtxt.h copy.h open.h lock.h wrap.h die.h idx.h mime.h config.h auto_version.h
+compile ezmlm-confirm.c error.h case.h stralloc.h gen_alloc.h str.h env.h sender.h error.h sig.h fork.h wait.h strerr.h hasattribute.h byte.h getln.h qmail.h substdio.h stralloc.h gen_alloc.h substdio.h readwrite.h seek.h quote.h datetime.h now.h datetime.h fmt.h getconfopt.h cookie.h messages.h copy.h open.h lock.h wrap.h die.h hasattribute.h idx.h mime.h stralloc.h gen_alloc.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-confirm.c
 
 ezmlm-cron.0: \
@@ -359,7 +387,7 @@ load ezmlm-cron.o libezmlm.a
 	./load ezmlm-cron -lezmlm 
 
 ezmlm-cron.o: \
-compile ezmlm-cron.c strerr.h hasattribute.h stralloc.h gen_alloc.h sgetopt.h subgetopt.h substdio.h error.h str.h fmt.h wait.h readwrite.h sig.h case.h scan.h open.h lock.h byte.h getln.h auto_qmail.h auto_cron.h auto_version.h errtxt.h die.h idx.h wrap.h
+compile ezmlm-cron.c strerr.h hasattribute.h stralloc.h gen_alloc.h getconfopt.h substdio.h error.h str.h fmt.h wait.h readwrite.h sig.h case.h scan.h open.h lock.h byte.h getln.h auto_qmail.h auto_cron.h auto_version.h messages.h die.h hasattribute.h idx.h wrap.h
 	./compile ezmlm-cron.c
 
 ezmlm-dispatch.0: \
@@ -371,7 +399,7 @@ load ezmlm-dispatch.o libezmlm.a
 	./load ezmlm-dispatch -lezmlm 
 
 ezmlm-dispatch.o: \
-compile ezmlm-dispatch.c env.h strerr.h hasattribute.h sgetopt.h subgetopt.h substdio.h subfd.h errtxt.h error.h byte.h fmt.h str.h stralloc.h gen_alloc.h qmail.h seek.h wrap.h slurp.h die.h auto_version.h
+compile ezmlm-dispatch.c env.h sender.h strerr.h hasattribute.h getconfopt.h substdio.h subfd.h substdio.h messages.h error.h byte.h fmt.h str.h stralloc.h gen_alloc.h qmail.h substdio.h stralloc.h gen_alloc.h seek.h wrap.h slurp.h die.h hasattribute.h auto_version.h
 	./compile ezmlm-dispatch.c
 
 ezmlm-gate.0: \
@@ -379,11 +407,11 @@ ezmlm-gate.1
 	nroff -man ezmlm-gate.1 > ezmlm-gate.0
 
 ezmlm-gate: \
-load ezmlm-gate.o libezmlm.a sql.lib
-	./load ezmlm-gate -lezmlm  `cat sql.lib`
+load ezmlm-gate.o libezmlm.a dl.lib
+	./load ezmlm-gate -lezmlm  `cat dl.lib`
 
 ezmlm-gate.o: \
-compile ezmlm-gate.c substdio.h subfd.h stralloc.h gen_alloc.h strerr.h hasattribute.h error.h env.h sig.h str.h seek.h wait.h exit.h getconf.h auto_bin.h sgetopt.h subgetopt.h errtxt.h die.h idx.h subscribe.h wrap.h config.h auto_version.h
+compile ezmlm-gate.c substdio.h subfd.h substdio.h stralloc.h gen_alloc.h strerr.h hasattribute.h error.h env.h sender.h sig.h str.h seek.h wait.h exit.h getconf.h auto_bin.h getconfopt.h messages.h die.h hasattribute.h idx.h subdb.h stralloc.h gen_alloc.h wrap.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-gate.c
 
 ezmlm-get.0: \
@@ -391,11 +419,11 @@ ezmlm-get.1
 	nroff -man ezmlm-get.1 > ezmlm-get.0
 
 ezmlm-get: \
-load ezmlm-get.o libezmlm.a sql.lib
-	./load ezmlm-get -lezmlm  `cat sql.lib`
+load ezmlm-get.o libezmlm.a dl.lib
+	./load ezmlm-get -lezmlm  `cat dl.lib`
 
 ezmlm-get.o: \
-compile ezmlm-get.c alloc.h error.h stralloc.h gen_alloc.h str.h env.h sig.h getconf.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h readwrite.h seek.h quote.h datetime.h now.h date822fmt.h fmt.h sgetopt.h subgetopt.h cookie.h makehash.h copy.h constmap.h subscribe.h hdr.h open.h lock.h scan.h idxthread.h idx.h die.h mime.h errtxt.h config.h auto_version.h
+compile ezmlm-get.c alloc.h error.h stralloc.h gen_alloc.h str.h env.h sender.h sig.h getconf.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h stralloc.h gen_alloc.h substdio.h readwrite.h seek.h quote.h datetime.h now.h datetime.h date822fmt.h fmt.h getconfopt.h cookie.h makehash.h copy.h constmap.h subdb.h stralloc.h gen_alloc.h hdr.h open.h lock.h scan.h idxthread.h idx.h die.h hasattribute.h wrap.h idx.h mime.h stralloc.h gen_alloc.h messages.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-get.c
 
 ezmlm-glconf.0: \
@@ -407,6 +435,10 @@ warn-auto.sh ezmlm-glconf.sh
 	cat warn-auto.sh ezmlm-glconf.sh > ezmlm-glconf
 	chmod 755 ezmlm-glconf
 
+ezmlmglrc.0: \
+ezmlmglrc.5
+	nroff -man ezmlmglrc.5 > ezmlmglrc.0
+
 ezmlm-idx.0: \
 ezmlm-idx.1
 	nroff -man ezmlm-idx.1 > ezmlm-idx.0
@@ -416,19 +448,35 @@ load ezmlm-idx.o libezmlm.a
 	./load ezmlm-idx -lezmlm 
 
 ezmlm-idx.o: \
-compile ezmlm-idx.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h lock.h slurp.h open.h getln.h sgetopt.h subgetopt.h case.h scan.h str.h fmt.h readwrite.h exit.h sig.h byte.h die.h idx.h mime.h errtxt.h getconf.h makehash.h config.h auto_version.h
+compile ezmlm-idx.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h lock.h slurp.h open.h getln.h getconfopt.h case.h scan.h str.h fmt.h readwrite.h exit.h substdio.h sig.h byte.h die.h hasattribute.h idx.h mime.h stralloc.h gen_alloc.h wrap.h messages.h getconf.h makehash.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-idx.c
+
+ezmlm-idx.spec: \
+ezmlm-idx.spec.template VERSION fill-template
+	./fill-template ezmlm-idx.spec
+
+ezmlm-import.0: \
+ezmlm-import.1
+	nroff -man ezmlm-import.1 > ezmlm-import.0
+
+ezmlm-import: \
+load ezmlm-import.o libezmlm.a
+	./load ezmlm-import -lezmlm 
+
+ezmlm-import.o: \
+compile ezmlm-import.c stralloc.h gen_alloc.h getconf.h config.h stralloc.h gen_alloc.h error.h strerr.h hasattribute.h substdio.h lock.h open.h messages.h die.h hasattribute.h wrap.h fmt.h getln.h byte.h idx.h getconfopt.h auto_version.h
+	./compile ezmlm-import.c
 
 ezmlm-issubn.0: \
 ezmlm-issubn.1
 	nroff -man ezmlm-issubn.1 > ezmlm-issubn.0
 
 ezmlm-issubn: \
-load ezmlm-issubn.o libezmlm.a sql.lib
-	./load ezmlm-issubn -lezmlm  `cat sql.lib`
+load ezmlm-issubn.o libezmlm.a dl.lib
+	./load ezmlm-issubn -lezmlm  `cat dl.lib`
 
 ezmlm-issubn.o: \
-compile ezmlm-issubn.c strerr.h hasattribute.h env.h subscribe.h stralloc.h gen_alloc.h sgetopt.h subgetopt.h errtxt.h die.h idx.h config.h auto_version.h
+compile ezmlm-issubn.c strerr.h hasattribute.h env.h sender.h subdb.h stralloc.h gen_alloc.h getconfopt.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-issubn.c
 
 ezmlm-limit.0: \
@@ -440,7 +488,7 @@ load ezmlm-limit.o libezmlm.a
 	./load ezmlm-limit -lezmlm 
 
 ezmlm-limit.o: \
-compile ezmlm-limit.c stralloc.h gen_alloc.h substdio.h readwrite.h strerr.h hasattribute.h sig.h lock.h getconf.h fmt.h now.h datetime.h sgetopt.h subgetopt.h error.h scan.h open.h errtxt.h die.h config.h idx.h
+compile ezmlm-limit.c stralloc.h gen_alloc.h substdio.h readwrite.h strerr.h hasattribute.h sig.h lock.h getconf.h fmt.h now.h datetime.h getconfopt.h error.h scan.h open.h messages.h die.h hasattribute.h config.h stralloc.h gen_alloc.h idx.h
 	./compile ezmlm-limit.c
 
 ezmlm-list.0: \
@@ -448,11 +496,11 @@ ezmlm-list.1
 	nroff -man ezmlm-list.1 > ezmlm-list.0
 
 ezmlm-list: \
-load ezmlm-list.o libezmlm.a sql.lib
-	./load ezmlm-list -lezmlm  `cat sql.lib`
+load ezmlm-list.o libezmlm.a dl.lib
+	./load ezmlm-list -lezmlm  `cat dl.lib`
 
 ezmlm-list.o: \
-compile ezmlm-list.c strerr.h hasattribute.h readwrite.h substdio.h subfd.h subscribe.h stralloc.h gen_alloc.h exit.h fmt.h sgetopt.h subgetopt.h errtxt.h die.h idx.h config.h auto_version.h
+compile ezmlm-list.c strerr.h hasattribute.h readwrite.h substdio.h subfd.h substdio.h subdb.h stralloc.h gen_alloc.h exit.h fmt.h getconfopt.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-list.c
 
 ezmlm-make.0: \
@@ -460,11 +508,11 @@ ezmlm-make.1
 	nroff -man ezmlm-make.1 > ezmlm-make.0
 
 ezmlm-make: \
-load ezmlm-make.o libezmlm.a
-	./load ezmlm-make -lezmlm 
+load ezmlm-make.o libezmlm.a dl.lib
+	./load ezmlm-make -lezmlm  `cat dl.lib`
 
 ezmlm-make.o: \
-compile ezmlm-make.c sgetopt.h subgetopt.h stralloc.h gen_alloc.h strerr.h hasattribute.h exit.h readwrite.h byte.h open.h substdio.h str.h auto_bin.h getln.h error.h lock.h errtxt.h die.h idx.h auto_etc.h auto_version.h
+compile ezmlm-make.c sgetopt.h subgetopt.h stralloc.h gen_alloc.h strerr.h hasattribute.h exit.h readwrite.h byte.h open.h substdio.h subdb.h stralloc.h gen_alloc.h str.h wrap.h auto_bin.h getln.h error.h lock.h messages.h die.h hasattribute.h idx.h auto_etc.h auto_version.h
 	./compile ezmlm-make.c
 
 ezmlm-manage.0: \
@@ -472,22 +520,12 @@ ezmlm-manage.1
 	nroff -man ezmlm-manage.1 > ezmlm-manage.0
 
 ezmlm-manage: \
-load ezmlm-manage.o libezmlm.a sql.lib
-	./load ezmlm-manage -lezmlm  `cat sql.lib`
+load ezmlm-manage.o libezmlm.a dl.lib
+	./load ezmlm-manage -lezmlm  `cat dl.lib`
 
 ezmlm-manage.o: \
-compile ezmlm-manage.c error.h stralloc.h gen_alloc.h str.h env.h sig.h slurp.h getconf.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h readwrite.h seek.h quote.h datetime.h now.h fmt.h subscribe.h cookie.h sgetopt.h subgetopt.h copy.h errtxt.h open.h lock.h scan.h mime.h hdr.h die.h idx.h config.h auto_version.h
+compile ezmlm-manage.c error.h stralloc.h gen_alloc.h str.h env.h sender.h sig.h slurp.h getconf.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h stralloc.h gen_alloc.h substdio.h readwrite.h seek.h quote.h datetime.h now.h datetime.h fmt.h subdb.h stralloc.h gen_alloc.h cookie.h getconfopt.h copy.h messages.h open.h lock.h scan.h mime.h stralloc.h gen_alloc.h hdr.h die.h hasattribute.h wrap.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-manage.c
-
-ezmlm-mktab.0: \
-ezmlm-mktab.1
-	nroff -man ezmlm-mktab.1 > ezmlm-mktab.0
-
-ezmlm-mktab: \
-conf-sub
-	rm -f ezmlm-mktab
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/ezmlm-mktab ezmlm-mktab
-	touch ezmlm-mktab
 
 ezmlm-moderate.0: \
 ezmlm-moderate.1
@@ -498,8 +536,19 @@ load ezmlm-moderate.o libezmlm.a
 	./load ezmlm-moderate -lezmlm 
 
 ezmlm-moderate.o: \
-compile ezmlm-moderate.c error.h case.h stralloc.h gen_alloc.h str.h env.h sig.h wait.h getconf.h strerr.h hasattribute.h byte.h getln.h qmail.h substdio.h subfd.h readwrite.h seek.h quote.h datetime.h now.h fmt.h sgetopt.h subgetopt.h cookie.h errtxt.h copy.h hdr.h mime.h open.h lock.h die.h idx.h wrap.h config.h auto_version.h
+compile ezmlm-moderate.c error.h case.h stralloc.h gen_alloc.h str.h env.h sender.h error.h sig.h wait.h strerr.h hasattribute.h byte.h getln.h qmail.h substdio.h stralloc.h gen_alloc.h substdio.h subfd.h substdio.h readwrite.h seek.h quote.h datetime.h now.h datetime.h fmt.h getconfopt.h cookie.h messages.h copy.h hdr.h mime.h stralloc.h gen_alloc.h open.h lock.h die.h hasattribute.h idx.h wrap.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-moderate.c
+
+ezmlmrc.0: \
+ezmlmrc.5
+	nroff -man ezmlmrc.5 > ezmlmrc.0
+
+ezmlmrc.all: \
+lang/ch_GB/ezmlmrc lang/cs/ezmlmrc lang/da/ezmlmrc lang/de/ezmlmrc lang/en_US/ezmlmrc lang/es/ezmlmrc lang/fr/ezmlmrc lang/hu/ezmlmrc lang/id/ezmlmrc lang/it/ezmlmrc lang/ja/ezmlmrc lang/nl/ezmlmrc lang/pl/ezmlmrc lang/pt/ezmlmrc lang/pt_BR/ezmlmrc lang/ru/ezmlmrc lang/sv/ezmlmrc
+
+ezmlmrc: \
+ezmlmrc.template VERSION fill-template
+	./fill-template ezmlmrc
 
 ezmlm-receipt.0: \
 ezmlm-receipt.1
@@ -514,7 +563,7 @@ load ezmlm-reject.o libezmlm.a
 	./load ezmlm-reject -lezmlm 
 
 ezmlm-reject.o: \
-compile ezmlm-reject.c strerr.h hasattribute.h substdio.h byte.h case.h str.h readwrite.h stralloc.h gen_alloc.h getln.h sgetopt.h subgetopt.h getconf.h constmap.h fmt.h qmail.h seek.h scan.h env.h errtxt.h die.h idx.h config.h auto_version.h
+compile ezmlm-reject.c strerr.h hasattribute.h substdio.h byte.h case.h str.h readwrite.h stralloc.h gen_alloc.h getln.h getconfopt.h getconf.h constmap.h fmt.h qmail.h substdio.h stralloc.h gen_alloc.h seek.h scan.h env.h sender.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-reject.c
 
 ezmlm-request.0: \
@@ -522,11 +571,11 @@ ezmlm-request.1
 	nroff -man ezmlm-request.1 > ezmlm-request.0
 
 ezmlm-request: \
-load ezmlm-request.o libezmlm.a sql.lib
-	./load ezmlm-request -lezmlm  `cat sql.lib`
+load ezmlm-request.o libezmlm.a dl.lib
+	./load ezmlm-request -lezmlm  `cat dl.lib`
 
 ezmlm-request.o: \
-compile ezmlm-request.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h env.h sig.h open.h getln.h case.h str.h datetime.h now.h quote.h readwrite.h exit.h getconf.h constmap.h fmt.h sgetopt.h subgetopt.h byte.h seek.h errtxt.h copy.h cookie.h subscribe.h mime.h hdr.h die.h idx.h config.h auto_version.h
+compile ezmlm-request.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h substdio.h stralloc.h gen_alloc.h env.h sender.h sig.h open.h getln.h case.h str.h datetime.h now.h datetime.h quote.h readwrite.h exit.h substdio.h getconf.h constmap.h fmt.h getconfopt.h byte.h seek.h messages.h copy.h cookie.h subdb.h stralloc.h gen_alloc.h mime.h stralloc.h gen_alloc.h hdr.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-request.c
 
 ezmlm-return.0: \
@@ -534,23 +583,35 @@ ezmlm-return.1
 	nroff -man ezmlm-return.1 > ezmlm-return.0
 
 ezmlm-return: \
-load ezmlm-return.o libezmlm.a sql.lib
-	./load ezmlm-return -lezmlm  `cat sql.lib`
+load ezmlm-return.o libezmlm.a dl.lib
+	./load ezmlm-return -lezmlm  `cat dl.lib`
 
 ezmlm-return.o: \
-compile ezmlm-return.c direntry.h stralloc.h gen_alloc.h str.h env.h sig.h getconf.h strerr.h hasattribute.h byte.h case.h open.h scan.h lock.h slurpclose.h getln.h substdio.h error.h quote.h readwrite.h fmt.h now.h datetime.h cookie.h sgetopt.h subgetopt.h subscribe.h errtxt.h die.h config.h idx.h auto_version.h
+compile ezmlm-return.c direntry.h stralloc.h gen_alloc.h str.h env.h sender.h sig.h strerr.h hasattribute.h byte.h case.h open.h scan.h lock.h slurpclose.h getln.h substdio.h error.h quote.h readwrite.h fmt.h now.h datetime.h cookie.h getconfopt.h subdb.h stralloc.h gen_alloc.h messages.h die.h hasattribute.h wrap.h config.h stralloc.h gen_alloc.h idx.h auto_version.h
 	./compile ezmlm-return.c
+
+ezmlm-rmtab.0: \
+ezmlm-rmtab.1
+	nroff -man ezmlm-rmtab.1 > ezmlm-rmtab.0
+
+ezmlm-rmtab: \
+load ezmlm-rmtab.o libezmlm.a dl.lib
+	./load ezmlm-rmtab -lezmlm  `cat dl.lib`
+
+ezmlm-rmtab.o: \
+compile ezmlm-rmtab.c strerr.h hasattribute.h readwrite.h substdio.h subfd.h substdio.h subdb.h stralloc.h gen_alloc.h exit.h fmt.h getconfopt.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
+	./compile ezmlm-rmtab.c
 
 ezmlm-send.0: \
 ezmlm-send.1
 	nroff -man ezmlm-send.1 > ezmlm-send.0
 
 ezmlm-send: \
-load ezmlm-send.o libezmlm.a sql.lib
-	./load ezmlm-send -lezmlm  `cat sql.lib`
+load ezmlm-send.o libezmlm.a dl.lib
+	./load ezmlm-send -lezmlm  `cat dl.lib`
 
 ezmlm-send.o: \
-compile ezmlm-send.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h env.h lock.h sig.h open.h getln.h case.h scan.h str.h fmt.h readwrite.h exit.h getconf.h constmap.h byte.h sgetopt.h subgetopt.h quote.h subscribe.h mime.h errtxt.h makehash.h cookie.h hdr.h die.h idx.h copy.h config.h auto_version.h
+compile ezmlm-send.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h substdio.h stralloc.h gen_alloc.h env.h sender.h lock.h sig.h open.h getln.h case.h scan.h str.h fmt.h readwrite.h exit.h substdio.h getconf.h constmap.h byte.h getconfopt.h quote.h subdb.h stralloc.h gen_alloc.h mime.h stralloc.h gen_alloc.h messages.h makehash.h cookie.h hdr.h die.h hasattribute.h wrap.h idx.h copy.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-send.c
 
 ezmlm-split.0: \
@@ -562,7 +623,7 @@ load ezmlm-split.o libezmlm.a
 	./load ezmlm-split -lezmlm 
 
 ezmlm-split.o: \
-compile ezmlm-split.c error.h stralloc.h gen_alloc.h str.h env.h sig.h getconf.h open.h scan.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h sgetopt.h subgetopt.h subfd.h readwrite.h quote.h now.h datetime.h uint32.h subhash.h fmt.h errtxt.h die.h config.h idx.h auto_version.h
+compile ezmlm-split.c error.h stralloc.h gen_alloc.h str.h env.h sender.h sig.h open.h scan.h strerr.h hasattribute.h byte.h getln.h case.h qmail.h substdio.h stralloc.h gen_alloc.h getconfopt.h subfd.h substdio.h readwrite.h quote.h now.h datetime.h uint32.h subhash.h fmt.h messages.h die.h hasattribute.h config.h stralloc.h gen_alloc.h idx.h auto_version.h
 	./compile ezmlm-split.c
 
 ezmlm-store.0: \
@@ -570,11 +631,11 @@ ezmlm-store.1
 	nroff -man ezmlm-store.1 > ezmlm-store.0
 
 ezmlm-store: \
-load ezmlm-store.o libezmlm.a sql.lib
-	./load ezmlm-store -lezmlm  `cat sql.lib`
+load ezmlm-store.o libezmlm.a dl.lib
+	./load ezmlm-store -lezmlm  `cat dl.lib`
 
 ezmlm-store.o: \
-compile ezmlm-store.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h env.h lock.h sig.h open.h getln.h str.h fmt.h readwrite.h wait.h exit.h getconf.h datetime.h now.h cookie.h sgetopt.h subgetopt.h errtxt.h byte.h case.h quote.h hdr.h die.h idx.h copy.h subscribe.h mime.h wrap.h config.h auto_version.h
+compile ezmlm-store.c stralloc.h gen_alloc.h subfd.h substdio.h strerr.h hasattribute.h error.h qmail.h substdio.h stralloc.h gen_alloc.h env.h sender.h lock.h sig.h open.h getln.h str.h fmt.h readwrite.h wait.h exit.h substdio.h getconf.h datetime.h now.h datetime.h cookie.h getconfopt.h messages.h byte.h case.h quote.h hdr.h die.h hasattribute.h idx.h copy.h subdb.h stralloc.h gen_alloc.h mime.h stralloc.h gen_alloc.h wrap.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-store.c
 
 ezmlm-sub.0: \
@@ -582,15 +643,19 @@ ezmlm-sub.1
 	nroff -man ezmlm-sub.1 > ezmlm-sub.0
 
 ezmlm-sub: \
-load ezmlm-sub.o ezmlm-subunsub.o libezmlm.a sql.lib
-	./load ezmlm-sub ezmlm-subunsub.o -lezmlm  `cat sql.lib`
+load ezmlm-sub.o ezmlm-subunsub.o libezmlm.a dl.lib
+	./load ezmlm-sub ezmlm-subunsub.o -lezmlm  `cat dl.lib`
 
 ezmlm-sub.o: \
-compile ezmlm-sub.c
+compile ezmlm-sub.c hasattribute.h
 	./compile ezmlm-sub.c
 
+ezmlmsubrc.0: \
+ezmlmsubrc.5
+	nroff -man ezmlmsubrc.5 > ezmlmsubrc.0
+
 ezmlm-subunsub.o: \
-compile ezmlm-subunsub.c strerr.h hasattribute.h subscribe.h stralloc.h gen_alloc.h sgetopt.h subgetopt.h substdio.h subfd.h readwrite.h getln.h scan.h errtxt.h die.h idx.h config.h auto_version.h
+compile ezmlm-subunsub.c strerr.h hasattribute.h subdb.h stralloc.h gen_alloc.h getconfopt.h str.h stralloc.h gen_alloc.h substdio.h subfd.h substdio.h readwrite.h getln.h scan.h messages.h die.h hasattribute.h idx.h config.h stralloc.h gen_alloc.h auto_version.h
 	./compile ezmlm-subunsub.c
 
 ezmlm-test.0: \
@@ -598,7 +663,7 @@ ezmlm-test.1
 	nroff -man ezmlm-test.1 > ezmlm-test.0
 
 ezmlm-test: \
-warn-auto.sh conf-qmail VERSION Makefile tests/00-config tests/01-misc tests/02-functions tests/100-ezmlm-make tests/110-ezmlm-reject tests/115-ezmlm-sub tests/120-ezmlm-send tests/125-ezmlm-tstdig tests/130-ezmlm-weed tests/135-ezmlm-make tests/140-ezmlm-clean tests/145-ezmlm-store tests/150-ezmlm-return tests/155-ezmlm-warn tests/160-ezmlm-manage tests/165-ezmlm-request tests/170-ezmlm-split tests/210-ezmlm-idx tests/221-ezmlm-get-index tests/222-ezmlm-get-get tests/223-ezmlm-get-thread tests/225-ezmlm-get-digest tests/260-ezmlm-manage tests/270-ezmlm-moderate tests/280-ezmlm-warn tests/500-export tests/505-flags tests/510-ezmlm-manage-subprobe tests/510-ezmlm-manage-unsubprobe tests/511-ezmlm-manage-subscribe tests/511-ezmlm-manage-unsubscribe tests/512-ezmlm-manage-copylines tests/550-ezmlm-send tests/90-cleanup tests/99-bugs
+warn-auto.sh conf-qmail VERSION Makefile tests/00-config tests/01-misc tests/02-functions tests/09-getconfopt tests/100-ezmlm-make tests/110-ezmlm-reject tests/115-ezmlm-sub tests/116-ezmlm-checksub tests/119-ezmlm-nosql tests/119-ezmlm-sql tests/120-ezmlm-send tests/125-ezmlm-tstdig tests/130-ezmlm-weed tests/135-ezmlmrc tests/140-ezmlm-clean tests/145-ezmlm-store tests/150-ezmlm-return tests/155-ezmlm-warn tests/160-ezmlm-manage tests/165-ezmlm-request tests/170-ezmlm-split tests/180-ezmlm-gate tests/210-ezmlm-idx tests/221-ezmlm-get-index tests/222-ezmlm-get-get tests/223-ezmlm-get-thread tests/225-ezmlm-get-digest tests/260-ezmlm-manage tests/270-ezmlm-moderate tests/280-ezmlm-warn tests/290-ezmlm-archive tests/300-ezmlm-dispatch tests/310-dispatch-editor tests/400-decode-sender tests/500-export tests/504-flags tests/505-substs tests/506-messages tests/510-ezmlm-manage-subnop tests/510-ezmlm-manage-unsubnop tests/511-ezmlm-manage-subprobe tests/511-ezmlm-manage-unsubprobe tests/512-ezmlm-manage-subscribe tests/512-ezmlm-manage-unsubscribe tests/513-ezmlm-manage-modsub tests/513-ezmlm-manage-modunsub tests/514-ezmlm-manage-subbymod tests/514-ezmlm-manage-unsubbymod tests/519-ezmlm-manage-copylines tests/550-ezmlm-send tests/560-addtrailer tests/570-omitbottom tests/90-cleanup tests/99-bugs
 	(cat warn-auto.sh; \
 	echo VER=\"`head -n 1 VERSION`\"; \
 	cat tests/*-* ) >ezmlm-test;
@@ -613,7 +678,7 @@ load ezmlm-tstdig.o libezmlm.a
 	./load ezmlm-tstdig -lezmlm 
 
 ezmlm-tstdig.o: \
-compile ezmlm-tstdig.c stralloc.h gen_alloc.h substdio.h readwrite.h strerr.h hasattribute.h sig.h getconf.h env.h fmt.h now.h datetime.h lock.h sgetopt.h subgetopt.h errtxt.h scan.h case.h str.h open.h die.h idx.h config.h auto_version.h
+compile ezmlm-tstdig.c stralloc.h gen_alloc.h substdio.h readwrite.h strerr.h hasattribute.h sig.h getconf.h env.h fmt.h now.h datetime.h lock.h getconfopt.h messages.h scan.h case.h str.h open.h die.h hasattribute.h wrap.h idx.h config.h stralloc.h gen_alloc.h
 	./compile ezmlm-tstdig.c
 
 ezmlm-unsub.0: \
@@ -621,11 +686,11 @@ ezmlm-unsub.1
 	nroff -man ezmlm-unsub.1 > ezmlm-unsub.0
 
 ezmlm-unsub: \
-load ezmlm-unsub.o ezmlm-subunsub.o libezmlm.a sql.lib
-	./load ezmlm-unsub ezmlm-subunsub.o -lezmlm  `cat sql.lib`
+load ezmlm-unsub.o ezmlm-subunsub.o libezmlm.a dl.lib
+	./load ezmlm-unsub ezmlm-subunsub.o -lezmlm  `cat dl.lib`
 
 ezmlm-unsub.o: \
-compile ezmlm-unsub.c
+compile ezmlm-unsub.c hasattribute.h
 	./compile ezmlm-unsub.c
 
 ezmlm-warn.0: \
@@ -633,11 +698,11 @@ ezmlm-warn.1
 	nroff -man ezmlm-warn.1 > ezmlm-warn.0
 
 ezmlm-warn: \
-load ezmlm-warn.o libezmlm.a sql.lib
-	./load ezmlm-warn -lezmlm  `cat sql.lib`
+load ezmlm-warn.o libezmlm.a dl.lib
+	./load ezmlm-warn -lezmlm  `cat dl.lib`
 
 ezmlm-warn.o: \
-compile ezmlm-warn.c direntry.h readwrite.h getln.h substdio.h stralloc.h gen_alloc.h slurp.h sgetopt.h subgetopt.h getconf.h byte.h error.h str.h strerr.h hasattribute.h sig.h now.h datetime.h fmt.h cookie.h qmail.h errtxt.h quote.h open.h scan.h lock.h copy.h mime.h auto_version.h hdr.h die.h idx.h config.h subscribe.h
+compile ezmlm-warn.c direntry.h readwrite.h getln.h substdio.h stralloc.h gen_alloc.h slurp.h getconfopt.h getconf.h byte.h error.h str.h strerr.h hasattribute.h sig.h now.h datetime.h fmt.h cookie.h qmail.h substdio.h stralloc.h gen_alloc.h messages.h quote.h open.h scan.h lock.h copy.h mime.h stralloc.h gen_alloc.h hdr.h die.h hasattribute.h wrap.h idx.h config.h stralloc.h gen_alloc.h subdb.h stralloc.h gen_alloc.h
 	./compile ezmlm-warn.c
 
 ezmlm-weed.0: \
@@ -649,98 +714,118 @@ load ezmlm-weed.o libezmlm.a
 	./load ezmlm-weed -lezmlm 
 
 ezmlm-weed.o: \
-compile ezmlm-weed.c stralloc.h gen_alloc.h str.h byte.h case.h readwrite.h substdio.h subfd.h getln.h strerr.h hasattribute.h errtxt.h die.h
+compile ezmlm-weed.c stralloc.h gen_alloc.h str.h byte.h case.h readwrite.h substdio.h subfd.h substdio.h getln.h strerr.h hasattribute.h messages.h die.h hasattribute.h
 	./compile ezmlm-weed.c
-
-ezmlm.0: \
-ezmlm.5
-	nroff -man ezmlm.5 > ezmlm.0
-
-ezmlmglrc.0: \
-ezmlmglrc.5
-	nroff -man ezmlmglrc.5 > ezmlmglrc.0
-
-ezmlmrc.0: \
-ezmlmrc.5
-	nroff -man ezmlmrc.5 > ezmlmrc.0
-
-ezmlmrc.all: \
-lang/ch_GB/ezmlmrc lang/cs/ezmlmrc lang/da/ezmlmrc lang/de/ezmlmrc lang/en_US/ezmlmrc lang/es/ezmlmrc lang/fr/ezmlmrc lang/hu/ezmlmrc lang/id/ezmlmrc lang/it/ezmlmrc lang/ja/ezmlmrc lang/nl/ezmlmrc lang/pl/ezmlmrc lang/pt/ezmlmrc lang/pt_BR/ezmlmrc lang/ru/ezmlmrc lang/sv/ezmlmrc
-
-ezmlmsubrc.0: \
-ezmlmsubrc.5
-	nroff -man ezmlmsubrc.5 > ezmlmsubrc.0
 
 fd_copy.0: \
 fd_copy.3
 	nroff -man fd_copy.3 > fd_copy.0
 
-fd_copy.o: \
-compile fd_copy.c fd.h
-	./compile fd_copy.c
+fd_copy.lo: \
+libcompile fd_copy.c fd.h
+	./libcompile fd_copy.c
 
 fd_move.0: \
 fd_move.3
 	nroff -man fd_move.3 > fd_move.0
 
-fd_move.o: \
-compile fd_move.c fd.h
-	./compile fd_move.c
+fd_move.lo: \
+libcompile fd_move.c fd.h
+	./libcompile fd_move.c
+
+fill-template: \
+warn-auto.sh fill-template.sh
+	cat warn-auto.sh fill-template.sh > fill-template
+	chmod 755 fill-template
 
 find-systype: \
 find-systype.sh auto-ccld.sh
 	cat auto-ccld.sh find-systype.sh > find-systype
 	chmod 755 find-systype
 
-fmt_str.o: \
-compile fmt_str.c fmt.h
-	./compile fmt_str.c
+fmt_str.lo: \
+libcompile fmt_str.c fmt.h
+	./libcompile fmt_str.c
 
-fmt_uint.o: \
-compile fmt_uint.c fmt.h
-	./compile fmt_uint.c
+fmt_uint0.lo: \
+libcompile fmt_uint0.c fmt.h
+	./libcompile fmt_uint0.c
 
-fmt_uint0.o: \
-compile fmt_uint0.c fmt.h
-	./compile fmt_uint0.c
+fmt_uint.lo: \
+libcompile fmt_uint.c fmt.h
+	./libcompile fmt_uint.c
 
-fmt_ulong.o: \
-compile fmt_ulong.c fmt.h
-	./compile fmt_ulong.c
-
-fork.h: \
-compile load tryvfork.c fork.h1 fork.h2
-	( ( ./compile tryvfork.c && ./load tryvfork ) >/dev/null 2>&1 \
-	&& cat fork.h2 || cat fork.h1 ) > fork.h
-	rm -f tryvfork.o tryvfork
+fmt_ulong.lo: \
+libcompile fmt_ulong.c fmt.h
+	./libcompile fmt_ulong.c
 
 fs.a: \
-makelib fmt_str.o fmt_uint.o fmt_uint0.o fmt_ulong.o scan_ulong.o scan_8long.o
-	./makelib fs.a fmt_str.o fmt_uint.o fmt_uint0.o fmt_ulong.o scan_ulong.o scan_8long.o
+makelib fmt_str.lo fmt_uint.lo fmt_uint0.lo fmt_ulong.lo scan_ulong.lo scan_8long.lo
+	./makelib fs.a fmt_str.lo fmt_uint.lo fmt_uint0.lo fmt_ulong.lo scan_ulong.lo scan_8long.lo
 
-getconf.o: \
-compile getconf.c stralloc.h gen_alloc.h byte.h slurp.h strerr.h hasattribute.h getconf.h altpath.h die.h scan.h config.h copy.h idx.h
-	./compile getconf.c
+getconf.lo: \
+libcompile getconf.c stralloc.h gen_alloc.h byte.h slurp.h strerr.h hasattribute.h getconf.h altpath.h die.h hasattribute.h config.h stralloc.h gen_alloc.h copy.h idx.h wrap.h messages.h
+	./libcompile getconf.c
+
+getconfopt_copy.lo: \
+libcompile getconfopt_copy.c die.h hasattribute.h getconfopt.h stralloc.h gen_alloc.h
+	./libcompile getconfopt_copy.c
+
+getconfopt_cstr_flag.lo: \
+libcompile getconfopt_cstr_flag.c getconf.h getconfopt.h
+	./libcompile getconfopt_cstr_flag.c
+
+getconfopt_cstr.lo: \
+libcompile getconfopt_cstr.c getconf.h getconfopt.h stralloc.h gen_alloc.h
+	./libcompile getconfopt_cstr.c
+
+getconfopt_flag.lo: \
+libcompile getconfopt_flag.c getconf.h getconfopt.h
+	./libcompile getconfopt_flag.c
+
+getconfopt.lo: \
+libcompile getconfopt.c config.h stralloc.h gen_alloc.h die.h hasattribute.h getconf.h getconfopt.h str.h
+	./libcompile getconfopt.c
+
+getconfopt_str.lo: \
+libcompile getconfopt_str.c die.h hasattribute.h getconf.h getconfopt.h stralloc.h gen_alloc.h
+	./libcompile getconfopt_str.c
+
+getconfopt_ulong_flag.lo: \
+libcompile getconfopt_ulong_flag.c getconf.h getconfopt.h
+	./libcompile getconfopt_ulong_flag.c
+
+getconfopt_ulong.lo: \
+libcompile getconfopt_ulong.c die.h hasattribute.h getconf.h getconfopt.h scan.h
+	./libcompile getconfopt_ulong.c
+
+getconfopt_version.lo: \
+libcompile getconfopt_version.c auto_version.h getconfopt.h strerr.h hasattribute.h
+	./libcompile getconfopt_version.c
+
+getconf_ulong.lo: \
+libcompile getconf_ulong.c stralloc.h gen_alloc.h getconf.h die.h hasattribute.h scan.h
+	./libcompile getconf_ulong.c
 
 getln.0: \
 getln.3
 	nroff -man getln.3 > getln.0
 
-getln.a: \
-makelib getln.o getln2.o
-	./makelib getln.a getln.o getln2.o
-
-getln.o: \
-compile getln.c substdio.h byte.h stralloc.h gen_alloc.h getln.h
-	./compile getln.c
-
 getln2.0: \
 getln2.3
 	nroff -man getln2.3 > getln2.0
 
-getln2.o: \
-compile getln2.c substdio.h stralloc.h gen_alloc.h byte.h getln.h
-	./compile getln2.c
+getln2.lo: \
+libcompile getln2.c substdio.h stralloc.h gen_alloc.h byte.h getln.h
+	./libcompile getln2.c
+
+getln.a: \
+makelib getln.lo getln2.lo
+	./makelib getln.a getln.lo getln2.lo
+
+getln.lo: \
+libcompile getln.c substdio.h byte.h stralloc.h gen_alloc.h getln.h
+	./libcompile getln.c
 
 getopt.0: \
 getopt.3
@@ -766,170 +851,235 @@ haswaitp.h: \
 choose compile haswaitp.h1 haswaitp.h2 load trywaitp.c
 	./choose cl trywaitp haswaitp.h1 haswaitp.h2 > haswaitp.h
 
-hdr_add.o: \
-compile hdr_add.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
-	./compile hdr_add.c
+hdr_add.lo: \
+libcompile hdr_add.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
+	./libcompile hdr_add.c
 
-hdr_boundary.o: \
-compile hdr_boundary.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h makehash.h
-	./compile hdr_boundary.c
+hdr_boundary.lo: \
+libcompile hdr_boundary.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h makehash.h
+	./libcompile hdr_boundary.c
 
-hdr_ctboundary.o: \
-compile hdr_ctboundary.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
-	./compile hdr_ctboundary.c
+hdr_ctboundary.lo: \
+libcompile hdr_ctboundary.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
+	./libcompile hdr_ctboundary.c
 
-hdr_datemsgid.o: \
-compile hdr_datemsgid.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h datetime.h fmt.h date822fmt.h makehash.h die.h hasattribute.h idx.h
-	./compile hdr_datemsgid.c
+hdr_datemsgid.lo: \
+libcompile hdr_datemsgid.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h stralloc.h gen_alloc.h datetime.h fmt.h date822fmt.h makehash.h die.h hasattribute.h idx.h
+	./libcompile hdr_datemsgid.c
 
-hdr_from.o: \
-compile hdr_from.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h quote.h die.h hasattribute.h idx.h
-	./compile hdr_from.c
+hdr_from.lo: \
+libcompile hdr_from.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h stralloc.h gen_alloc.h quote.h die.h hasattribute.h idx.h
+	./libcompile hdr_from.c
 
-hdr_listsubject.o: \
-compile hdr_listsubject.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h quote.h die.h hasattribute.h
-	./compile hdr_listsubject.c
+hdr_listsubject.lo: \
+libcompile hdr_listsubject.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h stralloc.h gen_alloc.h quote.h die.h hasattribute.h
+	./libcompile hdr_listsubject.c
 
-hdr_mime.o: \
-compile hdr_mime.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h makehash.h str.h
-	./compile hdr_mime.c
+hdr_mime.lo: \
+libcompile hdr_mime.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h makehash.h stralloc.h gen_alloc.h str.h
+	./libcompile hdr_mime.c
 
-hdr_transferenc.o: \
-compile hdr_transferenc.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
-	./compile hdr_transferenc.c
+hdr_subject.lo: \
+libcompile hdr_subject.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
+	./libcompile hdr_subject.c
 
-idxthread.o: \
-compile idxthread.c error.h alloc.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h lock.h open.h getln.h scan.h byte.h die.h idx.h errtxt.h substdio.h fmt.h readwrite.h makehash.h yyyymm.h
-	./compile idxthread.c
+hdr_transferenc.lo: \
+libcompile hdr_transferenc.c hdr.h qmail.h substdio.h stralloc.h gen_alloc.h
+	./libcompile hdr_transferenc.c
+
+idxthread.lo: \
+libcompile idxthread.c error.h alloc.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h lock.h open.h getln.h scan.h byte.h die.h hasattribute.h idx.h messages.h substdio.h fmt.h readwrite.h makehash.h yyyymm.h stralloc.h gen_alloc.h
+	./libcompile idxthread.c
 
 install: \
-load install.o getln.a strerr.a substdio.a stralloc.a alloc.a open.a error.a str.a fs.a
-	./load install getln.a strerr.a substdio.a stralloc.a alloc.a open.a error.a str.a fs.a 
+it man installer conf-bin conf-etc conf-lang conf-lib conf-man BIN ETC LIB MAN
+	./installer "`head -n 1 conf-bin`" < BIN
+	./installer "`head -n 1 conf-etc`" < ETC
+	./installer "`head -n 1 conf-man`" < MAN
+	./installer "`head -n 1 conf-lib`" < LIB
+	rm -f "`head -n 1 conf-etc`"/default
+	ln -sf "`head -n 1 conf-lang`" "`head -n 1 conf-etc`"/default
 
-install.o: \
-compile install.c substdio.h stralloc.h gen_alloc.h getln.h readwrite.h exit.h open.h error.h strerr.h hasattribute.h byte.h scan.h
-	./compile install.c
+installer: \
+load installer.o getln.a strerr.a substdio.a stralloc.a alloc.a open.a error.a str.a fs.a
+	./load installer getln.a strerr.a substdio.a stralloc.a alloc.a open.a error.a str.a fs.a 
 
-issub.c: \
-conf-sub
-	rm -f issub.c issub.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/issub.c issub.c
-	touch issub.c
-
-issub.o: \
-compile issub.c subscribe.h stralloc.h gen_alloc.h
-	./compile issub.c
+installer.o: \
+compile installer.c substdio.h stralloc.h gen_alloc.h getln.h readwrite.h exit.h open.h error.h strerr.h hasattribute.h byte.h scan.h
+	./compile installer.c
 
 it: \
-symlinks ezmlm-accept ezmlm-archive ezmlm-check ezmlm-cgi ezmlm-clean ezmlm-confirm ezmlm-cron ezmlm-dispatch ezmlm-gate ezmlm-get ezmlm-glconf ezmlm-idx ezmlm-issubn ezmlm-limit ezmlm-list ezmlm-make ezmlm-manage ezmlm-moderate ezmlm-reject ezmlm-request ezmlm-return ezmlm-send ezmlm-split ezmlm-store ezmlm-sub ezmlm-tstdig ezmlm-unsub ezmlm-warn ezmlm-weed ezmlm-test ezmlmrc.all
+ezmlm-accept ezmlm-archive ezmlm-check ezmlm-checksub ezmlm-cgi ezmlm-clean ezmlm-confirm ezmlm-cron ezmlm-dispatch ezmlm-gate ezmlm-get ezmlm-glconf ezmlm-idx ezmlm-import ezmlm-issubn ezmlm-limit ezmlm-list ezmlm-make ezmlm-manage ezmlm-moderate ezmlm-reject ezmlm-request ezmlm-return ezmlm-rmtab ezmlm-send ezmlm-split ezmlm-store ezmlm-sub ezmlm-tstdig ezmlm-unsub ezmlm-warn ezmlm-weed ezmlm-test sub-std.so ezmlmrc.all messages.all ezmlm-idx.spec test-getconfopt
 
 lang/ch_GB/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/ch_GB/sed
+makelang ezmlmrc
 	./makelang ch_GB
 
 lang/cs/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/cs/sed
+makelang ezmlmrc
 	./makelang cs
 
+lang/cs/text/messages: \
+make-messages lang/cs/messages
+	./make-messages < lang/cs/messages > lang/cs/text/messages
+
 lang/da/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/da/sed
+makelang ezmlmrc
 	./makelang da
 
+lang/da/text/messages: \
+make-messages lang/da/messages
+	./make-messages < lang/da/messages > lang/da/text/messages
+
 lang/de/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/de/sed
+makelang ezmlmrc
 	./makelang de
 
+lang/de/text/messages: \
+make-messages lang/de/messages
+	./make-messages < lang/de/messages > lang/de/text/messages
+
 lang/en_US/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/en_US/sed
+makelang ezmlmrc
 	./makelang en_US
 
+lang/en_US/text/messages: \
+make-messages lang/en_US/messages
+	./make-messages < lang/en_US/messages > lang/en_US/text/messages
+
 lang/es/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/es/sed
+makelang ezmlmrc
 	./makelang es
 
 lang/fr/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/fr/sed
+makelang ezmlmrc
 	./makelang fr
 
+lang/fr/text/messages: \
+make-messages lang/fr/messages
+	./make-messages < lang/fr/messages > lang/fr/text/messages
+
 lang/hu/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/hu/sed
+makelang ezmlmrc
 	./makelang hu
 
+lang/hu/text/messages: \
+make-messages lang/hu/messages
+	./make-messages < lang/hu/messages > lang/hu/text/messages
+
 lang/id/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/id/sed
+makelang ezmlmrc
 	./makelang id
 
+lang/id/text/messages: \
+make-messages lang/id/messages
+	./make-messages < lang/id/messages > lang/id/text/messages
+
 lang/it/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/it/sed
+makelang ezmlmrc
 	./makelang it
 
+lang/it/text/messages: \
+make-messages lang/it/messages
+	./make-messages < lang/it/messages > lang/it/text/messages
+
 lang/ja/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/ja/sed
+makelang ezmlmrc
 	./makelang ja
 
 lang/nl/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/nl/sed
+makelang ezmlmrc
 	./makelang nl
 
+lang/nl/text/messages: \
+make-messages lang/nl/messages
+	./make-messages < lang/nl/messages > lang/nl/text/messages
+
 lang/pl/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/pl/sed
+makelang ezmlmrc
 	./makelang pl
 
-lang/pt/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/pt/sed
-	./makelang pt
+lang/pl/text/messages: \
+make-messages lang/pl/messages
+	./make-messages < lang/pl/messages > lang/pl/text/messages
 
 lang/pt_BR/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/pt_BR/sed
+makelang ezmlmrc
 	./makelang pt_BR
 
+lang/pt_BR/text/messages: \
+make-messages lang/pt_BR/messages
+	./make-messages < lang/pt_BR/messages > lang/pt_BR/text/messages
+
+lang/pt/ezmlmrc: \
+makelang ezmlmrc
+	./makelang pt
+
+lang/pt/text/messages: \
+make-messages lang/pt/messages
+	./make-messages < lang/pt/messages > lang/pt/text/messages
+
 lang/ru/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/ru/sed
+makelang ezmlmrc
 	./makelang ru
 
 lang/sv/ezmlmrc: \
-makelang VERSION ezmlmrc.template lang/sv/sed
+makelang ezmlmrc
 	./makelang sv
 
+lang/sv/text/messages: \
+make-messages lang/sv/messages
+	./make-messages < lang/sv/messages > lang/sv/text/messages
+
+libcompile: \
+make-libcompile warn-auto.sh systype
+	( cat warn-auto.sh; ./make-libcompile "`cat systype`" ) > libcompile
+	chmod 755 libcompile
+
 libezmlm.a: \
-makelib alloc.o alloc_re.o altpath.o author.o auto_bin.o auto_cron.o auto_etc.o auto_qmail.o auto_version.o byte_chr.o byte_copy.o byte_cr.o byte_diff.o byte_rchr.o byte_zero.o case_diffb.o case_diffs.o case_lowerb.o case_startb.o case_starts.o checktag.o concatHDR.o config.o constmap.o cookie.o copy.o date2yyyymm.o date822fmt.o dateline.o datetime.o decodeB.o decodeHDR.o decodeQ.o die_badaddr.o die_badformat.o die_dow.o die_nomem.o die_sender.o die_usage.o encodeB.o encodeQ.o env.o envread.o error.o error_str.o fd_copy.o fd_move.o fmt_str.o fmt_uint.o fmt_uint0.o fmt_ulong.o getconf.o getln.o getln2.o hdr_add.o hdr_boundary.o hdr_ctboundary.o hdr_datemsgid.o hdr_from.o hdr_listsubject.o hdr_mime.o hdr_transferenc.o idxthread.o issub.o lock_ex.o lock_exnb.o lockfile.o log.o logmsg.o makehash.o now.o open_append.o open_read.o open_trunc.o opensub.o putsubs.o qmail.o qmail_copy.o quote.o scan_8long.o scan_ulong.o searchlog.o seek_set.o sgetopt.o sig_catch.o sig_pipe.o slurp.o slurpclose.o sqllib.o std_checktag.o std_issub.o std_makepath.o std_putsubs.o std_searchlog.o std_subscribe.o std_tagmsg.o str_chr.o str_cpy.o str_diff.o str_diffn.o str_len.o str_rchr.o str_start.o stralloc_arts.o stralloc_cat.o stralloc_catb.o stralloc_cats.o stralloc_copy.o stralloc_eady.o stralloc_num.o stralloc_opyb.o stralloc_opys.o stralloc_pend.o strerr.o strerr_die.o strerr_sys.o subfderr.o subfdin.o subfdout.o subgetopt.o subhash.o subscribe.o substdi.o substdio.o substdio_copy.o substdo.o surf.o surfpcs.o tagmsg.o unfoldHDR.o wait_pid.o wrap_execbin.o wrap_execsh.o wrap_execv.o wrap_exitcode.o wrap_fork.o wrap_stat.o wrap_waitpid.o
-	./makelib libezmlm.a alloc.o alloc_re.o altpath.o author.o auto_bin.o auto_cron.o auto_etc.o auto_qmail.o auto_version.o byte_chr.o byte_copy.o byte_cr.o byte_diff.o byte_rchr.o byte_zero.o case_diffb.o case_diffs.o case_lowerb.o case_startb.o case_starts.o checktag.o concatHDR.o config.o constmap.o cookie.o copy.o date2yyyymm.o date822fmt.o dateline.o datetime.o decodeB.o decodeHDR.o decodeQ.o die_badaddr.o die_badformat.o die_dow.o die_nomem.o die_sender.o die_usage.o encodeB.o encodeQ.o env.o envread.o error.o error_str.o fd_copy.o fd_move.o fmt_str.o fmt_uint.o fmt_uint0.o fmt_ulong.o getconf.o getln.o getln2.o hdr_add.o hdr_boundary.o hdr_ctboundary.o hdr_datemsgid.o hdr_from.o hdr_listsubject.o hdr_mime.o hdr_transferenc.o idxthread.o issub.o lock_ex.o lock_exnb.o lockfile.o log.o logmsg.o makehash.o now.o open_append.o open_read.o open_trunc.o opensub.o putsubs.o qmail.o qmail_copy.o quote.o scan_8long.o scan_ulong.o searchlog.o seek_set.o sgetopt.o sig_catch.o sig_pipe.o slurp.o slurpclose.o sqllib.o std_checktag.o std_issub.o std_makepath.o std_putsubs.o std_searchlog.o std_subscribe.o std_tagmsg.o str_chr.o str_cpy.o str_diff.o str_diffn.o str_len.o str_rchr.o str_start.o stralloc_arts.o stralloc_cat.o stralloc_catb.o stralloc_cats.o stralloc_copy.o stralloc_eady.o stralloc_num.o stralloc_opyb.o stralloc_opys.o stralloc_pend.o strerr.o strerr_die.o strerr_sys.o subfderr.o subfdin.o subfdout.o subgetopt.o subhash.o subscribe.o substdi.o substdio.o substdio_copy.o substdo.o surf.o surfpcs.o tagmsg.o unfoldHDR.o wait_pid.o wrap_execbin.o wrap_execsh.o wrap_execv.o wrap_exitcode.o wrap_fork.o wrap_stat.o wrap_waitpid.o
+makelib alloc.lo alloc_re.lo altpath.lo author.lo auto_bin.lo auto_cron.lo auto_etc.lo auto_lib.lo auto_qmail.lo auto_version.lo byte_chr.lo byte_copy.lo byte_cr.lo byte_diff.lo byte_rchr.lo byte_zero.lo case_diffb.lo case_diffs.lo case_lowerb.lo case_startb.lo case_starts.lo concatHDR.lo config.lo constmap.lo cookie.lo copy.lo date2yyyymm.lo date822fmt.lo dateline.lo datetime.lo decodeB.lo decodeHDR.lo decodeQ.lo die_badaddr.lo die_badformat.lo die_dow.lo die_nomem.lo die_sender.lo die_usage.lo encodeB.lo encodeQ.lo env.lo envread.lo error.lo error_str.lo fd_copy.lo fd_move.lo fmt_str.lo fmt_uint.lo fmt_uint0.lo fmt_ulong.lo getconf.lo getconf_ulong.lo getln.lo getln2.lo getconfopt.lo getconfopt_copy.lo getconfopt_cstr.lo getconfopt_cstr_flag.lo getconfopt_flag.lo getconfopt_str.lo getconfopt_ulong.lo getconfopt_ulong_flag.lo getconfopt_version.lo hdr_add.lo hdr_boundary.lo hdr_ctboundary.lo hdr_datemsgid.lo hdr_from.lo hdr_listsubject.lo hdr_mime.lo hdr_subject.lo hdr_transferenc.lo idxthread.lo lock_ex.lo lockfile.lo log.lo makehash.lo makepath.lo messages.lo now.lo open_append.lo open_read.lo open_trunc.lo qmail.lo qmail_copy.lo quote.lo scan_8long.lo scan_ulong.lo seek_set.lo sender.lo sgetopt.lo sig_catch.lo sig_pipe.lo slurp.lo slurpclose.lo str_chr.lo str_cpy.lo str_diff.lo str_diffn.lo str_len.lo str_rchr.lo str_start.lo stralloc_arts.lo stralloc_cat.lo stralloc_catb.lo stralloc_cats.lo stralloc_copy.lo stralloc_eady.lo stralloc_num.lo stralloc_opyb.lo stralloc_opys.lo stralloc_pend.lo strerr.lo subdb.lo subfderr.lo subfdin.lo subfdout.lo subgetopt.lo subhash.lo substdi.lo substdio.lo substdio_copy.lo substdo.lo surf.lo surfpcs.lo unfoldHDR.lo wait_pid.lo wrap_chdir.lo wrap_execbin.lo wrap_execsh.lo wrap_execv.lo wrap_exitcode.lo wrap_fork.lo wrap_rename.lo wrap_stat.lo wrap_waitpid.lo
+	./makelib libezmlm.a alloc.lo alloc_re.lo altpath.lo author.lo auto_bin.lo auto_cron.lo auto_etc.lo auto_lib.lo auto_qmail.lo auto_version.lo byte_chr.lo byte_copy.lo byte_cr.lo byte_diff.lo byte_rchr.lo byte_zero.lo case_diffb.lo case_diffs.lo case_lowerb.lo case_startb.lo case_starts.lo concatHDR.lo config.lo constmap.lo cookie.lo copy.lo date2yyyymm.lo date822fmt.lo dateline.lo datetime.lo decodeB.lo decodeHDR.lo decodeQ.lo die_badaddr.lo die_badformat.lo die_dow.lo die_nomem.lo die_sender.lo die_usage.lo encodeB.lo encodeQ.lo env.lo envread.lo error.lo error_str.lo fd_copy.lo fd_move.lo fmt_str.lo fmt_uint.lo fmt_uint0.lo fmt_ulong.lo getconf.lo getconf_ulong.lo getln.lo getln2.lo getconfopt.lo getconfopt_copy.lo getconfopt_cstr.lo getconfopt_cstr_flag.lo getconfopt_flag.lo getconfopt_str.lo getconfopt_ulong.lo getconfopt_ulong_flag.lo getconfopt_version.lo hdr_add.lo hdr_boundary.lo hdr_ctboundary.lo hdr_datemsgid.lo hdr_from.lo hdr_listsubject.lo hdr_mime.lo hdr_subject.lo hdr_transferenc.lo idxthread.lo lock_ex.lo lockfile.lo log.lo makehash.lo makepath.lo messages.lo now.lo open_append.lo open_read.lo open_trunc.lo qmail.lo qmail_copy.lo quote.lo scan_8long.lo scan_ulong.lo seek_set.lo sender.lo sgetopt.lo sig_catch.lo sig_pipe.lo slurp.lo slurpclose.lo str_chr.lo str_cpy.lo str_diff.lo str_diffn.lo str_len.lo str_rchr.lo str_start.lo stralloc_arts.lo stralloc_cat.lo stralloc_catb.lo stralloc_cats.lo stralloc_copy.lo stralloc_eady.lo stralloc_num.lo stralloc_opyb.lo stralloc_opys.lo stralloc_pend.lo strerr.lo subdb.lo subfderr.lo subfdin.lo subfdout.lo subgetopt.lo subhash.lo substdi.lo substdio.lo substdio_copy.lo substdo.lo surf.lo surfpcs.lo unfoldHDR.lo wait_pid.lo wrap_chdir.lo wrap_execbin.lo wrap_execsh.lo wrap_execv.lo wrap_exitcode.lo wrap_fork.lo wrap_rename.lo wrap_stat.lo wrap_waitpid.lo
 
 load: \
 make-load warn-auto.sh systype
 	( cat warn-auto.sh; ./make-load "`cat systype`" ) > load
 	chmod 755 load
 
-lock_ex.o: \
-compile lock_ex.c hasflock.h lock.h
-	./compile lock_ex.c
+lock_ex.lo: \
+libcompile lock_ex.c hasflock.h lock.h
+	./libcompile lock_ex.c
 
-lock_exnb.o: \
-compile lock_exnb.c hasflock.h lock.h
-	./compile lock_exnb.c
+lockfile.lo: \
+libcompile lockfile.c lock.h messages.h strerr.h hasattribute.h die.h hasattribute.h idx.h open.h
+	./libcompile lockfile.c
 
-lockfile.o: \
-compile lockfile.c lock.h errtxt.h strerr.h hasattribute.h die.h idx.h open.h
-	./compile lockfile.c
-
-log.o: \
-compile log.c substdio.h readwrite.h stralloc.h gen_alloc.h log.h now.h datetime.h fmt.h open.h subscribe.h
-	./compile log.c
-
-logmsg.c: \
-conf-sub
-	rm -f logmsg.c logmsg.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/logmsg.c logmsg.c
-	touch logmsg.c
-
-logmsg.o: \
-compile logmsg.c stralloc.h gen_alloc.h fmt.h subscribe.h errtxt.h
-	./compile logmsg.c
+log.lo: \
+libcompile log.c substdio.h readwrite.h stralloc.h gen_alloc.h log.h now.h datetime.h fmt.h open.h sub_std.h stralloc.h gen_alloc.h
+	./libcompile log.c
 
 make-compile: \
 make-compile.sh auto-ccld.sh
 	cat auto-ccld.sh make-compile.sh > make-compile
 	chmod 755 make-compile
+
+makehash.lo: \
+libcompile makehash.c stralloc.h gen_alloc.h byte.h surf.h uint32.h makehash.h die.h hasattribute.h idx.h
+	./libcompile makehash.c
+
+makelang: \
+warn-auto.sh makelang.sh
+	cat warn-auto.sh makelang.sh > makelang
+	chmod 755 makelang
+
+make-libcompile: \
+make-libcompile.sh auto-ccld.sh
+	cat auto-ccld.sh make-libcompile.sh > make-libcompile
+	chmod 755 make-libcompile
+
+makelib: \
+make-makelib warn-auto.sh systype
+	( cat warn-auto.sh; ./make-makelib "`cat systype`" ) > makelib
+	chmod 755 makelib
 
 make-load: \
 make-load.sh auto-ccld.sh
@@ -941,375 +1091,361 @@ make-makelib.sh auto-ccld.sh
 	cat auto-ccld.sh make-makelib.sh > make-makelib
 	chmod 755 make-makelib
 
-makehash.o: \
-compile makehash.c stralloc.h gen_alloc.h byte.h surf.h uint32.h makehash.h die.h hasattribute.h idx.h
-	./compile makehash.c
+make-makeso: \
+make-makeso.sh auto-ccld.sh
+	cat auto-ccld.sh make-makeso.sh > make-makeso
+	chmod 755 make-makeso
 
-makelang: \
-warn-auto.sh makelang.sh
-	cat warn-auto.sh makelang.sh > makelang
-	chmod 755 makelang
+make-messages-c: \
+make-messages-c.sh auto-ccld.sh
+	cat auto-ccld.sh make-messages-c.sh > make-messages-c
+	chmod 755 make-messages-c
 
-makelib: \
-make-makelib warn-auto.sh systype
-	( cat warn-auto.sh; ./make-makelib "`cat systype`" ) > makelib
-	chmod 755 makelib
+make-messages: \
+make-messages.sh auto-ccld.sh
+	cat auto-ccld.sh make-messages.sh > make-messages
+	chmod 755 make-messages
+
+makepath.lo: \
+libcompile makepath.c die.h hasattribute.h stralloc.h gen_alloc.h sub_std.h stralloc.h gen_alloc.h
+	./libcompile makepath.c
+
+makeso: \
+make-makeso warn-auto.sh systype
+	( cat warn-auto.sh; ./make-makeso "`cat systype`" ) > makeso
+	chmod 755 makeso
 
 man: \
-ezmlm.0 ezmlm-accept.0 ezmlm-archive.0 ezmlm-cgi.0 ezmlm-check.0 ezmlm-clean.0 ezmlm-confirm.0 ezmlm-cron.0 ezmlm-dispatch.0 ezmlm-gate.0 ezmlm-get.0 ezmlm-glconf.0 ezmlm-idx.0 ezmlm-issubn.0 ezmlm-limit.0 ezmlm-list.0 ezmlm-make.0 ezmlm-manage.0 ezmlm-mktab.0 ezmlm-moderate.0 ezmlm-receipt.0 ezmlm-reject.0 ezmlm-request.0 ezmlm-return.0 ezmlm-send.0 ezmlm-split.0 ezmlm-store.0 ezmlm-sub.0 ezmlm-test.0 ezmlm-tstdig.0 ezmlm-unsub.0 ezmlm-warn.0 ezmlm-weed.0 alloc.0 case.0 datetime.0 direntry.0 env.0 error.0 error_str.0 error_temp.0 ezmlm.0 ezmlmglrc.0 ezmlmsubrc.0 ezmlmrc.0 fd_copy.0 fd_move.0 getln.0 getln2.0 getopt.0 now.0 sgetopt.0 stralloc.0 subfd.0 subgetopt.0 substdio.0 substdio_copy.0 substdio_in.0 substdio_out.0 surf.0 surfpcs.0 wait.0
+ezmlm.0 ezmlm-accept.0 ezmlm-archive.0 ezmlm-cgi.0 ezmlm-check.0 ezmlm-checksub.0 ezmlm-clean.0 ezmlm-confirm.0 ezmlm-cron.0 ezmlm-dispatch.0 ezmlm-gate.0 ezmlm-get.0 ezmlm-glconf.0 ezmlm-idx.0 ezmlm-import.0 ezmlm-issubn.0 ezmlm-limit.0 ezmlm-list.0 ezmlm-make.0 ezmlm-manage.0 ezmlm-moderate.0 ezmlm-receipt.0 ezmlm-reject.0 ezmlm-request.0 ezmlm-return.0 ezmlm-rmtab.0 ezmlm-send.0 ezmlm-split.0 ezmlm-store.0 ezmlm-sub.0 ezmlm-test.0 ezmlm-tstdig.0 ezmlm-unsub.0 ezmlm-warn.0 ezmlm-weed.0 alloc.0 case.0 datetime.0 direntry.0 env.0 error.0 error_str.0 error_temp.0 ezmlm.0 ezmlmglrc.0 ezmlmsubrc.0 ezmlmrc.0 fd_copy.0 fd_move.0 getln.0 getln2.0 getopt.0 now.0 sgetopt.0 stralloc.0 subfd.0 subgetopt.0 substdio.0 substdio_copy.0 substdio_in.0 substdio_out.0 surf.0 surfpcs.0 wait.0
+
+messages.all: \
+lang/cs/text/messages lang/da/text/messages lang/de/text/messages lang/en_US/text/messages lang/fr/text/messages lang/hu/text/messages lang/id/text/messages lang/it/text/messages lang/nl/text/messages lang/pl/text/messages lang/pt_BR/text/messages lang/pt/text/messages lang/sv/text/messages
+
+messages.lo: \
+libcompile messages.c error.h messages.h altpath.h config.h stralloc.h gen_alloc.h constmap.h copy.h die.h hasattribute.h slurp.h stralloc.h gen_alloc.h str.h strerr.h hasattribute.h messages-txt.c
+	./libcompile messages.c
+
+messages-txt.c: \
+make-messages-c conf-lang Makefile lang/cs/messages lang/da/messages lang/de/messages lang/en_US/messages lang/fr/messages lang/hu/messages lang/id/messages lang/it/messages lang/nl/messages lang/pl/messages lang/pt_BR/messages lang/pt/messages lang/sv/messages
+	./make-messages-c < lang/$$(head -n 1 conf-lang)/messages >messages-txt.c
+
+m.lib: \
+compile load trylib.c
+	( ( ./compile trylib.c && ./load trylib -lm ) >/dev/null 2>&1 && echo -lm || exit 0 ) >m.lib
+	rm -f trylib.o trylib
+
+mysql: \
+sub-mysql.so
 
 now.0: \
 now.3
 	nroff -man now.3 > now.0
 
-now.o: \
-compile now.c datetime.h now.h
-	./compile now.c
+now.lo: \
+libcompile now.c datetime.h now.h datetime.h
+	./libcompile now.c
+
+nsl.lib: \
+compile load trylib.c
+	( ( ./compile trylib.c && ./load trylib -lnsl ) >/dev/null 2>&1 && echo -lnsl || exit 0 ) >nsl.lib
+	rm -f trylib.o trylib
 
 open.a: \
-makelib open_append.o open_read.o open_trunc.o
-	./makelib open.a open_append.o open_read.o open_trunc.o
+makelib open_append.lo open_read.lo open_trunc.lo
+	./makelib open.a open_append.lo open_read.lo open_trunc.lo
 
-open_append.o: \
-compile open_append.c open.h
-	./compile open_append.c
+open_append.lo: \
+libcompile open_append.c open.h
+	./libcompile open_append.c
 
-open_read.o: \
-compile open_read.c open.h
-	./compile open_read.c
+open_read.lo: \
+libcompile open_read.c open.h
+	./libcompile open_read.c
 
-open_trunc.o: \
-compile open_trunc.c open.h
-	./compile open_trunc.c
+open_trunc.lo: \
+libcompile open_trunc.c open.h
+	./libcompile open_trunc.c
 
-opensub.c: \
-conf-sub
-	rm -f opensub.c opensub.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/opensub.c opensub.c
-	touch opensub.c
+pgsql: \
+sub-pgsql.so
 
-opensub.o: \
-compile opensub.c stralloc.h gen_alloc.h strerr.h hasattribute.h errtxt.h subscribe.h
-	./compile opensub.c
+qmail_copy.lo: \
+libcompile qmail_copy.c qmail.h substdio.h stralloc.h gen_alloc.h substdio.h
+	./libcompile qmail_copy.c
 
-putsubs.c: \
-conf-sub
-	rm -f putsubs.c putsubs.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/putsubs.c putsubs.c
-	touch putsubs.c
+qmail.lo: \
+libcompile qmail.c substdio.h readwrite.h wait.h die.h hasattribute.h env.h stralloc.h gen_alloc.h getconf.h str.h exit.h fork.h fd.h qmail.h substdio.h stralloc.h gen_alloc.h auto_qmail.h alloc.h stralloc.h gen_alloc.h idx.h
+	./libcompile qmail.c
 
-putsubs.o: \
-compile putsubs.c subscribe.h stralloc.h gen_alloc.h
-	./compile putsubs.c
+quote.lo: \
+libcompile quote.c stralloc.h gen_alloc.h str.h quote.h
+	./libcompile quote.c
 
-qmail.o: \
-compile qmail.c substdio.h readwrite.h wait.h env.h str.h exit.h fork.h fd.h qmail.h stralloc.h gen_alloc.h auto_qmail.h alloc.h idx.h
-	./compile qmail.c
+scan_8long.lo: \
+libcompile scan_8long.c scan.h
+	./libcompile scan_8long.c
 
-qmail_copy.o: \
-compile qmail_copy.c qmail.h substdio.h stralloc.h gen_alloc.h
-	./compile qmail_copy.c
+scan_ulong.lo: \
+libcompile scan_ulong.c scan.h
+	./libcompile scan_ulong.c
 
-quote.o: \
-compile quote.c stralloc.h gen_alloc.h str.h quote.h
-	./compile quote.c
+seek_set.lo: \
+libcompile seek_set.c seek.h
+	./libcompile seek_set.c
 
-scan_8long.o: \
-compile scan_8long.c scan.h
-	./compile scan_8long.c
-
-scan_ulong.o: \
-compile scan_ulong.c scan.h
-	./compile scan_ulong.c
-
-searchlog.c: \
-conf-sub
-	rm -f searchlog.c searchlog.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/searchlog.c searchlog.c
-	touch searchlog.c
-
-searchlog.o: \
-compile searchlog.c subscribe.h stralloc.h gen_alloc.h
-	./compile searchlog.c
-
-seek_set.o: \
-compile seek_set.c seek.h
-	./compile seek_set.c
-
-setup: \
-it man install conf-bin conf-etc conf-lang conf-man BIN ETC MAN
-	./install "`head -n 1 conf-bin`" < BIN
-	./install "`head -n 1 conf-etc`" < ETC
-	./install "`head -n 1 conf-man`" < MAN
-	rm -f "`head -n 1 conf-etc`"/default
-	ln -sf "`head -n 1 conf-lang`" "`head -n 1 conf-etc`"/default
+sender.lo: \
+libcompile sender.c die.h hasattribute.h env.h str.h stralloc.h gen_alloc.h
+	./libcompile sender.c
 
 sgetopt.0: \
 sgetopt.3
 	nroff -man sgetopt.3 > sgetopt.0
 
-sgetopt.o: \
-compile sgetopt.c substdio.h subfd.h sgetopt.h subgetopt.h
-	./compile sgetopt.c
+sgetopt.lo: \
+libcompile sgetopt.c substdio.h subfd.h substdio.h sgetopt.h subgetopt.h
+	./libcompile sgetopt.c
 
-sig_catch.o: \
-compile sig_catch.c sig.h hassgact.h
-	./compile sig_catch.c
+sig_catch.lo: \
+libcompile sig_catch.c sig.h hassgact.h
+	./libcompile sig_catch.c
 
-sig_pipe.o: \
-compile sig_pipe.c sig.h
-	./compile sig_pipe.c
+sig_pipe.lo: \
+libcompile sig_pipe.c sig.h
+	./libcompile sig_pipe.c
 
-slurp.o: \
-compile slurp.c stralloc.h gen_alloc.h slurp.h slurpclose.h error.h open.h
-	./compile slurp.c
+slurpclose.lo: \
+libcompile slurpclose.c stralloc.h gen_alloc.h readwrite.h slurpclose.h error.h
+	./libcompile slurpclose.c
 
-slurpclose.o: \
-compile slurpclose.c stralloc.h gen_alloc.h readwrite.h slurpclose.h error.h
-	./compile slurpclose.c
+slurp.lo: \
+libcompile slurp.c stralloc.h gen_alloc.h slurp.h slurpclose.h error.h open.h
+	./libcompile slurp.c
 
-sql.lib: \
-conf-sub
-	sub=`head -n 1 conf-sub` ; head -n 1 sub_$$sub/conf-sqlld > sql.tmp
-	mv sql.tmp sql.lib
-
-sqllib.o: \
-compile sqllib.c str.h slurp.h scan.h stralloc.h gen_alloc.h strerr.h hasattribute.h errtxt.h subscribe.h
-	./compile sqllib.c
-
-std_checktag.o: \
-compile std_checktag.c stralloc.h gen_alloc.h scan.h fmt.h cookie.h makehash.h strerr.h hasattribute.h slurp.h byte.h errtxt.h subscribe.h config.h
-	./compile std_checktag.c
-
-std_issub.o: \
-compile std_issub.c stralloc.h gen_alloc.h getln.h readwrite.h substdio.h open.h byte.h case.h strerr.h hasattribute.h error.h uint32.h subhash.h fmt.h subscribe.h errtxt.h die.h idx.h
-	./compile std_issub.c
-
-std_makepath.o: \
-compile std_makepath.c die.h hasattribute.h stralloc.h gen_alloc.h subscribe.h
-	./compile std_makepath.c
-
-std_putsubs.o: \
-compile std_putsubs.c getln.h error.h strerr.h hasattribute.h readwrite.h str.h fmt.h stralloc.h gen_alloc.h open.h substdio.h case.h errtxt.h subscribe.h qmail.h die.h
-	./compile std_putsubs.c
-
-std_searchlog.o: \
-compile std_searchlog.c getln.h case.h scan.h stralloc.h gen_alloc.h str.h open.h datetime.h date822fmt.h substdio.h readwrite.h strerr.h hasattribute.h error.h errtxt.h subscribe.h die.h
-	./compile std_searchlog.c
-
-std_subscribe.o: \
-compile std_subscribe.c str.h stralloc.h gen_alloc.h getln.h readwrite.h substdio.h strerr.h hasattribute.h open.h byte.h case.h lock.h error.h subscribe.h uint32.h subhash.h fmt.h errtxt.h log.h die.h
-	./compile std_subscribe.c
-
-std_tagmsg.o: \
-compile std_tagmsg.c stralloc.h gen_alloc.h scan.h fmt.h strerr.h hasattribute.h cookie.h slurp.h errtxt.h subscribe.h makehash.h die.h idx.h config.h
-	./compile std_tagmsg.c
+sqlite3: \
+sub-sqlite3.so
 
 str.a: \
-makelib str_len.o str_diff.o str_diffn.o str_cpy.o str_chr.o str_rchr.o str_start.o byte_chr.o byte_rchr.o byte_diff.o byte_copy.o byte_cr.o byte_zero.o
-	./makelib str.a str_len.o str_diff.o str_diffn.o str_cpy.o str_chr.o str_rchr.o str_start.o byte_chr.o byte_rchr.o byte_diff.o byte_copy.o byte_cr.o byte_zero.o
-
-str_chr.o: \
-compile str_chr.c str.h
-	./compile str_chr.c
-
-str_cpy.o: \
-compile str_cpy.c str.h
-	./compile str_cpy.c
-
-str_diff.o: \
-compile str_diff.c str.h
-	./compile str_diff.c
-
-str_diffn.o: \
-compile str_diffn.c str.h
-	./compile str_diffn.c
-
-str_len.o: \
-compile str_len.c str.h
-	./compile str_len.c
-
-str_rchr.o: \
-compile str_rchr.c str.h
-	./compile str_rchr.c
-
-str_start.o: \
-compile str_start.c str.h
-	./compile str_start.c
+makelib str_len.lo str_diff.lo str_diffn.lo str_cpy.lo str_chr.lo str_rchr.lo str_start.lo byte_chr.lo byte_rchr.lo byte_diff.lo byte_copy.lo byte_cr.lo byte_zero.lo
+	./makelib str.a str_len.lo str_diff.lo str_diffn.lo str_cpy.lo str_chr.lo str_rchr.lo str_start.lo byte_chr.lo byte_rchr.lo byte_diff.lo byte_copy.lo byte_cr.lo byte_zero.lo
 
 stralloc.0: \
 stralloc.3
 	nroff -man stralloc.3 > stralloc.0
 
 stralloc.a: \
-makelib stralloc_eady.o stralloc_pend.o stralloc_copy.o stralloc_opys.o stralloc_opyb.o stralloc_cat.o stralloc_cats.o stralloc_catb.o stralloc_arts.o stralloc_num.o
-	./makelib stralloc.a stralloc_eady.o stralloc_pend.o stralloc_copy.o stralloc_opys.o stralloc_opyb.o stralloc_cat.o stralloc_cats.o stralloc_catb.o stralloc_arts.o stralloc_num.o
+makelib stralloc_eady.lo stralloc_pend.lo stralloc_copy.lo stralloc_opys.lo stralloc_opyb.lo stralloc_cat.lo stralloc_cats.lo stralloc_catb.o stralloc_arts.lo stralloc_num.lo
+	./makelib stralloc.a stralloc_eady.lo stralloc_pend.lo stralloc_copy.lo stralloc_opys.lo stralloc_opyb.lo stralloc_cat.lo stralloc_cats.lo stralloc_catb.o stralloc_arts.lo stralloc_num.lo
 
-stralloc_arts.o: \
-compile stralloc_arts.c byte.h str.h stralloc.h gen_alloc.h
-	./compile stralloc_arts.c
+stralloc_arts.lo: \
+libcompile stralloc_arts.c byte.h str.h stralloc.h gen_alloc.h
+	./libcompile stralloc_arts.c
 
-stralloc_cat.o: \
-compile stralloc_cat.c byte.h stralloc.h gen_alloc.h
-	./compile stralloc_cat.c
+stralloc_catb.lo: \
+libcompile stralloc_catb.c stralloc.h gen_alloc.h byte.h
+	./libcompile stralloc_catb.c
 
 stralloc_catb.o: \
 compile stralloc_catb.c stralloc.h gen_alloc.h byte.h
 	./compile stralloc_catb.c
 
-stralloc_cats.o: \
-compile stralloc_cats.c byte.h str.h stralloc.h gen_alloc.h
-	./compile stralloc_cats.c
+stralloc_cat.lo: \
+libcompile stralloc_cat.c byte.h stralloc.h gen_alloc.h
+	./libcompile stralloc_cat.c
 
-stralloc_copy.o: \
-compile stralloc_copy.c byte.h stralloc.h gen_alloc.h
-	./compile stralloc_copy.c
+stralloc_cats.lo: \
+libcompile stralloc_cats.c byte.h str.h stralloc.h gen_alloc.h
+	./libcompile stralloc_cats.c
 
-stralloc_eady.o: \
-compile stralloc_eady.c alloc.h stralloc.h gen_alloc.h gen_allocdefs.h
-	./compile stralloc_eady.c
+stralloc_copy.lo: \
+libcompile stralloc_copy.c byte.h stralloc.h gen_alloc.h
+	./libcompile stralloc_copy.c
 
-stralloc_num.o: \
-compile stralloc_num.c stralloc.h gen_alloc.h
-	./compile stralloc_num.c
+stralloc_eady.lo: \
+libcompile stralloc_eady.c alloc.h stralloc.h gen_alloc.h gen_allocdefs.h
+	./libcompile stralloc_eady.c
 
-stralloc_opyb.o: \
-compile stralloc_opyb.c stralloc.h gen_alloc.h byte.h
-	./compile stralloc_opyb.c
+stralloc_num.lo: \
+libcompile stralloc_num.c stralloc.h gen_alloc.h
+	./libcompile stralloc_num.c
 
-stralloc_opys.o: \
-compile stralloc_opys.c byte.h str.h stralloc.h gen_alloc.h
-	./compile stralloc_opys.c
+stralloc_opyb.lo: \
+libcompile stralloc_opyb.c stralloc.h gen_alloc.h byte.h
+	./libcompile stralloc_opyb.c
 
-stralloc_pend.o: \
-compile stralloc_pend.c alloc.h stralloc.h gen_alloc.h gen_allocdefs.h
-	./compile stralloc_pend.c
+stralloc_opys.lo: \
+libcompile stralloc_opys.c byte.h str.h stralloc.h gen_alloc.h
+	./libcompile stralloc_opys.c
+
+stralloc_pend.lo: \
+libcompile stralloc_pend.c alloc.h stralloc.h gen_alloc.h gen_allocdefs.h
+	./libcompile stralloc_pend.c
+
+str_chr.lo: \
+libcompile str_chr.c str.h
+	./libcompile str_chr.c
+
+str_cpy.lo: \
+libcompile str_cpy.c str.h
+	./libcompile str_cpy.c
+
+str_diff.lo: \
+libcompile str_diff.c str.h
+	./libcompile str_diff.c
+
+str_diffn.lo: \
+libcompile str_diffn.c str.h
+	./libcompile str_diffn.c
 
 strerr.a: \
-makelib strerr.o strerr_sys.o strerr_die.o
-	./makelib strerr.a strerr.o strerr_sys.o strerr_die.o
+makelib strerr.lo
+	./makelib strerr.a strerr.lo
 
-strerr.o: \
-compile strerr.c stralloc.h gen_alloc.h strerr.h hasattribute.h
-	./compile strerr.c
+strerr.lo: \
+libcompile strerr.c error.h exit.h substdio.h subfd.h substdio.h strerr.h hasattribute.h
+	./libcompile strerr.c
 
-strerr_die.o: \
-compile strerr_die.c substdio.h subfd.h exit.h strerr.h hasattribute.h
-	./compile strerr_die.c
+str_len.lo: \
+libcompile str_len.c str.h
+	./libcompile str_len.c
 
-strerr_sys.o: \
-compile strerr_sys.c error.h strerr.h hasattribute.h
-	./compile strerr_sys.c
+str_rchr.lo: \
+libcompile str_rchr.c str.h
+	./libcompile str_rchr.c
+
+str_start.lo: \
+libcompile str_start.c str.h
+	./libcompile str_start.c
+
+subdb.lo: \
+libcompile subdb.c case.h config.h stralloc.h gen_alloc.h cookie.h die.h hasattribute.h env.h messages.h fmt.h scan.h slurp.h stralloc.h gen_alloc.h str.h strerr.h hasattribute.h subdb.h stralloc.h gen_alloc.h auto_lib.h
+	./libcompile subdb.c
 
 subfd.0: \
 subfd.3
 	nroff -man subfd.3 > subfd.0
 
-subfderr.o: \
-compile subfderr.c readwrite.h substdio.h subfd.h
-	./compile subfderr.c
+subfderr.lo: \
+libcompile subfderr.c readwrite.h substdio.h subfd.h substdio.h
+	./libcompile subfderr.c
 
-subfdin.o: \
-compile subfdin.c readwrite.h substdio.h subfd.h
-	./compile subfdin.c
+subfdin.lo: \
+libcompile subfdin.c readwrite.h substdio.h subfd.h substdio.h
+	./libcompile subfdin.c
 
-subfdout.o: \
-compile subfdout.c readwrite.h substdio.h subfd.h
-	./compile subfdout.c
+subfdout.lo: \
+libcompile subfdout.c readwrite.h substdio.h subfd.h substdio.h
+	./libcompile subfdout.c
 
 subgetopt.0: \
 subgetopt.3
 	nroff -man subgetopt.3 > subgetopt.0
 
-subgetopt.o: \
-compile subgetopt.c subgetopt.h
-	./compile subgetopt.c
+subgetopt.lo: \
+libcompile subgetopt.c subgetopt.h
+	./libcompile subgetopt.c
 
-subhash.o: \
-compile subhash.c subhash.h str.h
-	./compile subhash.c
+subhash.lo: \
+libcompile subhash.c subhash.h str.h
+	./libcompile subhash.c
 
-subscribe.c: \
-conf-sub
-	rm -f subscribe.c subscribe.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/subscribe.c subscribe.c
-	touch subscribe.c
+sub-mysql.lo: \
+libcompile sub-mysql.c byte.h case.h cookie.h date822fmt.h datetime.h die.h hasattribute.h error.h messages.h fmt.h getln.h idx.h lock.h log.h makehash.h open.h qmail.h substdio.h stralloc.h gen_alloc.h readwrite.h scan.h slurp.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h sub_std.h stralloc.h gen_alloc.h subhash.h subdb.h stralloc.h gen_alloc.h substdio.h uint32.h wrap.h
+	./libcompile sub-mysql.c
 
-subscribe.o: \
-compile subscribe.c subscribe.h stralloc.h gen_alloc.h
-	./compile subscribe.c
+sub-mysql.so: \
+makeso sub-mysql.lo libezmlm.a nsl.lib m.lib
+	./makeso sub-mysql.so sub-mysql.lo -lezmlm -lmysqlclient  `cat nsl.lib` `cat m.lib`
 
-substdi.o: \
-compile substdi.c substdio.h byte.h error.h
-	./compile substdi.c
+sub-pgsql.lo: \
+libcompile sub-pgsql.c byte.h case.h cookie.h date822fmt.h datetime.h die.h hasattribute.h error.h messages.h fmt.h getln.h idx.h lock.h log.h makehash.h open.h qmail.h substdio.h stralloc.h gen_alloc.h readwrite.h scan.h slurp.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h sub_std.h stralloc.h gen_alloc.h subhash.h subdb.h stralloc.h gen_alloc.h substdio.h uint32.h wrap.h
+	./libcompile sub-pgsql.c
+
+sub-pgsql.so: \
+makeso sub-pgsql.lo libezmlm.a crypt.lib
+	./makeso sub-pgsql.so sub-pgsql.lo -lezmlm -lpq  `cat crypt.lib`
+
+sub-sqlite3.lo: \
+libcompile sub-sqlite3.c byte.h case.h cookie.h date822fmt.h datetime.h die.h hasattribute.h error.h messages.h fmt.h getln.h idx.h lock.h log.h makehash.h now.h datetime.h open.h qmail.h substdio.h stralloc.h gen_alloc.h readwrite.h scan.h slurp.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h sub_std.h stralloc.h gen_alloc.h subhash.h subdb.h stralloc.h gen_alloc.h substdio.h uint32.h wrap.h
+	./libcompile sub-sqlite3.c
+
+sub-sqlite3.so: \
+makeso sub-sqlite3.lo libezmlm.a crypt.lib
+	./makeso sub-sqlite3.so sub-sqlite3.lo -lezmlm -lsqlite3  `cat crypt.lib`
+
+substdi.lo: \
+libcompile substdi.c substdio.h byte.h error.h
+	./libcompile substdi.c
 
 substdio.0: \
 substdio.3
 	nroff -man substdio.3 > substdio.0
 
 substdio.a: \
-makelib substdio.o substdi.o substdo.o subfderr.o subfdin.o subfdout.o substdio_copy.o
-	./makelib substdio.a substdio.o substdi.o substdo.o subfderr.o subfdin.o subfdout.o substdio_copy.o
-
-substdio.o: \
-compile substdio.c substdio.h
-	./compile substdio.c
+makelib substdio.lo substdi.lo substdo.lo subfderr.lo subfdin.lo subfdout.lo substdio_copy.lo
+	./makelib substdio.a substdio.lo substdi.lo substdo.lo subfderr.lo subfdin.lo subfdout.lo substdio_copy.lo
 
 substdio_copy.0: \
 substdio_copy.3
 	nroff -man substdio_copy.3 > substdio_copy.0
 
-substdio_copy.o: \
-compile substdio_copy.c substdio.h
-	./compile substdio_copy.c
+substdio_copy.lo: \
+libcompile substdio_copy.c substdio.h
+	./libcompile substdio_copy.c
 
 substdio_in.0: \
 substdio_in.3
 	nroff -man substdio_in.3 > substdio_in.0
 
+substdio.lo: \
+libcompile substdio.c substdio.h
+	./libcompile substdio.c
+
 substdio_out.0: \
 substdio_out.3
 	nroff -man substdio_out.3 > substdio_out.0
 
-substdo.o: \
-compile substdo.c substdio.h str.h byte.h error.h
-	./compile substdo.c
+sub-std.lo: \
+libcompile sub-std.c byte.h case.h config.h stralloc.h gen_alloc.h cookie.h date822fmt.h datetime.h die.h hasattribute.h error.h messages.h fmt.h getln.h idx.h lock.h log.h makehash.h open.h qmail.h substdio.h stralloc.h gen_alloc.h readwrite.h scan.h slurp.h str.h stralloc.h gen_alloc.h strerr.h hasattribute.h sub_std.h stralloc.h gen_alloc.h subhash.h substdio.h subdb.h stralloc.h gen_alloc.h uint32.h wrap.h
+	./libcompile sub-std.c
+
+substdo.lo: \
+libcompile substdo.c substdio.h str.h byte.h error.h
+	./libcompile substdo.c
+
+sub-std.so: \
+makeso sub-std.lo libezmlm.a
+	./makeso sub-std.so sub-std.lo -lezmlm 
 
 surf.0: \
 surf.3
 	nroff -man surf.3 > surf.0
 
-surf.o: \
-compile surf.c surf.h uint32.h
-	./compile surf.c
+surf.lo: \
+libcompile surf.c surf.h uint32.h
+	./libcompile surf.c
 
 surfpcs.0: \
 surfpcs.3
 	nroff -man surfpcs.3 > surfpcs.0
 
-surfpcs.o: \
-compile surfpcs.c surf.h uint32.h surfpcs.h
-	./compile surfpcs.c
-
-symlinks: \
-ezmlm-mktab checktag.c issub.c logmsg.c opensub.c putsubs.c searchlog.c subscribe.c tagmsg.c
+surfpcs.lo: \
+libcompile surfpcs.c surf.h uint32.h surfpcs.h uint32.h
+	./libcompile surfpcs.c
 
 systype: \
 find-systype trycpp.c
 	./find-systype > systype
 
-tagmsg.c: \
-conf-sub
-	rm -f tagmsg.c tagmsg.o
-	sub=`head -n 1 conf-sub` ; ln sub_$$sub/tagmsg.c tagmsg.c
-	touch tagmsg.c
-
-tagmsg.o: \
-compile tagmsg.c subscribe.h stralloc.h gen_alloc.h
-	./compile tagmsg.c
-
 targets: \
-it man setup conf-bin conf-man
+all install
+
+test-getconfopt: \
+load test-getconfopt.o libezmlm.a
+	./load test-getconfopt -lezmlm 
+
+test-getconfopt.o: \
+compile test-getconfopt.c fmt.h getconfopt.h stralloc.h gen_alloc.h substdio.h
+	./compile test-getconfopt.c
 
 uint32.h: \
 tryulong32.c compile load uint32.h1 uint32.h2
@@ -1317,42 +1453,50 @@ tryulong32.c compile load uint32.h1 uint32.h2
 	&& cat uint32.h2 || cat uint32.h1 ) > uint32.h
 	rm -f tryulong32.o tryulong32
 
-unfoldHDR.o: \
-compile unfoldHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h case.h byte.h errtxt.h mime.h die.h idx.h
-	./compile unfoldHDR.c
+unfoldHDR.lo: \
+libcompile unfoldHDR.c stralloc.h gen_alloc.h strerr.h hasattribute.h case.h byte.h messages.h mime.h stralloc.h gen_alloc.h die.h hasattribute.h idx.h
+	./libcompile unfoldHDR.c
 
 wait.0: \
 wait.3
 	nroff -man wait.3 > wait.0
 
-wait_pid.o: \
-compile wait_pid.c error.h haswaitp.h
-	./compile wait_pid.c
+wait_pid.lo: \
+libcompile wait_pid.c error.h haswaitp.h
+	./libcompile wait_pid.c
 
-wrap_execbin.o: \
-compile wrap_execbin.c auto_bin.h stralloc.h gen_alloc.h wrap.h die.h hasattribute.h idx.h
-	./compile wrap_execbin.c
+wrap_chdir.lo: \
+libcompile wrap_chdir.c messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h
+	./libcompile wrap_chdir.c
 
-wrap_execsh.o: \
-compile wrap_execsh.c wrap.h
-	./compile wrap_execsh.c
+wrap_execbin.lo: \
+libcompile wrap_execbin.c auto_bin.h stralloc.h gen_alloc.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_execbin.c
 
-wrap_execv.o: \
-compile wrap_execv.c error.h errtxt.h strerr.h hasattribute.h wrap.h die.h idx.h
-	./compile wrap_execv.c
+wrap_execsh.lo: \
+libcompile wrap_execsh.c wrap.h
+	./libcompile wrap_execsh.c
 
-wrap_exitcode.o: \
-compile wrap_exitcode.c errtxt.h strerr.h hasattribute.h wrap.h die.h idx.h
-	./compile wrap_exitcode.c
+wrap_execv.lo: \
+libcompile wrap_execv.c error.h messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_execv.c
 
-wrap_fork.o: \
-compile wrap_fork.c fork.h errtxt.h strerr.h hasattribute.h wrap.h die.h idx.h
-	./compile wrap_fork.c
+wrap_exitcode.lo: \
+libcompile wrap_exitcode.c messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_exitcode.c
 
-wrap_stat.o: \
-compile wrap_stat.c error.h errtxt.h strerr.h hasattribute.h wrap.h die.h idx.h
-	./compile wrap_stat.c
+wrap_fork.lo: \
+libcompile wrap_fork.c fork.h messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_fork.c
 
-wrap_waitpid.o: \
-compile wrap_waitpid.c wait.h errtxt.h strerr.h hasattribute.h wrap.h die.h idx.h
-	./compile wrap_waitpid.c
+wrap_rename.lo: \
+libcompile wrap_rename.c die.h hasattribute.h messages.h strerr.h hasattribute.h wrap.h
+	./libcompile wrap_rename.c
+
+wrap_stat.lo: \
+libcompile wrap_stat.c error.h messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_stat.c
+
+wrap_waitpid.lo: \
+libcompile wrap_waitpid.c wait.h messages.h strerr.h hasattribute.h wrap.h die.h hasattribute.h idx.h
+	./libcompile wrap_waitpid.c

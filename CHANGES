@@ -18,22 +18,6 @@ Some ezmlmrc are not updated and may not work right.  If you fix them,
 please send them to ezmlm@list.cr.yp.to for inclusion in the next
 release.
 
-- Added <#C#>, <#T#>, and <#X#> substitutions for (un)subscribe
-  confirmation emails, replaced with the hash code, time stamp, and
-  action respectively.
-
-- Added option to ezmlm-[un]sub to use a tag other than "manual" in Log.
-
-- Added option to ezmlm-manage to show what response is being sent.
-
-- Fixed behavior of ezmlm-manage -Q flag to match man page.
-
-- Fixed ezmlm-import failing to flush output to the last message,
-  and enhanced it to allow reading the mbox from stdin.
-  Thanks to Tullio Andreatta.
-
-- Changed to UTF-8
-
 ezmlm-idx-7.1.1, 2010-11-18
 ===========================
 

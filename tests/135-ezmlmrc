@@ -7,13 +7,13 @@
 # make sure a few ezmlm-make switches work
   ${EZBIN}/ezmlm-make -+qkgu -C${EZBIN}/lang/en_US "$DIR" || \
 	fatal "failed to edit test list to +qkgu"
-  grep deny "${DIR}/editor" >/dev/null 2>&1 || \
+  ${GREP} deny "${DIR}/editor" >/dev/null 2>&1 || \
 	fatal "failed to implement -k for list"
-  grep "ezmlm-request" "${DIR}/manager" >/dev/null 2>&1 || \
+  ${GREP} "ezmlm-request" "${DIR}/manager" >/dev/null 2>&1 || \
 	fatal "failed to implement -q for list"
   test -e "$DIR"/subgetonly || \
 	fatal "failed to implement -g for list"
-  grep allow "${DIR}/editor" >/dev/null 2>&1 || \
+  ${GREP} allow "${DIR}/editor" >/dev/null 2>&1 || \
 	fatal "failed to implement -u for list"
 
   ${EZBIN}/ezmlm-make -+QKGU -C${EZBIN}/lang/en_US "$DIR" || \
@@ -38,21 +38,18 @@ ${EZBIN}/ezmlm-make -+ln -C${EZBIN}/lang/en_US "$DIR" || \
     echo 'TargetLocal: <#a#>'
     echo 'Confirm: <#R#>'
     echo 'Cookie: <#c#>'
-    echo 'Hash: <#C#>'
-    echo 'Time: <#T#>'
-    echo 'Action: <#X#>'
     echo 'MsgNum: <#n#>'
     echo 'ConfirmLocal: <#r#>'
     echo 'target: <#t#>'
-    for flag in 0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z; do
+    for flag in a b c d e f g h i j k l m n o p q r s t u v w x y z; do
       echo "<=${flag}=>"
       echo "Flag: ${flag}"
     done
   ) >"${DIR}/text/top"
 
   # remove inlocal/inhost - shouldn't be used
-  rm -f "${DIR}/inlocal" "${DIR}/inhost" > /dev/null || \
+  ${RM} -f "${DIR}/inlocal" "${DIR}/inhost" > /dev/null || \
     fatal "failed to remove inlocal/inhost for testlist"
 
-  echo "OK"
+  ${ECHO} "OK"
 

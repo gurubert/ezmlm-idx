@@ -1,4 +1,0 @@
-#!/bin/sh
-set -e
-
-./ezmlm-test -s pgsql -d eztest -p '' -h pgsql

@@ -3,6 +3,7 @@
   ${EZBIN}/ezmlm-unsub "$DIR" "$SENDER"
 
   DEFAULT="subscribe"
+  LOCAL="${LOC}-${DEFAULT}"
   ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
   fatal "failed to produce subscribe probe"
 
@@ -16,4 +17,4 @@
   grepbody added to the ${LOC} mailing list, please send
 
 
-  echo OK
+  ${ECHO} OK

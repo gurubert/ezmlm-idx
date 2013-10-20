@@ -3,6 +3,7 @@
   ${EZBIN}/ezmlm-unsub "$DIR" "$SENDER"
 
   DEFAULT="unsubscribe"
+  LOCAL="${LOC}-${DEFAULT}"
   ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
   fatal "failed to produce unsubscribe nop"
 
@@ -14,4 +15,4 @@
   grepbody test@example.org
   grepbody was not on the ${LOC} mailing list when I received
 
-  echo OK
+  ${ECHO} OK

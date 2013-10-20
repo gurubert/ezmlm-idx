@@ -31,4 +31,4 @@
 # clean up
   ${EZBIN}/ezmlm-unsub "$DIR" "$SENDER"
 
-  echo "OK"
+  ${ECHO} "OK"

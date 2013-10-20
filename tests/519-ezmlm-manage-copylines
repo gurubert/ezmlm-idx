@@ -1,6 +1,7 @@
   prompt "copylines:            "
 
   DEFAULT="subscribe"
+  LOCAL="${LOC}-${DEFAULT}"
 
   echo 0 >"$DIR"/copylines
   ${EZBIN}/ezmlm-manage -S "$DIR" <"$TMP" >"$ERR" 2>&1 || \
@@ -20,4 +21,4 @@
   grepbody 1
   grepbody 2
 
-  echo OK
+  ${ECHO} OK

@@ -4,14 +4,11 @@
 /* The following substitutions are also made. If not set, ?????    */
 /* will be printed:                                                */
 /*   <#A#> target email address (<#a#>@<#h#>)                      */
-/*   <#C#> The confirm cookie hash code                            */
 /*   <#H#> outhost                                                 */
 /*   <#L#> outlocal (unchanged)                                    */
 /*   <#R#> confirm address (<#r#>@<#h#>)                           */
-/*   <#T#> confirm time stamp                                      */
-/*   <#X#> confirm action code                                     */
 /*   <#a#> local part of the target address                        */
-/*   <#c#> the confirm cookie (<#X#>c.<#T#>.<#C#>-<#a#>=<#h#>)     */
+/*   <#c#> the confirm cookie                                      */
 /*   <#d#> base directory name                                     */
 /*   <#h#> outhost                                                 */
 /*   <#l#> outlocal (modified for digest requests)                 */
@@ -43,10 +40,7 @@
 #include "mime.h"
 #include "altpath.h"
 #include "byte.h"
-#include "cookie.h"
-#include "datetime.h"
 #include "die.h"
-#include "fmt.h"
 #include "idx.h"
 #include "config.h"
 
@@ -59,9 +53,6 @@ static const char *target = "?????";
 static unsigned int targetlocal;
 static const char *verptarget = "?????";
 static const char *confirm = "?????";
-static const char *action = "??.";
-static char hash[COOKIE] = "????????????????????";
-static datetime_sec when = (datetime_sec)-1;
 static unsigned int confirmlocal;
 static unsigned int confirmprefix;
 static const char *szmsgnum = "?????";
@@ -87,21 +78,6 @@ void set_cpconfirm(const char *cf,unsigned int prefixlen)
 void set_cpnum(const char *cf)
 {
   szmsgnum = cf;
-}
-
-void set_cpaction(const char *ac)
-{
-  action = ac;
-}
-
-void set_cpwhen(datetime_sec t)
-{
-  when = t;
-}
-
-void set_cphash(const char h[COOKIE])
-{
-  byte_copy(hash,COOKIE,h);
 }
 
 void codeput(struct qmail *qq,const char *l,unsigned int n,char code)
@@ -134,7 +110,6 @@ void copy_xlate(stralloc *out,
 {
   unsigned int pos;
   unsigned int nextpos;
-  char strnum[FMT_ULONG];
 
   pos = 0;
   nextpos = 0;
@@ -152,21 +127,12 @@ void copy_xlate(stralloc *out,
 	if (q == 'H') strerr_die1x(111,MSG(ERR_SUBST_UNSAFE));
 	if (!stralloc_cats(out,target)) die_nomem();
 	break;
-      case 'C':
-	if (!stralloc_catb(out,hash,COOKIE)) die_nomem();
-	break;
       case 'L':
 	if (!quote(&qline,&local)) die_nomem();
 	if (!stralloc_cat(out,&qline)) die_nomem();
 	break;
       case 'R':
 	if (!stralloc_cats(out,confirm)) die_nomem();
-	break;
-      case 'T':
-	if (!stralloc_catb(out,strnum,fmt_ulong(strnum,(unsigned long )when))) die_nomem();
-	break;
-      case 'X':
-	if (!stralloc_cats(out,action)) die_nomem();
 	break;
       case 'a':
 	if (!stralloc_catb(out,target,targetlocal)) die_nomem();

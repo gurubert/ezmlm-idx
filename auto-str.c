@@ -44,12 +44,11 @@ int main(int argc, char **argv)
     subputs(name);
     subputs("(void)\n"
 	    "{\n"
-	    "  static const char *env = 0;\n"
-	    "  if (env == 0)\n"
-	    "    if ((env = env_get(\"");
+	    "  const char *env;\n"
+	    "  if ((env = env_get(\"");
     subputs(env);
     subputs("\")) == 0)\n"
-	    "      env = \"");
+	    "    env = \"");
     subputsbin(value);
     subputs("\";\n"
 	    "  return env;\n"

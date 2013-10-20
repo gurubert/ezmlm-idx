@@ -9,15 +9,15 @@
   ${EZBIN}/ezmlm-tstdig -k2 -m10 -t0 "$DIR" && \
 	fatal "-t0 succeeded"
 
-  echo 2 >"$DIR"/digsize
-  echo 10 >"$DIR"/digcount
-  echo 1 >"$DIR"/digtime
+  ${ECHO} 2 >"$DIR"/digsize
+  ${ECHO} 10 >"$DIR"/digcount
+  ${ECHO} 1 >"$DIR"/digtime
   ${EZBIN}/ezmlm-tstdig "$DIR" || \
 	fatal "digtime=1 failed"
-  echo 0 >"$DIR"/digtime
+  ${ECHO} 0 >"$DIR"/digtime
   ${EZBIN}/ezmlm-tstdig -k2 -m10 -t0 "$DIR" && \
 	fatal "digtime=0 succeeded"
-  rm "$DIR"/digsize "$DIR"/digcount "$DIR"/digtime
+  ${RM} "$DIR"/digsize "$DIR"/digcount "$DIR"/digtime
 
   LOCAL="$LOC-xx"
   DEFAULT='xx'
@@ -30,33 +30,33 @@
   LOCAL="$LOC-digest-"
   DEFAULT='digest-'
   ${EZBIN}/ezmlm-tstdig -k2 -m10 -t0 "$DIR" || \
-	{ echo "err with -digest- in mgr pos: 0.31 bug fixed in 0.321"
+	{ ${ECHO} "err with -digest- in mgr pos: 0.31 bug fixed in 0.321"
 	  prompt "ezmlm-tstdig.......   "
 	  BUG="${BUG} digest"
 	}
   LOCAL=''
-  unset DEFAULT
+  ${UNSET} DEFAULT
   ${EZBIN}/ezmlm-tstdig -k2 -m4 -t1 "$DIR" || \
 	fatal "-m failed"
   ${EZBIN}/ezmlm-tstdig -k1 -m10 -t0 "$DIR" || \
 	fatal "-k failed"
 
-  echo 2 >"$DIR"/digsize
-  echo 4 >"$DIR"/digcount
-  echo 1 >"$DIR"/digtime
+  ${ECHO} 2 >"$DIR"/digsize
+  ${ECHO} 4 >"$DIR"/digcount
+  ${ECHO} 1 >"$DIR"/digtime
   ${EZBIN}/ezmlm-tstdig "$DIR" || \
 	fatal "digcount=4 failed"
-  echo 10 >"$DIR"/digcount
+  ${ECHO} 10 >"$DIR"/digcount
   ${EZBIN}/ezmlm-tstdig "$DIR" || \
 	fatal "digsize=2 failed"
-  rm "$DIR"/digsize "$DIR"/digcount "$DIR"/digtime
+  ${RM} "$DIR"/digsize "$DIR"/digcount "$DIR"/digtime
 
   LOCAL="$LOC"
   ${EZBIN}/ezmlm-tstdig -k1 -m10 -t0 "$DIR" > "$ERR" 2>&1 || \
 	{
-	 echo "problem with DEFAULT unset: 0.32 bug, OK in 0.321."
+	 ${ECHO} "problem with DEFAULT unset: 0.32 bug, OK in 0.321."
 	 prompt "ezmlm-tstdig.......   "
 	  BUG="${BUG} tstdig"
 	}
-  echo "OK"
+  ${ECHO} "OK"
   export DEFAULT

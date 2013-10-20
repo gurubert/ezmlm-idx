@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-if ! [ -s conf-cc ]; then
-  echo "$0: must be in compile directory"
-  exit 1
-fi
-
-make -s clean it mysql pgsql sqlite3

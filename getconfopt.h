@@ -12,7 +12,6 @@ struct option_type
 };
 
 extern const struct option_type opt_copy_flag;
-extern const struct option_type opt_counter;
 extern const struct option_type opt_cstr;
 extern const struct option_type opt_cstr_flag;
 extern const struct option_type opt_flag;
@@ -42,7 +41,6 @@ struct option
 };
 
 #define OPT_COPY_FLAG(VAR,CH) {{.str=&VAR},CH,&opt_copy_flag,{0},0}
-#define OPT_COUNTER(VAR,CH,VALUE,FILENAME) {{.flag=&VAR},CH,&opt_counter,{.flag=VALUE},FILENAME}
 #define OPT_CSTR(VAR,CH,FILENAME) {{.cstr=&VAR},CH,&opt_cstr,{0},FILENAME}
 #define OPT_CSTR_FLAG(VAR,CH,VALUE,FILENAME) {{.cstr=&VAR},CH,&opt_cstr_flag,{.cstr=VALUE},FILENAME}
 #define OPT_FLAG(VAR,CH,VALUE,FILENAME) {{.flag=&VAR},CH,&opt_flag,{.flag=VALUE},FILENAME}

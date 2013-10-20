@@ -4,6 +4,7 @@
 
 prompt "decode sender:        "
 
+LOCAL="$LOC-help"
 DEFAULT='help'
 
 SENDER="SRS0=HrNdli=BZ=host=xyzzy@otherhost.com"
@@ -46,4 +47,4 @@ ${EZBIN}/ezmlm-manage "$DIR" </dev/null >"$ERR" 2>&1 || \
 	fatal "ezmlm-manage failed"
 checkenv decode-btv1 "$LOC-return-@$HOST" "xyzzy@host"
 
-echo "OK"
+${ECHO} "OK"

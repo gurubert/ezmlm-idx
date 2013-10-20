@@ -6,6 +6,7 @@
   SENDER="moderator@$HOST"
 
   DEFAULT="unsubscribe-test=example.org"
+  LOCAL="${LOC}-unsubscribe-test=example.org"
   ${EZBIN}/ezmlm-manage "$DIR" <"$TMP" >"$ERR" 2>&1 || \
   fatal "failed to produce unsubscribe confirmation"
 
@@ -18,4 +19,4 @@
   grepbody test@example.org
   grepbody from the ${LOC} mailing list. If you agree, please send
 
-  echo OK
+  ${ECHO} OK

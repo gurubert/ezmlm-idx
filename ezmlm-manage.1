@@ -17,9 +17,11 @@ is normally invoked from a
 file.
 It reads a mail message from its standard input,
 and a mail envelope from the
-.B SENDER
+.BR SENDER ,
+.BR LOCAL ,
+.BR DEFAULT ,
 and
-.BR DEFAULT
+.BR HOST
 environment variables.
 
 .B ezmlm-manage
@@ -121,13 +123,6 @@ will use
 .B qmail-qmqp(1)
 to send messages.
 .SH OPTIONS
-.TP 5
-.B \-a
-Output an indicator of what action or response is being sent.
-.TP 5
-.B \-A
-(Default.)
-Do not output any action or response indicators.
 .TP 5
 .B \-b
 (Default.)

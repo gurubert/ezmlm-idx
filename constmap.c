@@ -21,17 +21,15 @@ static constmap_hash hash(const char *s,int len)
 int constmap_index(const struct constmap *cm,const char *s,int len)
 {
   constmap_hash h;
-  struct constmap_entry *e;
   int pos;
   h = hash(s,len);
   pos = cm->first[h & cm->mask];
   while (pos != -1) {
-    e = &cm->entries[pos];
-    if (h == e->hash)
-      if (len == e->inputlen)
-        if (!case_diffb(e->input,len,s))
+    if (h == cm->hash[pos])
+      if (len == cm->inputlen[pos])
+        if (!case_diffb(cm->input[pos],len,s))
 	  return pos + 1;
-    pos = e->next;
+    pos = cm->next[pos];
   }
   return 0;
 }
@@ -42,23 +40,21 @@ const char *constmap_get(struct constmap *cm,unsigned int idx)
   if (idx <= 0 || idx > cm->num)
     return 0;
   else
-    return cm->entries[idx-1].input;
+    return cm->input[idx-1];
 }
 
 const char *constmap(struct constmap *cm,const char *s,int len)
 {
   constmap_hash h;
-  struct constmap_entry *e;
   int pos;
   h = hash(s,len);
   pos = cm->first[h & cm->mask];
   while (pos != -1) {
-    e = &cm->entries[pos];
-    if (h == e->hash)
-      if (len == e->inputlen)
-        if (!case_diffb(e->input,len,s))
-	  return e->input + e->inputlen + 1;
-    pos = e->next;
+    if (h == cm->hash[pos])
+      if (len == cm->inputlen[pos])
+        if (!case_diffb(cm->input[pos],len,s))
+	  return cm->input[pos] + cm->inputlen[pos] + 1;
+    pos = cm->next[pos];
   }
   return 0;
 }
@@ -73,7 +69,6 @@ int constmap_init(struct constmap *cm,const char *s,int len,int splitchar)
   int k;
   int pos;
   constmap_hash h;
-  struct constmap_entry *e;
  
   cm->num = 0;
   for (j = 0;j < len;++j) if (!s[j]) ++cm->num;
@@ -84,34 +79,45 @@ int constmap_init(struct constmap *cm,const char *s,int len,int splitchar)
  
   cm->first = (int *) alloc(sizeof(int) * h);
   if (cm->first) {
-    cm->entries = alloc(cm->num * sizeof *cm->entries);
-    if (cm->entries) {
-      for (h = 0;h <= cm->mask;++h)
-	cm->first[h] = -1;
-      pos = 0;
-      i = 0;
-      for (j = 0;j < len;++j)
-	if (!s[j]) {
-	  k = j - i;
-	  if (splitchar) {
-	    for (k = i;k < j;++k)
-	      if (s[k] == splitchar)
-		break;
-	    if (k >= j) { i = j + 1; continue; }
-	    k -= i;
+    cm->input = (const char **) alloc(sizeof(char *) * cm->num);
+    if (cm->input) {
+      cm->inputlen = (int *) alloc(sizeof(int) * cm->num);
+      if (cm->inputlen) {
+        cm->hash = (constmap_hash *) alloc(sizeof(constmap_hash) * cm->num);
+        if (cm->hash) {
+	  cm->next = (int *) alloc(sizeof(int) * cm->num);
+	  if (cm->next) {
+	    for (h = 0;h <= cm->mask;++h)
+	      cm->first[h] = -1;
+            pos = 0;
+            i = 0;
+            for (j = 0;j < len;++j)
+              if (!s[j]) {
+	        k = j - i;
+	        if (splitchar) {
+		  for (k = i;k < j;++k)
+		    if (s[k] == splitchar)
+		      break;
+		  if (k >= j) { i = j + 1; continue; }
+		  k -= i;
+		}
+                cm->input[pos] = s + i;
+                cm->inputlen[pos] = k;
+                h = hash(s + i,k);
+                cm->hash[pos] = h;
+                h &= cm->mask;
+                cm->next[pos] = cm->first[h];
+                cm->first[h] = pos;
+                ++pos;
+                i = j + 1;
+              }
+            return 1;
 	  }
-	  h = hash(s + i,k);
-	  e = &cm->entries[pos];
-	  e->input = s + i;
-	  e->inputlen = k;
-	  e->hash = h;
-	  h &= cm->mask;
-	  e->next = cm->first[h];
-	  cm->first[h] = pos;
-	  ++pos;
-	  i = j + 1;
+	  alloc_free(cm->hash);
 	}
-      return 1;
+        alloc_free(cm->inputlen);
+      }
+      alloc_free(cm->input);
     }
     alloc_free(cm->first);
   }
@@ -120,6 +126,9 @@ int constmap_init(struct constmap *cm,const char *s,int len,int splitchar)
 
 void constmap_free(struct constmap *cm)
 {
-  alloc_free(cm->entries);
+  alloc_free(cm->next);
+  alloc_free(cm->hash);
+  alloc_free(cm->inputlen);
+  alloc_free(cm->input);
   alloc_free(cm->first);
 }

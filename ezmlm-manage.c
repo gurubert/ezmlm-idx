@@ -41,9 +41,9 @@
 const char FATAL[] = "ezmlm-manage: fatal: ";
 const char INFO[] = "ezmlm-manage: info: ";
 const char USAGE[] =
-"ezmlm-manage: usage: ezmlm-manage [-aAbBcCdDeEfFlLmMnNqQsSuUvV] dir";
+"ezmlm-manage: usage: ezmlm-manage [-bBcCdDeEfFlLmMnNqQsSuUvV] dir";
 
-int flagcopyowner = 0;	/* default: Owner not informed about subdb changes */
+int flagverbose = 0;	/* default: Owner not informed about subdb changes */
 			/* 1 => notified for failed unsub, 2 => for all */
 int flagnotify = 1;	/* notify subscriber of completed events. 0 also */
 			/* suppresses all subscriber communication for */
@@ -57,19 +57,14 @@ int flagunsubismod = 0;	/* default: do not require moderator approval to */
 			/* unsubscribe from moderated list */
 int flagedit = -1;	/* default: text file edit not allowed */
 int flagstorefrom = 1;	/* default: store from: line for subscribes */
-int flagshowact = 0;	/* default: do not show the action taken */
 char encin = '\0';	/* encoding of incoming message */
 int flagdig = 0;	/* request is not for digest list */
 unsigned long copylines = 0;	/* Number of lines from the message to copy */
 int flagpublic = 0;
 stralloc modsub = {0};
 stralloc remote = {0};
-static int ismod;
-static stralloc mod = {0};
 
 static struct option options[] = {
-  OPT_FLAG(flagshowact,'a',1,0),
-  OPT_FLAG(flagshowact,'A',0,0),
   OPT_FLAG(omitbottom,'b',0,0),
   OPT_FLAG(omitbottom,'B',1,"omitbottom"),
   OPT_FLAG(flagget,'c',1,0),
@@ -88,8 +83,8 @@ static struct option options[] = {
   OPT_FLAG(flagnotify,'N',0,0),
   OPT_FLAG(flagsubconf,'s',1,0),
   OPT_FLAG(flagsubconf,'S',0,"nosubconfirm"),
-  OPT_FLAG(flagcopyowner,'q',0,0),
-  OPT_COUNTER(flagcopyowner,'Q',1,0),
+  OPT_FLAG(flagverbose,'q',0,0),
+  OPT_FLAG(flagverbose,'Q',1,0), /* FIXME, should set flagverbose+1 */
   OPT_FLAG(flagunsubconf,'u',1,0),
   OPT_FLAG(flagunsubconf,'U',0,"nounsubconfirm"),
   OPT_ULONG(copylines,0,"copylines"),
@@ -102,6 +97,8 @@ static struct option options[] = {
 static const char hex[]="0123456789ABCDEF";
 char urlstr[] = "%00";	/* to build a url-encoded version of a char */
 
+int act = AC_NONE;	/* desired action */
+unsigned int actlen = 0;/* str_len of above */
 const char *dir;
 const char *workdir;
 const char *sender;
@@ -148,8 +145,6 @@ char frombuf[512];
 
 static int fdlock;
 
-struct qmail qq;
-
 void lock(void)
 {
     fdlock = lockfile("lock");
@@ -158,28 +153,6 @@ void lock(void)
 void unlock(void)
 {
     close(fdlock);
-}
-
-static void showact(const char *x1,const char *x2,const char *x3)
-{
-  if (flagshowact)
-    strerr_warn4(INFO,x1,x2,x3,0);
-}
-
-static void showsend(const char *t)
-{
-  showact("sending ",t,0);
-}
-
-static void showsend2(const char *t1,const char *t2)
-{
-  showact("sending ",t1,t2);
-}
-
-static void copy_act(const char *text)
-{
-  showsend(text + 5);
-  copy(&qq,text,flagcd);
 }
 
 void make_verptarget(void)
@@ -321,6 +294,8 @@ int hashok(const char *action,const char *ac)
   return byte_equal(hash,COOKIE,x);
 }
 
+struct qmail qq;
+
 int code_qput(const char *s,unsigned int n)
 {
     if (!flagcd)
@@ -387,7 +362,7 @@ void mod_bottom(void)
       qmail_from(&qq,from.s);
 }
 
-void msg_headers(int act)
+void msg_headers(void)
 /* Writes all the headers up to but not including subject */
 {
   int flaggoodfield;
@@ -478,10 +453,8 @@ int geton(const char *action)
   unsigned char ch;
 
   fl = get_from(target.s,action);		/* try to match up */
-  r = subscribe(workdir,target.s,1,fl,(*action == ACTION_RC[0]) ? "+mod" : "+",-1);
-  if (flagdig == FLD_DENY || flagdig == FLD_ALLOW)
-    strerr_die2x(0,INFO,MSG1(ERR_EXTRA_SUB,target.s));
-  switch (r) {
+  switch((r = subscribe(workdir,target.s,1,fl,
+			(*action == ACTION_RC[0]) ? "+mod" : "+",-1))) {
     case 1:
 	    qmail_puts(&qq,"List-Unsubscribe: <mailto:");	/*rfc2369 */
 	    qmail_put(&qq,outlocal.s,outlocal.len);
@@ -512,7 +485,7 @@ int geton(const char *action)
 	    if (!stralloc_0(&confirm)) die_nomem();
 	    set_cpconfirm(confirm.s,outlocal.len);	/* for !R in copy */
             copy(&qq,"text/top",flagcd);
-            copy_act("text/sub-ok");
+            copy(&qq,"text/sub-ok",flagcd);
             break;
     default:
             if (str_start(action,ACTION_TC))
@@ -520,9 +493,11 @@ int geton(const char *action)
 	    hdr_subject(MSG(SUB_SUBSCRIBE_NOP));
             hdr_ctboundary();
             copy(&qq,"text/top",flagcd);
-            copy_act("text/sub-nop");
+            copy(&qq,"text/sub-nop",flagcd);
             break;
   }
+  if (flagdig == FLD_DENY || flagdig == FLD_ALLOW)
+    strerr_die2x(0,INFO,MSG1(ERR_EXTRA_SUB,target.s));
   return r;
 }
 
@@ -530,25 +505,25 @@ int getoff(const char *action)
 {
   int r;
 
-  r = subscribe(workdir,target.s,0,"",(*action == ACTION_WC[0]) ? "-mod" : "-",-1);
-  if (flagdig == FLD_DENY || flagdig == FLD_ALLOW)
-    strerr_die2x(0,INFO,MSG1(ERR_EXTRA_UNSUB,target.s));
-  switch (r) {
+  switch((r = subscribe(workdir,target.s,0,"",
+			(*action == ACTION_WC[0]) ? "-mod" : "-",-1))) {
 			/* no comment for unsubscribe */
     case 1:
 	    hdr_subject(MSG(SUB_GOODBYE));
             qmail_puts(&qq,"\n");
             hdr_ctboundary();
             copy(&qq,"text/top",flagcd);
-            copy_act("text/unsub-ok");
+            copy(&qq,"text/unsub-ok",flagcd);
             break;
     default:
 	    hdr_subject(MSG(SUB_UNSUBSCRIBE_NOP));
             hdr_ctboundary();
             copy(&qq,"text/top",flagcd);
-            copy_act("text/unsub-nop");
+            copy(&qq,"text/unsub-nop",flagcd);
             break;
   }
+  if (flagdig == FLD_DENY || flagdig == FLD_ALLOW)
+    strerr_die2x(0,INFO,MSG1(ERR_EXTRA_UNSUB,target.s));
   return r;
 }
 
@@ -572,9 +547,6 @@ void doconfirm(const char *act)
   if (!stralloc_cat(&confirm,&outhost)) die_nomem();
   if (!stralloc_0(&confirm)) die_nomem();
   set_cpconfirm(confirm.s,outlocal.len);		/* for copy */
-  set_cpaction(act);
-  set_cphash(hash);
-  set_cpwhen(when);
 
   qmail_puts(&qq,"Reply-To: ");
   if (!quote2(&quoted,confirm.s)) die_nomem();
@@ -595,9 +567,9 @@ void sendtomods(void)
   putsubs(moddir.s,0L,52L,subto);
 }
 
-void copybottom(int forcebottom)
+void copybottom(void)
 {
-  if (!omitbottom || forcebottom) {
+  if (!omitbottom || act == AC_HELP) {
     copy(&qq,"text/bottom",flagcd);
     if (flagcd) {
       if (flagcd == 'B') {
@@ -629,554 +601,44 @@ void copybottom(int forcebottom)
   qmail_from(&qq,from.s);
 }
 
-static void subst_nuls(stralloc *what)
+int main(int argc,char **argv)
 {
-  /* get rid of nulls to use cookie */
-  char *s;
-  unsigned int n;
-  for (s = what->s, n = what->len; n > 0; --n, ++s) {
-    if (!*s)
-      *s = '_';
-  }
-}
-
-static void do_subscribe(const char *action)
-{
-  int r;
-
-  if (issub(workdir,target.s,0)) {
-    geton(ACTION_SC);
-    copybottom(0);
-    qmail_to(&qq,target.s);
-  } else if (ismod && remote.s != 0) {
-    doconfirm(ACTION_RC);
-    copy_act("text/mod-sub-confirm");
-    copybottom(0);
-    qmail_to(&qq,mod.s);
-  } else if (flagsubconf) {
-    doconfirm(ACTION_SC);
-    copy_act("text/sub-confirm");
-    copybottom(0);
-    qmail_to(&qq,target.s);
-  } else if (modsub.s != 0) {
-    store_from(&fromline,target.s);
-    doconfirm(ACTION_TC);
-    copy_act("text/mod-sub-confirm");
-    copybottom(0);
-    sendtomods();
-  } else {				/* normal subscribe, no confirm */
-    r = geton(action);		/* should be rarely used. */
-    copybottom(0);
-    if (flagnotify) qmail_to(&qq,target.s);
-    if (r && flagcopyowner > 1) to_owner();
-  }
-}
-
-static void do_sc(const char *action)
-{
-  int r;
-
-  if (hashok(action,ACTION_SC)) {
-    if (modsub.s != 0 && !(ismod && str_equal(sender,target.s))) {
-      store_from(&fromline,target.s);	/* save from line, if requested */
-					/* since transaction not complete */
-      doconfirm(ACTION_TC);
-      copy_act("text/mod-sub-confirm");
-      copybottom(0);
-      sendtomods();
-    } else {
-      r = geton(action);
-      copybottom(0);
-      qmail_to(&qq,target.s);
-      if (r && flagcopyowner > 1) to_owner();
-    }
-  } else {
-    doconfirm(ACTION_SC);
-    copy_act("text/sub-bad");
-    copybottom(0);
-    qmail_to(&qq,target.s);
-  }
-}
-
-static void do_rc_tc(const char *action,const char *ac)
-{
-  int r;
-
-  if (hashok(action,ac)) {
-    r = geton(action);
-    mod_bottom();
-    if (flagnotify) qmail_to(&qq,target.s);	/* unless suppressed */
-    if (r && flagcopyowner > 1) to_owner();
-  } else {
-    if (!ismod || remote.s == 0)	/* else anyone can get a good -tc. */
-      die_cookie();
-    doconfirm(ac);
-    copy(&qq,"text/sub-bad",flagcd);
-    copybottom(0);
-    qmail_to(&qq,mod.s);
-  }
-}
-
-static void do_unsubscribe(const char *action)
-{
-  int r;
-
-  if (!issub(workdir,target.s,0)) {
-    getoff(ACTION_UC);
-    copybottom(0);
-    qmail_to(&qq,target.s);
-  } else if (flagunsubconf) {
-    if (ismod && remote.s != 0) {
-      doconfirm(ACTION_WC);
-      copy_act("text/mod-unsub-confirm");
-      copybottom(0);
-      qmail_to(&qq,mod.s);
-    } else {
-      doconfirm(ACTION_UC);
-      copy_act("text/unsub-confirm");
-      copybottom(0);
-      qmail_to(&qq,target.s);
-    }
-  } else if (flagunsubismod && modsub.s != 0) {
-    doconfirm(ACTION_VC);
-    copy_act("text/mod-unsub-confirm");
-    copybottom(0);
-    sendtomods();
-  } else {
-    r = getoff(action);
-    copybottom(0);
-    if (!r || flagnotify) qmail_to(&qq,target.s);
-		/* tell owner if problems (-Q) or anyway (-QQ) */
-    if (flagcopyowner && (!r || flagcopyowner > 1)) to_owner();
-  }
-}
-
-static void do_uc(const char *action)
-{
-  int r;
-
-  if (hashok(action,ACTION_UC)) {
-    /* unsub is moderated only on moderated list if -m unless the */
-    /* target == sender == a moderator */
-    if (flagunsubismod && modsub.s != 0) {
-      doconfirm(ACTION_VC);
-      copy_act("text/mod-unsub-confirm");
-      copybottom(0);
-      sendtomods();
-    } else {
-      r = getoff(action);
-      copybottom(0);
-      if (!r || flagnotify) qmail_to(&qq,target.s);
-		/* tell owner if problems (-Q) or anyway (-QQ) */
-      if (flagcopyowner && (!r || flagcopyowner > 1)) to_owner();
-    }
-  } else {
-    doconfirm(ACTION_UC);
-    copy_act("text/unsub-bad");
-    copybottom(0);
-    qmail_to(&qq,target.s);
-  }
-}
-
-static void do_vc_wc(const char *action,const char *ac)
-{
-  int r;
-
-  if (hashok(action,ac)) {
-    r = getoff(action);
-    if (!r && modsub.s != 0)
-      strerr_die2x(0,INFO,MSG(ERR_UNSUB_NOP));
-    mod_bottom();
-    if (r) {				/* success to target */
-      qmail_to(&qq,target.s);
-      if (flagcopyowner > 1) to_owner();
-    } else				/* NOP to sender = admin. Will take */
-      qmail_to(&qq,sender);		/* care of it. No need to tell owner */
-		/* if list is moderated skip - otherwise bad with > 1 mod */
-  } else {
-    if (!ismod || remote.s == 0)	/* else anyone can get a good -vc. */
-      die_cookie();
-    doconfirm(ac);
-    copy_act("text/unsub-bad");
-    copybottom(0);
-    qmail_to(&qq,mod.s);
-  }
-}
-
-static void do_list(int act)
-{
-  unsigned int i;
-  if (!flaglist || (modsub.s == 0 && remote.s == 0))
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
-  if (!ismod)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
-  hdr_subject(MSG(SUB_LIST));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-
-  if (act == AC_LIST) {
-    showsend("list");
-    (void) code_qputs("");
-    (void) code_qputs(MSG(TXT_LISTMEMBERS));
-    (void) code_qputs("\n");
-    i = putsubs(workdir,0L,52L,code_subto);
-  } else {			/* listn */
-    showsend("listn");
-    i = putsubs(workdir,0L,52L,dummy_to);
-  }
-  (void) code_qput("\n  ======> ",11);
-  (void) code_qput(strnum,fmt_ulong(strnum,i));
-  (void) code_qput("\n",1);
-  copybottom(0);
-  qmail_to(&qq,mod.s);
-}
-
-static void do_log(char *action,unsigned int actlen)
-{
-  action += actlen;
-  if (*action == '.' || *action == '_') ++action;
-  if (!flaglist || remote.s == 0)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
-  if (!ismod)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
-  showsend("log");
-  hdr_subject((*action == 0) ? MSG(SUB_LOG) : MSG(SUB_LOG_SEARCH));
-  hdr_ctboundary();
-  searchlog(workdir,action,code_subto);
-  copybottom(0);
-  qmail_to(&qq,mod.s);
-}
-
-static void do_edit(const char *action)
-{
-  unsigned int i;
-  unsigned int len;
-  char ch;
-
-  /* only remote admins and only if -e is specified may edit */
-  if (!flagedit || remote.s == 0)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
-  if (!ismod)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
-  len = str_len(ACTION_EDIT);
-  if (!case_starts(action,ACTION_EDIT))
-    len = str_len(ALT_EDIT);
-  if (action[len]) {			/* -edit.file, not just -edit */
-    if (action[len] != '.')
-      strerr_die2x(100,FATAL,MSG(ERR_BAD_REQUEST));
-    showsend2("edit ",action+len+1);
-    if (!stralloc_copys(&fnedit,"text/")) die_nomem();
-    if (!stralloc_cats(&fnedit,action+len+1)) die_nomem();
-    if (!stralloc_0(&fnedit)) die_nomem();
-    case_lowerb(fnedit.s,fnedit.len);
-    i = 5;	/* after the "text/" */
-    while ((ch = fnedit.s[i++])) {
-      if (((ch > 'z') || (ch < 'a')) && (ch != '_'))
-	strerr_die2x(100,FATAL,MSG(ERR_BAD_NAME));
-      if (ch == '_') fnedit.s[i-1] = '-';
-    }
-    switch(slurp(fnedit.s,&text,1024)) {	/* entire file! */
-    case -1:
-      strerr_die2sys(111,FATAL,MSG1(ERR_READ,fnedit.s));
-    case 0:
-      strerr_die5x(100,FATAL,dir,"/",fnedit.s,MSG(ERR_NOEXIST));
-    }
-    if (!stralloc_copy(&line,&text)) die_nomem();
-
-    subst_nuls(&line);
-
-    if (!stralloc_cat(&line,&fnedit)) die_nomem();	/* including '\0' */
-    strnum[fmt_ulong(strnum,(unsigned long) when)] = 0;
-    cookie(hash,key.s,key.len,strnum,line.s,"-e");
-    if (!stralloc_copy(&confirm,&outlocal)) die_nomem();
-    if (!stralloc_append(&confirm,"-")) die_nomem();
-    if (!stralloc_catb(&confirm,ACTION_ED,LENGTH_ED)) die_nomem();
-    if (!stralloc_cats(&confirm,strnum)) die_nomem();
-    if (!stralloc_append(&confirm,".")) die_nomem();
-		/* action part has been checked for bad chars */
-    if (!stralloc_cats(&confirm,action + len + 1)) die_nomem();
-    if (!stralloc_append(&confirm,".")) die_nomem();
-    if (!stralloc_catb(&confirm,hash,COOKIE)) die_nomem();
-    if (!stralloc_append(&confirm,"@")) die_nomem();
-    if (!stralloc_cat(&confirm,&outhost)) die_nomem();
-    if (!stralloc_0(&confirm)) die_nomem();
-    set_cpconfirm(confirm.s,outlocal.len);
-    set_cpaction(ACTION_ED);
-    set_cphash(hash);
-    set_cpwhen(when);
-
-    qmail_puts(&qq,"Reply-To: ");
-    if (!quote2(&quoted,confirm.s)) die_nomem();
-    qmail_put(&qq,quoted.s,quoted.len);
-    qmail_puts(&qq,"\n");
-
-    hdr_subject(MSG1(SUB_EDIT_REQUEST,action+len+1));
-    hdr_ctboundary();
-    copy(&qq,"text/top",flagcd);
-    copy(&qq,"text/edit-do",flagcd);
-    (void) code_qputs(MSG(TXT_EDIT_START));
-    (void) code_qput(text.s,text.len);
-    (void) code_qputs(MSG(TXT_EDIT_END));
-
-  } else {	/* -edit only, so output list of editable files */
-    hdr_subject(MSG(SUB_EDIT_LIST));
-    hdr_ctboundary();
-    copy(&qq,"text/top",flagcd);
-    copy_act("text/edit-list");
-  }
-  qmail_puts(&qq,"\n\n");
-  copybottom(0);
-  qmail_to(&qq,mod.s);
-}
-
-static void do_ed(char *action)
-{
-  datetime_sec u;
-  int flaggoodfield;
-  int fd;
+  char *action;
+  const char *ac;
   char *x, *y;
-  char *cp,*cpfirst,*cplast,*cpnext,*cpafter;
-  int flagdone;
-  unsigned int len;
   const char *fname;
-  unsigned int i;
-
-  x = action + LENGTH_ED;
-  x += scan_ulong(x,&u);
-  if ((u > when) || (u < when - 100000)) die_cookie();
-  if (*x == '.') ++x;
-  fname = x;
-  x += str_chr(x,'.');
-  if (!*x) die_cookie();
-  *x = (char) 0;
-  ++x;
-  if (!stralloc_copys(&fnedit,"text/")) die_nomem();
-  if (!stralloc_cats(&fnedit,fname)) die_nomem();
-  if (!stralloc_0(&fnedit)) die_nomem();
-  y = fnedit.s + 5;		/* after "text/" */
-  while (*++y) {		/* Name should be guaranteed by the cookie, */
-				/* but better safe than sorry ... */
-    if (((*y > 'z') || (*y < 'a')) && (*y != '_'))
-      strerr_die2x(100,FATAL,MSG(ERR_BAD_NAME));
-    if (*y == '_') *y = '-';
-  }
-
-  lock();			/* file must not change while here */
-
-  switch (slurp(fnedit.s,&text,1024)) {
-  case -1:
-    strerr_die2sys(111,FATAL,MSG1(ERR_READ,fnedit.s));
-  case 0:
-    strerr_die5x(100,FATAL,dir,"/",fnedit.s,MSG(ERR_NOEXIST));
-  }
-  if (!stralloc_copy(&line,&text)) die_nomem();
-
-  subst_nuls(&line);
-
-  if (!stralloc_cat(&line,&fnedit)) die_nomem();	/* including '\0' */
-  strnum[fmt_ulong(strnum,(unsigned long) u)] = 0;
-  cookie(hash,key.s,key.len,strnum,line.s,"-e");
-  if (str_len(x) != COOKIE) die_cookie();
-  if (byte_diff(hash,COOKIE,x)) die_cookie();
-	/* cookie is ok, file exists, lock's on, new file ends in '_' */
-  if (!stralloc_copys(&fneditn,fnedit.s)) die_nomem();
-  if (!stralloc_append(&fneditn,"_")) die_nomem();
-  if (!stralloc_0(&fneditn)) die_nomem();
-  fd = open_trunc(fneditn.s);
-  if (fd == -1)
-    strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
-  substdio_fdbuf(&sstext,write,fd,textbuf,sizeof(textbuf));
-  if (!stralloc_copys(&quoted,"")) die_nomem();	/* clear */
-  if (!stralloc_copys(&text,"")) die_nomem();
-
-  for (;;) {			/* get message body */
-    if (getln(&ssin,&line,&match,'\n') == -1)
-      strerr_die2sys(111,FATAL,MSG(ERR_READ_INPUT));
-    if (!match) break;
-    if (!stralloc_cat(&text,&line)) die_nomem();
-  }
-  if (encin) {			/* decode if necessary */
-    if (encin == 'B')
-      decodeB(text.s,text.len,&line);
-    else
-      decodeQ(text.s,text.len,&line);
-    if (!stralloc_copy(&text,&line)) die_nomem();
-  }
-  cp = text.s;
-  cpafter = text.s+text.len;
-  flaggoodfield = 0;
-  flagdone = 0;
-  len = 0;
-  while ((cpnext = cp + byte_chr(cp,cpafter-cp,'\n')) != cpafter) {
-    i = byte_chr(cp,cpnext-cp,'%');
-    if (i != (unsigned int) (cpnext - cp)) {
-      if (!flaggoodfield) {	/* MSG(TXT_EDIT_START)/END */
-	if (case_startb(cp+i,cpnext-cp-i,MSG(TXT_EDIT_START))) {
-		/* start tag. Store users 'quote characters', e.g. '> ' */
-	  if (!stralloc_copyb(&quoted,cp,i)) die_nomem();
-	  flaggoodfield = 1;
-	  cp = cpnext + 1;
-	  cpfirst = cp;
-	  continue;
-	}
-      } else
-	if (case_startb(cp+i,cpnext-cp-i,MSG(TXT_EDIT_END))) {
-	  flagdone = 1;
-	  break;
-	}
-    }
-    if (flaggoodfield) {
-      if ((len += cpnext - cp - quoted.len + 1) > MAXEDIT)
-	strerr_die1x(100,MSG(ERR_EDSIZE));
-
-      if (quoted.len && cpnext-cp >= (int) quoted.len &&
-	  !str_diffn(cp,quoted.s,quoted.len))
-	cp += quoted.len;	/* skip quoting characters */
-      cplast = cpnext - 1;
-      if (*cplast == '\r')	/* CRLF -> '\n' for base64 encoding */
-	*cplast = '\n';
-      else
-	++cplast;
-      if (substdio_put(&sstext,cp,cplast-cp+1) == -1)
-	strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
-    }
-    cp = cpnext + 1;
-  }
-  if (!flagdone)
-    strerr_die2x(100,FATAL,MSG(ERR_NO_MARK));
-  if (substdio_flush(&sstext) == -1)
-    strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
-  if (fsync(fd) == -1)
-    strerr_die2sys(111,FATAL,MSG1(ERR_SYNC,fneditn.s));
-  if (fchmod(fd, 0600) == -1)
-    strerr_die2sys(111,FATAL,MSG1(ERR_CHMOD,fneditn.s));
-  if (close(fd) == -1)
-    strerr_die2sys(111,FATAL,MSG1(ERR_CLOSE,fneditn.s));
-  wrap_rename(fneditn.s,fnedit.s);
-
-  unlock();
-  hdr_subject(MSG1(SUB_EDIT_SUCCESS,fname));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  copy_act("text/edit-done");
-  copybottom(0);
-  qmail_to(&qq,sender);		/* not necessarily from mod */
-}
-
-static void do_get(const char *action)
-{
-  unsigned long u;
-  struct stat st;
-  char ch;
+  int ismod;
+  stralloc mod = {0};
+  const char *err;
+  char *cp,*cpfirst,*cplast,*cpnext,*cpafter;
   int r;
-  unsigned int pos;
+  unsigned int i;
+  unsigned int len;
   int fd;
+  int flagdone;
+  char ch;
 
-  if (!flagget)
-    strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
-  hdr_subject(MSG(SUB_GET_MSG));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
+  (void) umask(022);
+  sig_pipeignore();
+  when = now();
 
-  pos = str_len(ACTION_GET);
-  if (!case_starts(action,ACTION_GET))
-    pos = str_len(ALT_GET);
+  getconfopt(argc,argv,options,1,&dir);
+  initsub(0);
 
-  if (action[pos] == '.' || action [pos] == '_') pos++;
-  scan_ulong(action + pos,&u);
+  sender = get_sender();
+  if (!sender) die_sender();
+  action = env_get("DEFAULT");
+  if (!action) strerr_die2x(100,FATAL,MSG(ERR_NODEFAULT));
 
-  if (!stralloc_copys(&line,"archive/")) die_nomem();
-  if (!stralloc_catb(&line,strnum,fmt_ulong(strnum,u / 100))) die_nomem();
-  if (!stralloc_cats(&line,"/")) die_nomem();
-  if (!stralloc_catb(&line,strnum,fmt_uint0(strnum,(unsigned int) (u % 100),2))) die_nomem();
-  if (!stralloc_0(&line)) die_nomem();
+  if (!*sender)
+    strerr_die2x(100,FATAL,MSG(ERR_BOUNCE));
+  if (!sender[str_chr(sender,'@')])
+    strerr_die2x(100,FATAL,MSG(ERR_ANONYMOUS));
+  if (str_equal(sender,"#@[]"))
+    strerr_die2x(100,FATAL,MSG(ERR_BOUNCE));
 
-  fd = open_read(line.s);
-  if (fd == -1)
-    if (errno != error_noent)
-      strerr_die2sys(111,FATAL,MSG1(ERR_OPEN,line.s));
-    else
-      copy_act("text/get-bad");
-  else {
-    if (fstat(fd,&st) == -1)
-      copy_act("text/get-bad");
-    else if (!(st.st_mode & 0100))
-      copy_act("text/get-bad");
-    else {
-      showsend("get");
-      substdio_fdbuf(&sstext,read,fd,textbuf,sizeof(textbuf));
-      qmail_puts(&qq,"> ");
-      for (;;) {
-	r = substdio_get(&sstext,&ch,1);
-	if (r == -1) strerr_die2sys(111,FATAL,MSG1(ERR_READ,line.s));
-	if (r == 0) break;
-	qmail_put(&qq,&ch,1);
-	if (ch == '\n') qmail_puts(&qq,"> ");
-      }
-      qmail_puts(&qq,"\n");
-    }
-    close(fd);
-  }
-  copybottom(0);
-  qmail_to(&qq,target.s);
-}
+  workdir = ".";
 
-static void do_query(void)
-{
-  hdr_subject(MSG(SUB_STATUS));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  if (issub(workdir,target.s,0))
-    copy_act("text/sub-nop");
-  else
-    copy_act("text/unsub-nop");
-  copybottom(0);
-  qmail_to(&qq,ismod ? mod.s : target.s);
-}
-
-static void do_info(void)
-{
-  hdr_subject(MSG(SUB_INFO));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  copy_act("text/info");
-  copybottom(0);
-  qmail_to(&qq,target.s);
-}
-
-static void do_faq(void)
-{
-  hdr_subject(MSG(SUB_FAQ));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  copy_act("text/faq");
-  copybottom(0);
-  qmail_to(&qq,target.s);
-}
-
-static void do_mod_help(void)
-{
-  hdr_subject(MSG(SUB_MOD_HELP));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  copy_act("text/mod-help");
-  copy(&qq,"text/help",flagcd);
-  copybottom(0);
-  qmail_to(&qq,mod.s);
-}
-
-static void do_help(void)
-{
-  hdr_subject(MSG(SUB_HELP));
-  hdr_ctboundary();
-  copy(&qq,"text/top",flagcd);
-  copy_act("text/help");
-  copybottom(1);
-  qmail_to(&qq,sender);
-}
-
-static char *set_workdir(char *action)
-{
   if (case_starts(action,"digest")) {			/* digest */
     action += 6;
     if (!stralloc_cats(&outlocal,"-digest")) die_nomem();
@@ -1195,20 +657,24 @@ static char *set_workdir(char *action)
     workdir = "deny";
     flagdig = FLD_DENY;
   }
-  else {
-    workdir = ".";
-    flagdig = 0;
-  }
-
   if (flagdig)				/* zap '-' after db specifier */
     if (*(action++) != '-') die_badaddr();
 
-  return action;
-}
 
-static int get_act_ismod(const char *action,unsigned int *actlen)
-{
-  int act;
+  if (!stralloc_copys(&target,sender)) die_nomem();
+  if (action[0]) {
+    i = str_chr(action,'-');
+    if (action[i]) {
+      action[i] = 0;
+      if (!stralloc_copys(&target,action + i + 1)) die_nomem();
+      i = byte_rchr(target.s,target.len,'=');
+      if (i < target.len)
+	target.s[i] = '@';
+    }
+  }
+  if (!stralloc_0(&target)) die_nomem();
+  set_cptarget(target.s);	/* for copy() */
+  make_verptarget();
 
   if (case_equals(action,ACTION_LISTN) ||
 		case_equals(action,ALT_LISTN))
@@ -1226,11 +692,12 @@ static int get_act_ismod(const char *action,unsigned int *actlen)
 		case_starts(action,ALT_EDIT))
     act = AC_EDIT;
   else if (case_starts(action,ACTION_LOG))
-    { act = AC_LOG; *actlen = str_len(ACTION_LOG); }
+   { act = AC_LOG; actlen = str_len(ACTION_LOG); }
   else if (case_starts(action,ALT_LOG))
-    { act = AC_LOG; *actlen = str_len(ALT_LOG); }
-  else
-    act = AC_NONE;
+   { act = AC_LOG; actlen = str_len(ALT_LOG); }
+
+			/* NOTE: act is needed in msg_headers(). */
+			/* Yes, this needs to be cleaned up! */
 
   if (modsub.s != 0 || remote.s != 0) {
     if (modsub.len) {
@@ -1257,7 +724,6 @@ static int get_act_ismod(const char *action,unsigned int *actlen)
 				/* admin and modsub lists. Since ismod   */
 				/* is false for all non-mod lists, only it   */
 				/* needs to be tested. */
-
   if (!flagpublic && !(ismod && remote.s != 0) &&
                 !case_equals(action,ACTION_HELP))
       strerr_die2x(100,FATAL,MSG(ERR_NOT_PUBLIC));
@@ -1273,57 +739,8 @@ static int get_act_ismod(const char *action,unsigned int *actlen)
     else if (case_equals(action,ACTION_UNSUBSCRIBE)
 		|| case_equals(action,ALT_UNSUBSCRIBE))
       act = AC_UNSUBSCRIBE;
-    else if (str_start(action,ACTION_SC))
-      act = AC_SC;
+    else if (str_start(action,ACTION_SC)) act = AC_SC;
   }
-  return act;
-}
-
-int main(int argc,char **argv)
-{
-  char *action;
-  const char *err;
-  unsigned int i;
-  int act = AC_NONE;	/* desired action */
-  unsigned int actlen = 0;/* str_len of above */
-
-  (void) umask(022);
-  sig_pipeignore();
-  when = now();
-
-  getconfopt(argc,argv,options,1,&dir);
-  initsub(0);
-
-  sender = get_sender();
-  if (!sender) die_sender();
-  action = env_get("DEFAULT");
-  if (!action) strerr_die2x(100,FATAL,MSG(ERR_NODEFAULT));
-
-  if (!*sender)
-    strerr_die2x(100,FATAL,MSG(ERR_BOUNCE));
-  if (!sender[str_chr(sender,'@')])
-    strerr_die2x(100,FATAL,MSG(ERR_ANONYMOUS));
-  if (str_equal(sender,"#@[]"))
-    strerr_die2x(100,FATAL,MSG(ERR_BOUNCE));
-
-  action = set_workdir(action);
-
-  if (!stralloc_copys(&target,sender)) die_nomem();
-  if (action[0]) {
-    i = str_chr(action,'-');
-    if (action[i]) {
-      action[i] = 0;
-      if (!stralloc_copys(&target,action + i + 1)) die_nomem();
-      i = byte_rchr(target.s,target.len,'=');
-      if (i < target.len)
-	target.s[i] = '@';
-    }
-  }
-  if (!stralloc_0(&target)) die_nomem();
-  set_cptarget(target.s);	/* for copy() */
-  make_verptarget();
-
-  act = get_act_ismod(action,&actlen);
 
   if (!stralloc_copy(&from,&outlocal)) die_nomem();
   if (!stralloc_cats(&from,"-return-@")) die_nomem();
@@ -1332,52 +749,505 @@ int main(int argc,char **argv)
 
   if (qmail_open(&qq) == -1)
     strerr_die2sys(111,FATAL,MSG(ERR_QMAIL_QUEUE));
-  msg_headers(act);
+  msg_headers();
 
-  if (act == AC_SUBSCRIBE)
-    do_subscribe(action);
-  else if (act == AC_SC)
-    do_sc(action);
-  else if (str_start(action,ACTION_RC))
-    do_rc_tc(action,ACTION_RC);
-  else if(str_start(action,ACTION_TC))
-    do_rc_tc(action,ACTION_TC);
-  else if (act == AC_UNSUBSCRIBE)
-    do_unsubscribe(action);
-  else if (str_start(action,ACTION_UC))
-    do_uc(action);
-  else if (str_start(action,ACTION_VC))
-    do_vc_wc(action,ACTION_VC);
-  else if (str_start(action,ACTION_WC))
-    do_vc_wc(action,ACTION_WC);
-  else if (act == AC_LIST || act == AC_LISTN) 
-    do_list(act);
-  else if (act == AC_LOG)
-    do_log(action,actlen);
-  else if (act == AC_EDIT)
-    do_edit(action);
-  else if (str_start(action,ACTION_ED))
-    do_ed(action);
-  else if (act == AC_GET)
-    do_get(action);
-  else if (case_starts(action,ACTION_QUERY) ||
-		case_starts(action,ALT_QUERY))
-    do_query();
-  else if (case_starts(action,ACTION_INFO) ||
-		case_starts(action,ALT_INFO))
-    do_info();
-  else if (case_starts(action,ACTION_FAQ) ||
-		case_starts(action,ALT_FAQ))
-    do_faq();
-  else if (ismod && (act == AC_HELP))
-    do_mod_help();
-  else
-    do_help();
+  if (act == AC_SUBSCRIBE) {
+    if (issub(workdir,target.s,0)) {
+      geton(ACTION_SC);
+      copybottom();
+      qmail_to(&qq,target.s);
+    } else if (ismod && remote.s != 0) {
+      doconfirm(ACTION_RC);
+      copy(&qq,"text/mod-sub-confirm",flagcd);
+      copybottom();
+      qmail_to(&qq,mod.s);
+    } else if (flagsubconf) {
+      doconfirm(ACTION_SC);
+      copy(&qq,"text/sub-confirm",flagcd);
+      copybottom();
+      qmail_to(&qq,target.s);
+    } else if (modsub.s != 0) {
+      store_from(&fromline,target.s);
+      doconfirm(ACTION_TC);
+      copy(&qq,"text/mod-sub-confirm",flagcd);
+      copybottom();
+      sendtomods();
+    } else {				/* normal subscribe, no confirm */
+      r = geton(action);		/* should be rarely used. */
+      copybottom();
+      if (flagnotify) qmail_to(&qq,target.s);
+      if (r && flagverbose > 1) to_owner();
+    }
 
-  err = qmail_close(&qq);
-  closesub();
-  if (*err != '\0')
-    strerr_die4x(111,FATAL,MSG(ERR_TMP_QMAIL_QUEUE),": ",err + 1);
-  strnum[fmt_ulong(strnum,qmail_qp(&qq))] = 0;
-  strerr_die3x(0,INFO,"qp ",strnum);
+  } else if (act == AC_SC) {
+    if (hashok(action,ACTION_SC)) {
+      if (modsub.s != 0 && !(ismod && str_equal(sender,target.s))) {
+        store_from(&fromline,target.s);	/* save from line, if requested */
+					/* since transaction not complete */
+        doconfirm(ACTION_TC);
+        copy(&qq,"text/mod-sub-confirm",flagcd);
+        copybottom();
+        sendtomods();
+      } else {
+        r = geton(action);
+        copybottom();
+        qmail_to(&qq,target.s);
+	if (r && flagverbose > 1) to_owner();
+      }
+    } else {
+      doconfirm(ACTION_SC);
+      copy(&qq,"text/sub-bad",flagcd);
+      copybottom();
+      qmail_to(&qq,target.s);
+    }
+
+  } else if (str_start(action,ACTION_RC)
+	     ? (ac = ACTION_RC)
+	     : str_start(action,ACTION_TC)
+	     ? (ac = ACTION_TC)
+	     : 0) {
+    if (hashok(action,ac)) {
+      r = geton(action);
+      mod_bottom();
+      if (flagnotify) qmail_to(&qq,target.s);	/* unless suppressed */
+      if (r && flagverbose > 1) to_owner();
+    } else {
+      if (!ismod || remote.s == 0)	/* else anyone can get a good -tc. */
+        die_cookie();
+      doconfirm(ac);
+      copy(&qq,"text/sub-bad",flagcd);
+      copybottom();
+      qmail_to(&qq,mod.s);
+    }
+
+  } else if (act == AC_UNSUBSCRIBE) {
+    if (!issub(workdir,target.s,0)) {
+      getoff(ACTION_UC);
+      copybottom();
+      qmail_to(&qq,target.s);
+    } else if (flagunsubconf) {
+      if (ismod && remote.s != 0) {
+        doconfirm(ACTION_WC);
+        copy(&qq,"text/mod-unsub-confirm",flagcd);
+        copybottom();
+	qmail_to(&qq,mod.s);
+      } else {
+        doconfirm(ACTION_UC);
+        copy(&qq,"text/unsub-confirm",flagcd);
+        copybottom();
+        qmail_to(&qq,target.s);
+      }
+    } else if (flagunsubismod && modsub.s != 0) {
+        doconfirm(ACTION_VC);
+        copy(&qq,"text/mod-unsub-confirm",flagcd);
+        copybottom();
+        sendtomods();
+    } else {
+      r = getoff(action);
+      copybottom();
+      if (!r || flagnotify) qmail_to(&qq,target.s);
+		/* tell owner if problems (-Q) or anyway (-QQ) */
+      if (flagverbose && (!r || flagverbose > 1)) to_owner();
+    }
+
+  } else if (str_start(action,ACTION_UC)) {
+    if (hashok(action,ACTION_UC)) {
+	/* unsub is moderated only on moderated list if -m unless the */
+	/* target == sender == a moderator */
+      if (flagunsubismod && modsub.s != 0) {
+        doconfirm(ACTION_VC);
+        copy(&qq,"text/mod-unsub-confirm",flagcd);
+        copybottom();
+        sendtomods();
+      } else {
+        r = getoff(action);
+        copybottom();
+        if (!r || flagnotify) qmail_to(&qq,target.s);
+		/* tell owner if problems (-Q) or anyway (-QQ) */
+	if (flagverbose && (!r || flagverbose > 1)) to_owner();
+      }
+    } else {
+      doconfirm(ACTION_UC);
+      copy(&qq,"text/unsub-bad",flagcd);
+      copybottom();
+      qmail_to(&qq,target.s);
+    }
+
+  } else if (str_start(action,ACTION_VC)
+	     ? (ac = ACTION_VC)
+	     : str_start(action,ACTION_WC)
+	     ? (ac = ACTION_WC)
+	     : 0) {
+    if (hashok(action,ac)) {
+      r = getoff(action);
+      if (!r && modsub.s != 0)
+        strerr_die2x(0,INFO,MSG(ERR_UNSUB_NOP));
+      mod_bottom();
+      if (r) {				/* success to target */
+	qmail_to(&qq,target.s);
+        if (flagverbose > 1) to_owner();
+      } else				/* NOP to sender = admin. Will take */
+        qmail_to(&qq,sender);		/* care of it. No need to tell owner */
+		/* if list is moderated skip - otherwise bad with > 1 mod */
+    } else {
+      if (!ismod || remote.s == 0)	/* else anyone can get a good -vc. */
+        die_cookie();
+      doconfirm(ac);
+      copy(&qq,"text/unsub-bad",flagcd);
+      copybottom();
+      qmail_to(&qq,mod.s);
+    }
+
+  } else if (act == AC_LIST || act == AC_LISTN) {
+
+    if (!flaglist || (modsub.s == 0 && remote.s == 0))
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
+    if (!ismod)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
+    hdr_subject(MSG(SUB_LIST));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+
+    if (act == AC_LIST) {
+      (void) code_qputs("");
+      (void) code_qputs(MSG(TXT_LISTMEMBERS));
+      (void) code_qputs("\n");
+      i = putsubs(workdir,0L,52L,code_subto);
+    } else			/* listn */
+      i = putsubs(workdir,0L,52L,dummy_to);
+
+    (void) code_qput("\n  ======> ",11);
+    (void) code_qput(strnum,fmt_ulong(strnum,i));
+    (void) code_qput("\n",1);
+    copybottom();
+    qmail_to(&qq,mod.s);
+
+  } else if (act == AC_LOG) {
+    action += actlen;
+    if (*action == '.' || *action == '_') ++action;
+    if (!flaglist || remote.s == 0)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
+    if (!ismod)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
+    hdr_subject((*action == 0) ? MSG(SUB_LOG) : MSG(SUB_LOG_SEARCH));
+    hdr_ctboundary();
+    searchlog(workdir,action,code_subto);
+    copybottom();
+    qmail_to(&qq,mod.s);
+
+  } else if (act == AC_EDIT) {
+	/* only remote admins and only if -e is specified may edit */
+    if (!flagedit || remote.s == 0)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
+    if (!ismod)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_ALLOWED));
+    len = str_len(ACTION_EDIT);
+    if (!case_starts(action,ACTION_EDIT))
+      len = str_len(ALT_EDIT);
+    if (action[len]) {			/* -edit.file, not just -edit */
+      if (action[len] != '.')
+        strerr_die2x(100,FATAL,MSG(ERR_BAD_REQUEST));
+      if (!stralloc_copys(&fnedit,"text/")) die_nomem();
+      if (!stralloc_cats(&fnedit,action+len+1)) die_nomem();
+      if (!stralloc_0(&fnedit)) die_nomem();
+      case_lowerb(fnedit.s,fnedit.len);
+      i = 5;	/* after the "text/" */
+      while ((ch = fnedit.s[i++])) {
+        if (((ch > 'z') || (ch < 'a')) && (ch != '_'))
+          strerr_die2x(100,FATAL,MSG(ERR_BAD_NAME));
+        if (ch == '_') fnedit.s[i-1] = '-';
+      }
+      switch(slurp(fnedit.s,&text,1024)) {	/* entire file! */
+        case -1:
+          strerr_die2sys(111,FATAL,MSG1(ERR_READ,fnedit.s));
+        case 0:
+          strerr_die5x(100,FATAL,dir,"/",fnedit.s,MSG(ERR_NOEXIST));
+      }
+      if (!stralloc_copy(&line,&text)) die_nomem();
+      {		/* get rid of nulls to use cookie */
+        char *s;
+	unsigned int n;
+        s = line.s; n = line.len;
+        while(n--) { if (!*s) *s = '_'; ++s; }
+      }
+      if (!stralloc_cat(&line,&fnedit)) die_nomem();	/* including '\0' */
+      strnum[fmt_ulong(strnum,(unsigned long) when)] = 0;
+      cookie(hash,key.s,key.len,strnum,line.s,"-e");
+      if (!stralloc_copy(&confirm,&outlocal)) die_nomem();
+      if (!stralloc_append(&confirm,"-")) die_nomem();
+      if (!stralloc_catb(&confirm,ACTION_ED,LENGTH_ED)) die_nomem();
+      if (!stralloc_cats(&confirm,strnum)) die_nomem();
+      if (!stralloc_append(&confirm,".")) die_nomem();
+		/* action part has been checked for bad chars */
+      if (!stralloc_cats(&confirm,action + len + 1)) die_nomem();
+      if (!stralloc_append(&confirm,".")) die_nomem();
+      if (!stralloc_catb(&confirm,hash,COOKIE)) die_nomem();
+      if (!stralloc_append(&confirm,"@")) die_nomem();
+      if (!stralloc_cat(&confirm,&outhost)) die_nomem();
+      if (!stralloc_0(&confirm)) die_nomem();
+      set_cpconfirm(confirm.s,outlocal.len);
+
+      qmail_puts(&qq,"Reply-To: ");
+      if (!quote2(&quoted,confirm.s)) die_nomem();
+      qmail_put(&qq,quoted.s,quoted.len);
+      qmail_puts(&qq,"\n");
+
+      hdr_subject(MSG1(SUB_EDIT_REQUEST,action+len+1));
+      hdr_ctboundary();
+      copy(&qq,"text/top",flagcd);
+      copy(&qq,"text/edit-do",flagcd);
+      (void) code_qputs(MSG(TXT_EDIT_START));
+      (void) code_qput(text.s,text.len);
+      (void) code_qputs(MSG(TXT_EDIT_END));
+
+    } else {	/* -edit only, so output list of editable files */
+      hdr_subject(MSG(SUB_EDIT_LIST));
+      hdr_ctboundary();
+      copy(&qq,"text/top",flagcd);
+      copy(&qq,"text/edit-list",flagcd);
+    }
+    qmail_puts(&qq,"\n\n");
+    copybottom();
+    qmail_to(&qq,mod.s);
+
+  } else if (str_start(action,ACTION_ED)) {
+    datetime_sec u;
+    int flaggoodfield;
+    x = action + LENGTH_ED;
+    x += scan_ulong(x,&u);
+    if ((u > when) || (u < when - 100000)) die_cookie();
+    if (*x == '.') ++x;
+    fname = x;
+    x += str_chr(x,'.');
+    if (!*x) die_cookie();
+    *x = (char) 0;
+    ++x;
+    if (!stralloc_copys(&fnedit,"text/")) die_nomem();
+    if (!stralloc_cats(&fnedit,fname)) die_nomem();
+    if (!stralloc_0(&fnedit)) die_nomem();
+    y = fnedit.s + 5;		/* after "text/" */
+    while (*++y) {		/* Name should be guaranteed by the cookie, */
+				/* but better safe than sorry ... */
+      if (((*y > 'z') || (*y < 'a')) && (*y != '_'))
+          strerr_die2x(100,FATAL,MSG(ERR_BAD_NAME));
+      if (*y == '_') *y = '-';
+    }
+
+    lock();			/* file must not change while here */
+
+    switch (slurp(fnedit.s,&text,1024)) {
+      case -1:
+        strerr_die2sys(111,FATAL,MSG1(ERR_READ,fnedit.s));
+      case 0:
+        strerr_die5x(100,FATAL,dir,"/",fnedit.s,MSG(ERR_NOEXIST));
+    }
+    if (!stralloc_copy(&line,&text)) die_nomem();
+    {		/* get rid of nulls to use cookie */
+      char *s;
+      unsigned int n;
+      s = line.s; n = line.len;
+      while(n--) { if (!*s) *s = '_'; ++s; }
+    }
+    if (!stralloc_cat(&line,&fnedit)) die_nomem();	/* including '\0' */
+    strnum[fmt_ulong(strnum,(unsigned long) u)] = 0;
+    cookie(hash,key.s,key.len,strnum,line.s,"-e");
+    if (str_len(x) != COOKIE) die_cookie();
+    if (byte_diff(hash,COOKIE,x)) die_cookie();
+	/* cookie is ok, file exists, lock's on, new file ends in '_' */
+    if (!stralloc_copys(&fneditn,fnedit.s)) die_nomem();
+    if (!stralloc_append(&fneditn,"_")) die_nomem();
+    if (!stralloc_0(&fneditn)) die_nomem();
+    fd = open_trunc(fneditn.s);
+    if (fd == -1)
+      strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
+    substdio_fdbuf(&sstext,write,fd,textbuf,sizeof(textbuf));
+    if (!stralloc_copys(&quoted,"")) die_nomem();	/* clear */
+    if (!stralloc_copys(&text,"")) die_nomem();
+
+    for (;;) {			/* get message body */
+      if (getln(&ssin,&line,&match,'\n') == -1)
+        strerr_die2sys(111,FATAL,MSG(ERR_READ_INPUT));
+      if (!match) break;
+      if (!stralloc_cat(&text,&line)) die_nomem();
+    }
+    if (encin) {	/* decode if necessary */
+      if (encin == 'B')
+        decodeB(text.s,text.len,&line);
+      else
+        decodeQ(text.s,text.len,&line);
+      if (!stralloc_copy(&text,&line)) die_nomem();
+    }
+    cp = text.s;
+    cpafter = text.s+text.len;
+    flaggoodfield = 0;
+    flagdone = 0;
+    len = 0;
+    while ((cpnext = cp + byte_chr(cp,cpafter-cp,'\n')) != cpafter) {
+      i = byte_chr(cp,cpnext-cp,'%');
+      if (i != (unsigned int) (cpnext - cp)) {
+        if (!flaggoodfield) {	/* MSG(TXT_EDIT_START)/END */
+          if (case_startb(cp+i,cpnext-cp-i,MSG(TXT_EDIT_START))) {
+		/* start tag. Store users 'quote characters', e.g. '> ' */
+            if (!stralloc_copyb(&quoted,cp,i)) die_nomem();
+            flaggoodfield = 1;
+            cp = cpnext + 1;
+            cpfirst = cp;
+            continue;
+          }
+        } else
+          if (case_startb(cp+i,cpnext-cp-i,MSG(TXT_EDIT_END))) {
+            flagdone = 1;
+            break;
+          }
+      }
+      if (flaggoodfield) {
+        if ((len += cpnext - cp - quoted.len + 1) > MAXEDIT)
+          strerr_die1x(100,MSG(ERR_EDSIZE));
+
+        if (quoted.len && cpnext-cp >= (int) quoted.len &&
+			!str_diffn(cp,quoted.s,quoted.len))
+          cp += quoted.len;	/* skip quoting characters */
+        cplast = cpnext - 1;
+        if (*cplast == '\r')	/* CRLF -> '\n' for base64 encoding */
+          *cplast = '\n';
+        else
+          ++cplast;
+        if (substdio_put(&sstext,cp,cplast-cp+1) == -1)
+            strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
+      }
+      cp = cpnext + 1;
+    }
+    if (!flagdone)
+      strerr_die2x(100,FATAL,MSG(ERR_NO_MARK));
+    if (substdio_flush(&sstext) == -1)
+      strerr_die2sys(111,FATAL,MSG1(ERR_WRITE,fneditn.s));
+    if (fsync(fd) == -1)
+      strerr_die2sys(111,FATAL,MSG1(ERR_SYNC,fneditn.s));
+    if (fchmod(fd, 0600) == -1)
+      strerr_die2sys(111,FATAL,MSG1(ERR_CHMOD,fneditn.s));
+    if (close(fd) == -1)
+      strerr_die2sys(111,FATAL,MSG1(ERR_CLOSE,fneditn.s));
+    wrap_rename(fneditn.s,fnedit.s);
+
+    unlock();
+    hdr_subject(MSG1(SUB_EDIT_SUCCESS,fname));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    copy(&qq,"text/edit-done",flagcd);
+    copybottom();
+    qmail_to(&qq,sender);	/* not necessarily from mod */
+
+  } else if (act == AC_GET) {
+
+    unsigned long u;
+    struct stat st;
+    char ch;
+    int r;
+    unsigned int pos;
+
+    if (!flagget)
+      strerr_die2x(100,FATAL,MSG(ERR_NOT_AVAILABLE));
+    hdr_subject(MSG(SUB_GET_MSG));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+
+    pos = str_len(ACTION_GET);
+    if (!case_starts(action,ACTION_GET))
+      pos = str_len(ALT_GET);
+
+    if (action[pos] == '.' || action [pos] == '_') pos++;
+    scan_ulong(action + pos,&u);
+
+    if (!stralloc_copys(&line,"archive/")) die_nomem();
+    if (!stralloc_catb(&line,strnum,fmt_ulong(strnum,u / 100))) die_nomem();
+    if (!stralloc_cats(&line,"/")) die_nomem();
+    if (!stralloc_catb(&line,strnum,fmt_uint0(strnum,(unsigned int) (u % 100),2))) die_nomem();
+    if (!stralloc_0(&line)) die_nomem();
+
+    fd = open_read(line.s);
+    if (fd == -1)
+      if (errno != error_noent)
+	strerr_die2sys(111,FATAL,MSG1(ERR_OPEN,line.s));
+      else
+        copy(&qq,"text/get-bad",flagcd);
+    else {
+      if (fstat(fd,&st) == -1)
+        copy(&qq,"text/get-bad",flagcd);
+      else if (!(st.st_mode & 0100))
+        copy(&qq,"text/get-bad",flagcd);
+      else {
+        substdio_fdbuf(&sstext,read,fd,textbuf,sizeof(textbuf));
+	qmail_puts(&qq,"> ");
+	for (;;) {
+	  r = substdio_get(&sstext,&ch,1);
+	  if (r == -1) strerr_die2sys(111,FATAL,MSG1(ERR_READ,line.s));
+	  if (r == 0) break;
+	  qmail_put(&qq,&ch,1);
+	  if (ch == '\n') qmail_puts(&qq,"> ");
+	}
+	qmail_puts(&qq,"\n");
+      }
+      close(fd);
+    }
+    copybottom();
+    qmail_to(&qq,target.s);
+
+  } else if (case_starts(action,ACTION_QUERY) ||
+		case_starts(action,ALT_QUERY)) {
+    hdr_subject(MSG(SUB_STATUS));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    if (issub(workdir,target.s,0))
+      copy(&qq,"text/sub-nop",flagcd);
+    else
+      copy(&qq,"text/unsub-nop",flagcd);
+    copybottom();
+    qmail_to(&qq,ismod ? mod.s : target.s);
+
+  } else if (case_starts(action,ACTION_INFO) ||
+		case_starts(action,ALT_INFO)) {
+    hdr_subject(MSG(SUB_INFO));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    copy(&qq,"text/info",flagcd);
+    copybottom();
+    qmail_to(&qq,target.s);
+
+  } else if (case_starts(action,ACTION_FAQ) ||
+		case_starts(action,ALT_FAQ)) {
+    hdr_subject(MSG(SUB_FAQ));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    copy(&qq,"text/faq",flagcd);
+    copybottom();
+    qmail_to(&qq,target.s);
+
+  } else if (ismod && (act == AC_HELP)) {
+    hdr_subject(MSG(SUB_MOD_HELP));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    copy(&qq,"text/mod-help",flagcd);
+    copy(&qq,"text/help",flagcd);
+    copybottom();
+    qmail_to(&qq,mod.s);
+
+  } else {
+    act = AC_HELP;
+    hdr_subject(MSG(SUB_HELP));
+    hdr_ctboundary();
+    copy(&qq,"text/top",flagcd);
+    copy(&qq,"text/help",flagcd);
+    copybottom();
+    qmail_to(&qq,sender);
+  }
+
+  if (*(err = qmail_close(&qq)) == '\0') {
+      strnum[fmt_ulong(strnum,qmail_qp(&qq))] = 0;
+      closesub();
+      strerr_die2x(0,"ezmlm-manage: info: qp ",strnum);
+  } else {
+      closesub();
+      strerr_die4x(111,FATAL,MSG(ERR_TMP_QMAIL_QUEUE),": ",err + 1);
+  }
 }
+

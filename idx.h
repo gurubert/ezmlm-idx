@@ -196,7 +196,7 @@
 #define EZ_CGIRC_LOC ".ezcgirc"
 
 /* default charset for ezmlm-cgi [config file overrides per list] */
-#define EZ_CHARSET "utf-8"
+#define EZ_CHARSET "iso-8859-1"
 
 /*------------ Specific to SQL version ------------------------------*/
 /* cookie tag for SQL version of sublisting */

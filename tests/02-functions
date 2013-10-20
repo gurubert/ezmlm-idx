@@ -1,39 +1,39 @@
 fatal() {
   for line in "$@"; do
-    echo "$line" >&2
+    ${ECHO} "$line" >&2
   done
   exit 100;
 }
 
 grephdr() {
   # Search for the header line, and produce an error if it didn't match.
-  egrep "^$*$" "$QQHDR" >/dev/null 2>&1 || \
+  ${GREP} "^$*$" "$QQHDR" >/dev/null 2>&1 || \
   {
-    echo "Header is missing or wrong $1 line:";
-    grep -i "^$1" "$QQHDR"
+    ${ECHO} "Header is missing or wrong $1 line:";
+    ${GREP} -i "^$1" "$QQHDR"
     BUG="${BUG} headers"
     prompt "..............: "
   }
   # Remove any found lines from the header file
-  grep -iv "^$1" "$QQHDR" >"${TMP}hdr"
-  mv -f "${TMP}hdr" "$QQHDR"
+  ${GREP} -iv "^$1" "$QQHDR" >"${TMP}hdr"
+  ${MV} -f "${TMP}hdr" "$QQHDR"
 }
 
 grepbody() {
-  egrep "^$*$" "$QQBODY" >/dev/null 2>&1 || \
+  ${GREP} "^$*$" "$QQBODY" >/dev/null 2>&1 || \
   {
-    echo "Body is missing or wrong $1 line:";
-    grep -i "^$1" "$QQBODY"
+    ${ECHO} "Body is missing or wrong $1 line:";
+    ${GREP} -i "^$1" "$QQBODY"
     BUG="${BUG} body"
     prompt "..............: "
   }
 }
 
 grepbodynot() {
-  egrep "^$*" "$QQBODY" >/dev/null 2>&1 && \
+  ${GREP} "^$*" "$QQBODY" >/dev/null 2>&1 && \
   {
-    echo "Body contains extraneous $1 line:";
-    grep -i "^$1" "$QQBODY"
+    ${ECHO} "Body contains extraneous $1 line:";
+    ${GREP} -i "^$1" "$QQBODY"
     BUG="${BUG} body"
     prompt "..............: "
   }
@@ -68,8 +68,8 @@ grephdr_empty() {
   # Use this after all other grephdr checks to ensure nothing else was output
   test -s "$QQHDR" && \
   {
-    echo "Headers contained extra lines:"
-    cat "$QQHDR"
+    ${ECHO} "Headers contained extra lines:"
+    ${CAT} "$QQHDR"
     BUG="${BUG} headers"
   }
 }
@@ -77,7 +77,7 @@ grephdr_empty() {
 checkenv()
 {
   msg="$1"
-  head -n 1 "$QQENV" | grep "^F$2$" >/dev/null \
+  ${HEAD} -n 1 "$QQENV" | grep "^F$2$" >/dev/null \
   || fatal "envelope for $msg has wrong sender"
   test $# = $(wc -l <"$QQENV") \
   || fatal "envelope for $msg has wrong number of recipients"
@@ -93,44 +93,44 @@ checkenv()
 ###############################
 make_body()
 {
-  echo "This is a simple message body"
-  echo "--bound123ary"
-  echo "Content-type: Text/pLAIn"
-  echo
-  echo "plain text"
-  echo "--bound123ary"
-  echo "Content-type: texT/Html"
-  echo
-  echo "html text"
-  echo "--bound123ary--"
-  echo
-  echo "junk after boundary"
+  ${ECHO} "This is a simple message body"
+  ${ECHO} "--bound123ary"
+  ${ECHO} "Content-type: Text/pLAIn"
+  ${ECHO}
+  ${ECHO} "plain text"
+  ${ECHO} "--bound123ary"
+  ${ECHO} "Content-type: texT/Html"
+  ${ECHO}
+  ${ECHO} "html text"
+  ${ECHO} "--bound123ary--"
+  ${ECHO}
+  ${ECHO} "junk after boundary"
   return 0
 }
 
 qqclean()
 {
-  rm -f "$QQBODY" "$QQENV" "$QQHDR" "$QQMSG" "$QQMSG".*
+  ${RM} -f "$QQBODY" "$QQENV" "$QQHDR" "$QQMSG" "$QQMSG".*
 }
 
 make_message()
 {
-  echo "ReCEIved: #LAST#"
-  echo "ReCeIved: #PENULTIMATE#"
-  echo "retuRN-RECeipt-to: nobody"
-  echo "To: $TO"
-  echo "CC: "
-  echo " $CC"
-  echo "FROM: $FROM"
+  ${ECHO} "ReCEIved: #LAST#"
+  ${ECHO} "ReCeIved: #PENULTIMATE#"
+  ${ECHO} "retuRN-RECeipt-to: nobody"
+  ${ECHO} "To: $TO"
+  ${ECHO} "CC: "
+  ${ECHO} " $CC"
+  ${ECHO} "FROM: $FROM"
   if [ ! -z "$CONTENT" ]; then
-	echo "MIME-Version: 1.0"
-	echo "Content-type: $CONTENT;"
-	echo " boundary=bound123ary${AFTERBOUND}"
+	${ECHO} "MIME-Version: 1.0"
+	${ECHO} "Content-type: $CONTENT;"
+	${ECHO} " boundary=bound123ary${AFTERBOUND}"
   fi
   if [ ! -z "$SUBJECT" ]; then
-	echo "Subject: $SUBJECT"
+	${ECHO} "Subject: $SUBJECT"
   fi
-  echo
+  ${ECHO}
   make_body
   return 0
 }
@@ -140,43 +140,18 @@ make_message()
 #########################
 exists() {
   for file in "$@"; do
-    test -e "$file" || return 1
+    ${TEST} -e "$file" || return 1
   done
   return 0
 }
 
 msgexists() {
-  test -s "$QQMSG" -a -s "${QQENV}"
+  ${TEST} -s "$QQMSG" -a -s "${QQENV}"
 }
 
 #######################################
 # Extract parts of the message header #
 #######################################
 gethdr() {
-    sed -e "/^$1:/!d; s/[^ ]* *//;" "$QQHDR"
-}
-
-##########################################
-# Run ezmlm-manage and check the results #
-##########################################
-check_manage() {
-    local name=$1
-    local options=$2
-    local exit=$3
-    local exitmsg="$4"
-    local text=$5
-    local sender="$6"
-    shift 6
-    ${EZBIN}/ezmlm-manage -a $options "$DIR" < "$TMP" > "$ERR" 2>&1
-    local e=$?
-    test $e -eq $exit || fatal "ezmlm-manage ($name) $exitmsg (exit $e)"
-    if [ -n "$text" ]
-    then
-	grep "ezmlm-manage: info: sending $text$" "$ERR" >/dev/null 2>&1 \
-	    || fatal "ezmlm-manage ($name) sent wrong text (should be $text)"
-    fi
-    if [ -n "$sender" ]
-    then
-	checkenv $name "$sender" "$@"
-    fi
+    ${SED} -e "/^$1:/!d; s/[^ ]* *//;" "$QQHDR"
 }

@@ -17,13 +17,10 @@
 #include "config.h"
 #include "auto_version.h"
 
-static stralloc event;
-
 static unsigned long hash;
 static const char *flagsubdb = 0;
 static int forcehash = -1;
 static int flagname = 0;
-static const char *flagtag = "manual";
 
 static struct option options[] = {
   OPT_ULONG(hash,'h',0),
@@ -33,7 +30,6 @@ static struct option options[] = {
   OPT_CSTR(flagsubdb,'S',0),
   OPT_FLAG(flagname,'n',1,0),
   OPT_FLAG(flagname,'N',0,0),
-  OPT_CSTR(flagtag,'t',0),
   OPT_END
 };
 
@@ -48,7 +44,10 @@ void subunsub_main(int submode,
   char *cp;
   char ch;
   int match;
+  char manual[8] = "+manual";
   int i;
+
+  manual[0] = submode ? '+' : '-';
 
   (void) umask(022);
   i = getconfopt(argc,argv,options,1,0);
@@ -64,21 +63,17 @@ void subunsub_main(int submode,
   if (hash != 0)
     forcehash = (int) hash;
 
-  if (!stralloc_copys(&event,submode ? "+" : "-")) die_nomem();
-  if (!stralloc_cats(&event,flagtag)) die_nomem();
-  if (!stralloc_0(&event)) die_nomem();
-
   if (argv[i]) {
     if (flagname) {
 		/* allow repeats and last addr doesn't need comment */
       while ((addr = argv[i++])) {
-        (void) subscribe(subdir,addr,submode,argv[i],event.s,forcehash);
+        (void) subscribe(subdir,addr,submode,argv[i],manual,forcehash);
         if (!argv[i++]) break;
       }
     } else {
 
       while ((addr = argv[i++]))
-        (void) subscribe(subdir,addr,submode,"",event.s,forcehash);
+        (void) subscribe(subdir,addr,submode,"",manual,forcehash);
     }
   } else {		/* stdin */
     for (;;) {
@@ -101,7 +96,7 @@ void subunsub_main(int submode,
 	  comment = cp + 1;
         }
       }
-      (void)subscribe(subdir,line.s,submode,comment,event.s,forcehash);
+      (void)subscribe(subdir,line.s,submode,comment,manual,forcehash);
     }
   }
   closesub();
