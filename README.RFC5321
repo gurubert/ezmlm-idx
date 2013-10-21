@@ -1,0 +1,1 @@
+RFC 5321 imposes a limit of 64 characters for the local part of an email address.
