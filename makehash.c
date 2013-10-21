@@ -72,7 +72,7 @@ static void surfpcs_out(surfpcs *s,unsigned char h[32])
 }
 
 void makehash(const char *indata,unsigned int inlen,char *hash)
-	/* makes hash[COOKIE=20] from stralloc *indata, ignoring case and */
+	/* makes hash from stralloc *indata, ignoring case and */
 	/* SPACE/TAB */
 {
   unsigned char h[32];
@@ -84,7 +84,7 @@ void makehash(const char *indata,unsigned int inlen,char *hash)
   surfpcs_init(&s,seed);
   surfpcs_addlc(&s,indata,inlen);
   surfpcs_out(&s,h);
-  for (i = 0;i < 20;++i)
+  for (i = 0;i < HASHLEN;++i)
     hash[i] = 'a' + (h[i] & 15);
 }
 

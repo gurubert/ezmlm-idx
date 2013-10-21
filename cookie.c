@@ -45,6 +45,6 @@ step 2: apply SURF.
 /*
 step 3: extract a readable cookie from the SURF output.
 */
-  for (i = 0;i < 20;++i) 
+  for (i = 0;i < COOKIE;++i) 
     hash[i] = 'a' + (out[i] & 15);
 }
