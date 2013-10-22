@@ -1,4 +1,4 @@
-# $Id$
+# $Id: 550-ezmlm-send 509 2005-11-10 21:25:47Z bruce $
 
   prompt "ezmlm-send:           "
 
@@ -23,5 +23,10 @@ EOF
   grephdr subject: test post
   grephdr x-test-header: one
   grephdr_empty
+
+  grepbody Local: "$LOCAL"
+  grepbody local: "$LOCAL"
+  grepbody host: "$HOST"
+  grepbody num: `cut -d: -f1 "${DIR}/num"`
 
   ${ECHO} OK

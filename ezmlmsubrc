@@ -1,4 +1,4 @@
-#$Id$
+#$Id: ezmlmsubrc 257 2005-04-07 16:53:11Z bruce $
 # ezmlm-make -C ezmlmsubrc dir dot local host
 # Options:
 #	-3 mainlist local	(required)

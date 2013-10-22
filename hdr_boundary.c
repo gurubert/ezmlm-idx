@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr_boundary.c 126 2004-12-23 23:39:01Z bruce $*/
 
 #include "hdr.h"
 #include "qmail.h"

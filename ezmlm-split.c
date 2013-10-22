@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-split.c 520 2006-01-11 22:45:22Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -8,7 +8,6 @@
 #include "str.h"
 #include "env.h"
 #include "sig.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "open.h"
 #include "scan.h"
@@ -17,6 +16,7 @@
 #include "getln.h"
 #include "case.h"
 #include "qmail.h"
+#include "sgetopt.h"
 #include "subfd.h"
 #include "substdio.h"
 #include "readwrite.h"
@@ -27,7 +27,9 @@
 #include "fmt.h"
 #include "errtxt.h"
 #include "die.h"
+#include "config.h"
 #include "idx.h"
+#include "auto_version.h"
 
 const char FATAL[] = "ezmlm-split: fatal: ";
 const char INFO[] = "ezmlm-split: info: ";
@@ -38,8 +40,6 @@ int flagdo = 1;		/* default is manager function */
 
 const char *sender;
 const char *split;
-stralloc outhost = {0};
-stralloc outlocal = {0};
 stralloc target = {0};
 stralloc lctarget = {0};
 stralloc line = {0};
@@ -164,26 +164,26 @@ void main(int argc,char **argv)
   const char *err;
   unsigned int i;
   int match;
-  int optind = 1;
+  int opt;
 
   sig_pipeignore();
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
-  if (dir[0] == '-') {
-    if (dir[1] == 'd') flagdo = 1;
-    else if (dir[1] == 'D') flagdo = 0;
-    else die_usage();
-    if (!(dir = argv[optind++])) die_usage();
+  while ((opt = getopt(argc,argv,"dDvV")) != opteof) {
+    switch (opt) {
+    case 'd': flagdo = 1; break;
+    case 'D': flagdo = 0; break;
+    case 'v':
+    case 'V':
+      strerr_die2x(0, "ezmlm-split version: ",auto_version);
+    default:
+      die_usage();
+    }
   }
+
+  startup(dir = argv[optind++]);
+  load_config(dir);
   if (!(split = argv[optind]))
     split = "split";
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
-
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
 
   if (flagdo) {
     sender = env_get("SENDER");
@@ -240,7 +240,7 @@ void main(int argc,char **argv)
       if (qmail_open(&qq,(stralloc *) 0) == -1)
         strerr_die2sys(111,FATAL,ERR_QMAIL_QUEUE);
       qmail_puts(&qq,dtline);				/* delivered-to */
-      if (qmail_copy(&qq,subfdin) != 0)
+      if (qmail_copy(&qq,subfdin,0) != 0)
         strerr_die2sys(111,FATAL,ERR_READ_INPUT);
       qmail_from(&qq,from.s);
       qmail_to(&qq,to.s);

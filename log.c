@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: log.c 380 2005-07-12 22:33:57Z bruce $*/
 
 #include <unistd.h>
 #include "substdio.h"
@@ -15,6 +15,7 @@
 /* Unprintable chars are changed to '?'. Comment may have spaces */
 
 static substdio ss;
+static char buf[1];
 static char num[FMT_ULONG];
 static stralloc line = {0};
 static stralloc fn = {0};
@@ -48,7 +49,7 @@ void logaddr(const char *dir,const char *subdir,const char *event,
   std_makepath(&fn,dir,subdir,"/Log",0);
   fd = open_append(fn.s);
   if (fd == -1) return;
-  substdio_fdbuf(&ss,write,fd,0,0);
+  substdio_fdbuf(&ss,write,fd,buf,sizeof(buf));
   substdio_putflush(&ss,line.s,line.len);
   close(fd);
   return;

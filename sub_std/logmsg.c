@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: logmsg.c 372 2005-07-12 05:49:07Z bruce $*/
 #include "stralloc.h"
 #include "fmt.h"
 #include "subscribe.h"

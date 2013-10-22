@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: subscribe.c 380 2005-07-12 22:33:57Z bruce $*/
 
 #include "str.h"
 #include "stralloc.h"

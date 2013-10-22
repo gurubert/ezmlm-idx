@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: die_nomem.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include "strerr.h"
 #include "errtxt.h"

@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-clean.c 520 2006-01-11 22:45:22Z bruce $*/
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -7,7 +7,6 @@
 #include "str.h"
 #include "env.h"
 #include "sig.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "strerr.h"
 #include "byte.h"
@@ -33,11 +32,11 @@
 #include "die.h"
 #include "idx.h"
 #include "mime.h"
+#include "config.h"
 #include "auto_version.h"
 
 int flagmime = MOD_MIME;	/* default is message as attachment */
 int flagreturn = 1;		/* default return timed-out messages */
-char flagcd = '\0';		/* default: no transferencoding */
 stralloc fnmsg = {0};
 
 /* When ezmlm-clean is run, messages and message stubs in pending/      */
@@ -75,17 +74,11 @@ char strnum[FMT_ULONG];
 char boundary[COOKIE];
 datetime_sec hashdate;
 
-stralloc outhost = {0};
-stralloc outlocal = {0};
-stralloc mailinglist = {0};
-stralloc listid = {0};
 stralloc quoted = {0};
 stralloc line = {0};
 stralloc modtime = {0};
 stralloc to = {0};
-stralloc charset = {0};
 
-int flagconf;
 int fd;
 int match;
 unsigned long msgnum = 0;
@@ -95,19 +88,6 @@ unsigned long msgnum = 0;
 			/* ezmlm started within x seconds, and with the    */
 			/* same pid. Very unlikely.                        */
 
-void readconfigs(void)
-/* gets outlocal, outhost, etc. This is done only if there are any timed-out*/
-/* messages found, that merit a reply to the author. */
-{
-
-  getconf_line(&mailinglist,"mailinglist",1,dir);
-  getconf_line(&listid,"listid",0,dir);
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
-  set_cpouthost(&outlocal);
-  set_cpoutlocal(&outlocal);
-}
-
 void sendnotice(const char *d)
 /* sends file pointed to by d to the address in the return-path of the  */
 /* message. */
@@ -115,9 +95,6 @@ void sendnotice(const char *d)
   unsigned int x,y;
   const char *err;
 
-      if (!flagconf) {
-        readconfigs();
-      }
       if (qmail_open(&qq, (stralloc *) 0) == -1)
         strerr_die2x(111,FATAL,ERR_QMAIL_QUEUE);
 
@@ -136,23 +113,13 @@ void sendnotice(const char *d)
       } else
         die_read();
       hdr_add2("Mailing-List: ",mailinglist.s,mailinglist.len);
-      hdr_add2("List-ID: ",listid.s,listid.len);
+      if (listid.len > 0)
+	hdr_add2("List-ID: ",listid.s,listid.len);
       hdr_datemsgid(when+msgnum++);
       hdr_from("-help");
       hdr_listsubject1(TXT_RETURNED_POST);
       hdr_add2s("To: ",to.s);
       if (flagmime) {
-        if (getconf_line(&charset,"charset",0,dir)) {
-          if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-            if (charset.s[charset.len - 1] == 'B' ||
-		charset.s[charset.len - 1] == 'Q') {
-              flagcd = charset.s[charset.len - 1];
-              charset.s[charset.len - 2] = '\0';
-            }
-          }
-        } else
-          if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-        if (!stralloc_0(&charset)) die_nomem();
 	hdr_mime(CTYPE_MULTIPART);
 	hdr_boundary(0);
 	hdr_ctype(CTYPE_TEXT);
@@ -177,7 +144,7 @@ void sendnotice(const char *d)
         strerr_die4sys(111,FATAL,ERR_SEEK,d,": ");
 
       substdio_fdbuf(&sstext,read,fd,textbuf,sizeof(textbuf));
-      if (qmail_copy(&qq,&sstext) != 0) die_read();
+      if (qmail_copy(&qq,&sstext,-1) != 0) die_read();
       close (fd);
 
       if (flagmime)
@@ -271,11 +238,8 @@ void main(int argc,char **argv)
 	die_usage();
     }
 
-  dir = argv[optind];
-  if (!dir) die_usage();
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind]);
+  load_config(dir);
 
   getconf_line(&modtime,"modtime",0,dir);
   if (!stralloc_0(&modtime)) die_nomem();
@@ -287,7 +251,6 @@ void main(int argc,char **argv)
 
   fdlock = lockfile("mod/lock");
 
-  flagconf = 0;
   dodir("mod/pending/",flagreturn);
   dodir("mod/accepted/",0);
   dodir("mod/rejected/",0);

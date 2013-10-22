@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-cgi.c 507 2005-10-06 21:51:06Z bruce $*/
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -35,8 +35,11 @@
 #include "idx.h"
 #include "yyyymm.h"
 #include "cgi.h"
+#include "auto_etc.h"
 
 const char FATAL[] = "ezmlm-cgi: fatal: ";
+const char USAGE[] =
+"ezmlm-cgi: usage: ezmlm-cgi";
 #define GET "-getv"
 #define THREAD "-threadv"
 #define SUBSCRIBE "-subscribe"
@@ -54,10 +57,10 @@ int flagobscure = 0;	/* Don't remove Sender's E-mail address in message */
 			/* name). */
 
 /**************** Header processing ***********************/
-char headers_used[] = "Subject\\From\\Date\\content-type\\"
+static char headers_used[] = "Subject\\From\\Date\\content-type\\"
 		"content-transfer-encoding\\mime-version";
 /* index of headers displayed (shown in order listed above) */
-int headers_shown[] = {1,1,1,0,0,0};
+static int headers_shown[] = {1,1,1,0,0,0};
 /* index of specific headers */
 #define NO_HDRS 6
 #define HDR_SUBJECT 1
@@ -67,7 +70,7 @@ int headers_shown[] = {1,1,1,0,0,0};
 #define HDR_VERSION 6
 
 /* Need to add inits if you increase NO_HDRS */
-stralloc hdr[NO_HDRS] = { {0},{0},{0},{0},{0},{0} };
+static stralloc hdr[NO_HDRS] = { {0},{0},{0},{0},{0},{0} };
 /**************** Header processing ***********************/
 
 
@@ -80,7 +83,7 @@ stralloc hdr[NO_HDRS] = { {0},{0},{0},{0},{0},{0} };
 /* ulong at least 32 bits. (Creating a Year 0xffffff problem ;-) */
 #define MAXULONG 0xffffffff
 
-char cmdstr[5] = "xxx:";
+static char cmdstr[5] = "xxx:";
 #define ITEM "-msadiz"
 #define ITEM_MESSAGE 1
 #define ITEM_SUBJECT 2
@@ -96,60 +99,56 @@ char cmdstr[5] = "xxx:";
 #define DIRECT_FIRST 3
 #define DIRECT_LAST 2
 
-char *dir = 0;
-char *local = 0;
-char *host = 0;
-char *home = 0;
-char *banner = 0;
-const char *charset = 0;
-char *stylesheet = 0;
-char *cmd;
-char strnum[FMT_ULONG];
+static char *dir = 0;
+static char *local = 0;
+static char *host = 0;
+static char *home = 0;
+static char *banner = 0;
+static const char *charset = 0;
+static char *stylesheet = 0;
+static char *cmd;
+static char strnum[FMT_ULONG];
 /* these are the only headers we really care about for message display */
 /* one can always retrieve the complete message by E-mail */
-stralloc charg = {0};
-stralloc url = {0};
-stralloc author = {0};
-stralloc subject = {0};
-stralloc base = {0};
-stralloc line = {0};
-stralloc decline = {0};		/* for rfc2047-decoded headers and QP/base64 */
-stralloc cfline = {0};		/* from config file */
-stralloc fn = {0};
-stralloc dtline = {0};
-stralloc headers = {0};
-stralloc encoding = {0};
-stralloc content = {0};
-stralloc charsetbase = {0};
-stralloc curcharset = {0};
-stralloc sainit = {0};
-struct constmap headermap;
-unsigned long uid,euid;
-int recursion_level;
-int so = 0;
-int ss23 = 0;
-int state = 0;
-int newlevel;
-int match;	/* used everywhere and no overlap */
-int fd;		/* same; never >1 open */
-int cache;	/* 0 = don't; 1 = don't know; 2 = do */
-int child,wstat;
-int flagtoplevel;
-unsigned int flagmime;
-unsigned int cs,csbase,pos;
-int flagrobot;
-int flagpre;
-int precharcount;
-char cn1 = 0;
-char cn2 = 0;
-char lastjp[] = "B";	/* to get back to the correct JP after line break */
-char *bannerargs[4];
+static stralloc charg = {0};
+static stralloc url = {0};
+static stralloc author = {0};
+static stralloc subject = {0};
+static stralloc base = {0};
+static stralloc line = {0};
+static stralloc decline = {0};	/* for rfc2047-decoded headers and QP/base64 */
+static stralloc cfline = {0};	/* from config file */
+static stralloc fn = {0};
+static stralloc dtline = {0};
+static stralloc headers = {0};
+static stralloc encoding = {0};
+static stralloc content = {0};
+static stralloc curcharset = {0};
+static stralloc sainit = {0};
+static struct constmap headermap;
+static unsigned long uid,euid;
+static int recursion_level;
+static int so = 0;
+static int ss23 = 0;
+static int state = 0;
+static int match;	/* used everywhere and no overlap */
+static int fd;		/* same; never >1 open */
+static int cache;	/* 0 = don't; 1 = don't know; 2 = do */
+static int flagtoplevel;
+static unsigned int flagmime;
+static unsigned int cs,csbase,pos;
+static int flagrobot;
+static int flagpre;
+static int precharcount;
+static char cn1 = 0;
+static char cn2 = 0;
+static char lastjp[] = "B";/* to get back to the correct JP after line break */
 
 
-struct msginfo {	/* clean info on the target message */
-  char item;		/* What we want */
-  char direction;	/* Relation to current msg */
-  char axis;		/* Axis of desired movement [may be calculated] */
+static struct msginfo {	/* clean info on the target message */
+  int item;		/* What we want */
+  int direction;	/* Relation to current msg */
+  int axis;		/* Axis of desired movement [may be calculated] */
   unsigned long source;	/* reference message number */
   unsigned long target;
   unsigned long date;
@@ -160,22 +159,21 @@ struct msginfo {	/* clean info on the target message */
   char *cgiarg;			/* sub/auth as expected from axis */
 } msginfo;
 
-mime_info *mime_current = 0;
-mime_info *mime_tmp = 0;
+static mime_info *mime_current = 0;
+static mime_info *mime_tmp = 0;
 
-datetime_sec when;
-struct datetime dt;
+static struct datetime dt;
 
-char inbuf[4096];
-substdio ssin;
+static char inbuf[4096];
+static substdio ssin;
 
 void die_syntax(const char *s)
 {
   strerr_die4x(100,FATAL,ERR_SYNTAX,"config file: ",s);
 }
 
-char outbuf[4096];
-substdio ssout = SUBSTDIO_FDBUF(write,1,outbuf,sizeof(outbuf));
+static char outbuf[4096];
+static substdio ssout = SUBSTDIO_FDBUF(write,1,outbuf,sizeof(outbuf));
 
 void oput(const char *s, unsigned int l)
 /* unbuffered. Avoid extra copy as httpd buffers */
@@ -207,7 +205,7 @@ void cgierr(const char *s,const char *s1,const char *s2)
   _exit(0);
 }
 
-unsigned long msgnav[5]; /* 0 prev prev 1 prev 2 this 3 next 4 next-next */
+static unsigned long msgnav[5]; /* 0 prev prev 1 prev 2 this 3 next 4 next-next */
 
 void toggle_flagpre(int flag)
 {
@@ -405,8 +403,8 @@ void html_put (const char *s,unsigned int l)
   }
 }
 
-char hexchar[] = "0123456789ABCDEF";
-char enc_url[] = "%00";
+static const char hexchar[] = "0123456789ABCDEF";
+static char enc_url[] = "%00";
 
 void urlencode_put (const char *s,unsigned int l)
 {
@@ -490,7 +488,7 @@ int checkhash(const char *s)
   return 1;
 }
 
-int makefn(stralloc *sa,char item,unsigned long n,const char *hash)
+int makefn(stralloc *sa,int item,unsigned long n,const char *hash)
 {
   if (!stralloc_copys(sa,"archive/")) die_nomem();
   if (item == ITEM_MESSAGE) {
@@ -520,7 +518,7 @@ int makefn(stralloc *sa,char item,unsigned long n,const char *hash)
   return 1;
 }
 
-void alink(struct msginfo *infop,unsigned char item,unsigned char axis,
+void alink(struct msginfo *infop,int item,int axis,
 	   unsigned long msg,const char *data,unsigned int l)
 /* links with targets other msg -> msg. If the link is for author, we    */
 /* still supply subject, since most navigation at the message level will */
@@ -568,7 +566,7 @@ void alink(struct msginfo *infop,unsigned char item,unsigned char axis,
   oputs("</a>");
 }
 
-void linktoindex(struct msginfo *infop,unsigned char item)
+void linktoindex(struct msginfo *infop,int item)
 /* for links from message view back to author/subject/threads index */
 {
   oput(url.s,url.len);
@@ -600,7 +598,7 @@ void linktoindex(struct msginfo *infop,unsigned char item)
   oputs("#b\"");
 }
 
-void link_msg(struct msginfo *infop,unsigned char axis,unsigned char direction)
+void link_msg(struct msginfo *infop,int axis,int direction)
 /* Creates <a href="mapa:123:aaaaa...."> using a maximum of available */
 /* info only for links where the target is a message */
 {
@@ -808,7 +806,7 @@ void html_footer(int flagspecial)
 
 /* DATE functions */
 
-void datelink(struct msginfo *infop,unsigned long d,char direction)
+void datelink(struct msginfo *infop,unsigned long d,int direction)
 /* output a date with link back to thread index */
 {
   oput(url.s,url.len);
@@ -1013,7 +1011,7 @@ int show_index(struct msginfo *infop)
   return 1;
 }
 
-void objectlinks(struct msginfo *infop, char item)
+void objectlinks(struct msginfo *infop,int item)
 {
   oputs("<div class=\"objlinks\"><strong>\n");
   if (item == ITEM_DATE) {
@@ -1036,7 +1034,7 @@ void objectlinks(struct msginfo *infop, char item)
   oputs("</strong></div>\n");
 }
 
-int show_object(struct msginfo *infop,char item)
+int show_object(struct msginfo *infop,int item)
 /* shows thread, threads, author */
 /* infop has the info needed to access the author/subject/thread file */
 {
@@ -1591,7 +1589,7 @@ int show_message(struct msginfo *infop)
   return 1;
 }
 
-char decode_item(char ch)
+int decode_item(char ch)
 {
   switch (ch) {
 	case 'm': return ITEM_MESSAGE;
@@ -1605,7 +1603,7 @@ char decode_item(char ch)
   return 0;	/* never reached */
 }
 
-char decode_direction(char ch)
+int decode_direction(char ch)
 {
   switch (ch) {
 	case 's': return DIRECT_SAME;
@@ -2064,8 +2062,11 @@ int main(int argc,char **argv)
   euid = (unsigned long) geteuid();			/* chroot only if 0 */
 
   if (!euid) {
-    if ((fd = open_read(EZ_CGIRC)) == -1)		/* open config */
-      strerr_die4sys(111,FATAL,ERR_OPEN,EZ_CGIRC,": ");
+    if (!stralloc_copys(&line,auto_etc)) die_nomem();
+    if (!stralloc_cats(&line,EZ_CGIRC)) die_nomem();
+    if (!stralloc_0(&line)) die_nomem();
+    if ((fd = open_read(line.s)) == -1)			/* open config */
+      strerr_die4sys(111,FATAL,ERR_OPEN,line.s,": ");
   } else {
     if ((fd = open_read(EZ_CGIRC_LOC)) == -1)		/* open local config */
       strerr_die4sys(111,FATAL,ERR_OPEN,EZ_CGIRC_LOC,": ");

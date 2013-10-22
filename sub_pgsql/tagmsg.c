@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: tagmsg.c 380 2005-07-12 22:33:57Z bruce $*/
 #include "stralloc.h"
 #include "scan.h"
 #include "fmt.h"

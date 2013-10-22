@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr_mime.c 368 2005-07-11 22:22:33Z bruce $*/
 
 #include "hdr.h"
 #include "qmail.h"

@@ -1,4 +1,4 @@
-$Id$
+$Id: README 71 2004-06-11 16:32:43Z bruce $
 STANDARD EZMLM DATABASE INTERFACE
 
 These files comprise the ezmlm subscriber database interface. issub.c and

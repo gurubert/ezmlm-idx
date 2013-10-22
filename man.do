@@ -1,37 +1,8 @@
 dependon \
 ezmlm.0 \
-ezmlm-accept.0 \
-ezmlm-archive.0 \
-ezmlm-cgi.0 \
-ezmlm-check.0 \
-ezmlm-clean.0 \
-ezmlm-confirm.0 \
-ezmlm-cron.0 \
-ezmlm-dispatch.0 \
-ezmlm-gate.0 \
-ezmlm-get.0 \
-ezmlm-glconf.0 \
-ezmlm-idx.0 \
-ezmlm-issubn.0 \
-ezmlm-limit.0 \
-ezmlm-list.0 \
-ezmlm-make.0 \
-ezmlm-manage.0 \
-ezmlm-mktab.0 \
-ezmlm-moderate.0 \
-ezmlm-receipt.0 \
-ezmlm-reject.0 \
-ezmlm-request.0 \
-ezmlm-return.0 \
-ezmlm-send.0 \
-ezmlm-split.0 \
-ezmlm-store.0 \
-ezmlm-sub.0 \
-ezmlm-test.0 \
-ezmlm-tstdig.0 \
-ezmlm-unsub.0 \
-ezmlm-warn.0 \
-ezmlm-weed.0 \
+ezmlm-make.0 ezmlm-manage.0 ezmlm-send.0 ezmlm-reject.0 \
+ezmlm-return.0 ezmlm-warn.0 ezmlm-weed.0 \
+ezmlm-list.0 ezmlm-sub.0 ezmlm-unsub.0 \
 alloc.0 \
 case.0 \
 datetime.0 \
@@ -41,9 +12,6 @@ error.0 \
 error_str.0 \
 error_temp.0 \
 ezmlm.0 \
-ezmlmglrc.0 \
-ezmlmsubrc.0 \
-ezmlmrc.0 \
 fd_copy.0 \
 fd_move.0 \
 getln.0 \

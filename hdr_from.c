@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr_from.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include "hdr.h"
 #include "qmail.h"

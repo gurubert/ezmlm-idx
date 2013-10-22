@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-return.c 428 2005-09-15 17:55:56Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -9,7 +9,6 @@
 #include "str.h"
 #include "env.h"
 #include "sig.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "strerr.h"
 #include "byte.h"
@@ -26,10 +25,13 @@
 #include "fmt.h"
 #include "now.h"
 #include "cookie.h"
+#include "sgetopt.h"
 #include "subscribe.h"
 #include "errtxt.h"
 #include "die.h"
+#include "config.h"
 #include "idx.h"
+#include "auto_version.h"
 
 const char FATAL[] = "ezmlm-return: fatal: ";
 const char INFO[] = "ezmlm-return: info: ";
@@ -241,8 +243,6 @@ int flagmasterbounce = 0;
 int flaghaveheader;
 int flaghaveintro;
 
-stralloc key = {0};
-
 char msginbuf[1024];
 substdio ssmsgin;
 
@@ -262,22 +262,23 @@ void main(int argc,char **argv)
   int flagreceipt = 0;
   int fdlock;
   char ch;
+  int opt;
+
 
   umask(022);
   sig_pipeignore();
   when = (unsigned long) now();
 
-  dir = argv[1];
-  if (!dir) die_usage();
-  if (*dir == '-') {			/* for normal use */
-    if (dir[1] == 'd') {
-      flagdig = 1;
-    } else if (dir[1] == 'D') {
-      flagdig = 0;
-    } else
+  while ((opt = getopt(argc,argv,"dDvV")) != opteof) {
+    switch (opt) {
+    case 'd': flagdig = 1; break;
+    case 'D': flagdig = 0; break;
+    case 'v':
+    case 'V':
+      strerr_die2x(0, "ezmlm-return version: ",auto_version);
+    default:
       die_usage();
-    dir = argv[2];
-    if (!dir) die_usage();
+    }
   }
 
   sender = env_get("SENDER");
@@ -285,15 +286,8 @@ void main(int argc,char **argv)
   action = env_get("DEFAULT");
   if (!action) strerr_die2x(100,FATAL,ERR_NODEFAULT);
 
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
-
-  switch(slurp("key",&key,32)) {
-    case -1:
-      strerr_die4sys(111,FATAL,ERR_READ,dir,"/key: ");
-    case 0:
-      strerr_die4x(100,FATAL,dir,"/key",ERR_NOEXIST);
-  }
+  startup(dir = argv[optind]);
+  load_config(dir);
   workdir = dir;
 
     if (str_start(action,"receipt-")) {

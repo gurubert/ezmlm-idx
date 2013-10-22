@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-limit.c 421 2005-09-14 05:46:15Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -18,6 +18,7 @@
 #include "open.h"
 #include "errtxt.h"
 #include "die.h"
+#include "config.h"
 #include "idx.h"
 
 const char FATAL[] = "ezmlm-limit: fatal: ";
@@ -74,11 +75,7 @@ void main(int argc,char **argv)
 	die_usage();
   }
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind++]);
 
   if (argv[optind])
     die_usage();	/* avoid common error of putting options after dir */

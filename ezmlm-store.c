@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-store.c 524 2006-01-16 13:53:48Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -27,7 +27,6 @@
 #include "errtxt.h"
 #include "byte.h"
 #include "case.h"
-#include "slurp.h"
 #include "quote.h"
 #include "hdr.h"
 #include "die.h"
@@ -36,6 +35,7 @@
 #include "subscribe.h"
 #include "mime.h"
 #include "wrap.h"
+#include "config.h"
 #include "auto_version.h"
 
 int flagmime = MOD_MIME;	/* default is message as attachment */
@@ -45,7 +45,6 @@ int flagself = 0;		/* `modpost` mods approve own posts */
 				/* but mod/ is used for moderators */
 				/* of other posts. Def=no=0 */
 int flagconfirm = -1;           /* if true, sender must approve its own posts */
-char flagcd = '\0';		/* default: don't use quoted-printable */
 int flagbody = 1;		/* body of message enclosed with mod request */
 				/* 0 => headers only */
 
@@ -70,20 +69,15 @@ struct stat st;
 
 stralloc fnbase = {0};
 stralloc line = {0};
-stralloc mailinglist = {0};
-stralloc outlocal = {0};
-stralloc outhost = {0};
 stralloc mydtline = {0};
 stralloc returnpath = {0};
 stralloc accept = {0};
 stralloc action = {0};
 stralloc reject = {0};
 stralloc quoted = {0};
-stralloc key = {0};
 stralloc subject = {0};
 stralloc moderators = {0};
 stralloc confirmpost = {0};
-stralloc charset = {0};
 stralloc sendopt = {0};
 
 struct qmail qq;
@@ -175,11 +169,8 @@ void main(int argc,char **argv)
       strerr_die2x(100,FATAL,ERR_BOUNCE);
   }
 
-  dir = argv[optind];
-  if (!dir) die_usage();
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind]);
+  load_config(dir);
 
   if (flagconfirm == -1)
     flagconfirm = getconf_line(&confirmpost,"confirmpost",0,dir);
@@ -210,17 +201,6 @@ void main(int argc,char **argv)
 
   if (!pmod && !flagpublic)
     strerr_die2x(100,FATAL,ERR_NO_POST);
-
-  switch(slurp("key",&key,32)) {
-    case -1:
-      strerr_die4sys(111,FATAL,ERR_READ,dir,"/key: ");
-    case 0:
-      strerr_die4x(100,FATAL,dir,"/key",ERR_NOEXIST);
-  }
-
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
-  getconf_line(&mailinglist,"mailinglist",1,dir);
 
   fdlock = lockfile("mod/lock");
 
@@ -279,10 +259,8 @@ void main(int argc,char **argv)
   if (!stralloc_cat(&accept,&action)) die_nomem();
   if (!stralloc_0(&accept)) die_nomem();
 
-  set_cpoutlocal(&outlocal);
-  set_cpouthost(&outhost);
   set_cptarget(accept.s);	/* for copy () */
-  set_cpconfirm(reject.s);
+  set_cpconfirm(reject.s,quoted.len);
 
   fdmsg = open_trunc(fnmsg.s);
   if (fdmsg == -1)
@@ -293,8 +271,8 @@ void main(int argc,char **argv)
     strerr_die2sys(111,FATAL,ERR_QMAIL_QUEUE);
 
   hdr_add2("Mailing-List: ",mailinglist.s,mailinglist.len);
-  if (getconf_line(&line,"listid",0,dir))
-    hdr_add2("List-ID: ",line.s,line.len);
+  if (listid.len > 0)
+    hdr_add2("List-ID: ",listid.s,listid.len);
   hdr_datemsgid(when);
   if (flagconfirm)
     hdr_from("-owner");
@@ -351,17 +329,6 @@ void main(int argc,char **argv)
   if (!stralloc_append(&subject,"@")) die_nomem();
   if (!stralloc_cat(&subject,&outhost)) die_nomem();
   if (flagmime) {
-    if (getconf_line(&charset,"charset",0,dir)) {
-      if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-        if (charset.s[charset.len - 1] == 'B' ||
-		charset.s[charset.len - 1] == 'Q') {
-          flagcd = charset.s[charset.len - 1];
-          charset.s[charset.len - 2] = '\0';
-        }
-      }
-    } else
-      if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-    if (!stralloc_0(&charset)) die_nomem();
     hdr_mime(CTYPE_MULTIPART);
     qmail_put(&qq,subject.s,subject.len);
     hdr_boundary(0);

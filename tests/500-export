@@ -1,9 +1,20 @@
-# $Id$
+# $Id: 500-export 520 2006-01-11 22:45:22Z bruce $
 
   SENDER="test@example.org"
-  ${ECHO} "From: Test <${SENDER}>" >"$TMP"
+  (
+    ${ECHO} "From: Test <${SENDER}>"
+    ${ECHO}
+    ${ECHO} 1
+    ${ECHO} 2
+    ${ECHO} 3
+  ) >"$TMP"
 
   ${ECHO} Verifying message header and body contents...
 
   ${EZBIN}/ezmlm-make -+ -S "$DIR" || \
   fatal "ezmlm-make failed"
+
+  echo 'Local: <#L#>' >"${DIR}/text/trailer"
+  echo 'local: <#l#>' >>"${DIR}/text/trailer"
+  echo 'host: <#h#>' >>"${DIR}/text/trailer"
+  echo 'num: <#n#>' >>"${DIR}/text/trailer"

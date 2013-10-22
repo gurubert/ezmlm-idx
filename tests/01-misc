@@ -1,4 +1,4 @@
-# $Id$
+# $Id: 01-misc 390 2005-09-01 21:37:08Z bruce $
 
 if ${ECHO} -n | grep n > /dev/null 2>&1; then
 	prompt() {

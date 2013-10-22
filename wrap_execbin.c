@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: wrap_execbin.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include "auto_bin.h"
 #include "stralloc.h"

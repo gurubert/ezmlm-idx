@@ -9,6 +9,7 @@
 #include "strerr.h"
 #include "exit.h"
 #include "readwrite.h"
+#include "byte.h"
 #include "open.h"
 #include "substdio.h"
 #include "str.h"
@@ -19,6 +20,7 @@
 #include "errtxt.h"
 #include "die.h"
 #include "idx.h"
+#include "auto_etc.h"
 #include "auto_version.h"
 
 			/* defaults. All other flags are false = 0 */
@@ -36,12 +38,12 @@ const char *defflags="ap";	/* archived list -a */
 				/* no trailer -T */
 
 #define NO_FLAGS ('z' - 'a' + 1)
-int flags[NO_FLAGS];		/* holds flags */
+static int flags[NO_FLAGS];	/* holds flags */
 
-const char *popt[10];
-stralloc dotplus = {0};
-stralloc dirplus = {0};
-stralloc line = {0};
+static stralloc popt[10] = {{0}};
+static stralloc dotplus = {0};
+static stralloc dirplus = {0};
+static stralloc line = {0};
 
 const char FATAL[] = "ezmlm-make: fatal: ";
 const char WARNING[] = "ezmlm-make: warning: ";
@@ -66,22 +68,19 @@ void die_read(void)
   strerr_die4sys(111,FATAL,ERR_READ,dirplus.s,": ");
 }
 
-stralloc cmdline = {0};
-stralloc outline = {0};
-substdio sstext;
-char textbuf[1024];
+static stralloc outline = {0};
+static substdio sstext;
+static char textbuf[1024];
 
-stralloc fname = {0};		/* file name */
-stralloc oldfname = {0};	/* file name from prevoius tag */
-stralloc dname = {0};		/* directory name */
-stralloc lname = {0};		/* link name */
-stralloc template = {0};	/* template file name */
-stralloc ext1 = {0};		/* dot = dir/.qmail-ext1-ext2-list */
-stralloc ext2 = {0};
-stralloc f = {0};
-stralloc key = {0};
-struct timeval tv;
-char sz[2] = "?";
+static stralloc fname = {0};	/* file name */
+static stralloc oldfname = {0};	/* file name from prevoius tag */
+static stralloc dname = {0};	/* directory name */
+static stralloc lname = {0};	/* link name */
+static stralloc template = {0};	/* template file name */
+static stralloc f = {0};
+static stralloc key = {0};
+static struct timeval tv;
+static char sz[2] = "?";
 
 void keyadd(unsigned long u)
 {
@@ -98,21 +97,27 @@ void keyaddtime(void)
   keyadd(tv.tv_usec);
 }
 
-char *dir;
-char *dot;
-char *local = (char *) 0;
-char *host = (char *) 0;
+static stralloc dir = {0};
+static stralloc dot = {0};
+static stralloc local = {0};
+static stralloc host = {0};
+
+static unsigned long euid;
+static stralloc cfname = {0};	/* config file if spec as -C cf_file */
+static stralloc code = {0};
+static stralloc oldflags = {0};
+static int usecfg = 0;
 
 void dirplusmake(const char *slash)
 {
-  if (!stralloc_copys(&dirplus,dir)) die_nomem();
+  if (!stralloc_copy(&dirplus,&dir)) die_nomem();
   if (!stralloc_cats(&dirplus,slash)) die_nomem();
   if (!stralloc_0(&dirplus)) die_nomem();
 }
 
 void linkdotdir(const char *dash,const char *slash)
 {
-  if (!stralloc_copys(&dotplus,dot)) die_nomem();
+  if (!stralloc_copy(&dotplus,&dot)) die_nomem();
   if (!stralloc_cats(&dotplus,dash)) die_nomem();
   if (!stralloc_0(&dotplus)) die_nomem();
   dirplusmake(slash);
@@ -179,10 +184,113 @@ void frm(const char *slash)
     strerr_die4sys(111,FATAL,ERR_DELETE,dirplus.s,": ");
 }
 
+int read_line(const char *dpm,stralloc *sa)
+{
+  int fdin;
+  int match;
+  if (sa->len > 0)
+    return 0;
+  dirplusmake(dpm);
+  if ((fdin = open_read(dirplus.s)) == -1) {
+    if (errno != error_noent) die_read();
+    return -1;
+  } else {
+    substdio_fdbuf(&sstext,read,fdin,textbuf,sizeof(textbuf));
+    if (getln(&sstext,sa,&match,'\n') == -1) die_read();
+    sa->len -= match;
+    close(fdin);
+    return 0;
+  }
+}
+
+int read_new_config(void)
+{
+  if (read_line("/flags",&oldflags) != 0) return 0;
+  if (euid > 0 && !flags['c' - 'a'])
+    read_line("/ezmlmrc",&cfname);
+  read_line("/dot",&dot);
+  read_line("/outlocal",&local);
+  read_line("/outhost",&host);
+  read_line("/digestcode",&code);
+  read_line("/sublist",&popt[0]);
+  read_line("/fromheader",&popt[3]);
+  read_line("/tstdigopts",&popt[4]);
+  read_line("/owner",&popt[5]);
+  read_line("/sql",&popt[6]);
+  read_line("/modpost",&popt[7]);
+  read_line("/modsub",&popt[8]);
+  read_line("/remote",&popt[9]);
+  return 1;
+}
+
+int read_old_config(void)
+{
+  unsigned char ch;
+  int fdin;
+  int match;
+
+  /* for edit, try to get args from dir/config */
+  dirplusmake("/config");
+  if ((fdin = open_read(dirplus.s)) == -1) {
+    if (errno != error_noent) die_read();
+    return 0;
+  } else {
+    substdio_fdbuf(&sstext,read,fdin,textbuf,sizeof(textbuf));
+    for (;;) {
+      if (getln(&sstext,&line,&match,'\n') == -1) die_read();
+      if (!match) break;
+      if (line.s[0] == '#') continue;
+      if (line.len == 1) break;
+      if (line.s[1] != ':') break;
+      line.s[line.len - 1] = '\0';
+      switch (ch = line.s[0]) {
+      case 'X':
+	if (euid > 0 && !flags['c' - 'a'] && (cfname.len == 0))
+	  if (!stralloc_copys(&cfname,line.s+2)) die_nomem();
+	break;	/* for safety: ignore if root */
+      case 'T': if (!stralloc_copys(&dot,line.s+2)) die_nomem(); break;
+      case 'L': if (!stralloc_copys(&local,line.s+2)) die_nomem(); break;
+      case 'H': if (!stralloc_copys(&host,line.s+2)) die_nomem(); break;
+      case 'C': if (!stralloc_copys(&code,line.s+2)) die_nomem(); break;
+      case 'F': if (!stralloc_copys(&oldflags,line.s+2)) die_nomem(); break;
+      case 'D': break;	/* no reason to check */
+      default:
+	if (ch == '0' || (ch >= '3' && ch <= '9')) {
+	  if (usecfg && popt[ch - '0'].len == 0)
+	    if (!stralloc_copys(&popt[ch-'0'],line.s+2)) die_nomem();
+	} else
+	  strerr_die4x(111,FATAL,dirplus.s,ERR_SYNTAX,line.s+2);
+	break;
+      }
+    }
+    close(fdin);
+  }
+  return 1;
+}
+
+static int open_template(stralloc *fn)
+{
+  int fd;
+  struct stat st;
+  if (!stralloc_0(fn)) die_nomem();
+  if (stat(fn->s,&st) == -1)
+    strerr_die4sys(111,FATAL,ERR_STAT,fn->s,": ");
+  if (S_ISDIR(st.st_mode)) {
+    --fn->len;
+    if (!stralloc_cats(fn,TXT_EZMLMRC)) die_nomem();
+    if (!stralloc_0(fn)) die_nomem();
+  }
+  if ((fd = open_read(fn->s)) == -1) {
+    if (errno != error_noent)
+      strerr_die4sys(111,FATAL,ERR_OPEN,fn->s,": ");
+    else
+      strerr_die3x(100,FATAL,template.s,ERR_NOEXIST);
+  }
+  return fd;
+}
 
 void main(int argc,char **argv)
 {
-  unsigned long euid;
   int opt;
   int flagdo;
   int flagnot;
@@ -190,16 +298,12 @@ void main(int argc,char **argv)
   int flagnotexist = 0;
   int flagforce = 0;
   int flagforce_p = 0;
-  int usecfg = 0;
   int match;
   unsigned int next,i,j;
   int last;
   unsigned int slpos,hashpos,pos;
   int fdin,fdlock,fdtmp;
   char *p;
-  char *oldflags = (char *) 0;
-  char *code = (char *) 0;
-  const char *cfname = (char *) 0;	/* config file if spec as -C cf_file */
   unsigned char ch;
 
   keyadd((unsigned long) getpid());
@@ -216,7 +320,7 @@ void main(int argc,char **argv)
   for (pos = 0; pos < (unsigned int) NO_FLAGS; pos++) {
     flags[pos] = 0;
   }
-  for (pos = 0; pos < 10; popt[pos++] = (char *) 0);
+  for (pos = 0; pos < 10; popt[pos++].len = 0);
 
   while ((opt = getopt(argc,argv,
    "+aAbBcC:dDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0:3:4:5:6:7:8:9:"))
@@ -224,14 +328,15 @@ void main(int argc,char **argv)
     if (opt == 'v' || opt == 'V')
       strerr_die2x(0,"ezmlm-make version: ",auto_version);
     if (opt =='C')	/* treat this like nl switch to allow override of -c*/
-      cfname = optarg;
+      if (!stralloc_copys(&cfname,optarg)) die_nomem();
     if (opt >= 'a' && opt <= 'z') {
       flags[opt - 'a'] = 3;		/* Dominant "set" */
       if (opt == 'e') flagforce++;	/* two 'e' => ignore 'E' */
     } else if (opt >= 'A' && opt <= 'Z')
       flags[opt - 'A'] = 2;		/* Dominant "unset" */
-    else if (opt >= '0' && opt <= '9')
-      popt[opt-'0'] = optarg;
+    else if (opt >= '0' && opt <= '9') {
+      if (!stralloc_copys(&popt[opt-'0'],optarg)) die_nomem();
+    }
     else if (opt == '+') {
       flagforce_p++;		/* two '+' => ignore 'E' */
       flags['e' - 'a'] = 3;	/* -+ implies -e */
@@ -246,85 +351,45 @@ void main(int argc,char **argv)
   else
     flagforce = 0;
 
-  if (!(dir = *argv++)) die_usage();
-  if (dir[0] != '/') die_relative();
-  if (dir[str_chr(dir,'\'')]) die_quote();
-  if (dir[str_chr(dir,'\n')]) die_newline();
+  if (*argv == 0) die_usage();
+  if (!stralloc_copys(&dir,*argv++)) die_nomem();
+  if (dir.s[0] != '/') die_relative();
+  if (byte_chr(dir.s,dir.len,'\'') < dir.len) die_quote();
+  if (byte_chr(dir.s,dir.len,'\n') < dir.len) die_newline();
 
-  if (flags['e' - 'a'] & 1) {	/* lock for edit */
+  if (flags['e' - 'a'] & 1) {
+    /* lock for edit */
     dirplusmake("/lock");
     fdlock = lockfile(dirplus.s);
-
-				/* for edit, try to get args from dir/config */
-    dirplusmake("/config");
-    if ((fdin = open_read(dirplus.s)) == -1) {
-      if (errno != error_noent) die_read();
-    } else {
-      substdio_fdbuf(&sstext,read,fdin,textbuf,sizeof(textbuf));
-      for (;;) {
-	if (getln(&sstext,&line,&match,'\n') == -1) die_read();
-	if (!match) break;
-	if (line.s[0] == '#') continue;
-	if (line.len == 1) break;
-	if (line.s[1] != ':') break;
-	line.s[line.len - 1] = '\0';
-	      if (!stralloc_cat(&cmdline,&line)) die_nomem();
-      }
-      close(fdin);
-      pos = 0;
-      while (pos < cmdline.len) {
-	ch = cmdline.s[pos];
-	pos += 2;
-	switch (ch) {
-	  case 'X': if (euid && !flags['c' - 'a'] && (!cfname))
-			cfname = cmdline.s + pos;	/* cmdline overrides */
-		    break;	/* for safety: ignore if root */
-          case 'T': dot = cmdline.s + pos; break;
-          case 'L': local = cmdline.s + pos; break;
-          case 'H': host = cmdline.s + pos; break;
-          case 'C': code = cmdline.s + pos; break;
-          case 'D': break;	/* no reason to check */
-          case 'F': oldflags = cmdline.s + pos; break;
-          default:
-                 if (ch == '0' || (ch >= '3' && ch <= '9')) {
-                   if (usecfg && !popt[ch - '0'])
-                     popt[ch - '0'] = cmdline.s + pos;
-                 } else
-                   strerr_die4x(111,FATAL,dirplus.s,ERR_SYNTAX,
-                        cmdline.s+pos);
-                 break;
-        }
-        pos += str_len(cmdline.s + pos) + 1;
-      }
-    }
+    read_new_config() || read_old_config();
   }
 
   if ((p = *argv++) != 0) {
-    dot = p;
+    if (!stralloc_copys(&dot,p)) die_nomem();
     if ((p = *argv++) != 0) {
-      if (!local || str_diff(local,p))
+      if (local.len == 0 || str_diff(local.s,p))
 	flagforce = 1;		/* must rewrite if list name changed */
-      local = p;
+      if (!stralloc_copys(&local,p)) die_nomem();
       if ((p = *argv++) != 0) {
-	if (!host || str_diff(host,p))
+	if (host.len == 0 || str_diff(host.s,p))
 	  flagforce = 1;	/* must rewrite if list name changed */
-        host = p;
+	if (!stralloc_copys(&host,p)) die_nomem();
 	if ((p = *argv++) != 0) {
-          code = p;
+	  if (!stralloc_copys(&code,p)) die_nomem();
         }
       }
     }
   }
-  if (!dot || !local || !host) die_usage();
-  if (dot[0] != '/') die_relative();		/* force absolute dot */
+  if (dot.len == 0 || local.len == 0 || host.len == 0) die_usage();
+  if (dot.s[0] != '/') die_relative();		/* force absolute dot */
 
 			/* use flags from config, overridden with new values */
 			/* if there are old flags, we're in "edit" and "-+" */
 			/* Previous versions only wrote _set_ flags to */
 			/* to DIR/confiag. We need to make sure that we */
 			/* don't apply the defaults for non-specified ones! */
-  if (usecfg && oldflags && flags['e' - 'a']) {
-    while ((ch = *(oldflags++))) {
+  if (usecfg && oldflags.len > 0 && flags['e' - 'a']) {
+    for (p = oldflags.s, i = oldflags.len; ch = *p, i > 0; ++p, --i) {
       if (ch >= 'a' && ch <= 'z') {		/* unset flags ignored */
         if (ch != 'e')
           if (!flags[ch - 'a'])			/* cmd line overrides */
@@ -347,8 +412,8 @@ void main(int argc,char **argv)
       flags[pos] = flags[pos] & 1;		/* 3 = "dominant" 1 */
   }
 
-  if (local[str_chr(local,'\n')]) die_newline();
-  if (host[str_chr(host,'\n')]) die_newline();
+  if (byte_chr(local.s,local.len,'\n') < local.len) die_newline();
+  if (byte_chr(host.s,host.len,'\n') < host.len) die_newline();
 
 	/* build 'f' for <#F#> */
   if (!stralloc_ready(&f,28)) die_nomem();
@@ -362,59 +427,36 @@ void main(int argc,char **argv)
   }
 
   fdin = -1;	/* assure failure for .ezmlmrc in case flags['c'-'a'] = 0 */
-  slpos = str_len(dot);
-  while ((--slpos > 0) && dot[slpos] != '/');
-  if (dot[slpos] == '/') {
-    if (!stralloc_copyb(&template,dot,slpos+1)) die_nomem();	/* dot dir */
-    slpos += str_chr(dot+slpos,'-');
-    if (dot[slpos]) {
+  slpos = dot.len;
+  while ((--slpos > 0) && dot.s[slpos] != '/');
+  if (dot.s[slpos] == '/') {
+    if (!stralloc_copyb(&template,dot.s,slpos+1)) die_nomem();	/* dot dir */
+    slpos += byte_chr(dot.s+slpos,dot.len-slpos,'-');
+    if (dot.s[slpos]) {
       slpos++;
-      pos = slpos + str_chr(dot+slpos,'-');
-      if (dot[pos]) {
-        if (!stralloc_copyb(&ext1,dot+slpos,pos-slpos)) die_nomem();
+      if (slpos < dot.len
+	  && (pos = slpos+byte_chr(dot.s+slpos,dot.len-slpos,'-')) < dot.len) {
+        if (!stralloc_copyb(&popt[1],dot.s+slpos,pos-slpos)) die_nomem();
         pos++;
-        slpos = pos + str_chr(dot+pos,'-');
-        if (dot[slpos])
-          if (!stralloc_copyb(&ext2,dot+pos,slpos-pos)) die_nomem();
+	if (pos < dot.len
+	    && (slpos = pos+byte_chr(dot.s+pos,dot.len-pos,'-')) < dot.len)
+          if (!stralloc_copyb(&popt[2],dot.s+pos,slpos-pos)) die_nomem();
       }
     }
   }
-  if (!stralloc_0(&ext1)) die_nomem();
-  if (!stralloc_0(&ext2)) die_nomem();
-  popt[1] = ext1.s;
-  popt[2] = ext2.s;
 	/* if 'c', template already has the dot directory. If 'C', cfname */
 	/* (if exists and != '') points to the file name to use instead. */
-  if (flags['c'-'a'] || (cfname && *cfname)) {
+  if (flags['c'-'a'] || (cfname.len > 0)) {
     if (!flags['c'-'a']) {	/* i.e. there is a cfname specified */
-      if (!stralloc_copys(&template,cfname)) die_nomem();
+      if (!stralloc_copy(&template,&cfname)) die_nomem();
     } else
       if (!stralloc_cats(&template,TXT_DOTEZMLMRC)) die_nomem();
-    if (!stralloc_0(&template)) die_nomem();
-    if ((fdin = open_read(template.s)) == -1) {
-      if (errno != error_noent)
-	strerr_die4sys(111,FATAL,ERR_OPEN,template.s,": ");
-      else
-	strerr_die3x(100,FATAL,template.s,ERR_NOEXIST);
-    }
-  } else {			/* /etc/ezmlmrc */
-    if (!stralloc_copys(&template,TXT_ETC_EZMLMRC)) die_nomem();
-    if (!stralloc_0(&template)) die_nomem();
-    if ((fdin = open_read(template.s)) == -1) {
-      if (errno != error_noent)
-        strerr_die4sys(111,FATAL,ERR_OPEN,template.s,": ");
-      else {			/* ezbin/ezmlmrc */
-	if (!stralloc_copys(&template,auto_bin)) die_nomem();
-	if (!stralloc_cats(&template,TXT_EZMLMRC)) die_nomem();
-	if (!stralloc_0(&template)) die_nomem();
-	if ((fdin = open_read(template.s)) == -1) {
-	  if (errno != error_noent)
-	    strerr_die4sys(111,FATAL,ERR_OPEN,template.s,": ");
-	  else
-	    strerr_die3x(100,FATAL,template.s,ERR_NOEXIST);
-	}
-      }
-    }
+    fdin = open_template(&template);
+  } else {
+    /* /etc/ezmlm/default/ezmlmrc */
+    if (!stralloc_copys(&template,auto_etc)) die_nomem();
+    if (!stralloc_cats(&template,TXT_DEFAULT)) die_nomem();
+    fdin = open_template(&template);
   }
 
   dcreate("");		/* This is all we do, the rest is up to ezmlmrc */
@@ -450,18 +492,18 @@ void main(int argc,char **argv)
       continue;
     if (!stralloc_0(&line)) die_nomem();
     if (line.s[0] == '<' && line.s[1] == '/') {		/* tag */
-    if (line.s[str_chr(line.s,'.')])
-      strerr_die3x(100,FATAL,ERR_PERIOD,line.s);
+      if (byte_chr(line.s,line.len,'.') < line.len)
+	strerr_die3x(100,FATAL,ERR_PERIOD,line.s);
       flagdo = 1;
       flagover = 0;
       hashpos = 0;
-      pos = str_chr(line.s+2,'#')+2;
-      if (line.s[pos]) {
+      pos = byte_chr(line.s+2,line.len-2,'#')+2;
+      if (pos < line.len-2) {
         hashpos = pos;
         pos++;
         flagnot = 0;
-        while ((ch = line.s[pos]) &&
-              (line.s[pos] != '/' && line.s[pos+1] != '>')) {
+        while (pos < line.len
+	       && ((ch = line.s[pos]) != '/' && line.s[pos+1] != '>')) {
           if (ch == '^') {
             flagnot = 1;
             pos++;
@@ -476,21 +518,22 @@ void main(int argc,char **argv)
           else if (ch >= 'A' && ch <= 'Z')
             flagdo &= !(flags[ch - 'A'] ^ flagnot);
           else if (ch >= '0' && ch <= '9')
-            flagdo &= (popt[ch - '0'] && *popt[ch - '0']) ^flagnot;
+            flagdo &= (popt[ch - '0'].len > 0) ^flagnot;
           flagnot = 0;
           pos++;
         }
-        if (line.s[pos] != '/' || line.s[pos+1] != '>')
+        if (pos < line.len
+	    && (line.s[pos] != '/' || line.s[pos+1] != '>'))
           strerr_die3x(100,FATAL,ERR_ENDTAG,line.s);
       } else {
         flagdo = 1;
         pos = 2;	/* name needs to be >= 1 char */
-        while (line.s[pos = str_chr(line.s+pos,'/')+pos]) {
+        while ((pos = byte_chr(line.s+pos,line.len-pos,'/')+pos) < line.len) {
           if (line.s[pos+1] == '>')
             break;
           pos++;
         }
-        if (!line.s[pos])
+        if (pos >= line.len)
           strerr_die3x(100,FATAL,ERR_ENDTAG,line.s);
       }
       if (hashpos)
@@ -508,7 +551,7 @@ void main(int argc,char **argv)
       } else if (line.s[2] == ':') {		/* ln -s */
         if (!flagdo)
           continue;
-        slpos = str_chr(line.s + 3,'/') + 3;
+        slpos = byte_chr(line.s+3,line.len-3,'/') + 3;
         if (slpos >= pos)
           strerr_die3x(100,FATAL,ERR_LINKDIR,line.s);
         if (!stralloc_copyb(&dname,line.s+slpos,pos-slpos)) die_nomem();
@@ -571,8 +614,8 @@ void main(int argc,char **argv)
     next = 0;
     outline.len = 0;
     for (;;) {
-      pos = next + str_chr(line.s+next,'<');
-      if (line.s[pos] &&
+      if (next < line.len &&
+	  (pos = next + byte_chr(line.s+next,line.len-next,'<')) < line.len &&
           line.s[pos+1] == '#' &&
           line.s[pos+2] &&
           line.s[pos+3] == '#' &&
@@ -584,41 +627,38 @@ void main(int argc,char **argv)
             if (!stralloc_cats(&outline,auto_bin)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'C':		/* digestcode */
-            if (code && *code)
-              if (!stralloc_cats(&outline,code)) die_nomem();
+	    if (!stralloc_cat(&outline,&code)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'D':		/* listdir */
-            if (!stralloc_cats(&outline,dir)) die_nomem();
+            if (!stralloc_cat(&outline,&dir)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'F':		/* flags */
             if (!stralloc_cat(&outline,&f)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'H':		/* hostname */
-            if (!stralloc_cats(&outline,host)) die_nomem();
+            if (!stralloc_cat(&outline,&host)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'L':		/* local */
-            if (!stralloc_cats(&outline,local)) die_nomem();
+            if (!stralloc_cat(&outline,&local)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'T':		/* dot */
-            if (!stralloc_cats(&outline,dot)) die_nomem();
+            if (!stralloc_cat(&outline,&dot)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           case 'X':		/* config file name */
-            if (cfname)
-	      if (!stralloc_cats(&outline,cfname)) die_nomem();
+	    if (!stralloc_cat(&outline,&cfname)) die_nomem();
             last = pos + 4; next = pos + 5; break;
           default:		/* copy unknown tag as is for e.g. <#A#> and*/
 				/* <#R#> to be processed by -manage/store   */
                                 /* stuff in args for <#0#> .. <#9#> */
             if ((line.s[pos+2] >= '0') && (line.s[pos+2] <= '9')) {
-              if (popt[line.s[pos+2] - '0'])
-                if (!stralloc_cats(&outline,popt[line.s[pos+2]-'0']))
-                  die_nomem();
+	      if (!stralloc_cat(&outline,&popt[line.s[pos+2]-'0']))
+		die_nomem();
             } else
               if (!stralloc_catb(&outline,line.s+pos,5)) die_nomem();
             last = pos + 4; next = pos + 5; break;
         }
       } else {			/* not tag */
-        if (line.s[pos]) {
+	if (pos < line.len) {
           next++;
         } else {
           if (!stralloc_catb(&outline,line.s+last+1,line.len-last-1))

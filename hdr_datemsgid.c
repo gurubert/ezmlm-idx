@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr_datemsgid.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include <unistd.h>
 #include "hdr.h"

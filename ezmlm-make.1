@@ -1,4 +1,4 @@
-.\" $Id$
+.\" $Id: ezmlm-make.1 497 2005-10-03 05:51:21Z bruce $
 .TH ezmlm-make 1
 .SH NAME
 ezmlm-make \- create a new mailing list
@@ -277,16 +277,13 @@ Use
 .I dot
 resides.
 .B ezmlm-make
-otherwise uses the
-system wide ezmlmrc
-file (normally /etc/ezmlm/ezmlmrc and if not found there, the ezmlmrc file
-in the ezmlm binary directory).
+otherwise uses the system wide ezmlmrc file (normally
+.IR /etc/ezmlm/default/ezmlmrc ).
 The
 .B \-c
 switch may cause you to execute
 .B ezmlm-make
-based on a
-configuration file controlled by another user.
+based on a configuration file controlled by another user.
 .B ezmlm-make
 does not allow periods in any tag to restrict all actions to within
 .IR dir .
@@ -307,6 +304,11 @@ to override a default when using
 .B \-+
 or
 .BR \-e .
+If the given path is a directory instead of a file, the actual ezmlmrc
+file is taken as
+.IR arg/ezmlmrc ,
+and the other ezmlm-idx programs will use the directory to look up files
+(such as text files) that are not present in the list directory.
 .TP 5
 .B \-d
 Digest.
@@ -949,10 +951,8 @@ after all other actions.
 
 .B ezmlm-make
 will use
-.B /etc/ezmlm/ezmlmrc
-and if not found
-.B ezmlmrc
-in the ezmlm binary directory. This can be overridden with the
+.BR /etc/ezmlm/default/ezmlmrc .
+This can be overridden with the
 .B \-c
 and
 .B \-C

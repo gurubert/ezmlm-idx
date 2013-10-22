@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: copy.c 524 2006-01-16 13:53:48Z bruce $*/
 
 /* Copies a file relative the current directory and substitutes    */
 /* !A at the beginning of a line for the target,                   */
@@ -29,36 +29,23 @@
 #include "quote.h"
 #include "copy.h"
 #include "mime.h"
-#include "open.h"
+#include "altpath.h"
 #include "byte.h"
 #include "die.h"
 #include "idx.h"
+#include "config.h"
 
 static stralloc line = {0};
 static stralloc outline = {0};
 static stralloc qline = {0};
-static stralloc outlocal = {0};
-static stralloc outhost = {0};
 static substdio sstext;
 static char textbuf[256];
 static const char *target = "?????";
 static const char *verptarget = "?????";
 static const char *confirm = "?????";
 static unsigned int confirmlocal;
+static unsigned int confirmprefix;
 static const char *szmsgnum = "?????";
-
-void set_cpoutlocal(const stralloc *ln)
-{	/* must be quoted for safety. Note that substitutions that use */
-	/* outlocal within an atom may create illegal addresses */
-  if (!quote(&outlocal,ln))
-    die_nomem();
-}
-
-void set_cpouthost(const stralloc *ln)
-{
-  if (!stralloc_copy(&outhost,ln))
-    die_nomem();
-}
 
 void set_cptarget(const char *tg)
 {
@@ -70,10 +57,11 @@ void set_cpverptarget(const char *tg)
   verptarget = tg;
 }
 
-void set_cpconfirm(const char *cf)
+void set_cpconfirm(const char *cf,unsigned int prefixlen)
 {
   confirm = cf;
   confirmlocal = str_chr(cf, '@');
+  confirmprefix = prefixlen + 1;
 }
 
 void set_cpnum(const char *cf)
@@ -101,17 +89,87 @@ static void codeputs(const char *l,char code)
   codeput(l,str_len(l),code);
 }
 
+/* Find tags <#x#>. Replace with for x=R confirm, for x=A */
+/* target, x=l outlocal, x=h outhost. For others, just    */
+/* skip tag. If outlocal/outhost are not set, the tags are*/
+/* skipped. If confirm/taget are not set, the tags are    */
+/* replaced by "???????" */
+void copy_xlate(stralloc *out,
+		const stralloc *line,
+		char q)
+{
+  unsigned int pos;
+  unsigned int nextpos;
+
+  pos = 0;
+  nextpos = 0;
+  out->len = 0;
+  while ((pos += byte_chr(line->s+pos,line->len-pos,'<')) < line->len) {
+    if (pos + 4 < line->len &&
+	line->s[pos+1] == '#' &&
+	line->s[pos+3] == '#' &&
+	line->s[pos+4] == '>') {
+      /* tag. Copy first part of line */
+      if (!stralloc_catb(out,line->s+nextpos,pos-nextpos))
+	die_nomem();
+      switch(line->s[pos+2]) {
+      case 'A':
+	if (q == 'H') strerr_die1x(111,ERR_SUBST_UNSAFE);
+	if (!stralloc_cats(out,target)) die_nomem();
+	break;
+      case 'L':
+	if (!quote(&qline,&local)) die_nomem();
+	if (!stralloc_cat(out,&qline)) die_nomem();
+	break;
+      case 'R':
+	if (!stralloc_cats(out,confirm)) die_nomem();
+	break;
+      case 'c':
+	if (!stralloc_catb(out,confirm+confirmprefix,
+			   confirmlocal-confirmprefix)) die_nomem();
+	break;
+      case 'r':
+	if (!stralloc_catb(out,confirm,confirmlocal)) die_nomem();
+	break;
+      case 'l':
+	if (!quote(&qline,&outlocal)) die_nomem();
+	if (!stralloc_cat(out,&qline)) die_nomem();
+	break;
+      case 'h':
+      case 'H':
+	if (!stralloc_cat(out,&outhost)) die_nomem();
+	break;
+      case 't':
+	if (q == 'H') strerr_die1x(111,ERR_SUBST_UNSAFE);
+	if (!stralloc_cats(out,verptarget)) die_nomem();
+	break;
+      case 'n':
+	if (!stralloc_cats(out,szmsgnum)) die_nomem();
+	break;
+      default:
+	break;			/* unknown tags killed */
+      }
+      pos += 5;
+      nextpos = pos;
+    } else
+      ++pos;				/* try next position */
+  }
+  if (!stralloc_catb(out,line->s+nextpos,line->len-nextpos))
+    die_nomem();		/* remainder */
+}
+
 void copy(struct qmail *qqp,
 	  const char *fn,	/* text file name */
 	  char q)		/* '\0' for regular output, 'B' for base64, */
 				/* 'Q' for quoted printable,'H' for header  */
 {
   int fd;
-  int match, done;
-  unsigned int pos,nextpos;
+  int flagsmatched = 1;
+  int match;
+  unsigned int pos;
 
   qq = qqp;
-  if ((fd = open_read(fn)) == -1) {
+  if ((fd = alt_open_read(fn)) == -1) {
     if (errno != error_noent)
       strerr_die4sys(111,FATAL,ERR_OPEN,fn,": ");
     else
@@ -122,6 +180,7 @@ void copy(struct qmail *qqp,
     if (getln(&sstext,&line,&match,'\n') == -1)
       strerr_die4sys(111,FATAL,ERR_READ,fn,": ");
     if (line.len > 0) {		/* line.len is always > 0 if match is true */
+      if (line.s[0] == '#') continue;
       /* suppress blank line for 'H'eader mode */
       if (line.len == 1 && q == 'H') continue;
       if (line.s[0] == '!') {
@@ -138,62 +197,27 @@ void copy(struct qmail *qqp,
 	  continue;
 	}
       }
-		/* Find tags <#x#>. Replace with for x=R confirm, for x=A */
-		/* target, x=l outlocal, x=h outhost. For others, just    */
-		/* skip tag. If outlocal/outhost are not set, the tags are*/
-		/* skipped. If confirm/taget are not set, the tags are    */
-		/* replaced by "???????" */
-      pos = 0;
-      nextpos = 0;
-      done = 0;
-      outline.len = 0;			/* zap outline */
-      while ((pos += byte_chr(line.s+pos,line.len-pos,'<')) != line.len) {
-        if (pos + 4 < line.len &&
-            line.s[pos+1] == '#' &&
-            line.s[pos+3] == '#' &&
-            line.s[pos+4] == '>') {	/* tag. Copy first part of line */
-          done = 1;				/* did something */
-          if (!stralloc_catb(&outline,line.s+nextpos,pos-nextpos))
-			 die_nomem();
-          switch(line.s[pos+2]) {
-            case 'A':
-	      if (q == 'H') strerr_die1x(111,ERR_SUBST_UNSAFE);
-              if (!stralloc_cats(&outline,target)) die_nomem();
-              break;
-            case 'R':
-              if (!stralloc_cats(&outline,confirm)) die_nomem();
-              break;
-	    case 'r':
-	      if (!stralloc_catb(&outline,confirm,confirmlocal)) die_nomem();
-	      break;
-            case 'l':
-              if (!stralloc_cat(&outline,&outlocal)) die_nomem();
-              break;
-            case 'h':
-              if (!stralloc_cat(&outline,&outhost)) die_nomem();
-              break;
-            case 't':
-	      if (q == 'H') strerr_die1x(111,ERR_SUBST_UNSAFE);
-              if (!stralloc_cats(&outline,verptarget)) die_nomem();
-              break;
-            case 'n':
-              if (!stralloc_cats(&outline,szmsgnum)) die_nomem();
-              break;
-            default:
-              break;			/* unknown tags killed */
-          }
-          pos += 5;
-          nextpos = pos;
-        } else
-          ++pos;				/* try next position */
+      /* Find <=flags=> tags */
+      if (q != 'H'
+	  && line.len >= 5
+	  && line.s[0] == '<'
+	  && line.s[1] == '='
+	  && line.s[line.len-3] == '='
+	  && line.s[line.len-2] == '>') {
+	for (flagsmatched = 1, pos = 2; pos < line.len - 3; ++pos) {
+	  const char ch = line.s[pos];
+	  if ((ch >= 'A' && ch <= 'Z' && flags[ch - 'A'])
+	      || (ch >= 'a' && ch <= 'z' && !flags[ch - 'a'])) {
+	    flagsmatched = 0;
+	    break;
+	  }
+	}
+	continue;
       }
-      if (!done)
-        codeput(line.s,line.len,q);
-      else {
-        if (!stralloc_catb(&outline,line.s+nextpos,line.len-nextpos))
-		die_nomem();		/* remainder */
-        codeput(outline.s,outline.len,q);
-      }
+      if (!flagsmatched) continue;
+
+      copy_xlate(&outline,&line,q);
+      codeput(outline.s,outline.len,q);
 
       /* Last line is missing its trailing newline, add one on output. */
       if (!match)

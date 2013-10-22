@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: subscribe.h 380 2005-07-12 22:33:57Z bruce $*/
 #ifndef SUBSCRIBE_H
 #define SUBSCRIBE_H
 

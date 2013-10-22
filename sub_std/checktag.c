@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: checktag.c 369 2005-07-12 02:10:39Z bruce $*/
 
 #include "subscribe.h"
 

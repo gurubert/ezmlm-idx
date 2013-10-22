@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-moderate.c 520 2006-01-11 22:45:22Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -11,7 +11,6 @@
 #include "error.h"
 #include "sig.h"
 #include "wait.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "strerr.h"
 #include "byte.h"
@@ -36,28 +35,23 @@
 #include "die.h"
 #include "idx.h"
 #include "wrap.h"
+#include "config.h"
 #include "auto_version.h"
 
 int flagmime = MOD_MIME;	/* default is message as attachment */
-char flagcd = '\0';		/* default: do not use transfer encoding */
 
 const char FATAL[] = "ezmlm-moderate: fatal: ";
 const char INFO[] = "ezmlm-moderate: info: ";
 const char USAGE[] =
 "ezmlm-moderate: usage: ezmlm-moderate [-cCmMrRvV] [-t replyto] dir [/path/ezmlm-send]";
 
-stralloc outhost = {0};
-stralloc outlocal = {0};
-stralloc key = {0};
 stralloc mydtline = {0};
-stralloc mailinglist = {0};
 stralloc accept = {0};
 stralloc reject = {0};
 stralloc to = {0};
 stralloc send = {0};
 stralloc sendopt = {0};
 stralloc comment = {0};
-stralloc charset = {0};
 datetime_sec when;
 
 char strnum[FMT_ULONG];
@@ -202,8 +196,8 @@ void main(int argc,char **argv)
 	die_usage();
     }
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
+  startup(dir = argv[optind++]);
+  load_config(dir);
 
   sender = env_get("SENDER");
   if (!sender) strerr_die2x(100,FATAL,ERR_NOSENDER);
@@ -218,21 +212,6 @@ void main(int argc,char **argv)
     strerr_die2x(100,FATAL,ERR_ANONYMOUS);
   if (str_equal(sender,"#@[]"))
     strerr_die2x(100,FATAL,ERR_BOUNCE);
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
-
-  switch(slurp("key",&key,32)) {
-    case -1:
-      strerr_die4sys(111,FATAL,ERR_READ,dir,"/key: ");
-    case 0:
-      strerr_die4x(100,FATAL,dir,"/key",ERR_NOEXIST);
-  }
-  getconf_line(&mailinglist,"mailinglist",1,dir);
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
-  set_cpoutlocal(&outlocal);	/* for copy() */
-  set_cpouthost(&outhost);	/* for copy() */
 
   /* local should be >= def, but who knows ... */
   cp = local + str_len(local) - str_len(def) - 2;
@@ -298,8 +277,8 @@ void main(int argc,char **argv)
     maketo();			/* extract SENDER from return-path */
 						/* Build message */
     hdr_add2("Mailing-List: ",mailinglist.s,mailinglist.len);
-    if(getconf_line(&line,"listid",0,dir))
-      hdr_add2("List-ID: ",line.s,line.len);
+    if (listid.len > 0)
+      hdr_add2("List-ID: ",listid.s,listid.len);
     hdr_datemsgid(when);
     hdr_from("-owner");
     if (replyto)
@@ -308,17 +287,6 @@ void main(int argc,char **argv)
     hdr_listsubject1(TXT_RETURNED_POST);
 
     if (flagmime) {
-      if (getconf_line(&charset,"charset",0,dir)) {
-        if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-          if (charset.s[charset.len - 1] == 'B' ||
-		charset.s[charset.len - 1] == 'Q') {
-            flagcd = charset.s[charset.len - 1];
-            charset.s[charset.len - 2] = '\0';
-          }
-        }
-      } else
-        if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-      if (!stralloc_0(&charset)) die_nomem();
       hdr_mime(CTYPE_MULTIPART);
       hdr_boundary(0);
       hdr_ctype(CTYPE_TEXT);
@@ -414,7 +382,7 @@ void main(int argc,char **argv)
       strerr_die4sys(111,FATAL,ERR_SEEK,fnmsg.s,": ");
 
     substdio_fdbuf(&sstext,read,fd,textbuf,sizeof(textbuf));
-    if (qmail_copy(&qq,&sstext) != 0)
+    if (qmail_copy(&qq,&sstext,-1) != 0)
       strerr_die4sys(111,FATAL,ERR_READ,fnmsg.s,": ");
     close(fd);
 

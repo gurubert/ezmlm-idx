@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: idxthread.c 368 2005-07-11 22:22:33Z bruce $*/
 
 /* idxthread.c contains routines to from the ezmlm-idx subject index build */
 /* a structure of unique subjects as well as a table of messages with      */

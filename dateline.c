@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: dateline.c 145 2005-01-03 19:34:32Z bruce $*/
 
 #include "fmt.h"
 #include "yyyymm.h"

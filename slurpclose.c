@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: slurpclose.c 163 2005-01-04 04:55:17Z bruce $*/
 
 #include <unistd.h>
 #include "stralloc.h"

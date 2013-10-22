@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-get.c 520 2006-01-11 22:45:22Z bruce $*/
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -9,7 +9,6 @@
 #include "str.h"
 #include "env.h"
 #include "sig.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "strerr.h"
 #include "byte.h"
@@ -39,14 +38,15 @@
 #include "idx.h"
 #include "mime.h"
 #include "errtxt.h"
+#include "config.h"
 #include "auto_version.h"
 
 int flagdo = 1;			/* React to commands (doesn't affect -dig)*/
 int flagbottom = 1;		/* copy text/bottom + request */
 int flagpublic = 2;		/* 0 = non-public, 1 = public, 2 = respect*/
 				/* dir/public. */
-char flagcd = '\0';		/* default: don't use quoted-printable */
 int flagsub = 0;		/* =1 subscribers only for get/index/thread */
+unsigned long copylines = 0;	/* Number of lines from the message to copy */
 const char *digsz =
 		"from\\to\\subject\\reply-to\\date\\message-id\\cc\\"
 		"mime-version\\content-type\\content-transfer-encoding";
@@ -55,14 +55,10 @@ const char FATAL[] = "ezmlm-get: fatal: ";
 const char USAGE[] =
 "ezmlm-get: usage: ezmlm-get [-bBcClLpPsSvV] [-f fmt] [digestcode]";
 
-stralloc outhost = {0};
-stralloc outlocal = {0};
 stralloc listname = {0};
-stralloc mailinglist = {0};
 stralloc qmqpservers = {0};
 stralloc fn = {0};
 stralloc moddir = {0};
-stralloc charset = {0};
 stralloc mydtline = {0};
 stralloc digheaders = {0};
 stralloc seed = {0};
@@ -223,13 +219,9 @@ void get_num(void)
 unsigned long dignum(void)
 {
 /* return dignum if exists, 0 otherwise. */
-
-  unsigned long retval;
-  if (!stralloc_copys(&num,"")) die_nomem();	/* zap */
-  getconf_line(&num,"dignum",0,dir);
-  if(!stralloc_0(&num)) die_nomem();
-  scan_ulong(num.s,&retval);
-  return retval;
+  unsigned long u;
+  getconf_ulong(&u,"dignum",0,dir);
+  return u;
 }
 
 void write_ulong(unsigned long num,unsigned long cum,unsigned long dat,
@@ -287,7 +279,7 @@ void normal_bottom(char format)
     qmail_puts(&qq,">\n");
     if (seek_begin(0) == -1)
       strerr_die2sys(111,FATAL,ERR_SEEK_INPUT);
-    if (qmail_copy(&qq,&ssin2) != 0)
+    if (qmail_copy(&qq,&ssin2,copylines) != 0)
       strerr_die2sys(111,FATAL,ERR_READ_INPUT);
   } else {
     if (flagcd == 'B' && format != RFC1153) {
@@ -715,8 +707,8 @@ void doheaders(void)
     copy(&qq,"headeradd",'H');
 
   hdr_add2("Mailing-List: ",mailinglist.s,mailinglist.len);
-  if (getconf_line(&line,"listid",0,dir))
-    hdr_add2("List-ID: ",line.s,line.len);
+  if (listid.len > 0)
+    hdr_add2("List-ID: ",listid.s,listid.len);
   hdr_datemsgid(when);
   hdr_from("-help");
   if (!stralloc_copys(&mydtline,"Delivered-To: responder for ")) die_nomem();
@@ -810,15 +802,13 @@ void main(int argc,char **argv)
         die_usage();
     }
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
-  if (chdir(dir) == -1)
-    strerr_die4x(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind++]);
+  load_config(dir);
+  getconf_ulong(&copylines,"copylines",0,dir);
 
   digestcode = argv[optind];	/* code to activate digest (-digest-code)*/
 				/* ignore any extra args */
 
-  getconf_line(&outlocal,"outlocal",1,dir);
   if (!stralloc_copy(&subject,&outlocal)) die_nomem();	/* for subjects */
   if (!stralloc_copy(&listname,&outlocal)) die_nomem();	/* for content disp */
 
@@ -933,21 +923,6 @@ void main(int argc,char **argv)
   flagindexed = getconf_line(&line,"indexed",0,dir);
   flagarchived = getconf_line(&line,"archived",0,dir);
 
-  if (getconf_line(&charset,"charset",0,dir)) {
-    if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-      if (charset.s[charset.len - 1] == 'B' ||
-		 charset.s[charset.len - 1] == 'Q') {
-        flagcd = charset.s[charset.len - 1];
-        charset.s[charset.len - 2] = '\0';
-      }
-    }
-  } else
-    if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-  if (!stralloc_0(&charset)) die_nomem();
-  getconf_line(&mailinglist,"mailinglist",1,dir);
-  getconf_line(&outhost,"outhost",1,dir);
-  set_cpouthost(&outhost);
-
     if (!stralloc_copys(&ddir,dir)) die_nomem();
     if (!stralloc_cats(&ddir,"/digest")) die_nomem();
     if (!stralloc_0(&ddir)) die_nomem();
@@ -974,7 +949,6 @@ void main(int argc,char **argv)
   if (!stralloc_copys(&edir,dir)) die_nomem();	/* not needed for -dig, but */
   if (!stralloc_cats(&edir,"/allow")) die_nomem();	/* be safe */
   if (!stralloc_0(&edir)) die_nomem();
-  set_cpoutlocal(&outlocal);		/* needed for copy */
 
   if (flagqmqp) {
     if (qmail_open(&qq,&qmqpservers) == -1)		/* open qmail */

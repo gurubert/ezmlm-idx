@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: idx.h 476 2005-09-30 18:31:16Z bruce $*/
 #ifndef IDX_H
 #define IDX_H
 
@@ -222,14 +222,10 @@
 #define ACTION_SC "sc."
 /* moderator subscription confirm */
 #define ACTION_TC "tc."
-/* moderator initiated subscription confirm */
-#define ACTION_RC "rc."
 /* user unsubscribe confirm */
 #define ACTION_UC "uc."
 /* moderator unsubscribe confirm */
 #define ACTION_VC "vc."
-/* moderator initiated unsubscribe confirm */
-#define ACTION_WC "wc."
 
 /* name addition for digest, i.e. list-"digest" Don't change! */
 #define ACTION_DIGEST "digest"
@@ -251,14 +247,11 @@
 /* make sense to make these messages visible to anyone else.          */
 #define MODE_MOD_MSG 0700
 
-/* name and location of system-wide customized ezmlmrc. This is where */
-/* ezmlm-make looks first (unless the -c switch is specified) before  */
-/* falling back to the (usually unchanged) version in the ezmlm bin   */
-/* directory. */
-#define TXT_ETC_EZMLMRC "/etc/ezmlm/ezmlmrc"
-
-/* same name added to auto_bin. Note leading slash! */
+/* name of ezmlmrc file, added to directory names */
 #define TXT_EZMLMRC "/ezmlmrc"
+
+/* name of default configuration directory, added to auto_etc */
+#define TXT_DEFAULT "/default"
 
 /* same in dot dir for local config (-c) */
 #define TXT_DOTEZMLMRC ".ezmlmrc"
@@ -269,8 +262,8 @@
 /* default timestamp for ezmlm-limit */
 #define TXT_LOOPNUM "loopnum"
 
-/* ezmlm-cgi config file for normal SUID root install */
-#define EZ_CGIRC "/etc/ezmlm/ezcgirc"
+/* ezmlm-cgi config file, added to auto_etc, for normal SUID root install */
+#define EZ_CGIRC "/ezcgirc"
 
 /* ezmlm-cgi config file for local install we expect to find the file in PWD */
 #define EZ_CGIRC_LOC ".ezcgirc"

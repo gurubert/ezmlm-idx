@@ -1,4 +1,4 @@
-# $Id$
+# $Id: 510-ezmlm-manage-unsubprobe 390 2005-09-01 21:37:08Z bruce $
 
   prompt "unsubscribe probe:    "
 

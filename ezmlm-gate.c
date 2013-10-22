@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-gate.c 514 2005-12-16 16:59:32Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -22,6 +22,7 @@
 #include "idx.h"
 #include "subscribe.h"
 #include "wrap.h"
+#include "config.h"
 #include "auto_version.h"
 
 const char FATAL[] = "ezmlm-gate: fatal: ";
@@ -109,10 +110,7 @@ void main(int argc,char **argv)
         die_usage();
     }
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind++]);
 
   sender = env_get("SENDER");
 
@@ -164,12 +162,12 @@ void main(int argc,char **argv)
     substdio_put(subfderr, " ", 1);
     substdio_puts(subfderr, dir);
     substdio_putsflush(subfderr, "\n");
-    return;
+    _exit(0);
   }
 
   if ((child = wrap_fork()) == 0)
     wrap_execbin(program, opts, dir);
   /* parent */
   wrap_exitcode(child);
+  _exit(0);
 }
-

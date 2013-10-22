@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr_transferenc.c 120 2004-12-23 03:33:42Z bruce $*/
 #include "hdr.h"
 #include "qmail.h"
 

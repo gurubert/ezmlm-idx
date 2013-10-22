@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-confirm.c 487 2005-09-30 21:03:30Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -12,7 +12,6 @@
 #include "sig.h"
 #include "fork.h"
 #include "wait.h"
-#include "slurp.h"
 #include "getconf.h"
 #include "strerr.h"
 #include "byte.h"
@@ -36,6 +35,7 @@
 #include "die.h"
 #include "idx.h"
 #include "mime.h"
+#include "config.h"
 #include "auto_version.h"
 
 static int flagmime = MOD_MIME;	/* default is message as attachment */
@@ -45,10 +45,6 @@ const char INFO[] = "ezmlm-confirm: info: ";
 const char USAGE[] =
 "ezmlm-confirm: usage: ezmlm-confirm [-cCmMrRvV] dir [/path/ezmlm-send]";
 
-static stralloc outhost = {0};
-static stralloc outlocal = {0};
-static stralloc key = {0};
-static stralloc mailinglist = {0};
 static stralloc to = {0};
 static stralloc sendopt = {0};
 static datetime_sec when;
@@ -142,8 +138,8 @@ void main(int argc, char **argv)
 	die_usage();
     }
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
+  startup(dir = argv[optind++]);
+  load_config(dir);
 
   sender = env_get("SENDER");
   if (!sender) strerr_die2x(100,FATAL,ERR_NOSENDER);
@@ -158,21 +154,6 @@ void main(int argc, char **argv)
     strerr_die2x(100,FATAL,ERR_ANONYMOUS);
   if (str_equal(sender,"#@[]"))
     strerr_die2x(100,FATAL,ERR_BOUNCE);
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
-
-  switch(slurp("key",&key,32)) {
-    case -1:
-      strerr_die4sys(111,FATAL,ERR_READ,dir,"/key: ");
-    case 0:
-      strerr_die4x(100,FATAL,dir,"/key",ERR_NOEXIST);
-  }
-  getconf_line(&mailinglist,"mailinglist",1,dir);
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
-  set_cpoutlocal(&outlocal);	/* for copy() */
-  set_cpouthost(&outhost);	/* for copy() */
 
   /* local should be >= def, but who knows ... */
   cp = local + str_len(local) - str_len(def) - 2;

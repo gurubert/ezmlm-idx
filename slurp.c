@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: slurp.c 163 2005-01-04 04:55:17Z bruce $*/
 
 #include "stralloc.h"
 #include "slurp.h"

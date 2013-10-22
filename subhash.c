@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: subhash.c 360 2005-07-07 23:38:54Z bruce $*/
 
 #include "subhash.h"
 #include "str.h"

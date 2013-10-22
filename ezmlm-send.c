@@ -1,4 +1,4 @@
-/* $Id$*/
+/* $Id: ezmlm-send.c 487 2005-09-30 21:03:30Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -35,6 +35,7 @@
 #include "die.h"
 #include "idx.h"
 #include "copy.h"
+#include "config.h"
 #include "auto_version.h"
 
 int flagnoreceived = 1;		/* suppress received headers by default. They*/
@@ -68,7 +69,6 @@ stralloc received = {0};
 stralloc prefix = {0};
 stralloc content = {0};
 stralloc boundary = {0};
-stralloc charset = {0};
 stralloc dcprefix = {0};
 stralloc dummy = {0};
 stralloc qmqpservers = {0};
@@ -85,7 +85,6 @@ unsigned long hash_lo = 0L;
 unsigned long hash_hi = 52L;
 unsigned long msgsize = 0L;
 unsigned long cumsize = 0L;	/* cumulative archive size bytes / 256 */
-char flagcd = '\0';		/* no transfer-encoding for trailer */
 char encin = '\0';
 int flagindexed;
 int flagfoundokpart;		/* Found something to pass on. If multipart */
@@ -105,9 +104,6 @@ char archivebuf[1024];
 
 int flagsublist;
 stralloc sublist = {0};
-stralloc mailinglist = {0};
-stralloc outlocal = {0};
-stralloc outhost = {0};
 stralloc headerremove = {0};
 struct constmap headerremovemap;
 stralloc mimeremove = {0};
@@ -117,6 +113,8 @@ char *dir;
 struct qmail qq;
 substdio ssin;
 char inbuf[1024];
+substdio ssout;
+char outbuf[1];
 
 char textbuf[512];
 substdio sstext;
@@ -305,22 +303,6 @@ int idx_copy_insertsubject(void)
   return r;
 }
 
-void getcharset(void)
-{
-    if (getconf_line(&charset,"charset",0,dir)) {
-      if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-        if (charset.s[charset.len - 1] == 'B' ||
-			charset.s[charset.len - 1] == 'Q') {
-          flagcd = charset.s[charset.len - 1];
-          charset.s[charset.len - 2] = '\0';
-        }
-      }
-    } else
-      if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-
-    if (!stralloc_0(&charset)) die_nomem();
-}
-
 void main(int argc,char **argv)
 {
   unsigned long subs;
@@ -378,19 +360,15 @@ void main(int argc,char **argv)
     }
 
 
-  dir = argv[optind++];
-  if (!dir) die_usage();
+  startup(dir = argv[optind++]);
+  load_config(dir);
 
   sender = env_get("SENDER");
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
 
   fdlock = lockfile("lock");
 
   flagarchived = getconf_line(&line,"archived",0,dir);
   flagindexed = getconf_line(&line,"indexed",0,dir);
-  getcharset();
   flagprefixed = getconf_line(&prefix,"prefix",0,dir);
   if (prefix.len) {		/* encoding and serial # support */
 				/* no sanity checks - you put '\n' or '\0' */
@@ -420,10 +398,6 @@ void main(int argc,char **argv)
   } else
     msgnum = 1L;			/* if num not there */
 
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
-  set_cpoutlocal(&outlocal);
-  set_cpouthost(&outhost);
   flagsublist = getconf_line(&sublist,"sublist",0,dir);
 
   if (!stralloc_copys(&line,QMQPSERVERS)) die_nomem();
@@ -497,10 +471,9 @@ void main(int argc,char **argv)
       strerr_die2sys(111,FATAL,ERR_QMAIL_QUEUE);
 
   if (!flagsublist) {
-    getconf_line(&mailinglist,"mailinglist",1,dir);
     qa_puts("Mailing-List: ");
     qa_put(mailinglist.s,mailinglist.len);
-    if (getconf_line(&line,"listid",0,dir)) {
+    if (listid.len > 0) {
       flaglistid = 1;
       qmail_puts(&qq,"\nList-ID: ");
       qmail_put(&qq,line.s,line.len);

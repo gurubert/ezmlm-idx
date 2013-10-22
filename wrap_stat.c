@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: wrap_stat.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>

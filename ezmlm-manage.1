@@ -1,4 +1,4 @@
-.\" $Id$
+.\" $Id: ezmlm-manage.1 520 2006-01-11 22:45:22Z bruce $
 .TH ezmlm-manage 1
 .SH NAME
 ezmlm-manage \- automatically manage a mailing list
@@ -107,6 +107,14 @@ field,
 refuses to respond.
 .B ezmlm-manage
 also refuses to respond to bounce messages.
+
+.B ezmlm-manage
+reads
+.I dir\fB/copylines
+to determine how many lines of the original message to copy into the
+outgoing message.  If this file is empty or not present, a value of
+.I 0
+is presumed, meaning that only the header is copied.
 .SH OPTIONS
 .TP 5
 .B \-b
@@ -308,8 +316,6 @@ address in its response.
 If
 .I action
 is
-.B rc.\fIcookie
-or
 .BR tc.\fIcookie ,
 where
 .I cookie
@@ -339,19 +345,10 @@ Actions of
 and
 .B unsubscribe
 are used in the same way to delete the target from the mailing list.
-Unsubscribes do not require moderator confirmation unless the
-.B \-m
-option is given.  Actions of
+Unsubscribes do not require moderator confirmation.
+
+Actions of
 .B vc.\fIcookie
-are used for moderator confirmation of unsubscribes.
-
-Actions of
-.B rc.\fIcookie
-are used to confirm moderator-iniated subscribes for lists configured
-with remote administration (see MODERATION).
-
-Actions of
-.B wc.\fIcookie
 are used to confirm moderator-initiated unsubscribes for lists configured
 with remote administration (see MODERATION).
 

@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: date2yyyymm.c 180 2005-01-04 19:49:36Z bruce $*/
 
 #include "yyyymm.h"
 

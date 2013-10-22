@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: unfoldHDR.c 363 2005-07-11 16:49:20Z bruce $*/
 
 #include "stralloc.h"
 #include "strerr.h"

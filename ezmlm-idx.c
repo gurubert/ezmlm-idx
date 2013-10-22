@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-idx.c 427 2005-09-15 05:40:33Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -28,6 +28,7 @@
 #include "errtxt.h"
 #include "getconf.h"
 #include "makehash.h"
+#include "config.h"
 #include "auto_version.h"
 
 const char FATAL[] = "ezmlm-idx: fatal: ";
@@ -65,7 +66,6 @@ stralloc author = {0};
 stralloc authmail = {0};
 stralloc received = {0};
 stralloc prefix = {0};
-stralloc charset = {0};
 
 struct strerr index_err;
 
@@ -193,19 +193,13 @@ int main(int argc,char **argv)
       case 'V': strerr_die2x(0,"ezmlm-archive version: ",auto_version);
       default: die_usage();
   }
-  dir = argv[optind];
-  if (!dir) die_usage();
-
-  if (chdir(dir) == -1)
-    strerr_die4sys(100,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind]);
+  load_config(dir);
 
   (void) umask(022);
   sig_pipeignore();
 			/* obtain lock to write index files */
   fdlock = lockfile("lock");
-
-  getconf_line(&charset,"charset",0,dir);
-  if (!stralloc_0(&charset)) die_nomem();
 
   getconf_line(&prefix,"prefix",0,dir);
 					/* support rfc2047-encoded prefix */

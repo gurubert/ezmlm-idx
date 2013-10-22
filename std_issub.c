@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: std_issub.c 380 2005-07-12 22:33:57Z bruce $*/
 
 #include <unistd.h>
 #include "stralloc.h"

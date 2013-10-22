@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: errtxt.h 184 2005-01-05 04:46:48Z bruce $*/
 
 #ifndef ERRTXT_H
 #define ERRTXT_H

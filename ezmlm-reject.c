@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-reject.c 520 2006-01-11 22:45:22Z bruce $*/
 
 #include <unistd.h>
 #include "strerr.h"
@@ -20,6 +20,7 @@
 #include "errtxt.h"
 #include "die.h"
 #include "idx.h"
+#include "config.h"
 #include "auto_version.h"
 
 const char FATAL[] = "ezmlm-reject: fatal: ";
@@ -41,6 +42,7 @@ int flaghavesubject = 0;
 int flaghavecommand = 0;
 int flagcheck = 0;		/* set after boundary is found in body, */
 				/* until blank line */
+unsigned long copylines = 0;	/* Number of lines from the message to copy */
 
 stralloc mimeremove = {0};
 stralloc mimereject = {0};
@@ -59,8 +61,6 @@ struct qmail qq;
 
 stralloc line = {0};
 stralloc to = {0};
-stralloc outhost = {0};
-stralloc outlocal = {0};
 stralloc content = {0};
 stralloc subject = {0};
 stralloc boundary = {0};
@@ -196,18 +196,14 @@ void main(int argc,char **argv)
     }
   dir = argv[optind];
   if (dir) {
-    if (chdir(dir) == -1)
-      strerr_die4x(111,FATAL,ERR_SWITCH,dir,": ");
+    startup(dir);
+    load_config(dir);
     flagparsemime = 1;		/* only if dir do we have mimeremove/reject */
     if (getconf_line(&line,"msgsize",0,dir)) {
       if (!stralloc_0(&line)) die_nomem();
       len = scan_ulong(line.s,&maxmsgsize);
       if (line.s[len] == ':')
         scan_ulong(line.s+len+1,&minmsgsize);
-    }
-    if (!flagtook || flagforward) {
-      getconf_line(&outlocal,"outlocal",1,dir);
-      getconf_line(&outhost,"outhost",1,dir);
     }
     if (flagforward) {
       if (!stralloc_copys(&mydtline,"Delivered-To: command forwarder for "))
@@ -328,7 +324,7 @@ void main(int argc,char **argv)
       qmail_put(&qq,mydtline.s,mydtline.len);
       if (seek_begin(0) == -1)
 	strerr_die2sys(111,FATAL,ERR_SEEK_INPUT);
-      if (qmail_copy(&qq,&ssin2) != 0)
+      if (qmail_copy(&qq,&ssin2,copylines) != 0)
 	strerr_die2sys(111,FATAL,ERR_READ_INPUT);
       if (!stralloc_copy(&to,&outlocal)) die_nomem();
       if (!stralloc_cats(&to,"-request@")) die_nomem();

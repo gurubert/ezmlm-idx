@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-warn.c 520 2006-01-11 22:45:22Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -33,18 +33,14 @@
 #include "hdr.h"
 #include "die.h"
 #include "idx.h"
+#include "config.h"
 #include "subscribe.h"
 
 const char FATAL[] = "ezmlm-warn: fatal: ";
 const char USAGE[] =
 "ezmlm-warn: usage: ezmlm-warn -dD -l secs -t days dir";
 
-stralloc key = {0};
-stralloc outhost = {0};
-stralloc outlocal = {0};
-stralloc mailinglist = {0};
 stralloc digdir = {0};
-stralloc charset = {0};
 char boundary[COOKIE];
 
 substdio ssout;
@@ -54,13 +50,13 @@ long when;
 char *dir;
 char *workdir;
 int flagdig = 0;
-char flagcd = '\0';		/* default: don't use transfer encoding */
 stralloc fn = {0};
 stralloc bdname = {0};
 stralloc fnlasth = {0};
 stralloc fnlastd = {0};
 stralloc lasth = {0};
 stralloc lastd = {0};
+unsigned long copylines = 0;	/* Number of lines from the message to copy */
 struct stat st;
 
 static void die_read(void) { strerr_die4sys(111,FATAL,ERR_READ,fn.s,": "); }
@@ -127,8 +123,8 @@ void doit(int flagw)
     strerr_die2sys(111,FATAL,ERR_QMAIL_QUEUE);
 
   hdr_add2("Mailing-List: ",mailinglist.s,mailinglist.len);
-  if (getconf_line(&line,"listid",0,dir))
-    hdr_add2("\nList-ID: ",line.s,line.len);
+  if (listid.len > 0)
+    hdr_add2("\nList-ID: ",listid.s,listid.len);
   hdr_datemsgid(now());
   if (flagcd) {
     if (!stralloc_0(&line)) die_nomem();
@@ -188,7 +184,7 @@ void doit(int flagw)
     hdr_ctype(CTYPE_MESSAGE);
     qmail_puts(&qq,"\n");
   }
-  if (qmail_copy(&qq,&ssin) < 0) die_read();
+  if (qmail_copy(&qq,&ssin,copylines) < 0) die_read();
   close(fd);
 
   if (flagcd)				/* end multipart/mixed */
@@ -266,10 +262,9 @@ void main(int argc,char **argv)
       default:
 	die_usage();
     }
-  dir = argv[optind];
-  if (!dir) die_usage();
-  if (chdir(dir) == -1)
-    strerr_die4sys(111,FATAL,ERR_SWITCH,dir,": ");
+  startup(dir = argv[optind]);
+  load_config(dir);
+  getconf_ulong(&copylines,"copylines",0,dir);
   if (flagdig) {
     if (!stralloc_copys(&digdir,dir)) die_nomem();
     if (!stralloc_cats(&digdir,"/digest")) die_nomem();
@@ -294,31 +289,9 @@ void main(int argc,char **argv)
   if (!stralloc_copy(&fnlasth,&fnlastd)) die_nomem();
   fnlasth.s[fnlasth.len - 2] = 'h';		/* bad, but feels good ... */
 
-  switch(slurp("key",&key,32)) {
-    case -1:
-      strerr_die4sys(111,FATAL,ERR_READ,dir,"/key: ");
-    case 0:
-      strerr_die4x(100,FATAL,dir,"/key",ERR_NOEXIST);
-  }
-  getconf_line(&outhost,"outhost",1,dir);
-  getconf_line(&outlocal,"outlocal",1,dir);
   if (flagdig)
     if (!stralloc_cats(&outlocal,"-digest")) die_nomem();
-  getconf_line(&mailinglist,"mailinglist",1,dir);
-  if (getconf_line(&charset,"charset",0,dir)) {
-    if (charset.len >= 2 && charset.s[charset.len - 2] == ':') {
-      if (charset.s[charset.len - 1] == 'B' ||
-		charset.s[charset.len - 1] == 'Q') {
-        flagcd = charset.s[charset.len - 1];
-        charset.s[charset.len - 2] = '\0';
-      }
-    }
-  } else
-    if (!stralloc_copys(&charset,TXT_DEF_CHARSET)) die_nomem();
-  if (!stralloc_0(&charset)) die_nomem();
 
-  set_cpoutlocal(&outlocal);	/* for copy */
-  set_cpouthost(&outhost);	/* for copy */
   ddir = when / 10000;
   dfile = when - 10000 * ddir;
 

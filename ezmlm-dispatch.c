@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-dispatch.c 373 2005-07-12 06:27:29Z bruce $*/
 
 #include <sys/types.h>
 #include <sys/stat.h>

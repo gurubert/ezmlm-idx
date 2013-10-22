@@ -1,4 +1,4 @@
-# $Id$
+# $Id: 02-functions 520 2006-01-11 22:45:22Z bruce $
 
 fatal() {
   for line in "$@"; do
@@ -19,6 +19,26 @@ grephdr() {
   # Remove any found lines from the header file
   ${GREP} -iv "^$1" "$QQHDR" >"${TMP}hdr"
   ${MV} -f "${TMP}hdr" "$QQHDR"
+}
+
+grepbody() {
+  ${GREP} "^$*$" "$QQBODY" >/dev/null 2>&1 || \
+  {
+    ${ECHO} "Body is missing or wrong $1 line:";
+    ${GREP} -i "^$1" "$QQBODY"
+    BUG="${BUG} body"
+    prompt "..............: "
+  }
+}
+
+grepbodynot() {
+  ${GREP} "^$*" "$QQBODY" >/dev/null 2>&1 && \
+  {
+    ${ECHO} "Body is contains extraneous $1 line:";
+    ${GREP} -i "^$1" "$QQBODY"
+    BUG="${BUG} body"
+    prompt "..............: "
+  }
 }
 
 grephdr_std() {

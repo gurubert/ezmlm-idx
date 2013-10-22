@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: hdr.h 235 2005-02-09 16:24:15Z bruce $*/
 
 #ifndef HDR_H
 #define HDR_H

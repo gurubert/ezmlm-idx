@@ -1,4 +1,4 @@
-$Id$
+$Id: INSTALL.idx 461 2005-09-28 17:16:07Z bruce $
 
 Like any other piece of software (and information generally), ezmlm-idx
 comes with NO WARRANTY.
@@ -14,6 +14,8 @@ Things you have to decide before starting:
    but for e.g. rpm packages it's "/usr/bin". Adjust conf-man accordingly.
    For installations (e.g. Debian) where qmail is not in "/var/qmail", adjust
    conf-qmail.
+
+   Put the desired configuration path into conf-etc.  Default "/etc/ezmlm".
 
    NOTE: If you follow the test instructions in INSTALL of ezmlm-0.53 after
    adding ezmlm-idx, step 6 will fail. Before this step, edit
@@ -71,16 +73,14 @@ HOW TO BUILD, TEST, AND INSTALL:
        % make clean
        % make; make man
 
- 7. To use a language other than US English as the default for list texts:
-       % make ISO
+ 7. To use a language other than US English as the default for list
+    texts, edit the ``conf-lang'' file and change the first line to one
+    of the ISO language designations found in the ``text'' subdirectory.
 
-    where ``iso'' is the ISO language designation. Currently supported
-    are: ch, ch_GB, cs, da, de, en_US (en, us), es, fr, hu, id, ita, ja,
-    nl, pl, pt_BR, ru, sv. NOTE: A normal ``make'' sets up the en_US
-    version (as before).  All known language files are included with
-    ezmlm-idx.  If your language is not present, please feel free to
-    contribute one (translate lang/en_US.text but leave comments intact
-    for "diff").
+    NOTE: A normal ``make'' sets up the en_US version (as before).  All
+    known language files are included with ezmlm-idx.  If your language
+    is not present, please feel free to contribute one (translate the
+    files in text/en_US and lang/en_US.*).
 
  8. Test the programs:
 	From the build directory, execute ezmlm-test:
@@ -241,7 +241,7 @@ HOW TO BUILD, TEST, AND INSTALL:
 21. For any existing lists which you would like to archive,
     add the following line after the call to ezmlm-send in listdir/editor:
 
-	| /usr/local/ezmlm/ezmlm-archive listdir/DIR || exit 0
+	| /usr/local/bin/ezmlm/ezmlm-archive listdir/DIR || exit 0
 
     This is automatically done when running:
 
@@ -249,7 +249,7 @@ HOW TO BUILD, TEST, AND INSTALL:
 
 22. To display your web based archive, open your browser as follows:
 
-	%lynx http://localhost/cgi-bin/ezmlm-cgi
+	% lynx http://localhost/cgi-bin/ezmlm-cgi
 
  ------------- End Optional items -----------   
 

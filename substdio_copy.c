@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: substdio_copy.c 180 2005-01-04 19:49:36Z bruce $*/
 
 #include "substdio.h"
 

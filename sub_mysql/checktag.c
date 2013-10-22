@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: checktag.c 380 2005-07-12 22:33:57Z bruce $*/
 
 #include "slurp.h"
 #include "byte.h"

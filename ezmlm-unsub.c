@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: ezmlm-unsub.c 304 2005-04-28 23:53:52Z bruce $*/
 
 const char FATAL[] = "ezmlm-unsub: fatal: ";
 const char USAGE[] =

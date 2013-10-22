@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: decodeHDR.c 370 2005-07-12 02:56:23Z bruce $*/
 
 #include "stralloc.h"
 #include "strerr.h"

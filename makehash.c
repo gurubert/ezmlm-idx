@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: makehash.c 304 2005-04-28 23:53:52Z bruce $*/
 
 #include "stralloc.h"
 #include "byte.h"

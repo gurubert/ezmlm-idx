@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: surfpcs.c 167 2005-01-04 05:10:18Z bruce $*/
 
 /* XXX: this needs testing */
 

@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: qmail.c 365 2005-07-11 18:44:45Z bruce $*/
 
 #include <unistd.h>
 #include "substdio.h"

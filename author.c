@@ -1,4 +1,4 @@
-/*$Id$*/
+/*$Id: author.c 39 2004-01-14 05:00:25Z bruce $*/
 
 unsigned int author_name(char **sout,char *s,unsigned int l)
 /* s is a string that contains a from: line argument\n. We parse */

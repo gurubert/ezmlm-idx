@@ -1,4 +1,4 @@
-# $Id$
+# $Id: 99-bugs 381 2005-07-13 04:57:49Z bruce $
 
 ${ECHO}
 if [ ! -z "$BUG" ]; then
